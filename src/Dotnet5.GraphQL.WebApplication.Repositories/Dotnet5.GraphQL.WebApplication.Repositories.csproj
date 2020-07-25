@@ -8,4 +8,12 @@
     <Folder Include="Abstractions" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dotnet5.GraphQL.WebApplication.Domain\Dotnet5.GraphQL.WebApplication.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-rc.1.20372.13" />
+  </ItemGroup>
+
 </Project>
