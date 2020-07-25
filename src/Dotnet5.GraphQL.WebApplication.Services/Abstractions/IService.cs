@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL.WebApplication.Domain.Abstractions;
@@ -20,8 +22,8 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
         bool Exists(TId id);
         Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken);
 
-        IList<TEntity> GetAll();
-        Task<IList<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
         TEntity GetById(TId id);
         Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken);
