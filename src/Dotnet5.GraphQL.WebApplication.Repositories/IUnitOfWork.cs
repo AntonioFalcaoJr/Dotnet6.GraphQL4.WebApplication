@@ -1,10 +1,11 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Dotnet5.GraphQL.WebApplication.Repositories
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IDbContextTransaction BeginTransaction();
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
@@ -15,7 +16,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories
         void Rollback();
         void Rollback(IDbContextTransaction transaction);
         Task RollbackAsync(CancellationToken cancellationToken);
-        void RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken);
+        Task RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken);
         void SaveChanges();
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }

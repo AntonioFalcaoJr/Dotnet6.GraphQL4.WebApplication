@@ -8,8 +8,8 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private static DbContext _dbContext;
         private readonly DatabaseFacade _database;
+        private readonly DbContext _dbContext;
 
         public UnitOfWork(DbContext dbContext)
         {
@@ -24,10 +24,10 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories
             => _database.BeginTransactionAsync(cancellationToken);
 
         public void SaveChanges()
-            => _dbContext.SaveChanges();
+            => _dbContext.SaveChanges(true);
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
-            => await _dbContext.SaveChangesAsync(cancellationToken);
+            => await _dbContext.SaveChangesAsync(true, cancellationToken);
 
         public void Commit()
             => _database.CommitTransaction();
@@ -50,7 +50,10 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories
         public void Rollback(IDbContextTransaction transaction)
             => transaction.Rollback();
 
-        public void RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken)
+        public Task RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken)
             => transaction.RollbackAsync(cancellationToken);
+
+        public void Dispose() 
+            => _dbContext?.Dispose();
     }
 }

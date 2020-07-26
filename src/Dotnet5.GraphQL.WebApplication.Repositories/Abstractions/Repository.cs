@@ -13,25 +13,25 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Abstractions
         where TEntity : Entity<TId>
         where TId : struct
     {
-        private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        protected Repository(DbContext context)
+        protected Repository(DbContext dbContext)
         {
-            _context = context;
-            _dbSet = context.Set<TEntity>();
+            _dbSet = dbContext.Set<TEntity>();
         }
 
         public virtual void Delete(TId id)
         {
-            _dbSet.Remove(GetById(id));
-            _context.SaveChanges();
+            var entity = GetById(id);
+            if (entity is null) return;
+            _dbSet.Remove(entity);
         }
 
         public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken)
         {
-            _dbSet.Remove(await GetByIdAsync(id, cancellationToken).ConfigureAwait(false));
-            await _context.SaveChangesAsync(true, cancellationToken);
+            var entity = await GetByIdAsync(id, cancellationToken).ConfigureAwait(false);
+            if (entity is null) return;
+            _dbSet.Remove(entity);
         }
 
         public virtual bool Exists(TId id)
@@ -50,36 +50,32 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Abstractions
         {
             if (Exists(entity.Id)) return entity;
             _dbSet.Add(entity);
-            _context.SaveChanges();
             return entity;
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            if (await ExistsAsync(entity.Id, cancellationToken).ConfigureAwait(false)) return entity;
+            if (await ExistsAsync(entity.Id, cancellationToken)) return entity;
             await _dbSet.AddAsync(entity, cancellationToken);
-            await _context.SaveChangesAsync(true, cancellationToken);
             return entity;
         }
 
         public virtual TEntity GetById(TId id)
-            => _dbSet.Find(id);
+            => Equals(id, default(TId)) ? default : _dbSet.Find(id);
 
-        public virtual async Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken) =>
-            await _dbSet.FindAsync(new object[] {id}, cancellationToken);
+        public virtual async Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken)
+            => Equals(id, default(TId)) ? default : await _dbSet.FindAsync(new object[] {id}, cancellationToken);
 
         public void Update(TEntity entity)
         {
             if (Exists(entity.Id) is false) return;
             _dbSet.Update(entity);
-            _context.SaveChanges();
         }
 
         public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            if (await ExistsAsync(entity.Id, cancellationToken).ConfigureAwait(false) is false) return;
+            if (await ExistsAsync(entity.Id, cancellationToken) is false) return;
             _dbSet.Update(entity);
-            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

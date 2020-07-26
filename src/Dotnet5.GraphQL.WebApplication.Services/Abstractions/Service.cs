@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dotnet5.GraphQL.WebApplication.Domain.Abstractions;
+using Dotnet5.GraphQL.WebApplication.Repositories;
 using Dotnet5.GraphQL.WebApplication.Repositories.Abstractions;
 using Dotnet5.GraphQL.WebApplication.Services.Models;
 
@@ -17,9 +18,11 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
     {
         private readonly IMapper _mapper;
         private readonly IRepository<TEntity, TId> _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        protected Service(IRepository<TEntity, TId> repository, IMapper mapper)
+        protected Service(IUnitOfWork unitOfWork, IRepository<TEntity, TId> repository, IMapper mapper)
         {
+            _unitOfWork = unitOfWork;
             _repository = repository;
             _mapper = mapper;
         }
@@ -64,12 +67,14 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
         {
             if (Equals(id, default(TId))) return;
             _repository.Delete(id);
+            _unitOfWork.SaveChanges();
         }
 
         protected async Task OnDeleteAsync(TId id, CancellationToken cancellationToken)
         {
             if (Equals(id, default(TId))) return;
             await _repository.DeleteAsync(id, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
         protected TEntity OnEdit(TModel model)
@@ -77,6 +82,7 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
             if (model is null) return default;
             var entity = _mapper.Map<TEntity>(model);
             if (entity.IsValid) _repository.Update(entity);
+            _unitOfWork.SaveChanges();
             return entity;
         }
 
@@ -85,6 +91,7 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
             if (model is null) return default;
             var entity = _mapper.Map<TEntity>(model);
             if (entity.IsValid) await _repository.UpdateAsync(entity, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
@@ -95,10 +102,10 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
             => Equals(id, default(TId)) ? default : await _repository.ExistsAsync(id, cancellationToken);
 
         protected IEnumerable<TEntity> OnGetAll(Expression<Func<TEntity, bool>> predicate)
-            => _repository.GetAll(predicate);
+            => predicate is null ? default : _repository.GetAll(predicate);
 
         protected async Task<IEnumerable<TEntity>> OnGetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
-            => await _repository.GetAllAsync(predicate, cancellationToken);
+            => predicate is null ? default : await _repository.GetAllAsync(predicate, cancellationToken);
 
         protected TEntity OnGetById(TId id)
             => Equals(id, default(TId)) ? default : _repository.GetById(id);
@@ -111,6 +118,7 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
             if (model is null) return default;
             var entity = _mapper.Map<TEntity>(model);
             if (entity.IsValid) _repository.Add(entity);
+            _unitOfWork.SaveChanges();
             return entity;
         }
 
@@ -119,6 +127,7 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
             if (model is null) return default;
             var entity = _mapper.Map<TEntity>(model);
             if (entity.IsValid) await _repository.AddAsync(entity, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return entity;
         }
     }

@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dotnet5.GraphQL.WebApplication.Repositories\Dotnet5.GraphQL.WebApplication.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>

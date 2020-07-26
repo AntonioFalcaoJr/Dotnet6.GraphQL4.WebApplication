@@ -1,3 +1,4 @@
+using Dotnet5.GraphQL.WebApplication.Repositories.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -45,6 +46,11 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services) => services.AddControllersWithViews();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllersWithViews();
+            services.AddRepositories();
+            services.AddUnitOfWork();
+        }
     }
 }
