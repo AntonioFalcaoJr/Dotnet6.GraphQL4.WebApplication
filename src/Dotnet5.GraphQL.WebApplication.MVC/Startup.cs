@@ -1,4 +1,5 @@
 using Dotnet5.GraphQL.WebApplication.Repositories.Extensions.DependencyInjection;
+using Dotnet5.GraphQL.WebApplication.Services.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +17,6 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,12 +45,14 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
             });
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
             services.AddRepositories();
             services.AddUnitOfWork();
+
+            //services.AddAutoMapper();
+            services.AddServices();
         }
     }
 }
