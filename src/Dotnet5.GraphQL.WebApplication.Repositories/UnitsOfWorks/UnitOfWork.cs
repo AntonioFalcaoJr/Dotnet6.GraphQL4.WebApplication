@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Dotnet5.GraphQL.WebApplication.Repositories
+namespace Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -53,7 +53,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories
         public Task RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken)
             => transaction.RollbackAsync(cancellationToken);
 
-        public void Dispose() 
+        public void Dispose()
             => _dbContext?.Dispose();
     }
 }

@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Dotnet5.GraphQL.WebApplication.Repositories
+namespace Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks
 {
     public interface IUnitOfWork : IDisposable
     {
