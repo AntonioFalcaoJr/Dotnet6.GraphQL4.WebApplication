@@ -1,0 +1,10 @@
+﻿<Project>
+    <PropertyGroup Label="Common properties">
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Packages dependency versions">
+        <Microsoft_EntityFrameworkCore_Version>5.0.0-rc.1.20372.13</Microsoft_EntityFrameworkCore_Version>
+    </PropertyGroup>
+</Project>
