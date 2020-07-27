@@ -25,9 +25,9 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Extensions.DependencyInjec
 
         private static void DbContextOptionsBuilderAction(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-               .UseSqlServer(Options.ConnectionString, SqlServerOptionsAction)
                .EnableDetailedErrors()
-               .EnableSensitiveDataLogging();
+               .EnableSensitiveDataLogging()
+               .UseSqlServer(Options.ConnectionString, SqlServerOptionsAction);
 
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
