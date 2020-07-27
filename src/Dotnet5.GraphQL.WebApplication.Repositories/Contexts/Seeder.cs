@@ -35,7 +35,8 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
                     Stock = Faker.Random.Int(),
                 });
 
-            modelBuilder.Entity<Product>()
+            modelBuilder
+               .Entity<Product>()
                .HasData(products);
         }
 
@@ -48,8 +49,8 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
                 new TypeThree {Id = Guid.NewGuid()}
             });
 
-            ProductTypes.ForEach(type
-                => modelBuilder
+            ProductTypes.ForEach(type =>
+                modelBuilder
                    .Entity(type.GetType())
                    .HasData(type));
         }
