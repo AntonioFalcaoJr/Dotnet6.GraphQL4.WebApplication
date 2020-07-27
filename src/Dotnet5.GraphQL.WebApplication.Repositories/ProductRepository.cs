@@ -1,13 +1,13 @@
 using System;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
 using Dotnet5.GraphQL.WebApplication.Repositories.Abstractions;
-using Microsoft.EntityFrameworkCore;
+using Dotnet5.GraphQL.WebApplication.Repositories.Contexts;
 
 namespace Dotnet5.GraphQL.WebApplication.Repositories
 {
     public class ProductRepository : Repository<Product, Guid>, IProductRepository
     {
-        public ProductRepository(DbContext dbContext)
+        public ProductRepository(StoreContext dbContext)
             : base(dbContext) { }
     }
 }

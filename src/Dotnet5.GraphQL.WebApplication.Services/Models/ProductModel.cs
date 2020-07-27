@@ -1,5 +1,5 @@
 using System;
-using Dotnet5.GraphQL.WebApplication.Domain.Enumerations;
+using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using Dotnet5.GraphQL.WebApplication.Services.Abstractions;
 
 namespace Dotnet5.GraphQL.WebApplication.Services.Models

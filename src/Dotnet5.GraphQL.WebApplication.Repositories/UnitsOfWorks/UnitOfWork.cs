@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Dotnet5.GraphQL.WebApplication.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -11,7 +12,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks
         private readonly DatabaseFacade _database;
         private readonly DbContext _dbContext;
 
-        public UnitOfWork(DbContext dbContext)
+        public UnitOfWork(StoreContext dbContext)
         {
             _dbContext = dbContext;
             _database = _dbContext.Database;

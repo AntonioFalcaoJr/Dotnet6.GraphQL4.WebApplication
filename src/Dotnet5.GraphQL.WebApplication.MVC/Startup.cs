@@ -53,11 +53,10 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
         {
             services.AddControllersWithViews();
 
-            services.AddRepositories()
-               .AddUnitOfWork();
-
-            services.AddServices()
-               .AddAutoMapper();
+            services.AddRepositories();
+            services.AddUnitOfWork();
+            services.AddAutoMapper();
+            services.AddServices();
 
             services.AddDbContext(options =>
             {
