@@ -1,5 +1,5 @@
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
-using Dotnet5.GraphQL.WebApplication.Repositories.Extensions.ModelBuilder;
+using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
@@ -10,6 +10,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
             : base(options) { }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
