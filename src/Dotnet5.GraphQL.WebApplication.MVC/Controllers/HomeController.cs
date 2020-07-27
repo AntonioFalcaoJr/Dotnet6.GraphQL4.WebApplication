@@ -20,7 +20,11 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() => View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
 
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            var products = _service.GetAll(x => x.Name != null);
+            return View(products);
+        }
 
         public IActionResult Privacy() => View();
     }

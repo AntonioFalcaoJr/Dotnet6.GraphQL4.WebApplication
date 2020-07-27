@@ -1,8 +1,13 @@
+@model IEnumerable<Dotnet5.GraphQL.WebApplication.Domain.Entities.Product>
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@foreach (var item in Model)
+{
+    <div>
+        @item.Name
+        <hr/>
+    </div>
+}
