@@ -7,7 +7,6 @@ using AutoMapper;
 using Dotnet5.GraphQL.WebApplication.Domain.Abstractions;
 using Dotnet5.GraphQL.WebApplication.Repositories.Abstractions;
 using Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks;
-using Dotnet5.GraphQL.WebApplication.Services.Models;
 
 namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
 {

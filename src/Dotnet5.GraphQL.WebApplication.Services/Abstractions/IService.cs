@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL.WebApplication.Domain.Abstractions;
-using Dotnet5.GraphQL.WebApplication.Services.Models;
 
 namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
 {
