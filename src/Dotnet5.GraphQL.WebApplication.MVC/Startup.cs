@@ -1,7 +1,9 @@
+using Dotnet5.GraphQL.WebApplication.Repositories.Contexts;
 using Dotnet5.GraphQL.WebApplication.Repositories.Extensions.DependencyInjection;
 using Dotnet5.GraphQL.WebApplication.Services.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,7 +19,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
 
         public IConfiguration Configuration { get; }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, StoreContext context)
         {
             if (env.IsDevelopment())
             {
@@ -43,16 +45,24 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
                 endpoints.MapControllerRoute("default",
                     "{controller=Home}/{action=Index}/{id?}");
             });
+
+            context.Database.Migrate();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddRepositories();
-            services.AddUnitOfWork();
 
-            //services.AddAutoMapper();
-            services.AddServices();
+            services.AddRepositories()
+               .AddUnitOfWork();
+
+            services.AddServices()
+               .AddAutoMapper();
+
+            services.AddDbContext(options =>
+            {
+                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            });
         }
     }
 }

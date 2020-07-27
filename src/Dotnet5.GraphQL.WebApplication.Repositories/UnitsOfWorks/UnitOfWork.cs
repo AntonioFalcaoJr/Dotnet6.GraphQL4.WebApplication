@@ -20,40 +20,34 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks
         public IDbContextTransaction BeginTransaction()
             => _database.BeginTransaction();
 
-        public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
-            => _database.BeginTransactionAsync(cancellationToken);
+        public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+            => await _database.BeginTransactionAsync(cancellationToken);
 
         public void SaveChanges()
             => _dbContext.SaveChanges(true);
 
-        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
             => await _dbContext.SaveChangesAsync(true, cancellationToken);
 
         public void Commit()
             => _database.CommitTransaction();
 
-        public Task CommitAsync(CancellationToken cancellationToken)
-            => _database.CommitTransactionAsync(cancellationToken);
-
-        public void Commit(IDbContextTransaction transaction)
-            => transaction.Commit();
-
-        public Task CommitAsync(IDbContextTransaction transaction, CancellationToken cancellationToken)
-            => transaction.CommitAsync(cancellationToken);
+        public async Task CommitAsync(CancellationToken cancellationToken = default)
+            => await _database.CommitTransactionAsync(cancellationToken);
 
         public void Rollback()
             => _database.RollbackTransaction();
 
-        public Task RollbackAsync(CancellationToken cancellationToken)
-            => _database.RollbackTransactionAsync(cancellationToken);
-
-        public void Rollback(IDbContextTransaction transaction)
-            => transaction.Rollback();
-
-        public Task RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken)
-            => transaction.RollbackAsync(cancellationToken);
+        public async Task RollbackAsync(CancellationToken cancellationToken = default)
+            => await _database.RollbackTransactionAsync(cancellationToken);
 
         public void Dispose()
             => _dbContext?.Dispose();
+
+        public void CreateSavepoint(string savepoint)
+            => _database.CreateSavepoint(savepoint);
+
+        public async Task CreateSavepointAsync(string savepoint, CancellationToken cancellationToken = default)
+            => await _database.CreateSavepointAsync(savepoint, cancellationToken);
     }
 }

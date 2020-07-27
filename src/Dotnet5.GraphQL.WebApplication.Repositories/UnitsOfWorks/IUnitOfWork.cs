@@ -10,13 +10,11 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks
         IDbContextTransaction BeginTransaction();
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
         void Commit();
-        void Commit(IDbContextTransaction transaction);
         Task CommitAsync(CancellationToken cancellationToken);
-        Task CommitAsync(IDbContextTransaction transaction, CancellationToken cancellationToken);
+        void CreateSavepoint(string savepoint);
+        Task CreateSavepointAsync(string savepoint, CancellationToken cancellationToken);
         void Rollback();
-        void Rollback(IDbContextTransaction transaction);
         Task RollbackAsync(CancellationToken cancellationToken);
-        Task RollbackAsync(IDbContextTransaction transaction, CancellationToken cancellationToken);
         void SaveChanges();
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }
