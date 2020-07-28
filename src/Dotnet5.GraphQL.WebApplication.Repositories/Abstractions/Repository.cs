@@ -43,8 +43,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Abstractions
         public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
             => predicate is null ? default : _dbSet.Where(predicate);
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = 
-        default)
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default) 
             => predicate is null ? default : await _dbSet.Where(predicate).ToArrayAsync(cancellationToken);
 
         public virtual TEntity Add(TEntity entity)
