@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
         {
             Name = "Review";
 
-            Field(x => x.Id);
+            Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.Comment);
             Field(x => x.Title);
         }

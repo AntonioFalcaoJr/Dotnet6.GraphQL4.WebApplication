@@ -10,6 +10,7 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Extensions.DependencyInjection
             => services.AddAutoMapper(typeof(ModelToDomainProfile));
 
         public static IServiceCollection AddServices(this IServiceCollection services)
-            => services.AddScoped<IProductService, ProductService>();
+            => services.AddScoped<IProductService, ProductService>()
+               .AddScoped<IReviewService, ReviewService>();
     }
 }

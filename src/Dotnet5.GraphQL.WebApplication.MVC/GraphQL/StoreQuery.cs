@@ -8,9 +8,9 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL
     {
         public StoreQuery(IProductService service)
         {
-            Field<ListGraphType<ProductGraphType>>("products",
-                resolve: context
-                    => service.GetAllAsync(x => x.Name != null));
+            FieldAsync<ListGraphType<ProductGraphType>>("products",
+                resolve: async context
+                    => await service.GetAllAsync(x => x.Name != null));
         }
     }
 }
