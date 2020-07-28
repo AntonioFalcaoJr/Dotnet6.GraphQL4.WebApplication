@@ -40,10 +40,11 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Abstractions
         public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default) =>
             await _dbSet.AsNoTracking().AnyAsync(x => Equals(x.Id, id), cancellationToken);
 
-        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+        public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
             => predicate is null ? default : _dbSet.Where(predicate);
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = 
+        default)
             => predicate is null ? default : await _dbSet.Where(predicate).ToArrayAsync(cancellationToken);
 
         public virtual TEntity Add(TEntity entity)
@@ -66,13 +67,13 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Abstractions
         public virtual async Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
             => Equals(id, default(TId)) ? default : await _dbSet.FindAsync(new object[] {id}, cancellationToken);
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             if (Exists(entity.Id) is false) return;
             _dbSet.Update(entity);
         }
 
-        public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (await ExistsAsync(entity.Id, cancellationToken) is false) return;
             _dbSet.Update(entity);

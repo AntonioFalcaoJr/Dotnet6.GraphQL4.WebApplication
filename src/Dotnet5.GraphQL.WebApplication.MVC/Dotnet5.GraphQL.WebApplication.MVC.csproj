@@ -5,14 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dotnet5.GraphQL.WebApplication.Repositories\Dotnet5.GraphQL.WebApplication.Repositories.csproj"/>
-        <ProjectReference Include="..\Dotnet5.GraphQL.WebApplication.Services\Dotnet5.GraphQL.WebApplication.Services.csproj"/>
+        <ProjectReference Include="..\Dotnet5.GraphQL.WebApplication.Repositories\Dotnet5.GraphQL.WebApplication.Repositories.csproj" />
+        <ProjectReference Include="..\Dotnet5.GraphQL.WebApplication.Services\Dotnet5.GraphQL.WebApplication.Services.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="GraphQL" Version="2.4.0"/>
-        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0"/>
-        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0"/>
+        <PackageReference Include="GraphQL" Version="2.4.0" />
+        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
+        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
     </ItemGroup>
 
 </Project>
