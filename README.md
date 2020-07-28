@@ -31,7 +31,7 @@ OR
 
 #### Community Stack
 
-* [AutoMapper](https://automapper.org/) - A convention-based object-object mapper. 100% organic and gluten-free. Takes out all of the fuss of mapping one object to another;
+* [AutoMapper](https://automapper.org/) - A convention-based object-object mapper;
 * [FluentValidation](https://fluentvalidation.net/) - A popular .NET library for building strongly-typed validation rules;
 * [Bogus](https://github.com/bchavez/Bogus) - A simple and sane fake data generator for C#, F#, and VB.NET.
 

@@ -1,8 +1,14 @@
+using Dotnet5.GraphQL.WebApplication.MVC.GraphQL;
 using Dotnet5.GraphQL.WebApplication.Repositories.Contexts;
 using Dotnet5.GraphQL.WebApplication.Repositories.Extensions.DependencyInjection;
 using Dotnet5.GraphQL.WebApplication.Services.Extensions.DependencyInjection;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +53,9 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
             });
 
             context.Database.Migrate();
+
+            app.UseGraphQL<StoreSchema>();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -59,8 +68,18 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
             services.AddServices();
 
             services.AddDbContext(options =>
+                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection"));
+
+            services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
+            services.AddScoped<StoreSchema>();
+            services.AddGraphQL(x => x.ExposeExceptions = true)
+               .AddGraphTypes(ServiceLifetime.Scoped);
+
+            services.AddSingleton<GuidGraphType>();
+
+            services.Configure<KestrelServerOptions>(options =>
             {
-                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                options.AllowSynchronousIO = true;
             });
         }
     }

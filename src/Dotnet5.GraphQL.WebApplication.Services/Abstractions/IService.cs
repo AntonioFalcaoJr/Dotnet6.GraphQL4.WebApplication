@@ -13,21 +13,21 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Abstractions
         where TId : struct
     {
         void Delete(TId id);
-        Task DeleteAsync(TId id, CancellationToken cancellationToken);
+        Task DeleteAsync(TId id, CancellationToken cancellationToken = default);
 
         TEntity Edit(TModel model);
-        Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken);
+        Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default);
 
         bool Exists(TId id);
-        Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken);
+        Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
 
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
-        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
         TEntity GetById(TId id);
-        Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken);
+        Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
         TEntity Save(TModel model);
-        Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken);
+        Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default);
     }
 }
