@@ -16,6 +16,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
             Field(x => x.ProductType, type: typeof(ProductTypeGraphType));
             Field(x => x.Rating);
             Field(x => x.Stock);
+            Field<ProductOptionEnumGraphType>("Option");
         }
     }
 }

@@ -1,6 +1,8 @@
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
 {
@@ -31,10 +33,12 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
                .HasPrecision(18, 2)
                .IsRequired();
 
+            builder
+               .Property(x => x.Option)
+               .HasConversion(new EnumToStringConverter<Option>());
+
             builder.Property(x => x.Rating);
-
             builder.Property(x => x.Stock);
-
             builder.HasOne(x => x.ProductType);
         }
     }

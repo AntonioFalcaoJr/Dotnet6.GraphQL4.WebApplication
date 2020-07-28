@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Enumerations;
 using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
                     ProductTypeId = Faker.PickRandom(ProductTypes).Id,
                     Rating = Faker.Random.Int(),
                     Stock = Faker.Random.Int(),
+                    Option = Faker.PickRandom<Option>()
                 });
 
             modelBuilder

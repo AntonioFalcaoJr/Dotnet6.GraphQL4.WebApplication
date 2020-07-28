@@ -35,6 +35,10 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Migrations
                    .HasMaxLength(50)
                    .HasColumnType("nvarchar(50)");
 
+                b.Property<string>("Option")
+                   .IsRequired()
+                   .HasColumnType("nvarchar(max)");
+
                 b.Property<string>("PhotoFileName")
                    .HasMaxLength(100)
                    .HasColumnType("nvarchar(100)");
@@ -60,133 +64,143 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Migrations
 
                 b.HasData(new
                     {
-                        Id = new Guid("be315b78-6d02-403e-9165-a6a2067605c9"),
-                        Description = "Sequi quo ad minus rem ut ratione quo.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 1, 20, 8, 30, 32, 63, DateTimeKind.Unspecified).AddTicks(2145),
+                        Id = new Guid("ec324de5-3e6a-49df-bae4-2419a7970d68"),
+                        Description = "Excepturi quis aperiam consequatur.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 4, 30, 16, 33, 19, 198, DateTimeKind.Unspecified).AddTicks(1290),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "assumenda",
-                        PhotoFileName = "savings_account_producer_junction.dxp",
-                        Price = 0.6068225355158987537107710481m,
-                        ProductTypeId = new Guid("971c1e36-643b-41c7-9c09-049462bda664"),
-                        Rating = -859267479,
-                        Stock = 228098146
+                        Name = "ducimus",
+                        Option = "One",
+                        PhotoFileName = "xml_auto_loan_account.nnd",
+                        Price = 0.9674595037583389299498768888m,
+                        ProductTypeId = new Guid("4e3597c3-477d-4072-850c-fd3c7b158d8b"),
+                        Rating = -2018142710,
+                        Stock = -733726170
                     },
                     new
                     {
-                        Id = new Guid("fdf0b3fb-6c65-48b1-aae1-fcbdf30df2e7"),
-                        Description = "Aut quaerat provident praesentium officia.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 4, 21, 0, 34, 14, 324, DateTimeKind.Unspecified).AddTicks(2008),
+                        Id = new Guid("85ec5364-6703-462b-a39d-da2c0ba42545"),
+                        Description = "Nobis est aut.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 2, 16, 20, 20, 1, 44, DateTimeKind.Unspecified).AddTicks(4114),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "molestiae",
-                        PhotoFileName = "pakistan_business_focused_purple.eml",
-                        Price = 0.6285392153328352800353194224m,
-                        ProductTypeId = new Guid("ff19a5a8-d64c-44dd-b39f-0c189b6af015"),
-                        Rating = 1242200820,
-                        Stock = 1368050970
+                        Name = "ut",
+                        Option = "Three",
+                        PhotoFileName = "pixel_field_reboot.dtb",
+                        Price = 0.0490742421857707234530115109m,
+                        ProductTypeId = new Guid("ed0977bb-96c3-488f-9f8c-c235b22438c0"),
+                        Rating = 574024004,
+                        Stock = 1583914797
                     },
                     new
                     {
-                        Id = new Guid("eb965082-a859-43db-84ed-9616a274c78a"),
-                        Description = "Velit est consequatur error consequatur.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 4, 13, 0, 18, 16, 705, DateTimeKind.Unspecified).AddTicks(4820),
-                            new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "eius",
-                        PhotoFileName = "barbados_jamaican_dollar.exi",
-                        Price = 0.477300401453137375607324303m,
-                        ProductTypeId = new Guid("ff19a5a8-d64c-44dd-b39f-0c189b6af015"),
-                        Rating = 1186261203,
-                        Stock = -1154290413
-                    },
-                    new
-                    {
-                        Id = new Guid("c97024c7-4f1e-4b95-8155-1c25960734a2"),
-                        Description = "Maiores similique autem quia officiis corrupti occaecati id voluptate excepturi.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2020, 11, 17, 13, 13, 38, 536, DateTimeKind.Unspecified).AddTicks(1638),
-                            new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "dolorem",
-                        PhotoFileName = "action_items.mng",
-                        Price = 0.9815548049306890259469166815m,
-                        ProductTypeId = new Guid("ff19a5a8-d64c-44dd-b39f-0c189b6af015"),
-                        Rating = 2050551896,
-                        Stock = -1343422269
-                    },
-                    new
-                    {
-                        Id = new Guid("4cfb66f2-8104-4384-a73a-52e8b95104b9"),
-                        Description = "Voluptatem dicta vel sint iusto.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 3, 8, 17, 44, 35, 238, DateTimeKind.Unspecified).AddTicks(7709),
+                        Id = new Guid("1236eae0-5901-4ce9-b7f8-88e4b21a9293"),
+                        Description = "Sint error voluptas non.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 22, 5, 3, 15, 582, DateTimeKind.Unspecified).AddTicks(9477),
                             new TimeSpan(0, -3, 0, 0, 0)),
                         Name = "qui",
-                        PhotoFileName = "vortals.p7b",
-                        Price = 0.1748034255269259084765575476m,
-                        ProductTypeId = new Guid("ff19a5a8-d64c-44dd-b39f-0c189b6af015"),
-                        Rating = 1182544974,
-                        Stock = 493121065
+                        Option = "Three",
+                        PhotoFileName = "primary_monitor_distributed.wav",
+                        Price = 0.1451224545510112508240414015m,
+                        ProductTypeId = new Guid("ed0977bb-96c3-488f-9f8c-c235b22438c0"),
+                        Rating = -921827531,
+                        Stock = 1143516661
                     },
                     new
                     {
-                        Id = new Guid("89ddf9e9-c71e-4915-af5a-b38747fd627e"),
-                        Description = "Qui blanditiis iusto quas expedita dolor facere dolore.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 6, 7, 47, 9, 340, DateTimeKind.Unspecified).AddTicks(1390),
+                        Id = new Guid("6b6d31ab-01ea-4028-8730-3a933c1e28c3"),
+                        Description = "Molestiae recusandae tempora non.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2020, 11, 21, 14, 6, 58, 202, DateTimeKind.Unspecified).AddTicks(8077),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "odit",
-                        PhotoFileName = "haven.shf",
-                        Price = 0.2040882366204963644997544192m,
-                        ProductTypeId = new Guid("971c1e36-643b-41c7-9c09-049462bda664"),
-                        Rating = -424788367,
-                        Stock = -680911527
+                        Name = "nobis",
+                        Option = "Three",
+                        PhotoFileName = "leverage_overriding_automated.ai",
+                        Price = 0.2510580882283329373681090672m,
+                        ProductTypeId = new Guid("31e136fe-1402-4c07-aa22-974d312167e1"),
+                        Rating = 808312964,
+                        Stock = -1291239875
                     },
                     new
                     {
-                        Id = new Guid("5203065a-5aa1-470a-9e96-c9e91121dc61"),
-                        Description = "Et molestiae amet molestiae ratione a ab nisi.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 3, 22, 11, 43, 11, 202, DateTimeKind.Unspecified).AddTicks(3854),
+                        Id = new Guid("fa7ebfa7-7d73-4257-95a3-16210d3d79c4"),
+                        Description = "Sed quia sed consequatur rerum sed unde voluptates.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 7, 5, 28, 51, 348, DateTimeKind.Unspecified).AddTicks(1974),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "praesentium",
-                        PhotoFileName = "wooden.xla",
-                        Price = 0.9626982271390947205771029652m,
-                        ProductTypeId = new Guid("971c1e36-643b-41c7-9c09-049462bda664"),
-                        Rating = 1062381992,
-                        Stock = -1784381965
+                        Name = "nulla",
+                        Option = "Two",
+                        PhotoFileName = "bandwidth.tga",
+                        Price = 0.0477278506685921013802591011m,
+                        ProductTypeId = new Guid("ed0977bb-96c3-488f-9f8c-c235b22438c0"),
+                        Rating = 479280076,
+                        Stock = -1326289163
                     },
                     new
                     {
-                        Id = new Guid("d8b6adab-f8cf-442e-a511-92c2ee6f0773"),
-                        Description = "Aut voluptate optio sunt voluptas aut nulla itaque.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2020, 9, 13, 2, 54, 57, 638, DateTimeKind.Unspecified).AddTicks(729),
+                        Id = new Guid("72235d5b-dab9-49e3-8fcc-4ba3bd36d982"),
+                        Description = "Iste expedita quidem eos dolores deleniti doloremque facilis neque.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 20, 10, 3, 35, 628, DateTimeKind.Unspecified).AddTicks(5637),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "dolorem",
-                        PhotoFileName = "parsing.afp",
-                        Price = 0.4644587590737617690510497256m,
-                        ProductTypeId = new Guid("222bded7-7ab9-403d-8507-00e9823a4702"),
-                        Rating = 1357443794,
-                        Stock = -964072472
+                        Name = "doloremque",
+                        Option = "Three",
+                        PhotoFileName = "granite_lavender.wad",
+                        Price = 0.8457649264692008070893955937m,
+                        ProductTypeId = new Guid("31e136fe-1402-4c07-aa22-974d312167e1"),
+                        Rating = 301675014,
+                        Stock = -1785659415
                     },
                     new
                     {
-                        Id = new Guid("86ffc828-7e2e-48ca-85ec-2e6247bb1ea5"),
-                        Description = "Ea qui molestiae et.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2020, 10, 9, 14, 47, 19, 928, DateTimeKind.Unspecified).AddTicks(8824),
+                        Id = new Guid("23957437-e9d4-44cd-84e4-f1edb4ee952b"),
+                        Description = "Perspiciatis ipsam sunt quia asperiores.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2020, 10, 28, 12, 47, 49, 545, DateTimeKind.Unspecified).AddTicks(6679),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "qui",
-                        PhotoFileName = "sweden.m13",
-                        Price = 0.5995465419013371671599191763m,
-                        ProductTypeId = new Guid("971c1e36-643b-41c7-9c09-049462bda664"),
-                        Rating = 1958022412,
-                        Stock = -845175422
+                        Name = "modi",
+                        Option = "Two",
+                        PhotoFileName = "tasty_rubber_mouse_synchronised_future.qxb",
+                        Price = 0.1357320844746785288751837685m,
+                        ProductTypeId = new Guid("ed0977bb-96c3-488f-9f8c-c235b22438c0"),
+                        Rating = 1957327341,
+                        Stock = 171787702
                     },
                     new
                     {
-                        Id = new Guid("712c8c6c-9ad0-4f28-8498-07b41c72b926"),
-                        Description = "Tempore ipsam occaecati autem ipsam quis velit dolore.",
-                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 2, 1, 23, 36, 47, 859, DateTimeKind.Unspecified).AddTicks(8033),
+                        Id = new Guid("a7c7a9d8-6b19-430a-8a90-20d5af6d4ca5"),
+                        Description = "Labore atque facere fugiat iusto.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 4, 15, 20, 0, 50, 603, DateTimeKind.Unspecified).AddTicks(6074),
                             new TimeSpan(0, -3, 0, 0, 0)),
-                        Name = "vero",
-                        PhotoFileName = "oklahoma_relationships.sdd",
-                        Price = 0.604035536236239779807292004m,
-                        ProductTypeId = new Guid("971c1e36-643b-41c7-9c09-049462bda664"),
-                        Rating = -1129160119,
-                        Stock = 1046555505
+                        Name = "excepturi",
+                        Option = "Three",
+                        PhotoFileName = "united_states_minor_outlying_islands_pixel_corners.rip",
+                        Price = 0.8135563347166839716383547874m,
+                        ProductTypeId = new Guid("ed0977bb-96c3-488f-9f8c-c235b22438c0"),
+                        Rating = -1353319871,
+                        Stock = 1272533798
+                    },
+                    new
+                    {
+                        Id = new Guid("ada2c9ee-82aa-40e9-b48c-a67b3e9317d2"),
+                        Description = "Est cum aperiam recusandae rerum maxime cumque dolores et iure.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2020, 12, 27, 12, 48, 59, 895, DateTimeKind.Unspecified).AddTicks(4039),
+                            new TimeSpan(0, -3, 0, 0, 0)),
+                        Name = "quia",
+                        Option = "One",
+                        PhotoFileName = "payment_intranet_sudanese_pound.xlm",
+                        Price = 0.993976680948442415176617418m,
+                        ProductTypeId = new Guid("4e3597c3-477d-4072-850c-fd3c7b158d8b"),
+                        Rating = 168896327,
+                        Stock = -1600823244
+                    },
+                    new
+                    {
+                        Id = new Guid("25aedbe9-9958-4c1a-83e3-aeaa808f26cd"),
+                        Description = "Animi sit eum repudiandae repellendus sapiente cumque qui et.",
+                        IntroduceAt = new DateTimeOffset(new DateTime(2021, 3, 12, 19, 43, 21, 612, DateTimeKind.Unspecified).AddTicks(5060),
+                            new TimeSpan(0, -3, 0, 0, 0)),
+                        Name = "quidem",
+                        Option = "Two",
+                        PhotoFileName = "optimized.xsl",
+                        Price = 0.3166981746517214305278070353m,
+                        ProductTypeId = new Guid("31e136fe-1402-4c07-aa22-974d312167e1"),
+                        Rating = -1339100037,
+                        Stock = 1029984585
                     });
             });
 
@@ -219,7 +233,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Migrations
 
                 b.HasData(new
                 {
-                    Id = new Guid("971c1e36-643b-41c7-9c09-049462bda664")
+                    Id = new Guid("ed0977bb-96c3-488f-9f8c-c235b22438c0")
                 });
             });
 
@@ -231,7 +245,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Migrations
 
                 b.HasData(new
                 {
-                    Id = new Guid("ff19a5a8-d64c-44dd-b39f-0c189b6af015")
+                    Id = new Guid("4e3597c3-477d-4072-850c-fd3c7b158d8b")
                 });
             });
 
@@ -243,7 +257,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Migrations
 
                 b.HasData(new
                 {
-                    Id = new Guid("222bded7-7ab9-403d-8507-00e9823a4702")
+                    Id = new Guid("31e136fe-1402-4c07-aa22-974d312167e1")
                 });
             });
 

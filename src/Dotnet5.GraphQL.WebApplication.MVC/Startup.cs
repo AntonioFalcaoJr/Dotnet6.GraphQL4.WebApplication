@@ -73,7 +73,8 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
             services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
             services.AddScoped<StoreSchema>();
             services.AddGraphQL(x => x.ExposeExceptions = true)
-               .AddGraphTypes(ServiceLifetime.Scoped);
+               .AddGraphTypes(ServiceLifetime.Scoped)
+               .AddDataLoader();
 
             services.AddSingleton<GuidGraphType>();
 
