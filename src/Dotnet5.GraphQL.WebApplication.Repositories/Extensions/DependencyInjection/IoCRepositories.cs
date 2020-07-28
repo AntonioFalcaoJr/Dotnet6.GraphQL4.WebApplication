@@ -18,7 +18,8 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Extensions.DependencyInjec
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
-            => services.AddScoped<IProductRepository, ProductRepository>();
+            => services.AddScoped<IProductRepository, ProductRepository>()
+               .AddScoped<IReviewRepository, ReviewRepository>();
 
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
             => services.AddScoped<IUnitOfWork, UnitOfWork>();
