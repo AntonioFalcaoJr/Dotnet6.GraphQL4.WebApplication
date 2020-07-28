@@ -11,25 +11,34 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
 {
     public static class Seeder
     {
+        private const int Amount = 50;
         private static readonly Faker Faker = new Faker();
         private static readonly List<ProductType> ProductTypes = new List<ProductType>();
+        private static readonly List<Guid> ProductIds = new List<Guid>();
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            GenerateIds();
             modelBuilder.SeedProductTypes();
             modelBuilder.SeedProducts();
+            modelBuilder.SeedReviews();
+        }
+
+        private static void GenerateIds()
+        {
+            for (var i = 0; i < Amount; i++) ProductIds.Add(Guid.NewGuid());
         }
 
         private static void SeedProducts(this ModelBuilder modelBuilder)
         {
-            var products = Enumerable.Range(0, 10)
-               .Select(index => new
+            var products = ProductIds
+               .Select(id => new
                 {
-                    Id = Guid.NewGuid(),
+                    Id = id,
                     Description = Faker.Lorem.Sentence(),
                     IntroduceAt = Faker.Date.FutureOffset(),
                     Name = Faker.Lorem.Word(),
-                    PhotoFileName = Faker.System.FileName(),
+                    PhotoFileName = Faker.System.CommonFileName(),
                     Price = Faker.Finance.Random.Decimal(),
                     ProductTypeId = Faker.PickRandom(ProductTypes).Id,
                     Rating = Faker.Random.Int(),
@@ -55,6 +64,22 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
                 modelBuilder
                    .Entity(type.GetType())
                    .HasData(type));
+        }
+
+        private static void SeedReviews(this ModelBuilder modelBuilder)
+        {
+            var reviews = ProductIds
+               .Select(id => new
+                {
+                    Id = Guid.NewGuid(),
+                    ProductId = id,
+                    Comment = Faker.Lorem.Sentence(),
+                    Title = Faker.Lorem.Word(),
+                });
+
+            modelBuilder
+               .Entity<Review>()
+               .HasData(reviews);
         }
     }
 }

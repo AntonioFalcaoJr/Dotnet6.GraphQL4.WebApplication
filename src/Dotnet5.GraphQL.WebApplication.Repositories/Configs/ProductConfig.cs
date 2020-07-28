@@ -39,6 +39,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
 
             builder.Property(x => x.Rating);
             builder.Property(x => x.Stock);
+
             builder.HasOne(x => x.ProductType);
         }
     }

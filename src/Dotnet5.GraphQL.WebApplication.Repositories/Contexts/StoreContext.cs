@@ -11,6 +11,7 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
