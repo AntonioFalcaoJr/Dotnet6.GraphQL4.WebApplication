@@ -18,16 +18,18 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _env = env;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, StoreContext context)
+        public void Configure(IApplicationBuilder app, StoreContext context)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -68,13 +70,17 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
             services.AddServices();
 
             services.AddDbContext(options =>
-                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection"));
+                options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));
 
             services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
             services.AddScoped<StoreSchema>();
-            services.AddGraphQL(x => x.ExposeExceptions = true)
+
+            services.AddGraphQL(x => x.ExposeExceptions = _env.IsDevelopment())
                .AddGraphTypes(ServiceLifetime.Scoped)
+               .AddUserContextBuilder(context => context.User)
                .AddDataLoader();
+
+            services.AddCors();
 
             services.AddSingleton<GuidGraphType>();
 
