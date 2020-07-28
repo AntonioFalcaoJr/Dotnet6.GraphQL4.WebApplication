@@ -1,15 +1,14 @@
-using System.Threading;
-using System.Transactions;
+using System;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
-using Dotnet5.GraphQL.WebApplication.Repositories.UnitsOfWorks;
 using Dotnet5.GraphQL.WebApplication.Services;
+using GraphQL.DataLoader;
 using GraphQL.Types;
 
 namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
 {
     public sealed class ProductGraphType : ObjectGraphType<Product>
     {
-        public ProductGraphType(IReviewService reviewService)
+        public ProductGraphType(IReviewService reviewService, IDataLoaderContextAccessor dataLoaderContextAccessor)
         {
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.Description);
@@ -23,8 +22,10 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
             Field<ProductOptionEnumGraphType>("Option");
 
             FieldAsync<ListGraphType<ReviewGraphType>>("reviews",
-                resolve: async context 
-                    => await reviewService.GetAllAsync(x => x.Product.Id == context.Source.Id));
+                resolve: async context
+                    => await dataLoaderContextAccessor.Context
+                       .GetOrAddCollectionBatchLoader<Guid, Review>("GetReviewsByProductId", reviewService.GetForProductsAsync)
+                       .LoadAsync(context.Source.Id));
         }
     }
 }
