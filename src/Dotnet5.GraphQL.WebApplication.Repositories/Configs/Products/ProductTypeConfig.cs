@@ -2,7 +2,7 @@ using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
+namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs.Products
 {
     public class ProductTypeConfig : IEntityTypeConfiguration<ProductType>
     {

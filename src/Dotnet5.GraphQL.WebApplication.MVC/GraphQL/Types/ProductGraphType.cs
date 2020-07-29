@@ -1,5 +1,6 @@
 using System;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
 using Dotnet5.GraphQL.WebApplication.Services;
 using GraphQL.DataLoader;
 using GraphQL.Types;

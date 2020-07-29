@@ -1,5 +1,5 @@
 using System;
-using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
 using Dotnet5.GraphQL.WebApplication.Repositories.Abstractions;
 using Dotnet5.GraphQL.WebApplication.Repositories.Contexts;
 

@@ -4,11 +4,11 @@ using Dotnet5.GraphQL.WebApplication.Domain.Enumerations;
 using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using FluentValidation;
 
-namespace Dotnet5.GraphQL.WebApplication.Domain.Entities
+namespace Dotnet5.GraphQL.WebApplication.Domain.Entities.Products
 {
     public class Product : Entity<Guid>
     {
-        public Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoFileName, decimal price,
+        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoFileName, decimal price,
             ProductType productType, int rating, int stock, Option option)
         {
             Id = id;

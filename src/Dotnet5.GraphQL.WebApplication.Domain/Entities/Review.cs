@@ -1,5 +1,6 @@
 using System;
 using Dotnet5.GraphQL.WebApplication.Domain.Abstractions;
+using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
 using FluentValidation;
 
 namespace Dotnet5.GraphQL.WebApplication.Domain.Entities

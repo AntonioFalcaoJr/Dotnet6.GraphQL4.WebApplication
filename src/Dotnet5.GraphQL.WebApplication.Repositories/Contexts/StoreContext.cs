@@ -1,4 +1,5 @@
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
 using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
 

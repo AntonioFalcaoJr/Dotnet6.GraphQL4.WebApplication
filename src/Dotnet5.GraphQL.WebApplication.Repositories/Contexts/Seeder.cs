@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Bogus;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
 using Dotnet5.GraphQL.WebApplication.Domain.Enumerations;
 using Dotnet5.GraphQL.WebApplication.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
@@ -18,37 +20,56 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            GenerateIds();
+            GenerateSomeProductIds();
             modelBuilder.SeedProductTypes();
             modelBuilder.SeedProducts();
             modelBuilder.SeedReviews();
         }
 
-        private static void GenerateIds()
+        private static void GenerateSomeProductIds()
         {
             for (var i = 0; i < Amount; i++) ProductIds.Add(Guid.NewGuid());
         }
 
         private static void SeedProducts(this ModelBuilder modelBuilder)
         {
-            var products = ProductIds
-               .Select(id => new
-                {
-                    Id = id,
-                    Description = Faker.Lorem.Sentence(),
-                    IntroduceAt = Faker.Date.FutureOffset(),
-                    Name = Faker.Lorem.Word(),
-                    PhotoFileName = Faker.System.CommonFileName(),
-                    Price = Faker.Finance.Random.Decimal(),
-                    ProductTypeId = Faker.PickRandom(ProductTypes).Id,
-                    Rating = Faker.Random.Int(),
-                    Stock = Faker.Random.Int(),
-                    Option = Faker.PickRandom<Option>()
-                });
+            var types = Assembly.GetAssembly(typeof(Product))?.GetTypes()
+               .Where(type => type.IsClass && type.IsAbstract is false && type.IsSubclassOf(typeof(Product)));
 
-            modelBuilder
-               .Entity<Product>()
-               .HasData(products);
+            var productIds = ProductIds.ToList();
+
+            types?.ToList().ForEach(type =>
+            {
+                var products = Enumerable.Range(0, Amount)
+                   .Select(index =>
+                    {
+                        Guid? productId = productIds.FirstOrDefault();
+                        var product = new
+                        {
+                            Id = productId == default(Guid) ? Guid.NewGuid() : productId,
+                            Description = Faker.Lorem.Sentence(),
+                            IntroduceAt = Faker.Date.FutureOffset(),
+                            Name = Faker.Lorem.Word(),
+                            PhotoFileName = Faker.System.CommonFileName(),
+                            Price = Faker.Finance.Random.Decimal(),
+                            ProductTypeId = Faker.PickRandom(ProductTypes).Id,
+                            Rating = Faker.Random.Int(),
+                            Stock = Faker.Random.Int(),
+                            Size = Faker.Random.Int(),
+                            AmountOfPerson = Faker.Random.Int(),
+                            Option = Faker.PickRandom<Option>(),
+                            BackpackType = Faker.PickRandom<BackpackType>(),
+                            BootType = Faker.PickRandom<BootType>(),
+                            KayakType = Faker.PickRandom<KayakType>(),
+                        };
+                        if (productId.HasValue) productIds.Remove(productId.Value);
+                        return product;
+                    });
+
+                modelBuilder
+                   .Entity(type)
+                   .HasData(products);
+            });
         }
 
         private static void SeedProductTypes(this ModelBuilder modelBuilder)
@@ -68,11 +89,11 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Contexts
 
         private static void SeedReviews(this ModelBuilder modelBuilder)
         {
-            var reviews = ProductIds
-               .Select(id => new
+            var reviews = ProductIds.Take(Amount)
+               .Select(productId => new
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = id,
+                    ProductId = productId,
                     Comment = Faker.Lorem.Sentence(),
                     Title = Faker.Lorem.Word(),
                 });

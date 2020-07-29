@@ -1,10 +1,10 @@
-using Dotnet5.GraphQL.WebApplication.Domain.Entities;
+using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
 using Dotnet5.GraphQL.WebApplication.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
+namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs.Products
 {
     public class ProductConfig : IEntityTypeConfiguration<Product>
     {
@@ -17,7 +17,8 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
                .Property(x => x.Description)
                .HasMaxLength(100);
 
-            builder.Property(x => x.IntroduceAt);
+            builder
+               .Property(x => x.IntroduceAt);
 
             builder
                .Property(x => x.Name)
@@ -37,10 +38,20 @@ namespace Dotnet5.GraphQL.WebApplication.Repositories.Configs
                .Property(x => x.Option)
                .HasConversion(new EnumToStringConverter<Option>());
 
-            builder.Property(x => x.Rating);
-            builder.Property(x => x.Stock);
+            builder
+               .Property(x => x.Rating);
 
-            builder.HasOne(x => x.ProductType);
+            builder
+               .Property(x => x.Stock);
+
+            builder
+               .HasOne(x => x.ProductType);
+
+            builder
+               .HasDiscriminator()
+               .HasValue<Boot>(nameof(Boot))
+               .HasValue<Kayak>(nameof(Kayak))
+               .HasValue<Backpack>(nameof(Backpack));
         }
     }
 }
