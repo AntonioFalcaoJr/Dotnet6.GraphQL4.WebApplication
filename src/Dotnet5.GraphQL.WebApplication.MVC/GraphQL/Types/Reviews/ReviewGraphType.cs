@@ -1,7 +1,7 @@
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
 using GraphQL.Types;
 
-namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
+namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Reviews
 {
     public class ReviewGraphType : ObjectGraphType<Review>
     {

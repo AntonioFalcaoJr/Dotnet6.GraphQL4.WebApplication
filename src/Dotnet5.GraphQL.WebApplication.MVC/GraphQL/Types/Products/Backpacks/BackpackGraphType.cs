@@ -1,16 +1,21 @@
 using System;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities;
 using Dotnet5.GraphQL.WebApplication.Domain.Entities.Products;
+using Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Reviews;
 using Dotnet5.GraphQL.WebApplication.Services;
 using GraphQL.DataLoader;
 using GraphQL.Types;
 
-namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
+namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products.Backpacks
 {
-    public sealed class ProductGraphType : ObjectGraphType<Product>
+    public class BackpackGraphType : ObjectGraphType<Backpack>
     {
-        public ProductGraphType(IReviewService reviewService, IDataLoaderContextAccessor dataLoaderContextAccessor)
+        public BackpackGraphType(IReviewService reviewService, IDataLoaderContextAccessor dataLoaderContextAccessor)
         {
+            Name = "Backpack";
+
+            Field(x => x.BackpackType, type: typeof(BackpakcTypeEnumGraphType));
+            
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.Description);
             Field(x => x.IntroduceAt);
@@ -27,6 +32,9 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types
                     => await dataLoaderContextAccessor.Context
                        .GetOrAddCollectionBatchLoader<Guid, Review>("GetReviewsByProductId", reviewService.GetForProductsAsync)
                        .LoadAsync(context.Source.Id));
+            
+            Interface<ProductInterfaceGraphType>();
+            IsTypeOf = o => o is Product;
         }
     }
 }

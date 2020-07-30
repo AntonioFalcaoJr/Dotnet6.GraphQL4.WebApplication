@@ -1,5 +1,6 @@
 using System;
 using Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types;
+using Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products;
 using Dotnet5.GraphQL.WebApplication.Services;
 using GraphQL.Types;
 
@@ -9,11 +10,11 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL
     {
         public StoreQuery(IProductService productService)
         {
-            FieldAsync<ListGraphType<ProductGraphType>>("products",
+            FieldAsync<ListGraphType<ProductInterfaceGraphType>>("products",
                 resolve: async context
                     => await productService.GetAllAsync(x => x.Name != null));
 
-            FieldAsync<ProductGraphType>("product",
+            FieldAsync<ProductInterfaceGraphType>("product",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> {Name = "id"}),
                 resolve: async context =>
                 {
