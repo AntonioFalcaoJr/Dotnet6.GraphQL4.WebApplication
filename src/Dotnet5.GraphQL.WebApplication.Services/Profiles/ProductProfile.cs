@@ -4,9 +4,9 @@ using Dotnet5.GraphQL.WebApplication.Services.Models;
 
 namespace Dotnet5.GraphQL.WebApplication.Services.Profiles
 {
-    public class ModelToDomainProfile : Profile
+    public class ProductProfile : Profile
     {
-        public ModelToDomainProfile()
+        public ProductProfile()
         {
             CreateMap<ProductModel, Product>().ReverseMap();
         }

@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.WebApplication.Services.Extensions.DependencyInjection
     public static class IoCServices
     {
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)
-            => services.AddAutoMapper(typeof(ModelToDomainProfile));
+            => services.AddAutoMapper(typeof(ProductProfile), typeof(ReviewProfile));
 
         public static IServiceCollection AddServices(this IServiceCollection services)
             => services.AddScoped<IProductService, ProductService>()
