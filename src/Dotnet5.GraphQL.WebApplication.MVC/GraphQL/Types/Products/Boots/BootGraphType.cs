@@ -16,7 +16,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products.Boots
 
             Field(x => x.Size);
             Field(x => x.BootType, type: typeof(BootTypeEnumGraphType));
-            
+
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.Description);
             Field(x => x.IntroduceAt);

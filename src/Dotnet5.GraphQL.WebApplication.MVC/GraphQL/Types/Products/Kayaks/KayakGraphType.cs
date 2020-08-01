@@ -16,7 +16,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products.Kayaks
 
             Field(x => x.KayakType, type: typeof(KayakTypeEnumGraphType));
             Field(x => x.AmountOfPerson);
-            
+
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.Description);
             Field(x => x.IntroduceAt);
@@ -33,7 +33,6 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products.Kayaks
                     => await dataLoaderContextAccessor.Context
                        .GetOrAddCollectionBatchLoader<Guid, Review>("GetReviewsByProductId", reviewService.GetForProductsAsync)
                        .LoadAsync(context.Source.Id));
-
 
             Interface<ProductInterfaceGraphType>();
             IsTypeOf = o => o is Product;

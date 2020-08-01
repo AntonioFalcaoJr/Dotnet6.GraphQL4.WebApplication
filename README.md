@@ -20,6 +20,142 @@ OR
 
 ```
 
+## Query
+
+#### Fragment for comparison
+
+*QUERY*
+
+```json
+{
+  First: product(id: "2c05b59b-8fb3-4cba-8698-01d55a0284e5") {
+    ...comparisonFields
+  }
+  Second: product(id: "65af82e8-27f6-44f3-af4a-029b73f14530") {
+    ...comparisonFields
+  }
+}
+
+fragment comparisonFields on Product {
+  id
+  name
+  rating
+  description
+}
+```
+
+*RESULT*
+
+```json
+{
+  "data": {
+    "First": {
+      "id": "2c05b59b-8fb3-4cba-8698-01d55a0284e5",
+      "name": "libero",
+      "rating": -1864067132,
+      "description": "Deleniti voluptas quidem accusamus est debitis quisquam enim."
+    },
+    "Second": {
+      "id": "65af82e8-27f6-44f3-af4a-029b73f14530",
+      "name": "debitis",
+      "rating": 1764562021,
+      "description": "Est veniam unde."
+    }
+  }
+```
+
+#### Query named's and Variables
+
+*QUERY*
+
+```json
+query all {
+  products {
+    id
+    name
+  }
+}
+
+query byid($productId: ID!) {
+  product(id: $productId) {
+    id
+    name
+  }
+}
+```
+
+*QUERY VARIABLES*
+
+```json
+{
+  "productId": "2c05b59b-8fb3-4cba-8698-01d55a0284e5"
+}
+```
+
+*HTTP Body*
+```json
+{
+    "operationName": "byid",
+    "variables": {
+        "productId": "2c05b59b-8fb3-4cba-8698-01d55a0284e5"
+    },
+    "query": "query all {
+          products {
+            id
+            name
+          }
+    }
+    
+    query byid($productId: ID!) {
+          product(id: $productId) {
+            id
+            name
+          }
+    }"
+}
+```
+
+#### Variables with include, skip and default value
+
+*QUERY*
+
+```json
+query all($showPrice: Boolean = false) {
+  products {
+    id
+    name
+    price @include(if: $showPrice)
+    rating @skip(if: $showPrice)
+  }
+}
+```
+
+*QUERY VARIABLES*
+
+```json
+{
+  "showPrice": true
+}
+```
+
+*HTTP Body*
+
+```json
+{
+    "operationName": "all",
+    "variables": {
+        "showPrice": false
+    },
+    "query": "query all($showPrice: Boolean = false) {
+          products {
+            id
+            name
+            price @include(if: $showPrice)
+            rating @skip(if: $showPrice)
+          }
+    }"
+}
+```
 
 ## Built With
 

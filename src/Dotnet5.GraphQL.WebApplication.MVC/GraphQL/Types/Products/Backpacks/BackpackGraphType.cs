@@ -15,7 +15,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products.Backpacks
             Name = "Backpack";
 
             Field(x => x.BackpackType, type: typeof(BackpakcTypeEnumGraphType));
-            
+
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.Description);
             Field(x => x.IntroduceAt);
@@ -32,7 +32,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products.Backpacks
                     => await dataLoaderContextAccessor.Context
                        .GetOrAddCollectionBatchLoader<Guid, Review>("GetReviewsByProductId", reviewService.GetForProductsAsync)
                        .LoadAsync(context.Source.Id));
-            
+
             Interface<ProductInterfaceGraphType>();
             IsTypeOf = o => o is Product;
         }
