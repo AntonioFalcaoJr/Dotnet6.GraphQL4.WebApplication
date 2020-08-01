@@ -34,15 +34,15 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products
                     => await dataLoaderContextAccessor.Context
                        .GetOrAddCollectionBatchLoader<Guid, Review>("GetReviewsByProductId", reviewService.GetForProductsAsync)
                        .LoadAsync(context.Source.Id));
-            
-            ResolveType = @object => 
+
+            ResolveType = @object =>
             {
                 return @object switch
                 {
                     Boot _ => bootGraphType,
                     Backpack _ => backpackGraphType,
                     Kayak _ => kayakGraphType,
-                     _ => default
+                    var _ => default
                 };
             };
         }

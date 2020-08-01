@@ -29,30 +29,11 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
 
         public void Configure(IApplicationBuilder app, StoreContext context)
         {
-            if (_env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
+            if (_env.IsDevelopment()) app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute("default",
-                    "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
 
             context.Database.Migrate();
 
@@ -62,7 +43,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers();
 
             services.AddRepositories();
             services.AddUnitOfWork();
@@ -84,10 +65,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC
 
             services.AddSingleton<GuidGraphType>();
 
-            services.Configure<KestrelServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
-            });
+            services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
         }
     }
 }
