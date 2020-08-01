@@ -1,6 +1,7 @@
 using System;
 using Dotnet5.GraphQL.WebApplication.MVC.GraphQL.Types.Products;
 using Dotnet5.GraphQL.WebApplication.Services;
+using GraphQL.Execution;
 using GraphQL.Types;
 
 namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL
@@ -18,6 +19,7 @@ namespace Dotnet5.GraphQL.WebApplication.MVC.GraphQL
                 resolve: async context =>
                 {
                     var id = context.GetArgument<Guid>("id");
+                    if (Equals(id, default(Guid))) context.Errors.Add(new InvalidValueException("Id", $"Value: {id}"));
                     return await productService.GetByIdAsync(id, context.CancellationToken);
                 });
         }

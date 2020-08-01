@@ -22,7 +22,7 @@ OR
 
 ## Query
 
-#### Fragment for comparison
+#### Fragment for comparison and Arguments
 
 *QUERY*
 
