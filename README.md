@@ -11,7 +11,7 @@ OR
 
 #### AppSettings
 
-```json
+```json5
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=192.168.0.27,1433;Database=Store;User=sa;Password=!MyComplexPassword"
@@ -26,7 +26,7 @@ OR
 
 *QUERY*
 
-```json
+```markdown
 {
   First: product(id: "2c05b59b-8fb3-4cba-8698-01d55a0284e5") {
     ...comparisonFields
@@ -46,7 +46,7 @@ fragment comparisonFields on Product {
 
 *RESULT*
 
-```json
+```json5
 {
   "data": {
     "First": {
@@ -62,13 +62,14 @@ fragment comparisonFields on Product {
       "description": "Est veniam unde."
     }
   }
+}
 ```
 
 #### Query named's and Variables
 
 *QUERY*
 
-```json
+```markdown
 query all {
   products {
     id
@@ -86,31 +87,30 @@ query byid($productId: ID!) {
 
 *QUERY VARIABLES*
 
-```json
+```json5
 {
   "productId": "2c05b59b-8fb3-4cba-8698-01d55a0284e5"
 }
 ```
 
 *HTTP Body*
-```json
+```json5
 {
     "operationName": "byid",
     "variables": {
         "productId": "2c05b59b-8fb3-4cba-8698-01d55a0284e5"
     },
     "query": "query all {
-          products {
-            id
-            name
-          }
+        products {
+          id
+          name
+        }
     }
-    
     query byid($productId: ID!) {
-          product(id: $productId) {
-            id
-            name
-          }
+        product(id: $productId) {
+          id
+          name
+        }
     }"
 }
 ```
@@ -119,7 +119,7 @@ query byid($productId: ID!) {
 
 *QUERY*
 
-```json
+```markdown
 query all($showPrice: Boolean = false) {
   products {
     id
@@ -132,7 +132,7 @@ query all($showPrice: Boolean = false) {
 
 *QUERY VARIABLES*
 
-```json
+```json5
 {
   "showPrice": true
 }
@@ -140,7 +140,7 @@ query all($showPrice: Boolean = false) {
 
 *HTTP Body*
 
-```json
+```json5
 {
     "operationName": "all",
     "variables": {
