@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="10.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Domain\Dotnet5.GraphQL.Store.Domain.csproj" />
+        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Repositories\Dotnet5.GraphQL.Store.Repositories.csproj" />
+    </ItemGroup>
+
+</Project>

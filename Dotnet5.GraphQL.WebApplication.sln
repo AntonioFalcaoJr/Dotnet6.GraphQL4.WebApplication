@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.WebApplication.Domain", "src\Dotnet5.GraphQL.WebApplication.Domain\Dotnet5.GraphQL.WebApplication.Domain.csproj", "{ACC0F84A-E462-4AB2-9AD2-771D33307797}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Domain", "src\Dotnet5.GraphQL.Store.Domain\Dotnet5.GraphQL.Store.Domain.csproj", "{ACC0F84A-E462-4AB2-9AD2-771D33307797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.WebApplication.MVC", "src\Dotnet5.GraphQL.WebApplication.MVC\Dotnet5.GraphQL.WebApplication.MVC.csproj", "{ABC794E6-328F-4102-8418-3E3346B72311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.WebAPI", "src\Dotnet5.GraphQL.Store.WebAPI\Dotnet5.GraphQL.Store.WebAPI.csproj", "{ABC794E6-328F-4102-8418-3E3346B72311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.WebApplication.Repositories", "src\Dotnet5.GraphQL.WebApplication.Repositories\Dotnet5.GraphQL.WebApplication.Repositories.csproj", "{EDDE1CDC-F3C1-479B-8DAB-DD64A6B04E6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Repositories", "src\Dotnet5.GraphQL.Store.Repositories\Dotnet5.GraphQL.Store.Repositories.csproj", "{EDDE1CDC-F3C1-479B-8DAB-DD64A6B04E6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.WebApplication.Services", "src\Dotnet5.GraphQL.WebApplication.Services\Dotnet5.GraphQL.WebApplication.Services.csproj", "{5F636855-3808-4A4C-823F-7BD08AA6B6E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Services", "src\Dotnet5.GraphQL.Store.Services\Dotnet5.GraphQL.Store.Services.csproj", "{5F636855-3808-4A4C-823F-7BD08AA6B6E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
