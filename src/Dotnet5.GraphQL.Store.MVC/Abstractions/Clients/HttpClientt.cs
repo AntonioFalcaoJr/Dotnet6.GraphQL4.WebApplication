@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Dotnet5.GraphQL.Store.MVC.Models;
+using FluentValidation.Results;
 
 namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
 {
     public abstract class HttpClient<TEntity, TClientModel, TId> : IHttpClient<TEntity, TClientModel, TId>
-        where TClientModel : ClientModel<TId>, new()
+        where TClientModel : ClientModel, new()
         where TEntity : Entity<TId>
         where TId : struct
     {
@@ -25,6 +29,8 @@ namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
         protected abstract string GetEndpoint { get; }
         protected abstract string PostEndpoint { get; }
         protected abstract string PutEndpoint { get; }
+
+        public ValidationResult ValidationResult { get; set; }
 
         public async Task<TClientModel> GetAsync(CancellationToken token)
         {
@@ -51,7 +57,7 @@ namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
 
         private static ByteArrayContent GetByteContent(object obj)
         {
-            var content = JsonConvert.SerializeObject(obj);
+            var content = JsonSerializer.Serialize(obj);
             var buffer = Encoding.UTF8.GetBytes(content);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -63,7 +69,7 @@ namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
         private static TClientModel OnError(HttpResponseMessage responseMessage)
         {
             var client = new TClientModel();
-            client.Notification.AddError(responseMessage.ToString());
+            client.ValidationResult.Errors.Add(new ValidationFailure("client", responseMessage.ToString()));
             return client;
         }
 
