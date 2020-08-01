@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dotnet5.GraphQL.Store.Domain\Dotnet5.GraphQL.Store.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Abstractions\Controllers" />
+      <Folder Include="Clients" />
+    </ItemGroup>
+
+</Project>
