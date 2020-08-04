@@ -61,10 +61,12 @@ namespace Dotnet5.GraphQL.Store.WebAPI
                .AddDataLoader();
 
             services.AddCors();
-
             services.AddSingleton<GuidGraphType>();
 
+            // If using Kestrel:
             services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
+            // If using IIS:
+            services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
         }
     }
 }
