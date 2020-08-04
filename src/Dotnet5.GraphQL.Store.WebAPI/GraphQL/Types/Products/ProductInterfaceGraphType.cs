@@ -32,7 +32,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
             FieldAsync<ListGraphType<ReviewGraphType>>("reviews",
                 resolve: async context
                     => await dataLoaderContextAccessor.Context
-                       .GetOrAddCollectionBatchLoader<Guid, Review>("GetReviewsByProductId", reviewService.GetForProductsAsync)
+                       .GetOrAddCollectionBatchLoader<Guid, Review>("GetLookupByProductIdsAsync", reviewService.GetLookupByProductIdsAsync)
                        .LoadAsync(context.Source.Id));
 
             ResolveType = @object =>

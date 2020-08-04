@@ -10,6 +10,6 @@ namespace Dotnet5.GraphQL.Store.Services
 {
     public interface IReviewService : IService<Review, ReviewModel, Guid>
     {
-        Task<ILookup<Guid, Review>> GetForProductsAsync(IEnumerable<Guid> productIds);
+        Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds);
     }
 }

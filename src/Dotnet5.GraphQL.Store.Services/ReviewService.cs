@@ -21,7 +21,10 @@ namespace Dotnet5.GraphQL.Store.Services
             _repository = repository;
         }
 
-        public async Task<ILookup<Guid, Review>> GetForProductsAsync(IEnumerable<Guid> productIds)
-            => await _repository.GetForProducts(productIds);
+        public async Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds)
+        {
+            var reviews = await _repository.GetAllAsync(x => productIds.Contains(x.Product.Id));
+            return reviews.ToLookup(x => x.Product.Id);
+        }
     }
 }
