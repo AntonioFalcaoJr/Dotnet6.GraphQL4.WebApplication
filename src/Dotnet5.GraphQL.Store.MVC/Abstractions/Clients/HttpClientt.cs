@@ -1,19 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Dotnet5.GraphQL.Store.MVC.Models;
 using FluentValidation.Results;
 
 namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
 {
-    public abstract class HttpClient<TEntity, TClientModel, TId> : IHttpClient<TEntity, TClientModel, TId>
-        where TClientModel : ClientModel, new()
+    public abstract class HttpClient<TEntity, TId> : IHttpClient<TEntity, TId>
         where TEntity : Entity<TId>
         where TId : struct
     {
@@ -24,36 +22,30 @@ namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
             _httpClientFactory = httpClientFactory;
         }
 
+        public ValidationResult ValidationResult { get; set; }
+
         protected abstract string ClientName { get; }
         protected abstract string DeleteEndpoint { get; }
         protected abstract string GetEndpoint { get; }
         protected abstract string PostEndpoint { get; }
         protected abstract string PutEndpoint { get; }
 
-        public ValidationResult ValidationResult { get; set; }
-
-        public async Task<TClientModel> GetAsync(CancellationToken token)
+        public async Task<Response<TEntity>> GetAsync(CancellationToken token)
         {
             var responseMessage = await GetClient().GetAsync(GetEndpoint, token);
-
-            return responseMessage.IsSuccessStatusCode
-                ? await OnSuccessAsync(responseMessage)
-                : OnError(responseMessage);
+            return await GetResponse(responseMessage);
         }
 
-        public async Task<TClientModel> PostAsync(TEntity entity, CancellationToken cancellationToken)
+        public async Task<Response<TEntity>> PostAsync(TEntity entity, CancellationToken cancellationToken)
         {
             var byteContent = GetByteContent(entity);
             var responseMessage = await GetClient().PostAsync(PostEndpoint, byteContent, cancellationToken);
-
-            return responseMessage.IsSuccessStatusCode
-                ? await OnSuccessAsync(responseMessage)
-                : OnError(responseMessage);
+            return await GetResponse(responseMessage);
         }
 
-        public Task<TClientModel> PutAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task<Response<TEntity>> PutAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
 
-        public Task<TClientModel> DeleteAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task<Response<TEntity>> DeleteAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
 
         private static ByteArrayContent GetByteContent(object obj)
         {
@@ -66,17 +58,22 @@ namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
 
         private HttpClient GetClient() => _httpClientFactory.CreateClient(ClientName);
 
-        private static TClientModel OnError(HttpResponseMessage responseMessage)
+        private static async Task<Response<TEntity>> GetResponse(HttpResponseMessage responseMessage)
+            => responseMessage.IsSuccessStatusCode
+                ? await OnSuccessAsync(responseMessage)
+                : OnError(responseMessage);
+
+        private static Response<TEntity> OnError(HttpResponseMessage responseMessage)
         {
-            var client = new TClientModel();
-            client.ValidationResult.Errors.Add(new ValidationFailure("client", responseMessage.ToString()));
+            var client = new Response<TEntity>();
+            client.Errors.Add(responseMessage.ToString());
             return client;
         }
 
-        private static async Task<TClientModel> OnSuccessAsync(HttpResponseMessage responseMessage)
+        private static async Task<Response<TEntity>> OnSuccessAsync(HttpResponseMessage responseMessage)
         {
             var resultAsString = await responseMessage.Content.ReadAsStringAsync();
-            return new TClientModel {Result = resultAsString};
+            return new Response<TEntity> {Results = JsonSerializer.Deserialize<List<TEntity>>(resultAsString)};
         }
     }
 }

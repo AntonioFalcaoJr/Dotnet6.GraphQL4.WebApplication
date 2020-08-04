@@ -8,14 +8,14 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
 {
     public class Product : Entity<Guid>
     {
-        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoFileName, decimal price,
+        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
             ProductType productType, int rating, int stock, Option option)
         {
             Id = id;
             Description = description;
             IntroduceAt = introduceAt;
             Name = name;
-            PhotoFileName = photoFileName;
+            PhotoUrl = photoUrl;
             Price = price;
             ProductType = productType;
             Rating = rating;
@@ -31,7 +31,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
         public DateTimeOffset IntroduceAt { get; }
         public string Name { get; }
         public Option Option { get; }
-        public string PhotoFileName { get; }
+        public string PhotoUrl { get; }
         public decimal Price { get; }
         public ProductType ProductType { get; }
         public int Rating { get; }

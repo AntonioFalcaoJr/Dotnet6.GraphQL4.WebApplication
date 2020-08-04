@@ -22,7 +22,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
             Field(x => x.Description);
             Field(x => x.IntroduceAt);
             Field(x => x.Name).Description("The name of the product.");
-            Field(x => x.PhotoFileName);
+            Field(x => x.PhotoUrl);
             Field(x => x.Price);
             Field(x => x.ProductType, type: typeof(ProductTypeGraphType));
             Field(x => x.Rating);

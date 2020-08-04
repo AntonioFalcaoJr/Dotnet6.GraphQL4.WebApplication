@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Product Detail";
+}
+
+<body>
+<div class="product-list"></div>
+<div class="product-dual-column">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 text-center">
+                <div class="intro">
+                    <h1 class="text-center">@Model.Name</h1><img class="img-fluid" src="@Model.PhotoUrl" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-3 offset-md-1">
+                <div class="toc">
+                    <p>Details</p>
+                    <ul>
+                        <li>
+                            <p>Price: @Model.Price </p>
+                        </li>
+                        <li>
+                            <p>Rating: @Model.Rating</p>
+                        </li>
+                        <li>
+                            <p>Introduce at: @Model.IntroduceAt </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">
+                <div class="text">
+                    <p>@Model.Description</p>
+                    <figure class="figure"></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

@@ -50,7 +50,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Contexts
                             Description = Faker.Lorem.Sentence(),
                             IntroduceAt = Faker.Date.FutureOffset(),
                             Name = Faker.Lorem.Word(),
-                            PhotoFileName = Faker.System.CommonFileName(),
+                            PhotoUrl = Faker.Image.PicsumUrl(),
                             Price = Faker.Finance.Random.Decimal(),
                             ProductTypeId = Faker.PickRandom(ProductTypes).Id,
                             Rating = Faker.Random.Int(),

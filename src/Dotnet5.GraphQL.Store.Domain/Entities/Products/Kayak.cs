@@ -6,9 +6,9 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
 {
     public class Kayak : Product
     {
-        public Kayak(Guid id, string description, DateTimeOffset introduceAt, string name, string photoFileName, decimal price,
+        public Kayak(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
             ProductType productType, int rating, int stock, Option option, KayakType kayakType, int amountOfPerson)
-            : base(id, description, introduceAt, name, photoFileName, price, productType, rating, stock, option)
+            : base(id, description, introduceAt, name, photoUrl, price, productType, rating, stock, option)
         {
             KayakType = kayakType;
             AmountOfPerson = amountOfPerson;

@@ -26,7 +26,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
                .IsRequired();
 
             builder
-               .Property(x => x.PhotoFileName)
+               .Property(x => x.PhotoUrl)
                .HasMaxLength(100);
 
             builder

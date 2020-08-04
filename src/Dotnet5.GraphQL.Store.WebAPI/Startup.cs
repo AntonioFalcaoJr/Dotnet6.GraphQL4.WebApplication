@@ -32,7 +32,6 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             if (_env.IsDevelopment()) app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
             context.Database.Migrate();
