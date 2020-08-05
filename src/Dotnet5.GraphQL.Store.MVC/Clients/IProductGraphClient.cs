@@ -7,7 +7,8 @@ namespace Dotnet5.GraphQL.Store.MVC.Clients
 {
     public interface IProductGraphClient
     {
-        Task<ProductModel> GetProductAsync(Guid id);
-        Task<IEnumerable<ProductModel>> GetProducts();
+        Task<ProductModel> GetProductByIdAsync(Guid id);
+        Task<IEnumerable<ProductModel>> GetProductsAsync();
+        Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id);
     }
 }

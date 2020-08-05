@@ -47,16 +47,16 @@ namespace Dotnet5.GraphQL.Store.Repositories.Contexts
                         var product = new
                         {
                             Id = productId == default(Guid) ? Guid.NewGuid() : productId,
-                            Description = Faker.Lorem.Sentence(),
+                            Description = Faker.Commerce.ProductDescription(),
                             IntroduceAt = Faker.Date.FutureOffset(),
-                            Name = Faker.Lorem.Word(),
+                            Name = Faker.Commerce.ProductName(),
                             PhotoUrl = Faker.Image.PicsumUrl(),
-                            Price = Faker.Finance.Random.Decimal(),
+                            Price = Convert.ToDecimal(Faker.Commerce.Price()),
                             ProductTypeId = Faker.PickRandom(ProductTypes).Id,
-                            Rating = Faker.Random.Int(),
-                            Stock = Faker.Random.Int(),
-                            Size = Faker.Random.Int(),
-                            AmountOfPerson = Faker.Random.Int(),
+                            Rating = Faker.Random.Int(0, 10),
+                            Stock = Faker.Random.Int(0, 5000),
+                            Size = Faker.Random.Int(20, 30),
+                            AmountOfPerson = Faker.Random.Int(1, 3),
                             Option = Faker.PickRandom<Option>(),
                             BackpackType = Faker.PickRandom<BackpackType>(),
                             BootType = Faker.PickRandom<BootType>(),
@@ -94,8 +94,8 @@ namespace Dotnet5.GraphQL.Store.Repositories.Contexts
                 {
                     Id = Guid.NewGuid(),
                     ProductId = productId,
-                    Comment = Faker.Lorem.Sentence(),
-                    Title = Faker.Lorem.Word(),
+                    Comment = Faker.Lorem.Paragraphs(),
+                    Title = Faker.Lorem.Sentence(),
                 });
 
             modelBuilder

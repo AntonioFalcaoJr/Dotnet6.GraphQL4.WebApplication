@@ -15,7 +15,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
 
             builder
                .Property(x => x.Description)
-               .HasMaxLength(100);
+               .HasMaxLength(300);
 
             builder
                .Property(x => x.IntroduceAt);

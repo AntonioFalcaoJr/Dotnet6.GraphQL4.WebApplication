@@ -16,7 +16,7 @@ namespace Dotnet5.GraphQL.Store.MVC.Clients
             _client = client;
         }
 
-        public async Task<IEnumerable<ProductModel>> GetProducts()
+        public async Task<IEnumerable<ProductModel>> GetProductsAsync()
         {
             var query = new GraphQLRequest
             {
@@ -38,7 +38,7 @@ namespace Dotnet5.GraphQL.Store.MVC.Clients
             return response.GetDataFieldAs<IEnumerable<ProductModel>>("products");
         }
 
-        public async Task<ProductModel> GetProductAsync(Guid id)
+        public async Task<ProductModel> GetProductByIdAsync(Guid id)
         {
             var query = new GraphQLRequest
             {
@@ -59,6 +59,24 @@ namespace Dotnet5.GraphQL.Store.MVC.Clients
 
             var response = await _client.PostAsync(query);
             return response.GetDataFieldAs<ProductModel>("product");
+        }
+        
+        public async Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id)
+        {
+            var query = new GraphQLRequest
+            {
+                Query = @"query ReviewsByProductQuery($productId: ID!) {
+                          reviews(productId: $productId) {
+                            id
+                            title
+                            comment
+                          }
+                        }",
+                Variables = new {productId = id}
+            };
+
+            var response = await _client.PostAsync(query);
+            return response.GetDataFieldAs<IEnumerable<ReviewModel>>("reviews");
         }
     }
 }

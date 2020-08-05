@@ -24,23 +24,20 @@ namespace Dotnet5.GraphQL.Store.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var response = await _productGraphClient.GetProducts();
-
-            // return response.IsValid
-            //     ? View(response.Results)
-            //     : View(new ErrorViewModel
-            //     {
-            //         RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-            //         Erros = response.Errors
-            //     });
-
+            var response = await _productGraphClient.GetProductsAsync();
             return View(response);
         }
 
         public async Task<IActionResult> ProductDetail(Guid id)
         {
-            var product = await _productGraphClient.GetProductAsync(id);
+            var product = await _productGraphClient.GetProductByIdAsync(id);
             return View(product);
+        }
+        
+        public async Task<IActionResult> ProductReview(Guid id)
+        {
+            var reviews = await _productGraphClient.GetReviewByProductIdAsync(id);
+            return View(reviews);
         }
     }
 }

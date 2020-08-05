@@ -9,13 +9,14 @@
         <div class="row">
             <div class="col-md-10 offset-md-1 text-center">
                 <div class="intro">
-                    <h1 class="text-center">@Model.Name</h1><img class="img-fluid" src="@Model.PhotoUrl" alt="">
+                    <h1 class="text-center">@Model.Name</h1>
+                    <img class="img-fluid" src="@Model.PhotoUrl" alt="">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-10 col-lg-3 offset-md-1">
-                <div class="toc">
+                <div class="details">
                     <p>Details</p>
                     <ul>
                         <li>
@@ -33,9 +34,16 @@
             <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">
                 <div class="text">
                     <p>@Model.Description</p>
-                    <figure class="figure"></figure>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1 text-center">
+            <a asp-controller="Home" asp-action="ProductReview" asp-route-id="@Model.Id">
+                <h5>Reviews</h5>
+                <i class="fa fa-comments" style="font-size: 60px"></i>
+            </a>
         </div>
     </div>
 </div>

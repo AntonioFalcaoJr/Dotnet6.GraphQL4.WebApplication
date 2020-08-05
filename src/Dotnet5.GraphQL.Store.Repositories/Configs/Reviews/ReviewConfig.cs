@@ -12,12 +12,11 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Reviews
                .HasKey(x => x.Id);
 
             builder
-               .Property(x => x.Comment)
-               .HasMaxLength(300);
+               .Property(x => x.Comment);
 
             builder
                .Property(x => x.Title)
-               .HasMaxLength(50);
+               .HasMaxLength(100);
 
             builder
                .HasOne(x => x.Product);
