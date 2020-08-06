@@ -30,14 +30,13 @@ namespace Dotnet5.GraphQL.Store.WebAPI
         public void Configure(IApplicationBuilder app, StoreContext context)
         {
             if (_env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-            context.Database.Migrate();
-
             app.UseGraphQL<StoreSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+
+            context.Database.Migrate();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -60,11 +59,11 @@ namespace Dotnet5.GraphQL.Store.WebAPI
                .AddUserContextBuilder(context => context.User)
                .AddDataLoader();
 
-            services.AddCors();
             services.AddSingleton<GuidGraphType>();
 
             // If using Kestrel:
             services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
+
             // If using IIS:
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
         }

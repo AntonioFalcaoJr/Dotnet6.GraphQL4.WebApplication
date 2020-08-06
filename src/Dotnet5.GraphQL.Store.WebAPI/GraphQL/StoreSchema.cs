@@ -12,6 +12,8 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
             : base(resolver)
         {
             Query = resolver.Resolve<StoreQuery>();
+            Mutation = resolver.Resolve<StoreMutation>();
+            
             RegisterType<BootGraphType>();
             RegisterType<BackpackGraphType>();
             RegisterType<KayakGraphType>();

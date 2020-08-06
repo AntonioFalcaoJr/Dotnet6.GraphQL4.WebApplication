@@ -7,7 +7,7 @@ using Dotnet5.GraphQL.Store.Domain.Abstractions;
 
 namespace Dotnet5.GraphQL.Store.Services.Abstractions
 {
-    public interface IService<TEntity, in TModel, in TId>
+    public interface IService<TEntity, TModel, in TId>
         where TEntity : Entity<TId>
         where TModel : Model<TId>
         where TId : struct
@@ -27,7 +27,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         TEntity GetById(TId id);
         Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
-        TEntity Save(TModel model);
+        TModel Save(TModel model);
         Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default);
     }
 }

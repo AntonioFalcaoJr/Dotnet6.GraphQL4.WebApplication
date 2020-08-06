@@ -56,7 +56,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         public virtual Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken)
             => OnGetByIdAsync(id, cancellationToken);
 
-        public virtual TEntity Save(TModel model)
+        public virtual TModel Save(TModel model)
             => OnSave(model);
 
         public virtual Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken)
@@ -112,13 +112,13 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         protected async Task<TEntity> OnGetByIdAsync(TId id, CancellationToken cancellationToken)
             => Equals(id, default(TId)) ? default : await _repository.GetByIdAsync(id, cancellationToken);
 
-        protected TEntity OnSave(TModel model)
+        protected TModel OnSave(TModel model)
         {
             if (model is null) return default;
             var entity = _mapper.Map<TEntity>(model);
             if (entity.IsValid) _repository.Add(entity);
             _unitOfWork.SaveChanges();
-            return entity;
+            return _mapper.Map<TModel>(entity);
         }
 
         protected async Task<TEntity> OnSaveAsync(TModel model, CancellationToken cancellationToken)
