@@ -1,5 +1,6 @@
 # Dotnet5.GraphQL.CleanArchitecture
 
+This project exemplify the implementation of a simle Razor Web APP (MVC 5) consuming an GraphQL Web API, build in a .NET 5 multi-layer  project, considering development best practices, like SOLID and DRY in a Clean Architecture.
 
 #### Secrets
 
