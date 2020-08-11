@@ -1,6 +1,7 @@
 using System;
 using Dotnet5.GraphQL.Store.Domain.Entities;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;

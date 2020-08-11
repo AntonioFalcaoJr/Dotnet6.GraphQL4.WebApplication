@@ -1,4 +1,5 @@
 using Dotnet5.GraphQL.Store.Domain.Entities;
+using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using GraphQL.Types;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews

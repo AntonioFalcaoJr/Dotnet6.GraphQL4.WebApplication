@@ -3,7 +3,7 @@ using Dotnet5.GraphQL.Store.Domain.Abstractions;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 using FluentValidation;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities
+namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
 {
     public class Review : Entity<Guid>
     {

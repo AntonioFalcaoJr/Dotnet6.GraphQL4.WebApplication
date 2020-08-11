@@ -5,6 +5,7 @@ using System.Reflection;
 using Bogus;
 using Dotnet5.GraphQL.Store.Domain.Entities;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
