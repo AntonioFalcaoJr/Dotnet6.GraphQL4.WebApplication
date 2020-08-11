@@ -8,7 +8,7 @@ namespace Dotnet5.GraphQL.Store.Services.Profiles.Converters
     {
         public Review Convert(ReviewModel source, Review destination, ResolutionContext context)
         {
-            return new Review();
+            return null;
         }
     }
 }

@@ -2,20 +2,28 @@
 
 This project exemplify the implementation of a simle Razor Web APP (MVC 5) consuming an GraphQL Web API, build in a .NET 5 multi-layer  project, considering development best practices, like SOLID and DRY in a Clean Architecture.
 
+### Configuration
+
 #### Secrets
 
+Init your secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI)
+
 ```bash
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=192.168.0.27,1433;Database=Store;User=sa;Password=!MyComplexPassword"
+dotnet user-secrets init
+```
+Then, define the `DefaultConnection`: 
+```bash
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
 ```
 
-OR
+Or, if your prefer, is possible to define it on `appsettings.json`
 
 #### AppSettings
 
 ```json5
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=192.168.0.27,1433;Database=Store;User=sa;Password=!MyComplexPassword"
+    "DefaultConnection": "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
   }
 }
 

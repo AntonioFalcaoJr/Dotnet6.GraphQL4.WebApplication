@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <UserSecretsId>f310136b-48c9-49df-9dbd-038518cc81b4</UserSecretsId>
+        <UserSecretsId>50d27449-38cf-4054-be72-138f16c2f4e3</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="GraphQL" Version="2.4.0" />
-        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
-        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
+        <PackageReference Include="GraphQL" Version="2.4.0"/>
+        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0"/>
+        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Repositories\Dotnet5.GraphQL.Store.Repositories.csproj" />
-        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Services\Dotnet5.GraphQL.Store.Services.csproj" />
+        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Repositories\Dotnet5.GraphQL.Store.Repositories.csproj"/>
+        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Services\Dotnet5.GraphQL.Store.Services.csproj"/>
     </ItemGroup>
 
 </Project>
