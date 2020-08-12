@@ -7,5 +7,6 @@ namespace Dotnet5.GraphQL.Store.Services.Models
     {
         public string Title { get; set; }
         public string Comment { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

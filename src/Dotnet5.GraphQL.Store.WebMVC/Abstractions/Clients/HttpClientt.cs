@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
 using FluentValidation.Results;
 
-namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
+namespace Dotnet5.GraphQL.Store.WebMVC.Abstractions.Clients
 {
     public abstract class HttpClient<TEntity, TId> : IHttpClient<TEntity, TId>
         where TEntity : Entity<TId>

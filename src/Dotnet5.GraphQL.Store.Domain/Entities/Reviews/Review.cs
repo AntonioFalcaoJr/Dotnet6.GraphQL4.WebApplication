@@ -7,9 +7,8 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
 {
     public class Review : Entity<Guid>
     {
-        public Review(Product product, string title, string comment)
+        public Review(string title, string comment)
         {
-            Product = product;
             Title = title;
             Comment = comment;
 
@@ -20,6 +19,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
 
         public string Comment { get; }
         public Product Product { get; }
+        public Guid ProductId { get; }
         public string Title { get; }
     }
 }

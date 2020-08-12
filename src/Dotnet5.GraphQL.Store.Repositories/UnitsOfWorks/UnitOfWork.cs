@@ -10,12 +10,12 @@ namespace Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DatabaseFacade _database;
-        private readonly DbContext _dbContext;
+        private readonly DbContext _dbDbContext;
 
-        public UnitOfWork(StoreContext dbContext)
+        public UnitOfWork(StoreDbContext dbDbContext)
         {
-            _dbContext = dbContext;
-            _database = _dbContext.Database;
+            _dbDbContext = dbDbContext;
+            _database = _dbDbContext.Database;
         }
 
         public IDbContextTransaction BeginTransaction()
@@ -25,10 +25,10 @@ namespace Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks
             => await _database.BeginTransactionAsync(cancellationToken);
 
         public void SaveChanges()
-            => _dbContext.SaveChanges(true);
+            => _dbDbContext.SaveChanges(true);
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
-            => await _dbContext.SaveChangesAsync(true, cancellationToken);
+            => await _dbDbContext.SaveChangesAsync(true, cancellationToken);
 
         public void Commit()
             => _database.CommitTransaction();
@@ -43,7 +43,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks
             => await _database.RollbackTransactionAsync(cancellationToken);
 
         public void Dispose()
-            => _dbContext?.Dispose();
+            => _dbDbContext?.Dispose();
 
         public void CreateSavepoint(string savepoint)
             => _database.CreateSavepoint(savepoint);

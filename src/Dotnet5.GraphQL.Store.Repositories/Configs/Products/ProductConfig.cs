@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
@@ -8,50 +9,61 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
 {
     public class ProductConfig : IEntityTypeConfiguration<Product>
     {
+        private const string DiscriminatorDefaultName = "Discriminator";
+
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder
-               .HasKey(x => x.Id);
+                .HasKey(x => x.Id);
 
             builder
-               .Property(x => x.Description)
-               .HasMaxLength(300);
+                .Property(x => x.Description)
+                .HasMaxLength(300);
 
             builder
-               .Property(x => x.IntroduceAt);
+                .Property(x => x.IntroduceAt);
 
             builder
-               .Property(x => x.Name)
-               .HasMaxLength(50)
-               .IsRequired();
+                .Property(x => x.Name)
+                .HasMaxLength(50)
+                .IsRequired();
 
             builder
-               .Property(x => x.PhotoUrl)
-               .HasMaxLength(100);
+                .Property(x => x.PhotoUrl)
+                .HasMaxLength(100);
 
             builder
-               .Property(x => x.Price)
-               .HasPrecision(18, 2)
-               .IsRequired();
+                .Property(x => x.Price)
+                .HasPrecision(18, 2)
+                .IsRequired();
 
             builder
-               .Property(x => x.Option)
-               .HasConversion(new EnumToStringConverter<Option>());
+                .Property(x => x.Option)
+                .HasConversion(new EnumToStringConverter<Option>());
 
             builder
-               .Property(x => x.Rating);
+                .Property(x => x.Rating);
 
             builder
-               .Property(x => x.Stock);
+                .Property(x => x.Stock);
 
             builder
-               .HasOne(x => x.ProductType);
+                .HasOne(x => x.ProductType);
 
             builder
-               .HasDiscriminator()
-               .HasValue<Boot>(nameof(Boot))
-               .HasValue<Kayak>(nameof(Kayak))
-               .HasValue<Backpack>(nameof(Backpack));
+                .HasMany(x => x.Reviews)
+                .WithOne(x => x.Product)
+                .HasForeignKey(x => x.ProductId);
+
+            builder
+                .HasDiscriminator()
+                .HasValue<Boot>(nameof(Boot))
+                .HasValue<Kayak>(nameof(Kayak))
+                .HasValue<Backpack>(nameof(Backpack));
+
+            builder
+                .Property(DiscriminatorDefaultName)
+                .HasMaxLength(30);
         }
     }
 }

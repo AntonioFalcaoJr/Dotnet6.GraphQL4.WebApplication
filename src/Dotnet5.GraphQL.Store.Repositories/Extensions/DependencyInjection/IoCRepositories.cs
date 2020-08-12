@@ -14,7 +14,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Extensions.DependencyInjection
         public static IServiceCollection AddDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
         {
             options.Invoke(Options);
-            return services.AddDbContext<StoreContext>(DbContextOptionsBuilderAction);
+            return services.AddDbContext<StoreDbContext>(DbContextOptionsBuilderAction);
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
@@ -33,7 +33,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Extensions.DependencyInjection
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                .EnableRetryOnFailure(5, TimeSpan.FromSeconds(5), null)
-               .MigrationsAssembly(typeof(StoreContext).Assembly.GetName().Name);
+               .MigrationsAssembly(typeof(StoreDbContext).Assembly.GetName().Name);
     }
 
     public class RepositoriesOptions

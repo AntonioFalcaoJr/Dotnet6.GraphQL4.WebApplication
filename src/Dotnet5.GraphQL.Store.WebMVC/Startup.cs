@@ -1,4 +1,4 @@
-using Dotnet5.GraphQL.Store.MVC.Clients;
+using Dotnet5.GraphQL.Store.WebMVC.Clients;
 using GraphQL.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Dotnet5.GraphQL.Store.MVC
+namespace Dotnet5.GraphQL.Store.WebMVC
 {
     public class Startup
     {

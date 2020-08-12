@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.MVC.Models;
+using Dotnet5.GraphQL.Store.WebMVC.Models;
 using GraphQL.Client;
 using GraphQL.Common.Request;
 
-namespace Dotnet5.GraphQL.Store.MVC.Clients
+namespace Dotnet5.GraphQL.Store.WebMVC.Clients
 {
     public class ProductGraphClient : IProductGraphClient
     {

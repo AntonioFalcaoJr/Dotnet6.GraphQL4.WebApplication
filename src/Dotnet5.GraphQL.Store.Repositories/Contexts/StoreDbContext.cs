@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL.Store.Repositories.Contexts
 {
-    public class StoreContext : DbContext
+    public class StoreDbContext : DbContext
     {
-        public StoreContext(DbContextOptions options)
+        public StoreDbContext(DbContextOptions options)
             : base(options) { }
 
         public DbSet<Product> Products { get; set; }
@@ -18,7 +18,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CS_AS");
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreDbContext).Assembly);
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }

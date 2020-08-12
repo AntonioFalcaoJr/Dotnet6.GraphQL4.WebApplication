@@ -27,7 +27,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             _configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app, StoreContext context)
+        public void Configure(IApplicationBuilder app, StoreDbContext dbContext)
         {
             if (_env.IsDevelopment()) app.UseDeveloperExceptionPage();
             app.UseRouting();
@@ -36,7 +36,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             app.UseGraphQL<StoreSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
-            context.Database.Migrate();
+            dbContext.Database.Migrate();
         }
 
         public void ConfigureServices(IServiceCollection services)

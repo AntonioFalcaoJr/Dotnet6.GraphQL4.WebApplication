@@ -24,8 +24,8 @@ namespace Dotnet5.GraphQL.Store.Services
 
         public async Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds)
         {
-            var reviews = await _repository.GetAllAsync(x => productIds.Contains(x.Product.Id));
-            return reviews.ToLookup(x => x.Product.Id);
+            var reviews = await _repository.GetAllAsync(review => review, review => productIds.Contains(review.ProductId));
+            return reviews.ToLookup(x => x.ProductId);
         }
     }
 }

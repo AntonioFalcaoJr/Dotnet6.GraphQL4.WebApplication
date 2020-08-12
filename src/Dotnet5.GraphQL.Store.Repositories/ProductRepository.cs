@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.Repositories
 {
     public class ProductRepository : Repository<Product, Guid>, IProductRepository
     {
-        public ProductRepository(StoreContext dbContext)
-            : base(dbContext) { }
+        public ProductRepository(StoreDbContext dbDbContext)
+            : base(dbDbContext) { }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.MVC.Clients;
-using Dotnet5.GraphQL.Store.MVC.Models;
+using Dotnet5.GraphQL.Store.WebMVC.Clients;
+using Dotnet5.GraphQL.Store.WebMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Dotnet5.GraphQL.Store.MVC.Controllers
+namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
 {
     public class HomeController : Controller
     {

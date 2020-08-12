@@ -2,6 +2,7 @@ using AutoMapper;
 using Dotnet5.GraphQL.Store.Domain.Entities;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Services.Models;
+using Dotnet5.GraphQL.Store.Services.Profiles.Converters;
 
 namespace Dotnet5.GraphQL.Store.Services.Profiles
 {
@@ -9,7 +10,8 @@ namespace Dotnet5.GraphQL.Store.Services.Profiles
     {
         public ReviewProfile()
         {
-            CreateMap<ReviewModel, Review>().ReverseMap();
+            CreateMap<ReviewModel, Review>()
+                .ConvertUsing<ReviewModelToDomainConverter>();
         }
     }
 }

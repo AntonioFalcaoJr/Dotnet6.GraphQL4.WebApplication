@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Extensions.Http;
 
-namespace Dotnet5.GraphQL.Store.MVC.Clients.Extensions.DependencyInjection
+namespace Dotnet5.GraphQL.Store.WebMVC.Clients.Extensions.DependencyInjection
 {
     public static class IoCClients
     {

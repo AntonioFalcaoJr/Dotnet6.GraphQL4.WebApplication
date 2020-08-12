@@ -10,17 +10,18 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Reviews
         public void Configure(EntityTypeBuilder<Review> builder)
         {
             builder
-               .HasKey(x => x.Id);
+                .HasKey(x => x.Id);
 
             builder
-               .Property(x => x.Comment);
+                .Property(x => x.Comment);
 
             builder
-               .Property(x => x.Title)
-               .HasMaxLength(100);
+                .Property(x => x.Title)
+                .HasMaxLength(100);
 
             builder
-               .HasOne(x => x.Product);
+                .HasOne(x => x.Product)
+                .WithMany(x => x.Reviews);
         }
     }
 }

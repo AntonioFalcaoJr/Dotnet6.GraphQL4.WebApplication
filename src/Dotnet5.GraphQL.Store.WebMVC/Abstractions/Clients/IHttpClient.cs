@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
 
-namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
+namespace Dotnet5.GraphQL.Store.WebMVC.Abstractions.Clients
 {
     public interface IHttpClient<TEntity, TId>
         where TEntity : Entity<TId>

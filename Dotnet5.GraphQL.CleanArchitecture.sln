@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Repos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Services", "src\Dotnet5.GraphQL.Store.Services\Dotnet5.GraphQL.Store.Services.csproj", "{5F636855-3808-4A4C-823F-7BD08AA6B6E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.MVC", "src\Dotnet5.GraphQL.Store.MVC\Dotnet5.GraphQL.Store.MVC.csproj", "{C9F87428-A1C9-43A1-AAE7-ED5BDBEE6919}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.WebMVC", "src\Dotnet5.GraphQL.Store.WebMVC\Dotnet5.GraphQL.Store.WebMVC.csproj", "{C9F87428-A1C9-43A1-AAE7-ED5BDBEE6919}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

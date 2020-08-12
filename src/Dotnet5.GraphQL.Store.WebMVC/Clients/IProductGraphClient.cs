@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.MVC.Models;
+using Dotnet5.GraphQL.Store.WebMVC.Models;
 
-namespace Dotnet5.GraphQL.Store.MVC.Clients
+namespace Dotnet5.GraphQL.Store.WebMVC.Clients
 {
     public interface IProductGraphClient
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Dotnet5.GraphQL.Store.MVC.Models
+namespace Dotnet5.GraphQL.Store.WebMVC.Models
 {
     public class ReviewModel
     {

@@ -8,7 +8,7 @@ namespace Dotnet5.GraphQL.Store.Repositories
 {
     public class ReviewRepository : Repository<Review, Guid>, IReviewRepository
     {
-        public ReviewRepository(StoreContext dbContext)
-            : base(dbContext) { }
+        public ReviewRepository(StoreDbContext dbDbContext)
+            : base(dbDbContext) { }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
 
-namespace Dotnet5.GraphQL.Store.MVC.Models
+namespace Dotnet5.GraphQL.Store.WebMVC.Models
 {
     public class ProductModel
     {

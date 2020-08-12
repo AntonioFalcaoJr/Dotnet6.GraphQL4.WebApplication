@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dotnet5.GraphQL.Store.MVC.Abstractions.Clients
+namespace Dotnet5.GraphQL.Store.WebMVC.Abstractions.Clients
 {
     public class Response<T>
     {
