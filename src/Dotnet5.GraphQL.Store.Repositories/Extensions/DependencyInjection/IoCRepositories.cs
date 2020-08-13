@@ -19,21 +19,21 @@ namespace Dotnet5.GraphQL.Store.Repositories.Extensions.DependencyInjection
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
             => services.AddScoped<IProductRepository, ProductRepository>()
-               .AddScoped<IReviewRepository, ReviewRepository>();
+                .AddScoped<IReviewRepository, ReviewRepository>();
 
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
             => services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         private static void DbContextOptionsBuilderAction(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-               .EnableDetailedErrors()
-               .EnableSensitiveDataLogging()
-               .UseSqlServer(Options.ConnectionString, SqlServerOptionsAction);
+                .EnableDetailedErrors()
+                .EnableSensitiveDataLogging()
+                .UseSqlServer(Options.ConnectionString, SqlServerOptionsAction);
 
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-               .EnableRetryOnFailure(5, TimeSpan.FromSeconds(5), null)
-               .MigrationsAssembly(typeof(StoreDbContext).Assembly.GetName().Name);
+                .EnableRetryOnFailure(5, TimeSpan.FromSeconds(5), null)
+                .MigrationsAssembly(typeof(StoreDbContext).Assembly.GetName().Name);
     }
 
     public class RepositoriesOptions

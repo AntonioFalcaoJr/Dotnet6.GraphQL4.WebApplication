@@ -1,4 +1,4 @@
-namespace Dotnet5.GraphQL.Store.Services.Abstractions
+namespace Dotnet5.GraphQL.Store.Services.Models
 {
     public abstract class Model<TId>
         where TId : struct

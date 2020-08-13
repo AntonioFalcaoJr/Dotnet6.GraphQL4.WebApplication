@@ -29,9 +29,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
             Validate(this, new InlineValidator<Product>());
         }
 
-        protected Product()
-        {
-        }
+        protected Product() { }
 
         public string Description { get; }
         public DateTimeOffset IntroduceAt { get; }

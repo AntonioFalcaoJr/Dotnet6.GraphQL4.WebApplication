@@ -11,6 +11,6 @@ namespace Dotnet5.GraphQL.Store.Services.Extensions.DependencyInjection
 
         public static IServiceCollection AddServices(this IServiceCollection services)
             => services.AddScoped<IProductService, ProductService>()
-               .AddScoped<IReviewService, ReviewService>();
+                .AddScoped<IReviewService, ReviewService>();
     }
 }

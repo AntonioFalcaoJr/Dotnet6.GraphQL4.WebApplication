@@ -8,6 +8,7 @@ using AutoMapper;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
 using Dotnet5.GraphQL.Store.Repositories.Abstractions;
 using Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks;
+using Dotnet5.GraphQL.Store.Services.Models;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace Dotnet5.GraphQL.Store.Services.Abstractions

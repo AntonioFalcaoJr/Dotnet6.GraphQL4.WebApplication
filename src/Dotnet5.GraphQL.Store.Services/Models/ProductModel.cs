@@ -1,6 +1,5 @@
 using System;
 using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
-using Dotnet5.GraphQL.Store.Services.Abstractions;
 
 namespace Dotnet5.GraphQL.Store.Services.Models
 {
