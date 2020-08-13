@@ -70,6 +70,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
                             id
                             title
                             comment
+                            productId
                           }
                         }",
                 Variables = new {productId = id}
@@ -77,6 +78,22 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
 
             var response = await _client.PostAsync(query);
             return response.GetDataFieldAs<IEnumerable<ReviewModel>>("reviews");
+        }
+
+        public async Task<ReviewModel> AddReviewAsync(ReviewModel model)
+        {
+            var query = new GraphQLRequest
+            {
+                Query = @"mutation($review: reviewInput!) {
+                          addReview(review: $review) {
+                            id
+                          }
+                        }",
+                Variables = new {model}
+            };
+
+            var response = await _client.PostAsync(query);
+            return response.GetDataFieldAs<ReviewModel>("createReview");
         }
     }
 }

@@ -39,5 +39,15 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
             var reviews = await _productGraphClient.GetReviewByProductIdAsync(id);
             return View(reviews);
         }
+
+        public IActionResult AddReview(Guid productId) 
+            => View(new ReviewModel{ProductId = productId});
+
+        [HttpPost]
+        public async Task<IActionResult> AddReviewAsync(ReviewModel model)
+        {
+           await _productGraphClient.AddReviewAsync(model);
+           return RedirectToAction("ProductDetail", new {id = model.ProductId});
+        } 
     }
 }

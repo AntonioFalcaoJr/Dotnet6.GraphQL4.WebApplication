@@ -30,7 +30,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 {
                     var productId = context.GetArgument<Guid>("productId");
                     if (Equals(productId, default(Guid))) context.Errors.Add(new InvalidValueException("productId", $"Value: {productId}"));
-                    return await reviewService.GetAllAsync(review => review.ProductId == productId,
+                    return await reviewService.GetAllAsync(review => review, review => review.ProductId == productId,
                         cancellationToken: context.CancellationToken);
                 });
         }

@@ -10,5 +10,6 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
         Task<ProductModel> GetProductByIdAsync(Guid id);
         Task<IEnumerable<ProductModel>> GetProductsAsync();
         Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id);
+        Task<ReviewModel> AddReviewAsync(ReviewModel model);
     }
 }

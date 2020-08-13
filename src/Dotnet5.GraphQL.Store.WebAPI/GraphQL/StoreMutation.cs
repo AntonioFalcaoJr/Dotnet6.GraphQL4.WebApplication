@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
     {
         public StoreMutation(IProductService service)
         {
-            FieldAsync<ReviewGraphType>("addReview",
+            FieldAsync<ReviewGraphType>("createReview",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ReviewInputGraphType>> {Name = "review"}),
                 resolve: async context =>
                 {

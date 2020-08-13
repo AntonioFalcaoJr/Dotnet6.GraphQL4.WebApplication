@@ -1,18 +1,19 @@
 @{
-    ViewData["Title"] = "Product Detail";
+    ViewData["Title"] = "Product Review";
     IEnumerable<ReviewModel> reviews = Model;
+    var productId = reviews?.FirstOrDefault()?.ProductId;
 }
 
 <h2>Reviews</h2>
 
 <body>
 
-@if (reviews.Any() is false)
+@if (reviews?.Any() is false)
 {
     <h5>No reviews yet</h5>
 }
 
-@foreach (var review in reviews)
+@foreach (var review in reviews ?? new List<ReviewModel>())
 {
     <div class="row">
         <div class="col-12">
@@ -23,4 +24,6 @@
         </div>
     </div>
 }
+<a asp-action="AddReview" asp-route-productId="@productId">Add a Review!</a>
+
 </body>
