@@ -11,11 +11,11 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
         public void Configure(EntityTypeBuilder<Backpack> builder)
         {
             builder
-               .HasBaseType<Product>();
+                .HasBaseType<Product>();
 
             builder
-               .Property(x => x.BackpackType)
-               .HasConversion(new EnumToStringConverter<BackpackType>());
+                .Property(x => x.BackpackType)
+                .HasConversion(new EnumToStringConverter<BackpackType>());
         }
     }
 }

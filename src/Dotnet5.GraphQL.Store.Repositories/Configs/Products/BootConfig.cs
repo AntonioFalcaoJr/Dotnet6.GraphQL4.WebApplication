@@ -11,14 +11,14 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
         public void Configure(EntityTypeBuilder<Boot> builder)
         {
             builder
-               .HasBaseType<Product>();
+                .HasBaseType<Product>();
 
             builder
-               .Property(x => x.Size);
+                .Property(x => x.Size);
 
             builder
-               .Property(x => x.BootType)
-               .HasConversion(new EnumToStringConverter<BootType>());
+                .Property(x => x.BootType)
+                .HasConversion(new EnumToStringConverter<BootType>());
         }
     }
 }

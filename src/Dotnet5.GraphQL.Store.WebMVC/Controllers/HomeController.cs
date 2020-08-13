@@ -20,7 +20,10 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() => View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -33,7 +36,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
             var product = await _productGraphClient.GetProductByIdAsync(id);
             return View(product);
         }
-        
+
         public async Task<IActionResult> ProductReview(Guid id)
         {
             var reviews = await _productGraphClient.GetReviewByProductIdAsync(id);

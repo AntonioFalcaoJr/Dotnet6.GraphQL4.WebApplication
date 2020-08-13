@@ -14,9 +14,9 @@ namespace Dotnet5.GraphQL.Store.Services
 {
     public class ProductService : Service<Product, ProductModel, Guid>, IProductService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IProductRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IProductRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ProductService(IUnitOfWork unitOfWork, IProductRepository repository, IMapper mapper)
             : base(unitOfWork, repository, mapper)
@@ -31,9 +31,9 @@ namespace Dotnet5.GraphQL.Store.Services
             if (reviewModel is null) return default;
             var product = await _repository.GetByIdAsync(reviewModel.ProductId, products => products.Include(x => x.Reviews), true,
                 cancellationToken);
-            
+
             if (product is null) return default;
-            
+
             var review = _mapper.Map<Review>(reviewModel);
             product.AddReview(review);
             await _repository.UpdateAsync(product, cancellationToken);

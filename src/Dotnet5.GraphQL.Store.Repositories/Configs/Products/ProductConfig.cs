@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;

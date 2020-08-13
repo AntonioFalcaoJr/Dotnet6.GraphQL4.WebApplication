@@ -6,6 +6,6 @@ namespace Dotnet5.GraphQL.Store.Domain.Enumerations
         Camping,
         Diving,
         Racing,
-        Family,
+        Family
     }
 }

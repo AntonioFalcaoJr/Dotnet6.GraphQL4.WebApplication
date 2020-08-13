@@ -11,14 +11,14 @@ namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
         public void Configure(EntityTypeBuilder<Kayak> builder)
         {
             builder
-               .HasBaseType<Product>();
+                .HasBaseType<Product>();
 
             builder
-               .Property(x => x.KayakType)
-               .HasConversion(new EnumToStringConverter<KayakType>());
+                .Property(x => x.KayakType)
+                .HasConversion(new EnumToStringConverter<KayakType>());
 
             builder
-               .Property(x => x.AmountOfPerson);
+                .Property(x => x.AmountOfPerson);
         }
     }
 }

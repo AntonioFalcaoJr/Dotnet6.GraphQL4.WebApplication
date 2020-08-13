@@ -1,4 +1,3 @@
-using Dotnet5.GraphQL.Store.Domain.Entities;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

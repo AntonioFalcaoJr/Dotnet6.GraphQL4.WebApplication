@@ -25,6 +25,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Abstractions
 
         TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false);
+
         Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false, CancellationToken cancellationToken = default);
 

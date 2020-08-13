@@ -21,15 +21,18 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients.Extensions.DependencyInjection
             optionsAction.Invoke(Options);
 
             services.AddHttpClient("product", client => client.BaseAddress = Options.Uri)
-               .AddPolicyHandler((provider, _) => GetRetryPolicy(provider))
-               .AddPolicyHandler(GetCircuitBreakerPolicy());
+                .AddPolicyHandler((provider, _) => GetRetryPolicy(provider))
+                .AddPolicyHandler(GetCircuitBreakerPolicy());
         }
 
         private static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
-            => HttpPolicyExtensions.HandleTransientHttpError().CircuitBreakerAsync(CircuitBreakAttempt, DurationOfCircuitBreak);
+        {
+            return HttpPolicyExtensions.HandleTransientHttpError().CircuitBreakerAsync(CircuitBreakAttempt, DurationOfCircuitBreak);
+        }
 
         private static HttpStatusCode[] GetHttpStatusCodesWorthRetrying()
-            => new[]
+        {
+            return new[]
             {
                 HttpStatusCode.NotFound,
                 HttpStatusCode.BadGateway,
@@ -39,24 +42,27 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients.Extensions.DependencyInjection
                 HttpStatusCode.ServiceUnavailable,
                 HttpStatusCode.InternalServerError
             };
+        }
 
         private static string GetRetryMessage(TimeSpan timeSpan, int attempt, DelegateResult<HttpResponseMessage> result)
         {
             var message = $"Waiting for {timeSpan.TotalMilliseconds}ms, "
-                + $"then making retry {attempt}/{RetryAttempt}. "
-                + $"Reason: {result.Exception.Message} ";
+                          + $"then making retry {attempt}/{RetryAttempt}. "
+                          + $"Reason: {result.Exception.Message} ";
 
             return result.Result is null ? message : message + $"StatusCode: {result.Result?.StatusCode}";
         }
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy(IServiceProvider provider)
-            => HttpPolicyExtensions.HandleTransientHttpError()
-               .OrResult(httpResponseMessage => GetHttpStatusCodesWorthRetrying().Contains(httpResponseMessage.StatusCode))
-               .WaitAndRetryAsync(RetryAttempt, retryAttempt
+        {
+            return HttpPolicyExtensions.HandleTransientHttpError()
+                .OrResult(httpResponseMessage => GetHttpStatusCodesWorthRetrying().Contains(httpResponseMessage.StatusCode))
+                .WaitAndRetryAsync(RetryAttempt, retryAttempt
                     => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (result, timeSpan, attempt, context)
 
                     // TODO ILogger<ISomeClass>
                     => provider.GetService<ILogger>().LogWarning(GetRetryMessage(timeSpan, attempt, result)));
+        }
     }
 
     public class Options

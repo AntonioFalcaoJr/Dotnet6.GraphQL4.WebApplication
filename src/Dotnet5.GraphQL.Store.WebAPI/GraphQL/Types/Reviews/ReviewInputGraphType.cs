@@ -10,7 +10,6 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews
             Field<NonNullGraphType<StringGraphType>>("title");
             Field<StringGraphType>("comment");
             Field<NonNullGraphType<StringGraphType>>("productId");
-
         }
     }
 }

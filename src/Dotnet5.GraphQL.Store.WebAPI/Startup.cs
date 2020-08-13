@@ -55,9 +55,9 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             services.AddScoped<StoreSchema>();
 
             services.AddGraphQL(x => x.ExposeExceptions = _env.IsDevelopment())
-               .AddGraphTypes(ServiceLifetime.Scoped)
-               .AddUserContextBuilder(context => context.User)
-               .AddDataLoader();
+                .AddGraphTypes(ServiceLifetime.Scoped)
+                .AddUserContextBuilder(context => context.User)
+                .AddDataLoader();
 
             services.AddSingleton<GuidGraphType>();
 

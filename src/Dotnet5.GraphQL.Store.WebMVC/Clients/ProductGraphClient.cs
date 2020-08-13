@@ -60,7 +60,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
             var response = await _client.PostAsync(query);
             return response.GetDataFieldAs<ProductModel>("product");
         }
-        
+
         public async Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id)
         {
             var query = new GraphQLRequest
