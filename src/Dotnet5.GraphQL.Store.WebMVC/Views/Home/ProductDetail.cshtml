@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Product Detail";
+    IEnumerable<ReviewModel> reviews = Model.Reviews;
 }
 
 <body>
@@ -39,12 +40,30 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-10 offset-md-1 text-center">
-            <a asp-controller="Home" asp-action="ProductReview" asp-route-id="@Model.Id">
-                <h5>Reviews</h5>
-                <i class="fa fa-comments" style="font-size: 60px"></i>
-            </a>
-        </div>
+        <a asp-controller="Home" asp-action="ProductReview" asp-route-id="@Model.Id">
+            <h4>Reviews</h4>
+        </a>
     </div>
+
+    @if (reviews?.Any() is false)
+    {
+        <h5>No reviews yet</h5>
+    }
+    else
+    {
+        @foreach (var review in Model.Reviews)
+        {
+            <div class="row">
+                <div class="col-12">
+                    <h5>@review.Title</h5>
+                </div>
+                <div class="col-12">
+                    <h6>@review.Comment</h6>
+                </div>
+            </div>
+        }
+    }
+
+    <a asp-action="AddReview" asp-route-productId="@Model.Id">Add a Review!</a>
 </div>
 </body>

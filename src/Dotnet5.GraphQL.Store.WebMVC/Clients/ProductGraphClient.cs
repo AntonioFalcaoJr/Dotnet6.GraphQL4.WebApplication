@@ -52,8 +52,15 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
                                 description
                                 stock
                                 introduceAt
-                              }
-                            }",
+                                reviews {
+                                      id
+                                      title
+                                      comment
+                                      productId
+                                    }
+                                  }
+                               }",
+
                 Variables = new {productId = id}
             };
 
