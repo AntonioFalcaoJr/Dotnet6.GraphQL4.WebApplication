@@ -87,16 +87,16 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
             return response.GetDataFieldAs<IEnumerable<ReviewModel>>("reviews");
         }
 
-        public async Task<ReviewModel> AddReviewAsync(ReviewModel model)
+        public async Task<ReviewModel> AddReviewAsync(ReviewModel review)
         {
             var query = new GraphQLRequest
             {
                 Query = @"mutation($review: reviewInput!) {
-                          addReview(review: $review) {
-                            id
-                          }
-                        }",
-                Variables = new {model}
+                              createReview(review: $review) {
+                                id
+                              }
+                            }",
+                Variables = new {review}
             };
 
             var response = await _client.PostAsync(query);
