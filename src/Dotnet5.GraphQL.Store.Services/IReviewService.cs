@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Services.Abstractions;
@@ -10,6 +11,6 @@ namespace Dotnet5.GraphQL.Store.Services
 {
     public interface IReviewService : IService<Review, ReviewModel, Guid>
     {
-        Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds);
+        Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken = default);
     }
 }

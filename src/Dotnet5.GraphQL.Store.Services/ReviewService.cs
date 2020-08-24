@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
@@ -21,9 +22,13 @@ namespace Dotnet5.GraphQL.Store.Services
             _repository = repository;
         }
 
-        public async Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds)
+        public async Task<ILookup<Guid, Review>> GetLookupByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken = default)
         {
-            var reviews = await _repository.GetAllAsync(review => review, review => productIds.Contains(review.ProductId));
+            var reviews = await _repository.GetAllAsync(
+                selector: review => review,
+                predicate: review => productIds.Contains(review.ProductId),
+                cancellationToken: cancellationToken);
+
             return reviews.ToLookup(x => x.ProductId);
         }
     }
