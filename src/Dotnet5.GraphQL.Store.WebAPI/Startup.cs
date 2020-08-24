@@ -29,12 +29,22 @@ namespace Dotnet5.GraphQL.Store.WebAPI
 
         public void Configure(IApplicationBuilder app, StoreDbContext dbContext)
         {
-            if (_env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (_env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
+            app.UseCors(builder
+                => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+
             app.UseGraphQL<StoreSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<StoreSchema>();
 
             dbContext.Database.Migrate();
         }
@@ -42,10 +52,12 @@ namespace Dotnet5.GraphQL.Store.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddCors();
+            
             services.AddRepositories();
             services.AddUnitOfWork();
             services.AddAutoMapper();
+            services.AddMessageServices();
             services.AddServices();
 
             services.AddDbContext(options =>
@@ -57,7 +69,8 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             services.AddGraphQL(x => x.ExposeExceptions = _env.IsDevelopment())
                 .AddGraphTypes(ServiceLifetime.Scoped)
                 .AddUserContextBuilder(context => context.User)
-                .AddDataLoader();
+                .AddDataLoader()
+                .AddWebSockets();
 
             services.AddSingleton<GuidGraphType>();
 
