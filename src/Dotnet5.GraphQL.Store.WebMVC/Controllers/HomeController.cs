@@ -24,13 +24,13 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var response = await _productGraphClient.GetProductsAsync();
+            var response = await _productGraphClient.GetAllAsync();
             return View(response);
         }
 
         public async Task<IActionResult> ProductDetail(Guid id)
         {
-            var product = await _productGraphClient.GetProductByIdAsync(id);
+            var product = await _productGraphClient.GetByIdAsync(id);
             return View(product);
         }
 
