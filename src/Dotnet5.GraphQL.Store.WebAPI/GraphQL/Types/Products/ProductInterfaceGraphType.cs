@@ -2,6 +2,7 @@ using System;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Services;
+using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Extensions;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Backpacks;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Boots;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Kayaks;
@@ -14,7 +15,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
 {
     public sealed class ProductInterfaceGraphType : InterfaceGraphType<Product>
     {
-        public ProductInterfaceGraphType(IServiceProvider provider, IDataLoaderContextAccessor dataLoaderContextAccessor,
+        public ProductInterfaceGraphType(IServiceProvider serviceProvider, IDataLoaderContextAccessor dataLoaderContextAccessor,
             BootGraphType bootGraphType, BackpackGraphType backpackGraphType, KayakGraphType kayakGraphType)
         {
             Name = "product";
@@ -28,15 +29,18 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
             Field(x => x.ProductType, type: typeof(ProductTypeGraphType));
             Field(x => x.Rating);
             Field(x => x.Stock);
-            Field<ProductOptionEnumGraphType>("Option");
+            Field<ProductOptionEnumGraphType>("option");
 
-            FieldAsync<ListGraphType<ReviewGraphType>>("reviews",
+            FieldAsync<ListGraphType<ReviewGraphType>>(
+                name: "reviews",
                 resolve: async context
                     => await dataLoaderContextAccessor.Context
                         .GetOrAddCollectionBatchLoader<Guid, Review>(
-                            "GetLookupByProductIdsAsync",
-                            provider.GetRequiredService<IReviewService>().GetLookupByProductIdsAsync)
-                        .LoadAsync(context.Source.Id));
+                            loaderKey: "getLookupByProductIdsAsync",
+                            fetchFunc: serviceProvider
+                                .GetScopedService<IReviewService>()
+                                .GetLookupByProductIdsAsync)
+                        .LoadAsync(key: context.Source.Id));
 
             ResolveType = @object =>
             {
