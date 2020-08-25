@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using GraphQL.Server;
-using GraphQL.Types;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
 {
