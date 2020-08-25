@@ -2,6 +2,7 @@ using System;
 using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
+using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Types;
 

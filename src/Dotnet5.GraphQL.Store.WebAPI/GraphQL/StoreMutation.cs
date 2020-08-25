@@ -2,6 +2,7 @@ using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.Services.Messages;
 using Dotnet5.GraphQL.Store.Services.Models;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
+using GraphQL;
 using GraphQL.Types;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
