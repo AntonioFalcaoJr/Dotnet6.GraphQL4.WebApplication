@@ -14,23 +14,27 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
         public StoreQuery(IServiceProvider provider)
         {
             FieldAsync<ListGraphType<ProductInterfaceGraphType>>(
-                "products",
-                resolve: async context
-                    => await provider
+                name: "products",
+                resolve: async context =>
+                {
+                    using var serviceScope = provider.CreateScope();
+                    return await serviceScope.ServiceProvider
                         .GetRequiredService<IProductService>()
                         .GetAllAsync(
                             selector: product => product,
-                            cancellationToken: context.CancellationToken));
+                            cancellationToken: context.CancellationToken);
+                });
 
             FieldAsync<ProductInterfaceGraphType>(
-                "product",
+                name: "product",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> {Name = "id"}),
                 resolve: async context =>
                 {
                     var id = context.GetArgument<Guid>("id");
                     if (Equals(id, default(Guid))) context.Errors.Add(new InvalidValueException("Id", $"Value: {id}"));
 
-                    return await provider
+                    using var serviceScope = provider.CreateScope();
+                    return await serviceScope.ServiceProvider
                         .GetRequiredService<IProductService>()
                         .GetByIdAsync(
                             id: id,
@@ -38,14 +42,15 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 });
 
             FieldAsync<ListGraphType<ReviewGraphType>>(
-                "reviews",
+                name: "reviews",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> {Name = "productId"}),
                 resolve: async context =>
                 {
                     var productId = context.GetArgument<Guid>("productId");
                     if (Equals(productId, default(Guid))) context.Errors.Add(new InvalidValueException("productId", $"Value: {productId}"));
 
-                    return await provider
+                    using var serviceScope = provider.CreateScope();
+                    return await serviceScope.ServiceProvider
                         .GetRequiredService<IReviewService>()
                         .GetAllAsync(
                             selector: review => review,

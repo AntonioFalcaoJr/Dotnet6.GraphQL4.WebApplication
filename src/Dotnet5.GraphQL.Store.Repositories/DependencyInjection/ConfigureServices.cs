@@ -14,25 +14,27 @@ namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
         {
             options.Invoke(Options);
-            return services.AddDbContext<StoreDbContext>(
-                DbContextOptionsBuilderAction,
-                ServiceLifetime.Singleton);
+            return services
+                .AddDbContext<StoreDbContext>(
+                    optionsAction: DbContextOptionsBuilderAction);
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
             => services
-                .AddSingleton<IProductRepository, ProductRepository>()
-                .AddSingleton<IReviewRepository, ReviewRepository>();
+                .AddScoped<IProductRepository, ProductRepository>()
+                .AddScoped<IReviewRepository, ReviewRepository>();
 
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
             => services
-                .AddSingleton<IUnitOfWork, UnitOfWork>();
+                .AddScoped<IUnitOfWork, UnitOfWork>();
 
         private static void DbContextOptionsBuilderAction(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
-                .UseSqlServer(Options.ConnectionString, SqlServerOptionsAction);
+                .UseSqlServer(
+                    connectionString: Options.ConnectionString,
+                    sqlServerOptionsAction: SqlServerOptionsAction);
 
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
