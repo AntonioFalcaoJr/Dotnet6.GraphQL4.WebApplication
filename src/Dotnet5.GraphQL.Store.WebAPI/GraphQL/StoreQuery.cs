@@ -1,25 +1,24 @@
 using System;
 using Dotnet5.GraphQL.Store.Services;
+using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Extensions;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Types;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
     public sealed class StoreQuery : ObjectGraphType
     {
-        public StoreQuery(IServiceProvider provider)
+        public StoreQuery(IServiceProvider serviceProvider)
         {
             FieldAsync<ListGraphType<ProductInterfaceGraphType>>(
                 name: "products",
                 resolve: async context =>
                 {
-                    using var serviceScope = provider.CreateScope();
-                    return await serviceScope.ServiceProvider
-                        .GetRequiredService<IProductService>()
+                    return await serviceProvider
+                        .GetScopedService<IProductService>()
                         .GetAllAsync(
                             selector: product => product,
                             cancellationToken: context.CancellationToken);
@@ -33,9 +32,8 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     var id = context.GetArgument<Guid>("id");
                     if (Equals(id, default(Guid))) context.Errors.Add(new InvalidValueException("Id", $"Value: {id}"));
 
-                    using var serviceScope = provider.CreateScope();
-                    return await serviceScope.ServiceProvider
-                        .GetRequiredService<IProductService>()
+                    return await serviceProvider
+                        .GetScopedService<IProductService>()
                         .GetByIdAsync(
                             id: id,
                             cancellationToken: context.CancellationToken);
@@ -49,9 +47,8 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     var productId = context.GetArgument<Guid>("productId");
                     if (Equals(productId, default(Guid))) context.Errors.Add(new InvalidValueException("productId", $"Value: {productId}"));
 
-                    using var serviceScope = provider.CreateScope();
-                    return await serviceScope.ServiceProvider
-                        .GetRequiredService<IReviewService>()
+                    return await serviceProvider
+                        .GetScopedService<IReviewService>()
                         .GetAllAsync(
                             selector: review => review,
                             predicate: review => review.ProductId == productId,

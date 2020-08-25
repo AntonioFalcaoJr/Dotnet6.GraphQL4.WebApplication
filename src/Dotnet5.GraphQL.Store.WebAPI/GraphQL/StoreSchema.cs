@@ -9,12 +9,12 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
     public class StoreSchema : Schema
     {
-        public StoreSchema(IServiceProvider provider)
-            : base(provider)
+        public StoreSchema(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
-            Query = provider.GetRequiredService<StoreQuery>();
-            Mutation = provider.GetRequiredService<StoreMutation>();
-            Subscription = provider.GetRequiredService<StoreSubscription>();
+            Query = serviceProvider.GetRequiredService<StoreQuery>();
+            Mutation = serviceProvider.GetRequiredService<StoreMutation>();
+            Subscription = serviceProvider.GetRequiredService<StoreSubscription>();
 
             RegisterType<BootGraphType>();
             RegisterType<BackpackGraphType>();
