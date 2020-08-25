@@ -1,7 +1,7 @@
 ﻿using System;
+using GraphQL.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using GraphQL.Server;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
 {
@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
     {
         private static readonly Options Options = new Options();
 
-        public static IGraphQLBuilder AddGraphQL(this IServiceCollection services, Action<Options> actionOptions)
+        public static IGraphQLBuilder AddApplicationGraphQL(this IServiceCollection services, Action<Options> actionOptions)
         {
             actionOptions.Invoke(Options);
 

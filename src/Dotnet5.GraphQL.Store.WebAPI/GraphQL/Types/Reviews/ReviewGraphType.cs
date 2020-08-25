@@ -3,11 +3,11 @@ using GraphQL.Types;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews
 {
-    public class ReviewGraphType : ObjectGraphType<Review>
+    public sealed class ReviewGraphType : ObjectGraphType<Review>
     {
         public ReviewGraphType()
         {
-            Name = "Review";
+            Name = "review";
 
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.ProductId, type: typeof(GuidGraphType));

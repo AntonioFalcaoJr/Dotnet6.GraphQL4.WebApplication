@@ -5,24 +5,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Extensions.DependencyInjection
+namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
 {
-    public static class IoCRepositories
+    public static class ConfigureServices
     {
         private static readonly RepositoriesOptions Options = new RepositoriesOptions();
 
-        public static IServiceCollection AddDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
+        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
         {
             options.Invoke(Options);
-            return services.AddDbContext<StoreDbContext>(DbContextOptionsBuilderAction);
+            return services.AddDbContext<StoreDbContext>(
+                DbContextOptionsBuilderAction,
+                ServiceLifetime.Singleton);
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
-            => services.AddScoped<IProductRepository, ProductRepository>()
-                .AddScoped<IReviewRepository, ReviewRepository>();
+            => services
+                .AddSingleton<IProductRepository, ProductRepository>()
+                .AddSingleton<IReviewRepository, ReviewRepository>();
 
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
-            => services.AddScoped<IUnitOfWork, UnitOfWork>();
+            => services
+                .AddSingleton<IUnitOfWork, UnitOfWork>();
 
         private static void DbContextOptionsBuilderAction(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder

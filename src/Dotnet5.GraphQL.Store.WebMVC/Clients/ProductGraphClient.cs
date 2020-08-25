@@ -114,7 +114,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
             };
 
             var response = await _client.SendMutationAsync<ReviewModel>(query);
-            
+
             return response.Errors?.Any() is false
                 ? response.Data
                 : default;

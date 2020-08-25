@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
 {
     public static class Configure
     {
-        public static IApplicationBuilder UseGraphQL<TSchema>(this IApplicationBuilder app)
+        public static IApplicationBuilder UseApplicationGraphQL<TSchema>(this IApplicationBuilder app)
             where TSchema : ISchema
             => app.UseWebSockets()
                 .UseGraphQLWebSockets<TSchema>()
@@ -23,7 +23,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
                     EditorTheme = EditorTheme.Dark,
                     EditorFontSize = 14,
                     EditorReuseHeaders = true,
-                    EditorFontFamily = "JetBrains Mono",
+                    EditorFontFamily = "JetBrains Mono"
                 });
     }
 }

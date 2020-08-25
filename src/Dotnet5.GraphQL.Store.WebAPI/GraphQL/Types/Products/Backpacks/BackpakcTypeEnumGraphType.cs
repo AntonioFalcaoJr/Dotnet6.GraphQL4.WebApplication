@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Backpacks
     {
         public BackpakcTypeEnumGraphType()
         {
-            Name = "Backpack type";
+            Name = "backpackType";
             Description = "Backpack types";
         }
     }

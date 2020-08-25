@@ -5,14 +5,15 @@ using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Kayaks
 {
-    public class KayakGraphType : ObjectGraphType<Kayak>
+    public sealed class KayakGraphType : ObjectGraphType<Kayak>
     {
-        public KayakGraphType(IReviewService reviewService, IDataLoaderContextAccessor dataLoaderContextAccessor)
+        public KayakGraphType(IServiceProvider provider, IDataLoaderContextAccessor dataLoaderContextAccessor)
         {
-            Name = "Kayak";
+            Name = "kayak";
 
             Field(x => x.KayakType, type: typeof(KayakTypeEnumGraphType));
             Field(x => x.AmountOfPerson);
@@ -31,7 +32,9 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Kayaks
             FieldAsync<ListGraphType<ReviewGraphType>>("reviews",
                 resolve: async context
                     => await dataLoaderContextAccessor.Context
-                        .GetOrAddCollectionBatchLoader<Guid, Review>("GetLookupByProductIdsAsync", reviewService.GetLookupByProductIdsAsync)
+                        .GetOrAddCollectionBatchLoader<Guid, Review>(
+                            "GetLookupByProductIdsAsync",
+                            provider.GetRequiredService<IReviewService>().GetLookupByProductIdsAsync)
                         .LoadAsync(context.Source.Id));
 
             Interface<ProductInterfaceGraphType>();

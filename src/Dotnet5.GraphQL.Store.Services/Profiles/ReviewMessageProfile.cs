@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Dotnet5.GraphQL.Store.Services.Messages;
 using Dotnet5.GraphQL.Store.Services.Models;
+using Dotnet5.GraphQL.Store.Services.Models.Messages;
 
 namespace Dotnet5.GraphQL.Store.Services.Profiles
 {

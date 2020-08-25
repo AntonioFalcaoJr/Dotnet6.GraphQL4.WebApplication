@@ -5,14 +5,15 @@ using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Backpacks
 {
-    public class BackpackGraphType : ObjectGraphType<Backpack>
+    public sealed class BackpackGraphType : ObjectGraphType<Backpack>
     {
-        public BackpackGraphType(IReviewService reviewService, IDataLoaderContextAccessor dataLoaderContextAccessor)
+        public BackpackGraphType(IServiceProvider provider, IDataLoaderContextAccessor dataLoaderContextAccessor)
         {
-            Name = "Backpack";
+            Name = "backpack";
 
             Field(x => x.BackpackType, type: typeof(BackpakcTypeEnumGraphType));
 
@@ -30,7 +31,9 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Backpacks
             FieldAsync<ListGraphType<ReviewGraphType>>("reviews",
                 resolve: async context
                     => await dataLoaderContextAccessor.Context
-                        .GetOrAddCollectionBatchLoader<Guid, Review>("GetLookupByProductIdsAsync", reviewService.GetLookupByProductIdsAsync)
+                        .GetOrAddCollectionBatchLoader<Guid, Review>(
+                            "GetLookupByProductIdsAsync",
+                            provider.GetRequiredService<IReviewService>().GetLookupByProductIdsAsync)
                         .LoadAsync(context.Source.Id));
 
             Interface<ProductInterfaceGraphType>();

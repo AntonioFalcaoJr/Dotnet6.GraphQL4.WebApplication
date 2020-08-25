@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dotnet5.GraphQL.Store.Services.Messages
+namespace Dotnet5.GraphQL.Store.Services.Models.Messages
 {
     public class ReviewMessage
     {

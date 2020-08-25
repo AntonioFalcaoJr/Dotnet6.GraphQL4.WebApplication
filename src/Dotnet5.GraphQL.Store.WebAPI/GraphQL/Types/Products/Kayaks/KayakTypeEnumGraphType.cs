@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Kayaks
     {
         public KayakTypeEnumGraphType()
         {
-            Name = "Kayak type";
+            Name = "kayakType";
             Description = "Kayak types";
         }
     }

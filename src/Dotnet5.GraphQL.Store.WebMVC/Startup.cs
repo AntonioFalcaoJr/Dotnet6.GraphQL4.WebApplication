@@ -1,6 +1,5 @@
 using System;
 using Dotnet5.GraphQL.Store.WebMVC.Clients;
-using GraphQL.Client;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
 using Microsoft.AspNetCore.Builder;

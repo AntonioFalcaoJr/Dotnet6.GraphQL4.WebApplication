@@ -13,14 +13,18 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
     {
         public StoreMutation(IServiceProvider provider)
         {
-            FieldAsync<ReviewGraphType>("createReview",
+            FieldAsync<ReviewGraphType>(
+                "createReview",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ReviewInputGraphType>> {Name = "review"}),
                 resolve: async context =>
                 {
                     var model = context.GetArgument<ReviewModel>("review");
+
                     var review = await context.TryAsyncResolve(async fieldContext
-                        => await provider.GetRequiredService<IProductService>()
-                            .AddReviewAsync(model, context.CancellationToken));
+                        => await provider
+                            .GetRequiredService<IProductService>()
+                            .AddReviewAsync(model, fieldContext.CancellationToken));
+
                     provider.GetRequiredService<IReviewMessageService>().Add(model);
                     return review;
                 });

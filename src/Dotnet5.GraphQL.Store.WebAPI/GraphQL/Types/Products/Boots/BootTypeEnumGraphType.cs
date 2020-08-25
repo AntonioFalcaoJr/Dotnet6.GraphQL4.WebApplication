@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Boots
     {
         public BootTypeEnumGraphType()
         {
-            Name = "Boot Type";
+            Name = "bootType";
             Description = "Boot Types";
         }
     }

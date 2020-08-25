@@ -1,12 +1,8 @@
 using Dotnet5.GraphQL.Store.Repositories.Contexts;
-using Dotnet5.GraphQL.Store.Repositories.Extensions.DependencyInjection;
-using Dotnet5.GraphQL.Store.Services.Extensions.DependencyInjection;
+using Dotnet5.GraphQL.Store.Repositories.DependencyInjection;
+using Dotnet5.GraphQL.Store.Services.DependencyInjection;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection;
-using GraphQL;
-using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
-using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -14,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Dotnet5.GraphQL.Store.WebAPI
 {
@@ -37,7 +32,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-            app.UseGraphQL<StoreSchema>();
+            app.UseApplicationGraphQL<StoreSchema>();
 
             dbContext.Database.Migrate();
         }
@@ -52,10 +47,10 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             services.AddMessageServices();
             services.AddServices();
 
-            services.AddDbContext(options
+            services.AddApplicationDbContext(options
                 => options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));
 
-            services.AddGraphQL(options
+            services.AddApplicationGraphQL(options
                 => options.IsDevelopment = _env.IsDevelopment());
 
             // If using Kestrel:

@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
     {
         public ProductOptionEnumGraphType()
         {
-            Name = "Options";
+            Name = "options";
             Description = "Options from product";
         }
     }

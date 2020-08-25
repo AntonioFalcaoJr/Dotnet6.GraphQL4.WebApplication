@@ -1,13 +1,16 @@
-﻿using Dotnet5.GraphQL.Store.Services.Messages;
+﻿using System;
+using Dotnet5.GraphQL.Store.Services.Messages;
+using Dotnet5.GraphQL.Store.Services.Models.Messages;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.Resolvers;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
     public sealed class StoreSubscription : ObjectGraphType
     {
-        public StoreSubscription(IReviewMessageService messageService)
+        public StoreSubscription(IServiceProvider provider)
         {
             Name = "Subscription";
             AddField(new EventStreamFieldType
@@ -17,7 +20,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 Resolver = new FuncFieldResolver<ReviewMessage>(c
                     => c.Source as ReviewMessage),
                 Subscriber = new EventStreamResolver<ReviewMessage>(c
-                    => messageService.Get())
+                    => provider.GetRequiredService<IReviewMessageService>().Get())
             });
         }
     }
