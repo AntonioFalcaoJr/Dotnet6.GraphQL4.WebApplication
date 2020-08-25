@@ -2,6 +2,7 @@ using Dotnet5.GraphQL.Store.Repositories.Contexts;
 using Dotnet5.GraphQL.Store.Repositories.Extensions.DependencyInjection;
 using Dotnet5.GraphQL.Store.Services.Extensions.DependencyInjection;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL;
+using Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
@@ -13,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Dotnet5.GraphQL.Store.WebAPI
 {
@@ -31,20 +33,11 @@ namespace Dotnet5.GraphQL.Store.WebAPI
         {
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-            
+
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-            app.UseCors(builder
-                => builder
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-
             app.UseGraphQL<StoreSchema>();
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
-            app.UseWebSockets();
-            app.UseGraphQLWebSockets<StoreSchema>();
 
             dbContext.Database.Migrate();
         }
@@ -52,31 +45,21 @@ namespace Dotnet5.GraphQL.Store.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCors();
-            
+
             services.AddRepositories();
             services.AddUnitOfWork();
             services.AddAutoMapper();
             services.AddMessageServices();
             services.AddServices();
 
-            services.AddDbContext(options =>
-                options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));
+            services.AddDbContext(options
+                => options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));
 
-            services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
-            services.AddScoped<StoreSchema>();
-
-            services.AddGraphQL(x => x.ExposeExceptions = _env.IsDevelopment())
-                .AddGraphTypes(ServiceLifetime.Scoped)
-                .AddUserContextBuilder(context => context.User)
-                .AddDataLoader()
-                .AddWebSockets();
-
-            services.AddSingleton<GuidGraphType>();
+            services.AddGraphQL(options
+                => options.IsDevelopment = _env.IsDevelopment());
 
             // If using Kestrel:
             services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
-
             // If using IIS:
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
         }
