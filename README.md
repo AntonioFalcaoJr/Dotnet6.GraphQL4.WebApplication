@@ -1,12 +1,12 @@
 # Dotnet5.GraphQL.CleanArchitecture
 
-This project exemplify the implementation of a simle Razor Web APP (MVC 5) consuming an GraphQL Web API, build in a .NET 5 multi-layer  project, considering development best practices, like SOLID and DRY in a Clean Architecture.
+This project exemplify the implementation of a simple Razor Web APP MVC Core consuming an full **GraphQL** Web API, build in a **.NET 5** multi-layer  project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Clean Architecture**.
 
 ### Configuration
 
 #### Secrets
 
-Init your secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI)
+To configure database resource, Init secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI)
 
 ```bash
 dotnet user-secrets init
@@ -16,7 +16,7 @@ Then, define the `DefaultConnection`:
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
 ```
 
-Or, if your prefer, is possible to define it on `appsettings.json`
+Or, if your prefer, is possible to define it on [`appsettings.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.json)
 
 #### AppSettings
 
@@ -33,7 +33,7 @@ Or, if your prefer, is possible to define it on `appsettings.json`
 
 #### Fragment for comparison and Arguments
 
-*QUERY*
+QUERY
 
 ```markdown
 {
@@ -53,7 +53,7 @@ fragment comparisonFields on Product {
 }
 ```
 
-*RESULT*
+RESULT
 
 ```json5
 {
@@ -76,7 +76,7 @@ fragment comparisonFields on Product {
 
 #### Query named's and Variables
 
-*QUERY*
+QUERY
 
 ```markdown
 query all {
@@ -94,7 +94,7 @@ query byid($productId: ID!) {
 }
 ```
 
-*QUERY VARIABLES*
+VARIABLES
 
 ```json5
 {
@@ -102,8 +102,9 @@ query byid($productId: ID!) {
 }
 ```
 
-*HTTP Body*
-```json5
+HTTP Body
+
+```markdown
 {
     "operationName": "byid",
     "variables": {
@@ -126,7 +127,7 @@ query byid($productId: ID!) {
 
 #### Variables with include, skip and default value
 
-*QUERY*
+QUERY
 
 ```markdown
 query all($showPrice: Boolean = false) {
@@ -139,7 +140,7 @@ query all($showPrice: Boolean = false) {
 }
 ```
 
-*QUERY VARIABLES*
+VARIABLES
 
 ```json5
 {
@@ -147,9 +148,9 @@ query all($showPrice: Boolean = false) {
 }
 ```
 
-*HTTP Body*
+HTTP Body
 
-```json5
+```markdown
 {
     "operationName": "all",
     "variables": {
@@ -165,20 +166,20 @@ query all($showPrice: Boolean = false) {
     }"
 }
 ```
-
 ## Built With
 
 ### Microsoft Stack
 
-* [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
-* [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
-* [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM.
+* [.NET 5.0 (preview 8)](https://dotnet.microsoft.com/) - Base framework;
+* [ASP.NET 5.0 (preview 8)](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
+* [Entity Framework Core 5.0 (preview 7)](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM.
 
 #### GraphQL Stack
 
 * [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries with data;
-* [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
-* [GraphQL Playground](https://github.com/prisma-labs/graphql-playground/) - GraphQL IDE for better development workflows.
+* [GraphQL for .NET 3.0 (preview 1719)](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
+* [GraphQL.Client 3.1.5](https://github.com/graphql-dotnet/graphql-client) - A GraphQL Client for .NET over HTTP;
+* [GraphQL Playground 3.5 (alpha 0073)](https://github.com/prisma-labs/graphql-playground/) - GraphQL IDE for better development workflows.
 
 #### Community Stack
 
