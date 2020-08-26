@@ -61,20 +61,21 @@ RESULT
     "First": {
       "id": "2c05b59b-8fb3-4cba-8698-01d55a0284e5",
       "name": "libero",
-      "rating": -1864067132,
+      "rating": 5,
       "description": "Deleniti voluptas quidem accusamus est debitis quisquam enim."
     },
     "Second": {
       "id": "65af82e8-27f6-44f3-af4a-029b73f14530",
       "name": "debitis",
-      "rating": 1764562021,
+      "rating": 10,
       "description": "Est veniam unde."
     }
   }
 }
 ```
-
+___
 #### Query named's and Variables
+
 
 QUERY
 
@@ -124,7 +125,7 @@ HTTP Body
     }"
 }
 ```
-
+___
 #### Variables with include, skip and default value
 
 QUERY
@@ -166,6 +167,30 @@ HTTP Body
     }"
 }
 ```
+___
+## Mutation
+
+QUERY
+
+```markdown
+mutation($review: reviewInput!) {
+  createReview(review: $review) {
+    id
+  }
+}
+```
+VARIABLES
+
+```json5
+{
+  "review": {
+    "title": "some title",
+    "comment": "some comment",
+    "productId": "0fb8ec7e-7af1-4fe3-a2e2-000996ffd20f"
+  }
+}
+```
+
 ## Built With
 
 ### Microsoft Stack
