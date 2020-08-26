@@ -2,6 +2,8 @@
 
 This project exemplify the implementation of a simple Razor Web APP MVC Core consuming an full **GraphQL** Web API, build in a **.NET 5** multi-layer  project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Clean Architecture**.
 
+---
+
 ### Configuration
 
 #### Secrets
@@ -29,7 +31,7 @@ Or, if your prefer, is possible to define it on [`appsettings.json`](./src/Dotne
 
 ```
 
-## Query
+## Queries
 
 #### Fragment for comparison and Arguments
 
@@ -103,7 +105,7 @@ VARIABLES
 }
 ```
 
-HTTP Body
+HTTP BODY
 
 ```markdown
 {
@@ -149,7 +151,7 @@ VARIABLES
 }
 ```
 
-HTTP Body
+HTTP BODY
 
 ```markdown
 {
@@ -168,9 +170,10 @@ HTTP Body
 }
 ```
 ___
-## Mutation
 
-QUERY
+## Mutations
+
+MUTATION
 
 ```markdown
 mutation($review: reviewInput!) {
