@@ -9,8 +9,8 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
     public interface IProductGraphClient
     {
         Task<ProductModel> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-        Task<IEnumerable<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<List<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id, CancellationToken cancellationToken = default);
-        Task<ReviewModel> AddReviewAsync(ReviewModel review);
+        Task<Guid> AddReviewAsync(ReviewModel review, CancellationToken cancellationToken = default);
     }
 }

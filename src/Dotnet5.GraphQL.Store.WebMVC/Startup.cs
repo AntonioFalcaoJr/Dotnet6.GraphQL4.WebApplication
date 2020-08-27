@@ -43,12 +43,17 @@ namespace Dotnet5.GraphQL.Store.WebMVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options 
+                => options.SuppressAsyncSuffixInActionNames = true);
 
-            services.AddSingleton(type
-                => new GraphQLHttpClient(options
-                        => options.EndPoint = new Uri(Configuration["HttpClient:Product"]),
-                    new SystemTextJsonSerializer()));
+            services.AddSingleton(provider
+                => new GraphQLHttpClient(
+                    endPoint: new Uri(Configuration["HttpClient:Store"]),
+                    serializer: new SystemTextJsonSerializer(options =>
+                    {
+                        options.PropertyNameCaseInsensitive = true;
+                        options.IgnoreNullValues = true;
+                    })));
 
             services.AddSingleton<IProductGraphClient, ProductGraphClient>();
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dotnet5.GraphQL.Store.WebMVC.Models;
 using GraphQL;
 using GraphQL.Client.Http;
+using GraphQL.Client.Abstractions;
 
 namespace Dotnet5.GraphQL.Store.WebMVC.Clients
 {
@@ -18,35 +19,36 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
             _client = client;
         }
 
-        public async Task<IEnumerable<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<List<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            var query = new GraphQLRequest
+            var request = new GraphQLRequest
             {
-                Query = @"{
-                          products {
-                            id
-                            name
-                            price
-                            rating
-                            photoUrl
-                            description
-                            stock
-                            introduceAt
-                          }
-                        }"
+                Query = @"query getAll {
+                                  products {
+                                    id
+                                    name
+                                    price
+                                    rating
+                                    photoUrl
+                                    description
+                                    stock
+                                    introduceAt
+                                  }
+                                }",
+                OperationName = "getAll"
             };
 
-            var response = await _client
-                .SendQueryAsync<IEnumerable<ProductModel>>(query, cancellationToken);
+            var response = await _client.SendQueryAsync(
+                request: request,
+                defineResponseType: () => new {products = new List<ProductModel>()},
+                cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() is false
-                ? response.Data
-                : default;
+            return response.Errors?.Any() ?? default ? default : response.Data.products;
         }
 
         public async Task<ProductModel> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var query = new GraphQLRequest
+            var request = new GraphQLRequest
             {
                 Query = @"query ProductQuery($productId: ID!) {
                               product(id: $productId) {
@@ -66,21 +68,21 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
                                     }
                                   }
                                }",
-
+                OperationName = "ProductQuery",
                 Variables = new {productId = id}
             };
 
-            var response = await _client
-                .SendQueryAsync<ProductModel>(query, cancellationToken);
+            var response = await _client.SendQueryAsync(
+                request: request,
+                defineResponseType: () => new {product = new ProductModel()},
+                cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() is false
-                ? response.Data
-                : default;
+            return response.Errors?.Any() ?? default ? default : response.Data.product;
         }
 
         public async Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var query = new GraphQLRequest
+            var request = new GraphQLRequest
             {
                 Query = @"query ReviewsByProductQuery($productId: ID!) {
                           reviews(productId: $productId) {
@@ -90,20 +92,21 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
                             productId
                           }
                         }",
+                OperationName = "ReviewsByProductQuery",
                 Variables = new {productId = id}
             };
 
-            var response = await _client
-                .SendQueryAsync<IEnumerable<ReviewModel>>(query, cancellationToken);
+            var response = await _client.SendQueryAsync(
+                request: request,
+                defineResponseType: () => new {reviews = new List<ReviewModel>()},
+                cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() is false
-                ? response.Data
-                : default;
+            return response.Errors?.Any() ?? default ? default : response.Data.reviews;
         }
 
-        public async Task<ReviewModel> AddReviewAsync(ReviewModel review)
+        public async Task<Guid> AddReviewAsync(ReviewModel review, CancellationToken cancellationToken = default)
         {
-            var query = new GraphQLRequest
+            var request = new GraphQLRequest
             {
                 Query = @"mutation($review: reviewInput!) {
                               createReview(review: $review) {
@@ -113,11 +116,12 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
                 Variables = new {review}
             };
 
-            var response = await _client.SendMutationAsync<ReviewModel>(query);
+            var response = await _client.SendMutationAsync(
+                request: request,
+                defineResponseType: () => new {createReview = new {id = new Guid()}},
+                cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() is false
-                ? response.Data
-                : default;
+            return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
         }
     }
 }

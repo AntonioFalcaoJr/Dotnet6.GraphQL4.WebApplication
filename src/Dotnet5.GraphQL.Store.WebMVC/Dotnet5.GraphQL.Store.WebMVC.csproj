@@ -1,13 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <ItemGroup>
-        <PackageReference Include="GraphQL.Client" Version="3.1.5"/>
-        <PackageReference Include="GraphQL.Client.Extensions" Version="3.0.1"/>
-        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="3.1.5"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Domain\Dotnet5.GraphQL.Store.Domain.csproj"/>
+        <PackageReference Include="GraphQL.Client" Version="3.1.5" />
+        <PackageReference Include="GraphQL.Client.Extensions" Version="3.0.1" />
+        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="3.1.5" />
     </ItemGroup>
 
 </Project>

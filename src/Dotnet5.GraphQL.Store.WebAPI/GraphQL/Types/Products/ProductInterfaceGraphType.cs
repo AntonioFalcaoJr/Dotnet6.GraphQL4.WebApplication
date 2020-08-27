@@ -9,7 +9,6 @@ using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Kayaks;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;
 using GraphQL.Types;
-using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
 {
