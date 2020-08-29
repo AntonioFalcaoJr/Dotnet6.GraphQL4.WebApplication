@@ -12,18 +12,19 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
             => app.UseWebSockets()
                 .UseGraphQLWebSockets<TSchema>()
                 .UseGraphQL<TSchema>()
-                .UseGraphQLPlayground(new GraphQLPlaygroundOptions
-                {
-                    Path = "/ui/playground",
-                    BetaUpdates = true,
-                    RequestCredentials = RequestCredentials.Omit,
-                    HideTracingResponse = false,
+                .UseGraphQLPlayground(
+                    new GraphQLPlaygroundOptions
+                    {
+                        Path = "/ui/playground",
+                        BetaUpdates = true,
+                        RequestCredentials = RequestCredentials.Omit,
+                        HideTracingResponse = false,
 
-                    EditorCursorShape = EditorCursorShape.Line,
-                    EditorTheme = EditorTheme.Dark,
-                    EditorFontSize = 14,
-                    EditorReuseHeaders = true,
-                    EditorFontFamily = "JetBrains Mono"
-                });
+                        EditorCursorShape = EditorCursorShape.Line,
+                        EditorTheme = EditorTheme.Dark,
+                        EditorFontSize = 14,
+                        EditorReuseHeaders = true,
+                        EditorFontFamily = "JetBrains Mono"
+                    });
     }
 }

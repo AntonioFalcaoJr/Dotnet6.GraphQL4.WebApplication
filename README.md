@@ -4,23 +4,30 @@ This project exemplify the implementation of a simple Razor Web APP MVC Core con
 
 ---
 
-### Configuration
+## Environment configuration
 
 #### Secrets
 
-To configure database resource, Init secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI)
+To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI), and then, define the `DefaultConnection`: 
 
 ```bash
 dotnet user-secrets init
-```
-Then, define the `DefaultConnection`: 
-```bash
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
 ```
 
-Or, if your prefer, is possible to define it on [`appsettings.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.json)
+After this, to configure the client, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebMVC`](./src/Dotnet5.GraphQL.Store.WebMVC), and define **Store** client host:
 
-#### AppSettings
+```bash
+dotnet user-secrets init
+dotnet user-secrets set "HttpClient:Store" "http://localhost:5000/graphql"
+```
+
+Or, if your prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebMVC/appsettings.Development.json) files:
+
+
+##### AppSettings 
+
+WebAPI
 
 ```json5
 {
@@ -28,7 +35,45 @@ Or, if your prefer, is possible to define it on [`appsettings.json`](./src/Dotne
     "DefaultConnection": "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
   }
 }
+```
 
+WebMCV
+
+```json5
+{
+  "HttpClient": {
+    "Store": "http://localhost:5000/graphql"
+  }
+}
+```
+
+## Running
+
+The respective [compose](./docker-compose.yml) provide the `API` and `MVC` applications:
+
+```bash
+docker-compose up -d
+``` 
+
+## GraphQL Playground 
+
+By default,**Playground** respond at `http://localhost:5000/ui/playground`, but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
+
+```c#
+app.UseGraphQLPlayground(
+    new GraphQLPlaygroundOptions
+    {
+        Path = "/ui/playground",
+        BetaUpdates = true,
+        RequestCredentials = RequestCredentials.Omit,
+        HideTracingResponse = false,
+
+        EditorCursorShape = EditorCursorShape.Line,
+        EditorTheme = EditorTheme.Dark,
+        EditorFontSize = 14,
+        EditorReuseHeaders = true,
+        EditorFontFamily = "JetBrains Mono"
+    });
 ```
 
 ## Queries
