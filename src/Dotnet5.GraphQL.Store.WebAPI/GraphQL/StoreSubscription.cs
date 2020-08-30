@@ -17,13 +17,12 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
             {
                 Name = "reviewAdded",
                 Type = typeof(ReviewAddedMessageType),
-                Resolver = new FuncFieldResolver<ReviewMessage>(
-                    resolver
-                        => resolver.Source as ReviewMessage),
-                Subscriber = new EventStreamResolver<ReviewMessage>(
-                    subscriber
-                        => serviceProvider.GetScopedService<IReviewMessageService>()
-                            .Get())
+                Resolver = new FuncFieldResolver<ReviewMessage>(resolver
+                    => resolver.Source as ReviewMessage),
+                Subscriber = new EventStreamResolver<ReviewMessage>(subscriber
+                    => serviceProvider
+                        .GetScopedService<IReviewMessageService>()
+                        .Get())
             });
         }
     }
