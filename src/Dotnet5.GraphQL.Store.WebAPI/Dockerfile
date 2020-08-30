@@ -1,10 +1,12 @@
-ARG ASPNET_VERSION="5.0-buster-slim"
-ARG SDK_VERSION="5.0-buster-slim"
+ARG ASPNET_VERSION="5.0-alpine"
+ARG SDK_VERSION="5.0-alpine"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:$ASPNET_VERSION AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
+
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 FROM mcr.microsoft.com/dotnet/core/sdk:$SDK_VERSION AS build
 WORKDIR /src
@@ -16,6 +18,7 @@ COPY ./src/Dotnet5.GraphQL.Store.WebAPI/*.csproj ./Dotnet5.GraphQL.Store.WebAPI/
 
 COPY ./NuGet.Config ./
 COPY ./Directory.Build.props ./
+
 RUN dotnet restore ./Dotnet5.GraphQL.Store.WebAPI
 
 COPY ./src/Dotnet5.GraphQL.Store.Domain/. ./Dotnet5.GraphQL.Store.Domain/

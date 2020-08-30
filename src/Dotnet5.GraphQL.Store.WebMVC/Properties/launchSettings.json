@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:48344",
+      "applicationUrl": "http://localhost:48344/",
       "sslPort": 44359
     }
   },
@@ -15,10 +15,10 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Dotnet5.GraphQL.Store.MVC": {
+    "Dotnet5.GraphQL.Store.WebMVC": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:7000",
+      "applicationUrl": "http://localhost:7000/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,7 +1,6 @@
-version: '3.7'
+version: "3.7"
 
 services:
-
   webapi:
     container_name: webapi
     image: webapi
@@ -9,12 +8,28 @@ services:
       context: .
       dockerfile: ./src/Dotnet5.GraphQL.Store.WebAPI/Dockerfile
     environment:
-      - ASPNETCORE_URLS=https://*:5001;http://*:5000
+      - ASPNETCORE_URLS=http://*:5000
     ports:
-      - 5000:80
-      - 5001:443
+      - 5000:5000
     networks:
       - graphqlstore
+    depends_on:
+      - mssql
+
+  webmvc:
+    container_name: webmvc
+    image: webmvc
+    build:
+      context: .
+      dockerfile: ./src/Dotnet5.GraphQL.Store.WebMVC/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://*:7000
+    ports:
+      - 7000:7000
+    networks:
+      - graphqlstore
+    depends_on:
+      - webapi
 
   mssql:
     container_name: mssql
@@ -26,7 +41,7 @@ services:
       ACCEPT_EULA: "Y"
     networks:
       - graphqlstore
-        
+
 networks:
   graphqlstore:
     driver: bridge
