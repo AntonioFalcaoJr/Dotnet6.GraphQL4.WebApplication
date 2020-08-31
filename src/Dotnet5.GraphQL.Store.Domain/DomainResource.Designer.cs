@@ -77,5 +77,23 @@ namespace Dotnet5.GraphQL.Store.Domain {
                 return ResourceManager.GetString("Product_Item_Null", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An Comment is necessary for the Review..
+        /// </summary>
+        internal static string Review_Comment_Empty {
+            get {
+                return ResourceManager.GetString("Review_Comment_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An Title is necessary for the Review..
+        /// </summary>
+        internal static string Review_Title_Empty {
+            get {
+                return ResourceManager.GetString("Review_Title_Empty", resourceCulture);
+            }
+        }
     }
 }

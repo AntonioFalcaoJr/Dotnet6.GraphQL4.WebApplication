@@ -29,16 +29,18 @@ namespace Dotnet5.GraphQL.Store.Services
         public async Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken = default)
         {
             if (reviewModel is null) return default;
+            var review = _mapper.Map<Review>(reviewModel);
 
+            if (review.IsValid is false) return default;
+            
             var product = await _repository.GetByIdAsync(
                 id: reviewModel.ProductId,
                 include: products => products.Include(x => x.Reviews),
                 withTracking: true,
                 cancellationToken: cancellationToken);
 
-            if (product is null) return default;
+            if (product is null || product.IsValid is false) return default;
 
-            var review = _mapper.Map<Review>(reviewModel);
             product.AddReview(review);
             await _repository.UpdateAsync(product, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -25,5 +25,11 @@
     <data name="Product_Item_Invalid" xml:space="preserve">
         The Review informed is invalid.
     </data>
+    <data name="Review_Title_Empty" xml:space="preserve">
+        An Title is necessary for the Review.
+    </data>
+    <data name="Review_Comment_Empty" xml:space="preserve">
+        An Comment is necessary for the Review.
+    </data>
     
 </root>

@@ -7,6 +7,6 @@ namespace Dotnet5.GraphQL.Store.Services.Profiles.Converters
     public class ReviewModelToDomainConverter : ITypeConverter<ReviewModel, Review>
     {
         public Review Convert(ReviewModel source, Review destination, ResolutionContext context)
-            => new Review(source.Title, source.Comment);
+            => new Review(source.Title, source.Comment, source.ProductId);
     }
 }

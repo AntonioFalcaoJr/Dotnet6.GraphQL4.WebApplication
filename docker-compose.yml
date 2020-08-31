@@ -1,6 +1,18 @@
 version: "3.7"
 
 services:
+
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "!MyComplexPassword"
+      ACCEPT_EULA: "Y"
+    networks:
+      - graphqlstore
+
   webapi:
     container_name: webapi
     image: webapi
@@ -30,17 +42,6 @@ services:
       - graphqlstore
     depends_on:
       - webapi
-
-  mssql:
-    container_name: mssql
-    image: mcr.microsoft.com/mssql/server
-    ports:
-      - 1433:1433
-    environment:
-      SA_PASSWORD: "!MyComplexPassword"
-      ACCEPT_EULA: "Y"
-    networks:
-      - graphqlstore
 
 networks:
   graphqlstore:
