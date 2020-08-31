@@ -4,6 +4,8 @@ This project exemplify the implementation of a simple Razor Web APP MVC Core con
 
 ![CI](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/CI/badge.svg?branch=master)
 ![WebAPI Docker Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/WebAPI%20Docker%20Image/badge.svg?branch=master)
+![WebMVC Docker Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/WebMVC%20Docker%20Image/badge.svg?branch=master)
+
 ---
 
 ## Environment configuration
