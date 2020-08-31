@@ -2,6 +2,10 @@
 
 This project exemplify the implementation of a simple Razor Web APP MVC Core consuming an full **GraphQL** Web API, build in a **.NET 5** multi-layer  project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Clean Architecture**.
 
+![CI](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/CI/badge.svg?branch=master)
+![WebAPI Docker Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/WebAPI%20Docker%20Image/badge.svg?branch=master)
+![WebMVC Docker Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/WebMVC%20Docker%20Image/badge.svg?branch=master)
+
 ---
 
 ## Environment configuration
