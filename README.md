@@ -14,14 +14,14 @@ This project exemplify the implementation of a simple Razor Web APP MVC Core con
 
 ##### Secrets
 
-To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI), and then, define the `DefaultConnection`: 
+To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI), and then define the `DefaultConnection`: 
 
 ```bash
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
 ```
 
-After this, to configure the client, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebMVC`](./src/Dotnet5.GraphQL.Store.WebMVC), and define **Store** client host:
+After this, to configure the HTTP client, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebMVC`](./src/Dotnet5.GraphQL.Store.WebMVC) and define **Store** client host:
 
 ```bash
 dotnet user-secrets init
@@ -51,6 +51,7 @@ WebMCV
   }
 }
 ```
+___
 
 ### Production
 
@@ -77,6 +78,7 @@ WebMCV
   }
 }
 ```
+___
 
 ## Running
 
@@ -203,6 +205,10 @@ HTTP BODY
     }"
 }
 ```
+
+PLAYGROUND
+
+![queries](./img/queries.PNG) 
 ___
 #### Variables with include, skip and default value
 
@@ -276,15 +282,15 @@ VARIABLES
 
 * [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
 * [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
-* [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM.
+* [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM;
 * [Microsoft SQL Server on Linux for Docker](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - Database.
 
-#### GraphQL Stack
+### GraphQL Stack - v3.0 (preview / alpha)
 
 * [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries with data;
-* [GraphQL for .NET 3.0 (preview 1719)](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
-* [GraphQL.Client 3.1.5](https://github.com/graphql-dotnet/graphql-client) - A GraphQL Client for .NET over HTTP;
-* [GraphQL Playground 3.5 (alpha 0073)](https://github.com/prisma-labs/graphql-playground/) - GraphQL IDE for better development workflows.
+* [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
+* [GraphQL.Client](https://github.com/graphql-dotnet/graphql-client) - A GraphQL Client for .NET over HTTP;
+* [GraphQL Playground](https://github.com/prisma-labs/graphql-playground/) - GraphQL IDE for better development workflows.
 
 #### Community Stack
 
