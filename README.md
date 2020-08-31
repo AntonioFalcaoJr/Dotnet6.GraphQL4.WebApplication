@@ -208,7 +208,7 @@ HTTP BODY
 
 PLAYGROUND
 
-![queries](./img/queries.PNG) 
+![queries](./.assets/img/queries.PNG) 
 ___
 #### Variables with include, skip and default value
 
