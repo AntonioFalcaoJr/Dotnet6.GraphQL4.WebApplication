@@ -6,7 +6,9 @@ This project exemplify the implementation of a simple Razor Web APP MVC Core con
 
 ## Environment configuration
 
-#### Secrets
+### Development
+
+##### Secrets
 
 To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI), and then, define the `DefaultConnection`: 
 
@@ -22,10 +24,9 @@ dotnet user-secrets init
 dotnet user-secrets set "HttpClient:Store" "http://localhost:5000/graphql"
 ```
 
-Or, if your prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebMVC/appsettings.Development.json) files:
-
-
 ##### AppSettings 
+
+If you prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebMVC/appsettings.Development.json) files:
 
 WebAPI
 
@@ -47,9 +48,35 @@ WebMCV
 }
 ```
 
+### Production
+
+Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet5.GraphQL.Store.WebMVC/appsettings.json) files:   
+
+##### AppSettings 
+
+WebAPI
+
+```json5
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=mssql;Database=Store;User=sa;Password=!MyComplexPassword"
+  }
+}
+```
+
+WebMCV
+
+```json5
+{
+  "HttpClient": {
+    "Store": "http://webapi:5000/graphql"
+  }
+}
+```
+
 ## Running
 
-The respective [compose](./docker-compose.yml) provide the `API` and `MVC` applications:
+The [./docker-compose.yml](./docker-compose.yml) provide the `WebAPI`, `WebMVC` and `MS SQL Server` applications:
 
 ```bash
 docker-compose up -d
