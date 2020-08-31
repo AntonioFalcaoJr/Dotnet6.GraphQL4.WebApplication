@@ -292,7 +292,7 @@ VARIABLES
 * [GraphQL.Client](https://github.com/graphql-dotnet/graphql-client) - A GraphQL Client for .NET over HTTP;
 * [GraphQL Playground](https://github.com/prisma-labs/graphql-playground/) - GraphQL IDE for better development workflows.
 
-#### Community Stack
+### Community Stack
 
 * [AutoMapper](https://automapper.org/) - A convention-based object-object mapper;
 * [FluentValidation](https://fluentvalidation.net/) - A popular .NET library for building strongly-typed validation rules;
