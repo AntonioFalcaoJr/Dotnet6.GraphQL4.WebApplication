@@ -80,7 +80,7 @@ WebMCV
 
 ## Running
 
-The [./docker-compose.yml](./docker-compose.yml) provide the `WebAPI`, `WebMVC` and `MS SQL Server` applications:
+The [`./docker-compose.yml`](./docker-compose.yml) provide the `WebAPI`, `WebMVC` and `MS SQL Server` applications:
 
 ```bash
 docker-compose up -d
@@ -272,11 +272,12 @@ VARIABLES
 
 ## Built With
 
-### Microsoft Stack
+### Microsoft Stack - v5.0 (preview 8)
 
-* [.NET 5.0 (preview 8)](https://dotnet.microsoft.com/) - Base framework;
-* [ASP.NET 5.0 (preview 8)](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
-* [Entity Framework Core 5.0 (preview 7)](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM.
+* [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
+* [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
+* [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM.
+* [Microsoft SQL Server on Linux for Docker](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - Database.
 
 #### GraphQL Stack
 
