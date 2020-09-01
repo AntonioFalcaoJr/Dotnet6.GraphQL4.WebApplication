@@ -5,13 +5,31 @@
 
 <body>
 <form method="post" asp-action="AddReview">
-    <div class="form-group">
+    <div class="form-row">
         <label for="Title">Title</label>
-        <input class="form-control form-control-lg" type="text" name="Title" id="Title" placeholder="Title">
+
+        <input class="form-control form-control-lg"
+               type="text"
+               name="Title"
+               id="Title"
+               placeholder="Title"
+               rows="3"
+               required>
+
+        <div class="invalid-feedback">
+            Please choose a username.
+        </div>
     </div>
-    <div class="form-group">
+    <div class="form-row">
         <label for="Review">Review</label>
-        <textarea class="form-control" name="Comment" id="Review" placeholder="Comment" rows="3"></textarea>
+
+        <textarea class="form-control" 
+                  name="Comment" 
+                  id="Review" 
+                  placeholder="Comment"
+                  rows="3" 
+                  required></textarea>
+
     </div>
     <input name="ProductId" type="hidden" value="@productId">
     <button type="submit" class="btn btn-primary">Add</button>
