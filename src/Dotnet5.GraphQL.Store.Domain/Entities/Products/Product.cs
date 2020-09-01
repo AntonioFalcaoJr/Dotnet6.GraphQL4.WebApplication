@@ -10,8 +10,8 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
 {
     public class Product : Entity<Guid>
     {
-        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl,
-            decimal price, ProductType productType, int rating, int stock, Option option)
+        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
+            ProductType productType, int rating, int stock, Option option)
         {
             Id = id;
             Description = description;

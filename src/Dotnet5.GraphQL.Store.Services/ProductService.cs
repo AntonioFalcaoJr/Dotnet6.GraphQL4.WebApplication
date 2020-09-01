@@ -39,7 +39,7 @@ namespace Dotnet5.GraphQL.Store.Services
                 withTracking: true,
                 cancellationToken: cancellationToken);
 
-            if (product is null || product.IsValid is false) return default;
+            if (product is null) return default;
 
             product.AddReview(review);
             await _repository.UpdateAsync(product, cancellationToken);
