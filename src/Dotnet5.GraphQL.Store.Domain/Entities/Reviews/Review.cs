@@ -1,7 +1,6 @@
 using System;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
-using FluentValidation;
 
 namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
 {
@@ -13,7 +12,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
             Comment = comment;
             ProductId = productId;
 
-            Validate(this, new ReviewValidator());
+            Validate();
         }
 
         protected Review() { }
@@ -22,5 +21,8 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
         public Product Product { get; }
         public Guid ProductId { get; }
         public string Title { get; }
+
+        protected sealed override bool Validate()
+            => OnValidate(this, new ReviewValidator());
     }
 }

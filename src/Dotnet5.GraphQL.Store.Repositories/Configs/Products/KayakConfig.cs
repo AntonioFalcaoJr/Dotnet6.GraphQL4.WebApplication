@@ -1,4 +1,5 @@
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -1,8 +1,9 @@
 using System;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
+using FluentValidation;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
+namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks
 {
     public class Kayak : Product
     {
@@ -12,6 +13,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
         {
             KayakType = kayakType;
             AmountOfPerson = amountOfPerson;
+            Validate();
         }
 
         protected Kayak() { }
@@ -19,5 +21,8 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
         public int AmountOfPerson { get; }
 
         public KayakType KayakType { get; }
+
+        protected sealed override bool Validate()
+            => OnValidate(this, new InlineValidator<Kayak>());
     }
 }

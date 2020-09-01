@@ -61,6 +61,24 @@ namespace Dotnet5.GraphQL.Store.Domain {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Type from Backpack need be informed..
+        /// </summary>
+        internal static string Backpack_Type_Null {
+            get {
+                return ResourceManager.GetString("Backpack_Type_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Description from Product need be informed..
+        /// </summary>
+        internal static string Product_Description_Null_Empty {
+            get {
+                return ResourceManager.GetString("Product_Description_Null_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Review informed is invalid..
         /// </summary>
         internal static string Product_Item_Invalid {
@@ -79,11 +97,47 @@ namespace Dotnet5.GraphQL.Store.Domain {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Name from Product need be informed..
+        /// </summary>
+        internal static string Product_Name_Null_Empty {
+            get {
+                return ResourceManager.GetString("Product_Name_Null_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Option from Product need be informed..
+        /// </summary>
+        internal static string Product_Option_Null {
+            get {
+                return ResourceManager.GetString("Product_Option_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Price from Product need be greater than zero..
+        /// </summary>
+        internal static string Product_Price_Invalid {
+            get {
+                return ResourceManager.GetString("Product_Price_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An Comment is necessary for the Review..
         /// </summary>
         internal static string Review_Comment_Empty {
             get {
                 return ResourceManager.GetString("Review_Comment_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An valid ProductId is necessary for the Review..
+        /// </summary>
+        internal static string Review_ProductId_Invalid {
+            get {
+                return ResourceManager.GetString("Review_ProductId_Invalid", resourceCulture);
             }
         }
         

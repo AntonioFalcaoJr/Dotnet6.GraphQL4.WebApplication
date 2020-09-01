@@ -11,18 +11,24 @@ namespace Dotnet5.GraphQL.Store.Domain.Abstractions
         public TId Id { get; protected set; }
 
         [NotMapped] 
-        public bool IsValid => ValidationResult?.IsValid ?? default;
+        public bool IsValid 
+            => ValidationResult?.IsValid ?? Validate();
 
         [NotMapped] 
         public ValidationResult ValidationResult { get; private set; }
 
-        protected void Validate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator)
-            => ValidationResult = validator.Validate(entity);
+        protected bool OnValidate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator)
+        {
+            ValidationResult = validator.Validate(entity);
+            return IsValid;
+        }
 
         protected void AddError(string errorMessage, ValidationResult validationResult = default)
         {
             ValidationResult.Errors.Add(new ValidationFailure(default, errorMessage));
             validationResult?.Errors.ToList().ForEach(failure => ValidationResult.Errors.Add(failure));
         }
+
+        protected abstract bool Validate();
     }
 }

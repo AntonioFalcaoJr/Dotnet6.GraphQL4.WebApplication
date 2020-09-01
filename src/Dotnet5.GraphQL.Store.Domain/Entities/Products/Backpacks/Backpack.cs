@@ -1,8 +1,9 @@
 using System;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
+using FluentValidation;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
+namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Backpacks
 {
     public class Backpack : Product
     {
@@ -11,10 +12,14 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
             : base(id, description, introduceAt, name, photoUrl, price, productType, rating, stock, option)
         {
             BackpackType = backpackType;
+            Validate();
         }
 
         protected Backpack() { }
 
         public BackpackType BackpackType { get; }
+
+        protected sealed override bool Validate()
+            => OnValidate(this, new InlineValidator<Backpack>());
     }
 }

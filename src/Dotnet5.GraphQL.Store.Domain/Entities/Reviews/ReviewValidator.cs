@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 
 namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
 {
@@ -14,6 +15,11 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
             RuleFor(x => x.Comment)
                 .NotNull()
                 .NotEmpty()
+                .WithMessage(DomainResource.Review_Title_Empty);
+            
+            RuleFor(x => x.ProductId)
+                .NotNull()
+                .NotEqual(Guid.Empty)
                 .WithMessage(DomainResource.Review_Title_Empty);
         }
     }
