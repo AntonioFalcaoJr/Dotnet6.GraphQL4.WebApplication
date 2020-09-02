@@ -46,7 +46,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReviewAsync(ReviewModel model)
         {
-            await _productGraphClient.AddReviewAsync(model);
+            if (ModelState.IsValid) await _productGraphClient.AddReviewAsync(model);
             return RedirectToAction("ProductDetail", new {id = model.ProductId});
         }
     }

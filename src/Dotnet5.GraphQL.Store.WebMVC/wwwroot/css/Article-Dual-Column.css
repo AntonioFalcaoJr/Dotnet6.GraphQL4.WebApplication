@@ -1,8 +1,9 @@
 .product-dual-column {
   color: #56585b;
   background-color: #fff;
-  font-family: 'Lora', serif;
-  font-size: 14px;
+  font-family: 'Arial' ,'Lora', serif;
+  font-size: 20px;
+  margin-bottom: 5%;
 }
 
 .product-dual-column .intro {
