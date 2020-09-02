@@ -296,7 +296,8 @@ VARIABLES
 
 * [AutoMapper](https://automapper.org/) - A convention-based object-object mapper;
 * [FluentValidation](https://fluentvalidation.net/) - A popular .NET library for building strongly-typed validation rules;
-* [Bogus](https://github.com/bchavez/Bogus) - A simple and sane fake data generator for C#, F#, and VB.NET.
+* [Bogus](https://github.com/bchavez/Bogus) - A simple and sane fake data generator for C#, F#, and VB.NET;
+* [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world.
 
 ## Contributing
 
