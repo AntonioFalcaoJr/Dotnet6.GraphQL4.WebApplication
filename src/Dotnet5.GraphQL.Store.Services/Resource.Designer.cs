@@ -61,20 +61,20 @@ namespace Dotnet5.GraphQL.Store.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} can not be null..
+        ///   Looks up a localized string similar to The Identifier from {0} is invalid..
         /// </summary>
-        internal static string Entity_Null {
+        internal static string Identifier_Invalid {
             get {
-                return ResourceManager.GetString("Entity_Null", resourceCulture);
+                return ResourceManager.GetString("Identifier_Invalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Product with Id {0} is not found..
+        ///   Looks up a localized string similar to The {0} can not be null..
         /// </summary>
-        internal static string Product_Not_Found {
+        internal static string Object_Null {
             get {
-                return ResourceManager.GetString("Product_Not_Found", resourceCulture);
+                return ResourceManager.GetString("Object_Null", resourceCulture);
             }
         }
     }
