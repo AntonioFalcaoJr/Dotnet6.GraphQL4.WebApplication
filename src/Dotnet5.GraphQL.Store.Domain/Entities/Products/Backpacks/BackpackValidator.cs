@@ -8,7 +8,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Backpacks
         {
             RuleFor(x => x.BackpackType)
                 .NotNull()
-                .WithMessage(DomainResource.Backpack_Type_Null);
+                .WithMessage(Resource.Backpack_Type_Null);
         }
     }
 }

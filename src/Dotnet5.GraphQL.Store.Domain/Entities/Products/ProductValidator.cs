@@ -10,20 +10,20 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
             RuleFor(x => x.Description)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage(DomainResource.Product_Description_Null_Empty);
+                .WithMessage(Resource.Product_Description_Null_Empty);
 
             RuleFor(x => x.Name)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage(DomainResource.Product_Name_Null_Empty);
+                .WithMessage(Resource.Product_Name_Null_Empty);
 
             RuleFor(x => x.Option)
                 .NotNull()
-                .WithMessage(DomainResource.Product_Option_Null);
+                .WithMessage(Resource.Product_Option_Null);
 
             RuleFor(x => x.Price)
                 .LessThanOrEqualTo(decimal.Zero)
-                .WithMessage(DomainResource.Product_Price_Invalid);
+                .WithMessage(Resource.Product_Price_Invalid);
         }
     }
 }

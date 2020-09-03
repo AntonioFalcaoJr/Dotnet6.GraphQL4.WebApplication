@@ -42,7 +42,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
         {
             if (review is null || review.IsValid is false)
             {
-                AddError(DomainResource.Product_Item_Invalid, review?.ValidationResult);
+                AddError(Resource.Product_Item_Invalid, review?.ValidationResult);
                 return;
             }
 

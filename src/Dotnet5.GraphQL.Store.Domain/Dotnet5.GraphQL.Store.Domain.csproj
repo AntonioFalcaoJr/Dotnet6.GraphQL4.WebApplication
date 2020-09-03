@@ -5,14 +5,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="DomainResource.resx">
+      <EmbeddedResource Update="Resource.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>DomainResource.Designer.cs</LastGenOutput>
+        <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="DomainResource.Designer.cs">
+      <Compile Update="Resource.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>DomainResource.resx</DependentUpon>

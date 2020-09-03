@@ -1,3 +1,4 @@
+using Dotnet5.GraphQL.Store.CrossCutting.DependencyInjection;
 using Dotnet5.GraphQL.Store.Repositories.Contexts;
 using Dotnet5.GraphQL.Store.Repositories.DependencyInjection;
 using Dotnet5.GraphQL.Store.Services.DependencyInjection;
@@ -46,6 +47,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             services.AddAutoMapper();
             services.AddMessageServices();
             services.AddServices();
+            services.AddNotificationContext();
 
             services.AddApplicationDbContext(options
                 => options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));

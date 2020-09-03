@@ -10,17 +10,17 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
             RuleFor(x => x.Title)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage(DomainResource.Review_Comment_Empty);
+                .WithMessage(Resource.Review_Comment_Empty);
 
             RuleFor(x => x.Comment)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage(DomainResource.Review_Title_Empty);
+                .WithMessage(Resource.Review_Title_Empty);
             
             RuleFor(x => x.ProductId)
                 .NotNull()
                 .NotEqual(Guid.Empty)
-                .WithMessage(DomainResource.Review_Title_Empty);
+                .WithMessage(Resource.Review_Title_Empty);
         }
     }
 }
