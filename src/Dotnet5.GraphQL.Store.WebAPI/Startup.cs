@@ -30,8 +30,9 @@ namespace Dotnet5.GraphQL.Store.WebAPI
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseRouting()
+                .UseEndpoints(endpoints
+                    => endpoints.MapControllers());
 
             app.UseApplicationGraphQL<StoreSchema>();
 
@@ -42,12 +43,12 @@ namespace Dotnet5.GraphQL.Store.WebAPI
         {
             services.AddControllers();
 
-            services.AddRepositories();
-            services.AddUnitOfWork();
-            services.AddAutoMapper();
-            services.AddMessageServices();
-            services.AddServices();
-            services.AddNotificationContext();
+            services.AddRepositories()
+                .AddUnitOfWork()
+                .AddAutoMapper()
+                .AddMessageServices()
+                .AddServices()
+                .AddNotificationContext();
 
             services.AddApplicationDbContext(options
                 => options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));
