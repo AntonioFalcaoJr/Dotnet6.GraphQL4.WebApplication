@@ -14,6 +14,7 @@ namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
             _notifications = new List<Notification>();
         }
 
+        public IReadOnlyList<Notification> Notifications => _notifications;
         public bool HasNotifications => _notifications.Any();
 
         public void AddNotification(string message, string key = default)

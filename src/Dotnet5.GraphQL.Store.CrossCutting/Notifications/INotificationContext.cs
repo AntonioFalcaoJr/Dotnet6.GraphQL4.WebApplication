@@ -6,6 +6,9 @@ namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
 {
     public interface INotificationContext
     {
+        IReadOnlyList<Notification> Notifications { get; }
+        bool HasNotifications { get; }
+
         void AddNotification(string message, string key = default);
         void AddNotification(Notification notification);
         void AddNotifications(IEnumerable<Notification> notifications);
