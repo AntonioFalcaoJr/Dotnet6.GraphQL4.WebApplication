@@ -22,13 +22,6 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-
-    <data name="Object_Null" xml:space="preserve">
-        The {0} can not be null.
-    </data>
-
-    <data name="Identifier_Invalid" xml:space="preserve">
-        The Identifier from {0} is invalid.
-    </data>
-    
+    <data name="Object_Null">The {0} can not be null.</data>
+    <data name="Identifier_Invalid">The Identifier from {0} is invalid.</data>
 </root>
