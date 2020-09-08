@@ -11,6 +11,7 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 FROM mcr.microsoft.com/dotnet/core/sdk:$SDK_VERSION AS build
 WORKDIR /src
 
+COPY ./src/Dotnet5.GraphQL.Store.CrossCutting/*.csproj ./Dotnet5.GraphQL.Store.CrossCutting/
 COPY ./src/Dotnet5.GraphQL.Store.Domain/*.csproj ./Dotnet5.GraphQL.Store.Domain/
 COPY ./src/Dotnet5.GraphQL.Store.Repositories/*.csproj ./Dotnet5.GraphQL.Store.Repositories/
 COPY ./src/Dotnet5.GraphQL.Store.Services/*.csproj ./Dotnet5.GraphQL.Store.Services/
@@ -21,6 +22,7 @@ COPY ./Directory.Build.props ./
 
 RUN dotnet restore ./Dotnet5.GraphQL.Store.WebAPI
 
+COPY ./src/Dotnet5.GraphQL.Store.CrossCutting/. ./Dotnet5.GraphQL.Store.CrossCutting/
 COPY ./src/Dotnet5.GraphQL.Store.Domain/. ./Dotnet5.GraphQL.Store.Domain/
 COPY ./src/Dotnet5.GraphQL.Store.Repositories/. ./Dotnet5.GraphQL.Store.Repositories/
 COPY ./src/Dotnet5.GraphQL.Store.Services/. ./Dotnet5.GraphQL.Store.Services/
