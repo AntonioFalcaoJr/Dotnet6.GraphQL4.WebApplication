@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentValidation.Results;
+using GraphQL;
 
 namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
 {
     public interface INotificationContext
     {
+        IEnumerable<ExecutionError> ExecutionErrors { get; }
         IReadOnlyList<Notification> Notifications { get; }
         bool HasNotifications { get; }
 

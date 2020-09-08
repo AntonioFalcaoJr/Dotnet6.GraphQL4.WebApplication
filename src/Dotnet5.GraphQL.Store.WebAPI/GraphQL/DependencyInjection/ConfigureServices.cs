@@ -13,7 +13,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
         {
             actionOptions.Invoke(Options);
 
-            return services.AddSingleton<StoreSchema>()
+            return services.AddScoped<StoreSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Options.IsDevelopment;
@@ -24,7 +24,9 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
                 .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(StoreSchema));
+                .AddGraphTypes(
+                    typeFromAssembly: typeof(StoreSchema),
+                    serviceLifetime: ServiceLifetime.Scoped);
         }
     }
 

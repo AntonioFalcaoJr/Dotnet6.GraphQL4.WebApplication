@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
+using GraphQL;
 
 namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
 {
@@ -13,6 +14,9 @@ namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
         {
             _notifications = new List<Notification>();
         }
+
+        public IEnumerable<ExecutionError> ExecutionErrors
+            => _notifications.Select(notification => new ExecutionError(notification.Message));
 
         public IReadOnlyList<Notification> Notifications => _notifications;
         public bool HasNotifications => _notifications.Any();

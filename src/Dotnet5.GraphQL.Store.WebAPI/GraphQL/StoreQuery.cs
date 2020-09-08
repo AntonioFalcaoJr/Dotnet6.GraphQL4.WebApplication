@@ -1,11 +1,11 @@
 using System;
 using Dotnet5.GraphQL.Store.Services;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Extensions;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
@@ -18,7 +18,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 resolve: async context =>
                 {
                     return await serviceProvider
-                        .GetScopedService<IProductService>()
+                        .GetRequiredService<IProductService>()
                         .GetAllAsync(
                             selector: product => product,
                             cancellationToken: context.CancellationToken);
@@ -33,7 +33,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     if (Equals(id, default(Guid))) context.Errors.Add(new InvalidValueException("Id", $"Value: {id}"));
 
                     return await serviceProvider
-                        .GetScopedService<IProductService>()
+                        .GetRequiredService<IProductService>()
                         .GetByIdAsync(
                             id: id,
                             cancellationToken: context.CancellationToken);
@@ -48,7 +48,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     if (Equals(productId, default(Guid))) context.Errors.Add(new InvalidValueException("productId", $"Value: {productId}"));
 
                     return await serviceProvider
-                        .GetScopedService<IReviewService>()
+                        .GetRequiredService<IReviewService>()
                         .GetAllAsync(
                             selector: review => review,
                             predicate: review => review.ProductId == productId,
