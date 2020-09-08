@@ -4,7 +4,7 @@
     var productId = reviews?.FirstOrDefault()?.ProductId;
 }
 
-<h2>Reviews</h2>
+ <h2 class="text-center">Reviews</h2>
 
 <body>
 
@@ -17,16 +17,14 @@ else
     @foreach (var review in reviews)
     {
         <div class="row">
-            <div class="col-12">
-                <h5>@review.Title</h5>
-            </div>
-            <div class="col-12">
-                <h6>@review.Comment</h6>
-            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="font-size: x-large">@review.Title</li>
+                <li class="list-group-item" style="font-size: small">@review.Comment</li>
+            </ul>
         </div>
     }
 
-    <a asp-action="AddReview" asp-route-productId="@productId">Add a Review!</a>
+    <a asp-controller="Home" asp-action="AddReview" asp-route-productId="@productId" class="btn btn-outline-secondary review-btn">Add a review</a>
 }
 
 </body>
