@@ -3,6 +3,7 @@
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="10.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Scrutor" Version="3.2.2" />
     </ItemGroup>
 
     <ItemGroup>

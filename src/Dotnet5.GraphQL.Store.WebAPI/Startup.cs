@@ -2,6 +2,7 @@ using Dotnet5.GraphQL.Store.CrossCutting.DependencyInjection;
 using Dotnet5.GraphQL.Store.Repositories.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL.Store.Repositories.Contexts;
 using Dotnet5.GraphQL.Store.Repositories.DependencyInjection;
+using Dotnet5.GraphQL.Store.Services.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL.Store.Services.DependencyInjection;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection;

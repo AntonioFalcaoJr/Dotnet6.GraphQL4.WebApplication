@@ -14,11 +14,6 @@ namespace Dotnet5.GraphQL.Store.Services.DependencyInjection
                     typeof(ReviewProfile),
                     typeof(ReviewMessageProfile));
 
-        public static IServiceCollection AddServices(this IServiceCollection services)
-            => services
-                .AddScoped<IProductService, ProductService>()
-                .AddScoped<IReviewService, ReviewService>();
-
         public static IServiceCollection AddMessageServices(this IServiceCollection services)
             => services
                 .AddSingleton<IReviewMessageService, ReviewMessageService>();
