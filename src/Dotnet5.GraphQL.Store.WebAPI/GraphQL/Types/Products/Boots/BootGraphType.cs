@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products.Boots;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
@@ -7,12 +8,13 @@ using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Extensions;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Boots
 {
     public sealed class BootGraphType : ObjectGraphType<Boot>
     {
-        public BootGraphType(IServiceProvider serviceProvider, IDataLoaderContextAccessor dataLoaderContextAccessor)
+        public BootGraphType(IServiceProvider serviceProvider, IDataLoaderContextAccessor accessor)
         {
             Name = "boot";
 
@@ -30,16 +32,16 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Boots
             Field(x => x.Stock);
             Field<ProductOptionEnumGraphType>("Option");
 
-            FieldAsync<ListGraphType<ReviewGraphType>>(
-                name: "reviews",
-                resolve: async context
-                    => await dataLoaderContextAccessor.Context
+            Field<ReviewGraphType, IEnumerable<Review>>()
+                .Name("ssss")
+                .ResolveAsync(context =>
+                    accessor.Context
                         .GetOrAddCollectionBatchLoader<Guid, Review>(
                             loaderKey: "getLookupByProductIdsAsync",
                             fetchFunc: serviceProvider
-                                .GetScopedService<IReviewService>()
+                                .GetRequiredService<IReviewService>()
                                 .GetLookupByProductIdsAsync)
-                        .LoadAsync(key: context.Source.Id));
+                        .LoadAsync(context.Source.Id));
 
             Interface<ProductInterfaceGraphType>();
             IsTypeOf = o => o is Product;

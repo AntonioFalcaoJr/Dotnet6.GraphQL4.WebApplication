@@ -4,11 +4,11 @@
     var productId = reviews?.FirstOrDefault()?.ProductId;
 }
 
- <h2 class="text-center">Reviews</h2>
+<h2 class="text-center">Reviews</h2>
 
 <body>
 
-@if (reviews?.Any() is false)
+@if (reviews is null || reviews.Any() is false)
 {
     <h5>No reviews yet</h5>
 }

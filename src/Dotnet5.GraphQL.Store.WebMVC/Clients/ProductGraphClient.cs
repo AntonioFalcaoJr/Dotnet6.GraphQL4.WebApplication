@@ -7,16 +7,19 @@ using Dotnet5.GraphQL.Store.WebMVC.Models;
 using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Abstractions;
+using Microsoft.Extensions.Logging;
 
 namespace Dotnet5.GraphQL.Store.WebMVC.Clients
 {
     public class ProductGraphClient : IProductGraphClient
     {
         private readonly GraphQLHttpClient _client;
+        private readonly ILogger<IProductGraphClient> _logger;
 
-        public ProductGraphClient(GraphQLHttpClient client)
+        public ProductGraphClient(GraphQLHttpClient client, ILogger<IProductGraphClient> logger)
         {
             _client = client;
+            _logger = logger;
         }
 
         public async Task<List<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -122,6 +125,27 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
                 cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
+        }
+
+        public void SubscribeToUpdates()
+        {
+            var request = new GraphQLRequest
+            {
+                Query = @"subscription {
+                              reviewAdded {
+                                productId
+                                title
+                              }
+                            }"
+            };
+
+            var stream = _client.CreateSubscriptionStream<AddedReviewSubscriptionResult>(
+                request: request,
+                exceptionHandler: exception => _logger.LogError(exception.Message));
+
+            var subscription = stream.Subscribe(response
+                => _logger.LogInformation($"A new Review from Product '{response.Data.Review.ProductId}' " +
+                                          $"was added with Title: {response.Data.Review.Title}"));
         }
     }
 }

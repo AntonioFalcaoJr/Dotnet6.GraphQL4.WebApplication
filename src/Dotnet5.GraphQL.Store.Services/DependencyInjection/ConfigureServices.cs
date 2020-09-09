@@ -21,6 +21,6 @@ namespace Dotnet5.GraphQL.Store.Services.DependencyInjection
 
         public static IServiceCollection AddMessageServices(this IServiceCollection services)
             => services
-                .AddScoped<IReviewMessageService, ReviewMessageService>();
+                .AddSingleton<IReviewMessageService, ReviewMessageService>();
     }
 }

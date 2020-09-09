@@ -26,7 +26,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions.Messages
             return message;
         }
 
-        public IObservable<TMessage> Get()
+        public IObservable<TMessage> Messages()
             => _subject.AsObservable();
     }
 }

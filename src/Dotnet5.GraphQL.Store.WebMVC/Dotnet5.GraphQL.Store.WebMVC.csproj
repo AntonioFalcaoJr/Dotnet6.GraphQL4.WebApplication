@@ -4,9 +4,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="GraphQL.Client" Version="3.1.5"/>
-        <PackageReference Include="GraphQL.Client.Extensions" Version="3.0.1"/>
-        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="3.1.5"/>
+        <PackageReference Include="GraphQL.Client" Version="3.1.6" />
+        <PackageReference Include="GraphQL.Client.Extensions" Version="3.0.1" />
+        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="3.1.6" />
     </ItemGroup>
 
 </Project>

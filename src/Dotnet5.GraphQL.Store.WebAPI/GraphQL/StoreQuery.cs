@@ -30,7 +30,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 resolve: async context =>
                 {
                     var id = context.GetArgument<Guid>("id");
-                    if (Equals(id, default(Guid))) context.Errors.Add(new InvalidValueException("Id", $"Value: {id}"));
+                    if (Equals(id, default(Guid))) context.Errors.Add(new ExecutionError($"Invalid Id: {id}"));
 
                     return await serviceProvider
                         .GetRequiredService<IProductService>()
@@ -45,7 +45,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 resolve: async context =>
                 {
                     var productId = context.GetArgument<Guid>("productId");
-                    if (Equals(productId, default(Guid))) context.Errors.Add(new InvalidValueException("productId", $"Value: {productId}"));
+                    if (Equals(productId, default(Guid))) context.Errors.Add(new ExecutionError($"Invalid Id: {productId}"));
 
                     return await serviceProvider
                         .GetRequiredService<IReviewService>()

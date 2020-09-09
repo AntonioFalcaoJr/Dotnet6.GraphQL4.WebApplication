@@ -1,10 +1,10 @@
 ﻿using System;
 using Dotnet5.GraphQL.Store.Services.Messages;
 using Dotnet5.GraphQL.Store.Services.Models.Messages;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Extensions;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.Resolvers;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
@@ -21,8 +21,8 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     => resolver.Source as ReviewMessage),
                 Subscriber = new EventStreamResolver<ReviewMessage>(subscriber
                     => serviceProvider
-                        .GetScopedService<IReviewMessageService>()
-                        .Get())
+                        .GetRequiredService<IReviewMessageService>()
+                        .Messages())
             });
         }
     }

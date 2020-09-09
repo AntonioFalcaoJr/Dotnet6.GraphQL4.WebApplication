@@ -3,7 +3,6 @@ using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
 using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.Services.Messages;
 using Dotnet5.GraphQL.Store.Services.Models;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Extensions;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
 using GraphQL.Types;
@@ -22,13 +21,11 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 {
                     var model = context.GetArgument<ReviewModel>("review");
 
-                    var review = await context.TryAsyncResolve(
-                        resolve: async fieldContext
-                            => await serviceProvider
-                                .GetRequiredService<IProductService>()
-                                .AddReviewAsync(
-                                    reviewModel: model,
-                                    cancellationToken: fieldContext.CancellationToken));
+                    var review = await serviceProvider
+                        .GetRequiredService<IProductService>()
+                        .AddReviewAsync(
+                            reviewModel: model,
+                            cancellationToken: context.CancellationToken);
 
                     var notificationContext = serviceProvider.GetRequiredService<INotificationContext>();
                     if (notificationContext.HasNotifications)
@@ -37,7 +34,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                         return default;
                     }
 
-                    serviceProvider.GetScopedService<IReviewMessageService>()
+                    serviceProvider.GetRequiredService<IReviewMessageService>()
                         .Add(model: model);
 
                     return review;

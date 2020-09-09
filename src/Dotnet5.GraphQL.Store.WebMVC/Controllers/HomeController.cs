@@ -30,6 +30,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Controllers
 
         public async Task<IActionResult> ProductDetail(Guid id)
         {
+            _productGraphClient.SubscribeToUpdates();
             var product = await _productGraphClient.GetByIdAsync(id);
             return View(product);
         }

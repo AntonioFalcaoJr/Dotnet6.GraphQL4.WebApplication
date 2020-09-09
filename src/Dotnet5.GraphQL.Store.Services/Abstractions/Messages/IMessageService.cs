@@ -9,6 +9,6 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions.Messages
         where TId : struct
     {
         TMessage Add(TModel model);
-        IObservable<TMessage> Get();
+        IObservable<TMessage> Messages();
     }
 }

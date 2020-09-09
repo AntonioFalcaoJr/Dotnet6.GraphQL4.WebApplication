@@ -12,5 +12,6 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
         Task<List<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<Guid> AddReviewAsync(ReviewModel review, CancellationToken cancellationToken = default);
+        void SubscribeToUpdates();
     }
 }
