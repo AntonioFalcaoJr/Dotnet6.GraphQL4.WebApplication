@@ -1,4 +1,5 @@
 using Dotnet5.GraphQL.Store.CrossCutting.DependencyInjection;
+using Dotnet5.GraphQL.Store.Domain.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL.Store.Repositories.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL.Store.Repositories.Contexts;
 using Dotnet5.GraphQL.Store.Repositories.DependencyInjection;
@@ -45,7 +46,9 @@ namespace Dotnet5.GraphQL.Store.WebAPI
         {
             services.AddControllers();
 
-            services.AddRepositories()
+            services
+                .AddBuilders()
+                .AddRepositories()
                 .AddUnitOfWork()
                 .AddAutoMapper()
                 .AddMessageServices()

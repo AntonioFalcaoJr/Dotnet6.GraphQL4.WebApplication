@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="9.3.0-preview1" />
+        <PackageReference Include="FluentValidation" Version="$(FluentValidation_Version)"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(Microsoft_DependencyInjection_Version)"/>
+        <PackageReference Include="Scrutor" Version="$(Scrutor_Version)"/>
     </ItemGroup>
 
 </Project>
