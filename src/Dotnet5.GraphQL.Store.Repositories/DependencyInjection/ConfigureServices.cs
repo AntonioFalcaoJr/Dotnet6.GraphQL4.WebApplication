@@ -8,14 +8,17 @@ namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
 {
     public static class ConfigureServices
     {
+        private const int MaxRetryCount = 5;
+        private static readonly TimeSpan MaxRetryDelay = TimeSpan.FromSeconds(5);
         private static readonly RepositoriesOptions Options = new RepositoriesOptions();
 
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
         {
             options.Invoke(Options);
+
             return services
-                .AddDbContext<StoreDbContext>(
-                    optionsAction: DbContextOptionsBuilderAction);
+                .AddScoped<DbContext, StoreDbContext>()
+                .AddDbContext<StoreDbContext>(DbContextOptionsBuilderAction);
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
@@ -33,7 +36,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
 
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-                .EnableRetryOnFailure(5, TimeSpan.FromSeconds(5), null)
+                .EnableRetryOnFailure(MaxRetryCount, MaxRetryDelay, null)
                 .MigrationsAssembly(typeof(StoreDbContext).Assembly.GetName().Name);
     }
 
