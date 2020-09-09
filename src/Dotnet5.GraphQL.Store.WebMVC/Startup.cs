@@ -43,8 +43,7 @@ namespace Dotnet5.GraphQL.Store.WebMVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(options 
-                => options.SuppressAsyncSuffixInActionNames = true);
+            services.AddControllersWithViews();
 
             services.AddSingleton(provider
                 => new GraphQLHttpClient(
