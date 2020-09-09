@@ -1,5 +1,5 @@
 using System;
-using Dotnet5.GraphQL.Store.Domain.Abstractions;
+using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 
 namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews

@@ -3,7 +3,7 @@ using System.Linq;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace Dotnet5.GraphQL.Store.Domain.Abstractions
+namespace Dotnet5.GraphQL.Store.Domain.Abstractions.Entities
 {
     public abstract class Entity<TId>
         where TId : struct

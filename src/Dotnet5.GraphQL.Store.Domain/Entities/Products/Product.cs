@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Dotnet5.GraphQL.Store.Domain.Abstractions;
+using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Domain.Enumerations;
 using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
