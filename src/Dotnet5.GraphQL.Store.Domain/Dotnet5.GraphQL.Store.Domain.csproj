@@ -5,6 +5,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Dotnet5.GraphQL.Store.Domain.Abstractions\Dotnet5.GraphQL.Store.Domain.Abstractions.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
       <EmbeddedResource Update="Resource.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resource.Designer.cs</LastGenOutput>

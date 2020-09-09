@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Repositories.Abstractions", "src\Dotnet5.GraphQL.Store.Repositories.Abstractions\Dotnet5.GraphQL.Store.Repositories.Abstractions.csproj", "{F0B4EC38-335C-4CB1-9582-E7F12C6CB068}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Domain.Abstractions", "Dotnet5.GraphQL.Store.Domain.Abstractions\Dotnet5.GraphQL.Store.Domain.Abstractions.csproj", "{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,18 @@ Global
 		{F0B4EC38-335C-4CB1-9582-E7F12C6CB068}.Release|x64.Build.0 = Release|Any CPU
 		{F0B4EC38-335C-4CB1-9582-E7F12C6CB068}.Release|x86.ActiveCfg = Release|Any CPU
 		{F0B4EC38-335C-4CB1-9582-E7F12C6CB068}.Release|x86.Build.0 = Release|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Debug|x64.Build.0 = Debug|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Debug|x86.Build.0 = Debug|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Release|x64.ActiveCfg = Release|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Release|x64.Build.0 = Release|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Release|x86.ActiveCfg = Release|Any CPU
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ACC0F84A-E462-4AB2-9AD2-771D33307797} = {5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}
@@ -140,5 +154,6 @@ Global
 		{2D3C002E-8B8C-4A67-991B-1FE2B5781050} = {5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}
 		{70361D35-7BBF-4B27-9B9E-4C88EBCFBED6} = {5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}
 		{F0B4EC38-335C-4CB1-9582-E7F12C6CB068} = {5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}
+		{BC13DEB8-1D4B-46EE-80DB-A0B3F73CD261} = {5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}
 	EndGlobalSection
 EndGlobal
