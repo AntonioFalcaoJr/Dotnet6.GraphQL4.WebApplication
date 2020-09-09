@@ -6,7 +6,7 @@ using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
 using Dotnet5.GraphQL.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Repositories;
-using Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks;
+using Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWorks;
 using Dotnet5.GraphQL.Store.Services.Abstractions;
 using Dotnet5.GraphQL.Store.Services.Abstractions.Resources;
 using Dotnet5.GraphQL.Store.Services.Models;

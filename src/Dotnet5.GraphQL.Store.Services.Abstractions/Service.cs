@@ -8,7 +8,7 @@ using AutoMapper;
 using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
 using Dotnet5.GraphQL.Store.Repositories.Abstractions;
-using Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks;
+using Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWorks;
 using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
 using Dotnet5.GraphQL.Store.Services.Abstractions.Resources;
 using Microsoft.EntityFrameworkCore.Query;

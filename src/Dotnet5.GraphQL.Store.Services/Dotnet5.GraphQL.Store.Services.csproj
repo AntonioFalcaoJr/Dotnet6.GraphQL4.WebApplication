@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1"/>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Services.Abstractions\Dotnet5.GraphQL.Store.Services.Abstractions.csproj"/>
+        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Repositories\Dotnet5.GraphQL.Store.Repositories.csproj" />
+        <ProjectReference Include="..\Dotnet5.GraphQL.Store.Services.Abstractions\Dotnet5.GraphQL.Store.Services.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

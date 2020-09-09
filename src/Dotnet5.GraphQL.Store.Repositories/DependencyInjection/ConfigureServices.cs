@@ -1,6 +1,5 @@
 using System;
 using Dotnet5.GraphQL.Store.Repositories.Contexts;
-using Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,10 +22,6 @@ namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
             => services
                 .AddScoped<IProductRepository, ProductRepository>()
                 .AddScoped<IReviewRepository, ReviewRepository>();
-
-        public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
-            => services
-                .AddScoped<IUnitOfWork, UnitOfWork>();
 
         private static void DbContextOptionsBuilderAction(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
