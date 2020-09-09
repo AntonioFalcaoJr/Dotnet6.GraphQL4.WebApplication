@@ -9,7 +9,8 @@ using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
 using Dotnet5.GraphQL.Store.Domain.Abstractions;
 using Dotnet5.GraphQL.Store.Repositories.Abstractions;
 using Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks;
-using Dotnet5.GraphQL.Store.Services.Models;
+using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
+using Dotnet5.GraphQL.Store.Services.Abstractions.Resources;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace Dotnet5.GraphQL.Store.Services.Abstractions
@@ -154,7 +155,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
                     _notificationContext.AddNotifications(entity.ValidationResult);
                     return default;
                 case null:
-                    _notificationContext.AddNotificationWithType(Resource.Object_Null, typeof(TEntity));
+                    _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TEntity));
                     return default;
                 default:
                     return true;
@@ -164,14 +165,14 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         private bool IsValid(TModel model)
         {
             if (model is {}) return true;
-            _notificationContext.AddNotificationWithType(Resource.Object_Null, typeof(TEntity));
+            _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TEntity));
             return default;
         }
 
         private bool IsValid(TId id)
         {
             if (Equals(id, default(TId)) is false) return true;
-            _notificationContext.AddNotificationWithType(Resource.Identifier_Invalid, typeof(TEntity));
+            _notificationContext.AddNotificationWithType(ServicesResource.Identifier_Invalid, typeof(TEntity));
             return default;
         }
     }

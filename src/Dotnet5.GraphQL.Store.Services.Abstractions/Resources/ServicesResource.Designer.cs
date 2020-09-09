@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dotnet5.GraphQL.Store.Services {
+namespace Dotnet5.GraphQL.Store.Services.Abstractions.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Dotnet5.GraphQL.Store.Services {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    public class ServicesResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal ServicesResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Dotnet5.GraphQL.Store.Services {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dotnet5.GraphQL.Store.Services.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dotnet5.GraphQL.Store.Services.Abstractions.Resources.ServicesResource", typeof(ServicesResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -72,7 +72,7 @@ namespace Dotnet5.GraphQL.Store.Services {
         /// <summary>
         ///   Looks up a localized string similar to The {0} can not be null..
         /// </summary>
-        internal static string Object_Null {
+        public static string Object_Null {
             get {
                 return ResourceManager.GetString("Object_Null", resourceCulture);
             }

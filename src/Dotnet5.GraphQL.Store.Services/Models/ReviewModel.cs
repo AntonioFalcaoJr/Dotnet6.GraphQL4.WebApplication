@@ -1,4 +1,5 @@
 using System;
+using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
 
 namespace Dotnet5.GraphQL.Store.Services.Models
 {

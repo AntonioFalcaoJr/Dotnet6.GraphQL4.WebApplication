@@ -2,7 +2,7 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using AutoMapper;
-using Dotnet5.GraphQL.Store.Services.Models;
+using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
 
 namespace Dotnet5.GraphQL.Store.Services.Abstractions.Messages
 {

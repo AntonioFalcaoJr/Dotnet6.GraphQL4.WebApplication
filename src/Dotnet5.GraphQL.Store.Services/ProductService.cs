@@ -8,6 +8,7 @@ using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL.Store.Repositories;
 using Dotnet5.GraphQL.Store.Repositories.UnitsOfWorks;
 using Dotnet5.GraphQL.Store.Services.Abstractions;
+using Dotnet5.GraphQL.Store.Services.Abstractions.Resources;
 using Dotnet5.GraphQL.Store.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ namespace Dotnet5.GraphQL.Store.Services
         {
             if (reviewModel is null)
             {
-                _notificationContext.AddNotificationWithType(Resource.Object_Null, typeof(ReviewModel));
+                _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(ReviewModel));
                 return default;
             }
 
