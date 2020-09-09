@@ -1,13 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-    </PropertyGroup>
-
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="9.3.0-preview1" />
-      <PackageReference Include="GraphQL" Version="3.0.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0-preview.8.20407.11" />
+        <PackageReference Include="FluentValidation" Version="9.3.0-preview1"/>
+        <PackageReference Include="GraphQL" Version="$(GraphQL_Version)"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(Microsoft_DependencyInjection_Version)"/>
     </ItemGroup>
 
 </Project>
