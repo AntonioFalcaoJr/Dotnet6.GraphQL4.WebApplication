@@ -17,8 +17,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
 {
     public sealed class ProductInterfaceGraphType : InterfaceGraphType<Product>
     {
-        public ProductInterfaceGraphType(IServiceProvider serviceProvider, IDataLoaderContextAccessor accessor,
-            BootGraphType bootGraphType, BackpackGraphType backpackGraphType, KayakGraphType kayakGraphType)
+        public ProductInterfaceGraphType(BootGraphType bootGraphType, BackpackGraphType backpackGraphType, KayakGraphType kayakGraphType)
         {
             Name = "product";
 
@@ -35,14 +34,14 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
 
             FieldAsync<ListGraphType<ReviewGraphType>>(
                 name: "reviews",
-                resolve: async context
-                    => await accessor.Context
-                        .GetOrAddCollectionBatchLoader<Guid, Review>(
-                            loaderKey: "getLookupByProductIdsAsync",
-                            fetchFunc: serviceProvider
-                                .GetRequiredService<IProductService>()
-                                .GetLookupReviewsByProductIdsAsync)
-                        .LoadAsync(context.Source.Id));
+                resolve: async context => await context
+                    .RequestServices.GetRequiredService<IDataLoaderContextAccessor>()
+                    .Context.GetOrAddCollectionBatchLoader<Guid, Review>(
+                        loaderKey: "getLookupByProductIdsAsync",
+                        fetchFunc: context.RequestServices
+                            .GetRequiredService<IProductService>()
+                            .GetLookupReviewsByProductIdsAsync)
+                    .LoadAsync(context.Source.Id));
             
             ResolveType = @object =>
             {

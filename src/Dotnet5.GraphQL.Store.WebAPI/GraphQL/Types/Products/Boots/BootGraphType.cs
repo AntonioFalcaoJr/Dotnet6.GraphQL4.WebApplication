@@ -12,7 +12,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Boots
 {
     public sealed class BootGraphType : ObjectGraphType<Boot>
     {
-        public BootGraphType(IServiceProvider serviceProvider, IDataLoaderContextAccessor accessor)
+        public BootGraphType()
         {
             Name = "boot";
 
@@ -32,14 +32,14 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Boots
             
             FieldAsync<ListGraphType<ReviewGraphType>>(
                 name: "reviews",
-                resolve: async context
-                    => await accessor.Context
-                        .GetOrAddCollectionBatchLoader<Guid, Review>(
-                            loaderKey: "getLookupByProductIdsAsync",
-                            fetchFunc: serviceProvider
-                                .GetRequiredService<IProductService>()
-                                .GetLookupReviewsByProductIdsAsync)
-                        .LoadAsync(context.Source.Id));
+                resolve: async context => await context
+                    .RequestServices.GetRequiredService<IDataLoaderContextAccessor>()
+                    .Context.GetOrAddCollectionBatchLoader<Guid, Review>(
+                        loaderKey: "getLookupByProductIdsAsync",
+                        fetchFunc: context.RequestServices
+                            .GetRequiredService<IProductService>()
+                            .GetLookupReviewsByProductIdsAsync)
+                    .LoadAsync(context.Source.Id));
 
             Interface<ProductInterfaceGraphType>();
             IsTypeOf = o => o is Product;

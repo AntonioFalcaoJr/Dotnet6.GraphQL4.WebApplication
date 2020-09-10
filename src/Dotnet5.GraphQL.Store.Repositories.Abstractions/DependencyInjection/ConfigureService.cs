@@ -1,4 +1,4 @@
-﻿using Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWorks;
+﻿using Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWork;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
@@ -14,7 +14,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Abstractions.DependencyInjection
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
-        
+
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
             => services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
