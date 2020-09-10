@@ -8,7 +8,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions.DependencyInjection
         public static IServiceCollection AddServices(this IServiceCollection services)
             => services.Scan(selector
                 => selector
-                    .FromCallingAssembly()
+                    .FromApplicationDependencies()
                     .AddClasses(filter => filter.AssignableToAny(typeof(IService<,,>)))
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()

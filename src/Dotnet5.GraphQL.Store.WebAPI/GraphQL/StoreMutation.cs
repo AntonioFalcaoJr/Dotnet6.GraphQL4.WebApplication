@@ -1,5 +1,3 @@
-using System;
-using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
 using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.Services.Messages;
 using Dotnet5.GraphQL.Store.Services.Models;
@@ -12,7 +10,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
     public class StoreMutation : ObjectGraphType
     {
-        public StoreMutation(IServiceProvider serviceProvider)
+        public StoreMutation()
         {
             FieldAsync<ReviewGraphType>(
                 name: "createReview",
@@ -21,22 +19,18 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                 {
                     var model = context.GetArgument<ReviewModel>("review");
 
-                    var review = await serviceProvider
+                    var review = await context.RequestServices
                         .GetRequiredService<IProductService>()
                         .AddReviewAsync(
                             reviewModel: model,
                             cancellationToken: context.CancellationToken);
 
-                    var notificationContext = serviceProvider.GetRequiredService<INotificationContext>();
-                    if (notificationContext.HasNotifications)
+                    if (review.IsValid)
                     {
-                        context.Errors.AddRange(notificationContext.ExecutionErrors);
-                        return default;
+                        context.RequestServices.GetRequiredService<IReviewMessageService>()
+                            .Add(model: model);
                     }
-
-                    serviceProvider.GetRequiredService<IReviewMessageService>()
-                        .Add(model: model);
-
+                    
                     return review;
                 });
         }

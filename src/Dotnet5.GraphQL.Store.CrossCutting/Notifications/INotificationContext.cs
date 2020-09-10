@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
 {
     public interface INotificationContext
     {
-        IEnumerable<ExecutionError> ExecutionErrors { get; }
+        ExecutionErrors ExecutionErrors { get; }
         IReadOnlyList<Notification> Notifications { get; }
         bool HasNotifications { get; }
 

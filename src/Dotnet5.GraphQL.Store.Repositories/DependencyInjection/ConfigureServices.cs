@@ -21,11 +21,6 @@ namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
                 .AddDbContext<StoreDbContext>(DbContextOptionsBuilderAction);
         }
 
-        public static IServiceCollection AddRepositories(this IServiceCollection services)
-            => services
-                .AddScoped<IProductRepository, ProductRepository>()
-                .AddScoped<IReviewRepository, ReviewRepository>();
-
         private static void DbContextOptionsBuilderAction(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .EnableDetailedErrors()

@@ -15,8 +15,18 @@ namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
             _notifications = new List<Notification>();
         }
 
-        public IEnumerable<ExecutionError> ExecutionErrors
+        private IEnumerable<ExecutionError> _executionErrors
             => _notifications.Select(notification => new ExecutionError(notification.Message));
+
+        public ExecutionErrors ExecutionErrors
+        {
+            get
+            {
+                var executionErrors = new ExecutionErrors();
+                executionErrors.AddRange(_executionErrors);
+                return executionErrors;
+            }
+        }
 
         public IReadOnlyList<Notification> Notifications => _notifications;
         public bool HasNotifications => _notifications.Any();

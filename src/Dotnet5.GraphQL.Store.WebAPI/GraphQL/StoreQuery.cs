@@ -3,21 +3,21 @@ using Dotnet5.GraphQL.Store.Services;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products;
 using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
-using GraphQL.Execution;
 using GraphQL.Types;
 using GraphQL.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
 {
     public sealed class StoreQuery : ObjectGraphType
     {
-        public StoreQuery(IServiceProvider serviceProvider)
+        public StoreQuery()
         {
             FieldAsync<ListGraphType<ProductInterfaceGraphType>>(
                 name: "products",
                 resolve: async context =>
                 {
-                    return await serviceProvider
+                    return await context.RequestServices
                         .GetRequiredService<IProductService>()
                         .GetAllAsync(
                             selector: product => product,
@@ -32,7 +32,7 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     var id = context.GetArgument<Guid>("id");
                     if (Equals(id, default(Guid))) context.Errors.Add(new ExecutionError($"Invalid Id: {id}"));
 
-                    return await serviceProvider
+                    return await context.RequestServices
                         .GetRequiredService<IProductService>()
                         .GetByIdAsync(
                             id: id,
@@ -47,12 +47,14 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
                     var productId = context.GetArgument<Guid>("productId");
                     if (Equals(productId, default(Guid))) context.Errors.Add(new ExecutionError($"Invalid Id: {productId}"));
 
-                    return await serviceProvider
-                        .GetRequiredService<IReviewService>()
-                        .GetAllAsync(
-                            selector: review => review,
-                            predicate: review => review.ProductId == productId,
+                    var product = await context.RequestServices
+                        .GetRequiredService<IProductService>()
+                        .GetByIdAsync(
+                            id: productId,
+                            include: products => products.Include(x => x.Reviews),
                             cancellationToken: context.CancellationToken);
+
+                    return product?.Reviews;
                 });
         }
     }

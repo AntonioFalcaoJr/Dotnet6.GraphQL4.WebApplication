@@ -2,6 +2,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
+        <PackageReference Include="Scrutor" Version="$(Scrutor_Version)"/>
     </ItemGroup>
 
     <ItemGroup>
