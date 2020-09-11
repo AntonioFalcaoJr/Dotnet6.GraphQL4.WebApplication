@@ -51,7 +51,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             _unitOfWork.SaveChanges();
         }
 
-        public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken)
+        public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
         {
             if (IsValid(id) is false) return;
             await _repository.DeleteAsync(id, cancellationToken);
@@ -65,7 +65,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             return OnEdit(entity);
         }
 
-        public virtual async Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
             var entity = _mapper.Map<TEntity>(model);
@@ -108,7 +108,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             return OnSave(entity);
         }
 
-        public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
             var entity = _mapper.Map<TEntity>(model);
@@ -131,7 +131,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             return entity;
         }
 
-        protected async Task<TEntity> OnEditAsync(TEntity entity, CancellationToken cancellationToken)
+        protected async Task<TEntity> OnEditAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (IsValid(entity) is false) return default;
             await _repository.UpdateAsync(entity, cancellationToken);
@@ -139,7 +139,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             return entity;
         }
 
-        protected async Task<TEntity> OnSaveAsync(TEntity entity, CancellationToken cancellationToken)
+        protected async Task<TEntity> OnSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (IsValid(entity) is false) return default;
             await _repository.AddAsync(entity, cancellationToken);
@@ -165,7 +165,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         private bool IsValid(TModel model)
         {
             if (model is {}) return true;
-            _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TEntity));
+            _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TModel));
             return default;
         }
 

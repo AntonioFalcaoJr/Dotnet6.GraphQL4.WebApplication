@@ -15,6 +15,8 @@ namespace Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWork
         Task CreateSavepointAsync(string savepoint, CancellationToken cancellationToken = default);
         void Rollback();
         Task RollbackAsync(CancellationToken cancellationToken = default);
+        Task RollbackToSavepointAsync(string savePoint, CancellationToken cancellationToken = default);
+        void RollbackToSavepoint(string savePoint);
         void SaveChanges();
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }

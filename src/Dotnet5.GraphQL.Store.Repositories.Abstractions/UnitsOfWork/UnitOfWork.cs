@@ -38,6 +38,12 @@ namespace Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWork
         public void Rollback()
             => _database.RollbackTransaction();
 
+        public void RollbackToSavepoint(string savePoint)
+            => _database.RollbackToSavepoint(savePoint);
+
+        public Task RollbackToSavepointAsync(string savePoint, CancellationToken cancellationToken = default)
+            => _database.RollbackToSavepointAsync(savePoint, cancellationToken);
+
         public async Task RollbackAsync(CancellationToken cancellationToken = default)
             => await _database.RollbackTransactionAsync(cancellationToken);
 

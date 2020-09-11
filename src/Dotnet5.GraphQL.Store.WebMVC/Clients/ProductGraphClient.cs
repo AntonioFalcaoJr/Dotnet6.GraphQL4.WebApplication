@@ -146,6 +146,8 @@ namespace Dotnet5.GraphQL.Store.WebMVC.Clients
             var subscription = stream.Subscribe(response
                 => _logger.LogInformation($"A new Review from Product '{response.Data.Review.ProductId}' " +
                                           $"was added with Title: {response.Data.Review.Title}"));
+            
+            subscription.Dispose();
         }
     }
 }
