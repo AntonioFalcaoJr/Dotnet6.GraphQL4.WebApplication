@@ -260,6 +260,8 @@ ___
 
 MUTATION
 
+> Creating / adding a new Review to the respective product.
+
 ```markdown
 mutation($review: reviewInput!) {
   createReview(review: $review) {
@@ -279,6 +281,131 @@ VARIABLES
 }
 ```
 
+RESULT
+
+```json5
+{
+  "data": {
+    "createReview": {
+      "title": "some title"
+    }
+  }
+}
+```
+___
+
+## Subscriptions
+
+SUBSCRIPTION
+
+> The Mutation stay listening if a new review is added.
+
+```markdown
+subscription {
+  reviewAdded {
+    title
+  }
+}
+
+```
+RESULT
+
+```json5
+{
+  "data": {
+    "reviewAdded": {
+      "title": "Some title"
+    }
+  }
+}
+```
+___
+
+## Highlights
+
+### Notifications (pattern/context)
+
+To avoid handle exceptions, was implemented a _notification context_ that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
+
+```c#
+var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
+var notificationContext = _serviceProvider.GetRequiredService<INotificationContext>();
+
+if (notificationContext.HasNotifications)
+{
+    result.Errors = notificationContext.ExecutionErrors;
+    result.Data = default;
+}
+```
+
+### Resolve `Scoped` dependencies with `Singleton` Schema.
+
+Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`
+
+```c#
+var options = base.GetOptions(operationName, query, variables, context, cancellationToken);
+options.RequestServices = _serviceProvider;
+```
+
+### Abstractions
+
+With abstract designs, it is possible to reduce coupling in addition to applying DRY concepts, providing resources for the main behaviors:
+
+[`...Domain.Abstractions`](./src/Dotnet5.GraphQL.Store.Domain.Abstractions)
+
+```c#
+public abstract class Entity<TId>
+    where TId : struct
+```
+
+```c#
+public abstract class Builder<TBuilder, TEntity, TId> : IBuilder<TEntity, TId>
+    where TBuilder : Builder<TBuilder, TEntity, TId>
+    where TEntity : Entity<TId>
+    where TId : struct
+```
+    
+[`...Repositories.Abstractions`](./src/Dotnet5.GraphQL.Store.Repositories.Abstractions/Repository.cs)  
+
+```c#
+public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
+    where TEntity : Entity<TId>
+    where TId : struct
+{
+    private readonly DbSet<TEntity> _dbSet;
+
+    protected Repository(DbContext dbDbContext)
+    {
+        _dbSet = dbDbContext.Set<TEntity>();
+    }
+```
+
+[`...Services.Abstractions`](./src/Dotnet5.GraphQL.Store.Services.Abstractions/Service.cs) 
+
+```c#
+public abstract class Service<TEntity, TModel, TId> : IService<TEntity, TModel, TId>
+    where TEntity : Entity<TId>
+    where TModel : Model<TId>
+    where TId : struct
+{
+    protected readonly IMapper Mapper;
+    protected readonly INotificationContext NotificationContext;
+    protected readonly IRepository<TEntity, TId> Repository;
+    protected readonly IUnitOfWork UnitOfWork;
+
+    protected Service(
+        IUnitOfWork unitOfWork,
+        IRepository<TEntity, TId> repository,
+        IMapper mapper,
+        INotificationContext notificationContext)
+    {
+        UnitOfWork = unitOfWork;
+        Repository = repository;
+        Mapper = mapper;
+        NotificationContext = notificationContext;
+    }
+```
+
 ## Built With
 
 ### Microsoft Stack - v5.0 (preview 8)
@@ -288,7 +415,7 @@ VARIABLES
 * [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM;
 * [Microsoft SQL Server on Linux for Docker](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - Database.
 
-### GraphQL Stack - v3.0 (preview / alpha)
+### GraphQL Stack - v3.0 (preview/alpha)
 
 * [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries with data;
 * [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;

@@ -40,7 +40,6 @@ namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Executers
             IDictionary<string, object> context, CancellationToken cancellationToken = new CancellationToken())
         {
             var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
-
             var notification = _serviceProvider.GetRequiredService<INotificationContext>();
 
             if (notification.HasNotifications)
