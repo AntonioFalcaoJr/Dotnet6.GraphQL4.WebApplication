@@ -6,12 +6,11 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
 {
     public class Review : Entity<Guid>
     {
-        public Review(string title, string comment, Guid productId)
+        internal Review(string title, string comment, Guid productId)
         {
             Title = title;
             Comment = comment;
             ProductId = productId;
-
             Validate();
         }
 

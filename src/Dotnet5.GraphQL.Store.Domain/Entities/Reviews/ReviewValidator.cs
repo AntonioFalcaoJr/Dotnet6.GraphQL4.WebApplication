@@ -16,7 +16,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
                 .NotNull()
                 .NotEmpty()
                 .WithMessage(Resource.Review_Title_Empty);
-            
+
             RuleFor(x => x.ProductId)
                 .NotNull()
                 .NotEqual(Guid.Empty)

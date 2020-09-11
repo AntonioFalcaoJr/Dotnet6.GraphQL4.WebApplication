@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks
 {
     public class Kayak : Product
     {
-        public Kayak(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
+        internal Kayak(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
             ProductType productType, int rating, int stock, Option option, KayakType kayakType, int amountOfPerson)
             : base(id, description, introduceAt, name, photoUrl, price, productType, rating, stock, option)
         {
@@ -19,7 +19,6 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks
         protected Kayak() { }
 
         public int AmountOfPerson { get; }
-
         public KayakType KayakType { get; }
 
         protected sealed override bool Validate()

@@ -21,7 +21,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Boots
         public BootType BootType { get; }
         public int Size { get; }
 
-        protected sealed override bool Validate() 
+        protected sealed override bool Validate()
             => OnValidate(this, new InlineValidator<Boot>());
     }
 }

@@ -7,7 +7,7 @@ using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
 
 namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
 {
-    public abstract class  Product : Entity<Guid>
+    public abstract class Product : Entity<Guid>, IProduct
     {
         protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
             ProductType productType, int rating, int stock, Option option)

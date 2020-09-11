@@ -1,6 +1,6 @@
-# Dotnet5.GraphQL.HexagonalArch
+# Dotnet5.GraphQL3.WebApplication
 
-This project exemplify the implementation of a simple Razor Web APP MVC Core consuming an full **GraphQL** Web API, build in a **.NET 5** multi-layer  project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
+This project exemplify the implementation of a simple Razor Web APP MVC Core consuming an full **GraphQL 3** Web API, build in a **.NET 5** multi-layer project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
 
 ![CI](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/CI/badge.svg?branch=master)
 ![WebAPI Docker Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/workflows/WebAPI%20Docker%20Image/badge.svg?branch=master)
@@ -340,7 +340,7 @@ if (notificationContext.HasNotifications)
 
 ### Resolve `Scoped` dependencies with `Singleton` Schema.
 
-Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`
+Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:
 
 ```c#
 var options = base.GetOptions(operationName, query, variables, context, cancellationToken);
@@ -349,7 +349,7 @@ options.RequestServices = _serviceProvider;
 
 ### Abstractions
 
-With abstract designs, it is possible to reduce coupling in addition to applying DRY concepts, providing resources for the main behaviors:
+With abstract designs, it is possible to reduce coupling in addition to applying **DRY** concepts, providing resources for the main behaviors:
 
 [`...Domain.Abstractions`](./src/Dotnet5.GraphQL.Store.Domain.Abstractions)
 

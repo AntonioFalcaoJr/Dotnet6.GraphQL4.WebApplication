@@ -6,15 +6,13 @@ namespace Dotnet5.GraphQL.Store.Domain.Abstractions.DependencyInjection
 {
     public static class ConfigureService
     {
-        public static IServiceCollection AddBuilders(this IServiceCollection services)
-        {
-            return services.Scan(selector
+        public static IServiceCollection AddBuilders(this IServiceCollection services) 
+            => services.Scan(selector
                 => selector
-                    .FromCallingAssembly()
+                    .FromApplicationDependencies()
                     .AddClasses(filter => filter.AssignableToAny(typeof(IBuilder<,>)))
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
-        }
     }
 }
