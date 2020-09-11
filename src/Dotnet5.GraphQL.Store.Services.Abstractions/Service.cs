@@ -20,10 +20,10 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         where TModel : Model<TId>
         where TId : struct
     {
-        private readonly IMapper _mapper;
-        private readonly INotificationContext _notificationContext;
-        private readonly IRepository<TEntity, TId> _repository;
-        private readonly IUnitOfWork _unitOfWork;
+        protected readonly IMapper Mapper;
+        protected readonly INotificationContext NotificationContext;
+        protected readonly IRepository<TEntity, TId> Repository;
+        protected readonly IUnitOfWork UnitOfWork;
 
         protected Service(
             IUnitOfWork unitOfWork,
@@ -31,52 +31,52 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             IMapper mapper,
             INotificationContext notificationContext)
         {
-            _unitOfWork = unitOfWork;
-            _repository = repository;
-            _mapper = mapper;
-            _notificationContext = notificationContext;
+            UnitOfWork = unitOfWork;
+            Repository = repository;
+            Mapper = mapper;
+            NotificationContext = notificationContext;
         }
 
         public virtual void Delete(TId id)
         {
             if (IsValid(id) is false) return;
-            _repository.Delete(id);
-            _unitOfWork.SaveChanges();
+            Repository.Delete(id);
+            UnitOfWork.SaveChanges();
         }
 
         public virtual void Delete(TEntity entity)
         {
             if (IsValid(entity) is false) return;
-            _repository.Delete(entity);
-            _unitOfWork.SaveChanges();
+            Repository.Delete(entity);
+            UnitOfWork.SaveChanges();
         }
 
         public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
         {
             if (IsValid(id) is false) return;
-            await _repository.DeleteAsync(id, cancellationToken);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await Repository.DeleteAsync(id, cancellationToken);
+            await UnitOfWork.SaveChangesAsync(cancellationToken);
         }
 
         public virtual TEntity Edit(TModel model)
         {
             if (IsValid(model) is false) return default;
-            var entity = _mapper.Map<TEntity>(model);
+            var entity = Mapper.Map<TEntity>(model);
             return OnEdit(entity);
         }
 
         public virtual async Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
-            var entity = _mapper.Map<TEntity>(model);
+            var entity = Mapper.Map<TEntity>(model);
             return await OnEditAsync(entity, cancellationToken);
         }
 
         public virtual bool Exists(TId id)
-            => IsValid(id) ? _repository.Exists(id) : default;
+            => IsValid(id) ? Repository.Exists(id) : default;
 
         public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken)
-            => IsValid(id) ? await _repository.ExistsAsync(id, cancellationToken) : default;
+            => IsValid(id) ? await Repository.ExistsAsync(id, cancellationToken) : default;
 
         public virtual IEnumerable<TResult> GetAll<TResult>(
             Expression<Func<TEntity, TResult>> selector = default,
@@ -84,7 +84,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false)
-            => _repository.GetAll(selector, predicate, orderBy, include, withTracking);
+            => Repository.GetAll(selector, predicate, orderBy, include, withTracking);
 
         public virtual Task<IEnumerable<TResult>> GetAllAsync<TResult>(
             Expression<Func<TEntity, TResult>> selector = default,
@@ -93,57 +93,57 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false,
             CancellationToken cancellationToken = default)
-            => _repository.GetAllAsync(selector, predicate, orderBy, include, withTracking, cancellationToken);
+            => Repository.GetAllAsync(selector, predicate, orderBy, include, withTracking, cancellationToken);
 
         public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool withTracking = false)
-            => IsValid(id) ? _repository.GetById(id, include, withTracking) : default;
+            => IsValid(id) ? Repository.GetById(id, include, withTracking) : default;
 
         public virtual async Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool withTracking = false, CancellationToken cancellationToken = default)
-            => IsValid(id) ? await _repository.GetByIdAsync(id, include, withTracking, cancellationToken) : default;
+            => IsValid(id) ? await Repository.GetByIdAsync(id, include, withTracking, cancellationToken) : default;
 
         public virtual TEntity Save(TModel model)
         {
             if (IsValid(model) is false) return default;
-            var entity = _mapper.Map<TEntity>(model);
+            var entity = Mapper.Map<TEntity>(model);
             return OnSave(entity);
         }
 
         public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
-            var entity = _mapper.Map<TEntity>(model);
+            var entity = Mapper.Map<TEntity>(model);
             return await OnSaveAsync(entity, cancellationToken);
         }
 
         protected TEntity OnSave(TEntity entity)
         {
             if (IsValid(entity) is false) return default;
-            _repository.Add(entity);
-            _unitOfWork.SaveChanges();
+            Repository.Add(entity);
+            UnitOfWork.SaveChanges();
             return entity;
         }
 
         protected TEntity OnEdit(TEntity entity)
         {
             if (IsValid(entity) is false) return default;
-            _repository.Update(entity);
-            _unitOfWork.SaveChanges();
+            Repository.Update(entity);
+            UnitOfWork.SaveChanges();
             return entity;
         }
 
         protected async Task<TEntity> OnEditAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (IsValid(entity) is false) return default;
-            await _repository.UpdateAsync(entity, cancellationToken);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await Repository.UpdateAsync(entity, cancellationToken);
+            await UnitOfWork.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
         protected async Task<TEntity> OnSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (IsValid(entity) is false) return default;
-            await _repository.AddAsync(entity, cancellationToken);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await Repository.AddAsync(entity, cancellationToken);
+            await UnitOfWork.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
@@ -152,10 +152,10 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
             switch (entity)
             {
                 case {IsValid: false}:
-                    _notificationContext.AddNotifications(entity.ValidationResult);
+                    NotificationContext.AddNotifications(entity.ValidationResult);
                     return default;
                 case null:
-                    _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TEntity));
+                    NotificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TEntity));
                     return default;
                 default:
                     return true;
@@ -165,14 +165,14 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions
         private bool IsValid(TModel model)
         {
             if (model is {}) return true;
-            _notificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TModel));
+            NotificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TModel));
             return default;
         }
 
         private bool IsValid(TId id)
         {
             if (Equals(id, default(TId)) is false) return true;
-            _notificationContext.AddNotificationWithType(ServicesResource.Identifier_Invalid, typeof(TEntity));
+            NotificationContext.AddNotificationWithType(ServicesResource.Identifier_Invalid, typeof(TEntity));
             return default;
         }
     }

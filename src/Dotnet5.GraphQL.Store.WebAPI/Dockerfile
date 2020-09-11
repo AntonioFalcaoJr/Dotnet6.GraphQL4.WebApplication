@@ -13,6 +13,7 @@ WORKDIR /src
 
 COPY ./src/Dotnet5.GraphQL.Store.CrossCutting/*.csproj ./Dotnet5.GraphQL.Store.CrossCutting/
 COPY ./src/Dotnet5.GraphQL.Store.Domain/*.csproj ./Dotnet5.GraphQL.Store.Domain/
+COPY ./src/Dotnet5.GraphQL.Store.Domain.Abstractions/*.csproj ./Dotnet5.GraphQL.Store.Domain.Abstractions/
 COPY ./src/Dotnet5.GraphQL.Store.Repositories/*.csproj ./Dotnet5.GraphQL.Store.Repositories/
 COPY ./src/Dotnet5.GraphQL.Store.Repositories.Abstractions/*.csproj ./Dotnet5.GraphQL.Store.Repositories.Abstractions/
 COPY ./src/Dotnet5.GraphQL.Store.Services/*.csproj ./Dotnet5.GraphQL.Store.Services/
@@ -26,6 +27,7 @@ RUN dotnet restore ./Dotnet5.GraphQL.Store.WebAPI
 
 COPY ./src/Dotnet5.GraphQL.Store.CrossCutting/. ./Dotnet5.GraphQL.Store.CrossCutting/
 COPY ./src/Dotnet5.GraphQL.Store.Domain/. ./Dotnet5.GraphQL.Store.Domain/
+COPY ./src/Dotnet5.GraphQL.Store.Domain.Abstractions/. ./Dotnet5.GraphQL.Store.Domain.Abstractions/
 COPY ./src/Dotnet5.GraphQL.Store.Repositories/. ./Dotnet5.GraphQL.Store.Repositories/
 COPY ./src/Dotnet5.GraphQL.Store.Repositories.Abstractions/. ./Dotnet5.GraphQL.Store.Repositories.Abstractions/
 COPY ./src/Dotnet5.GraphQL.Store.Services/. ./Dotnet5.GraphQL.Store.Services/
