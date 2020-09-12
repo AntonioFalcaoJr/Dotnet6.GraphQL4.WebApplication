@@ -6,7 +6,7 @@ namespace Dotnet5.GraphQL.Store.Domain.Abstractions.DependencyInjection
 {
     public static class ConfigureService
     {
-        public static IServiceCollection AddBuilders(this IServiceCollection services) 
+        public static IServiceCollection AddBuilders(this IServiceCollection services)
             => services.Scan(selector
                 => selector
                     .FromApplicationDependencies()

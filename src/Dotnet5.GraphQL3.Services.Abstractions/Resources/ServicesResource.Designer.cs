@@ -39,7 +39,7 @@ namespace Dotnet5.GraphQL.Store.Services.Abstractions.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dotnet5.GraphQL.Store.Services.Abstractions.Resources.ServicesResource", typeof(ServicesResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dotnet5.GraphQL3.Services.Abstractions.Resources.ServicesResource", typeof(ServicesResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

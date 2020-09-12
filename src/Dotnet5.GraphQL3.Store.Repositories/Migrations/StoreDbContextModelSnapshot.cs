@@ -18,7 +18,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0-preview.8.20407.4");
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Product");
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Reviews.Review", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Reviews.Review", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -446,7 +446,7 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.ProductType", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.ProductType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -463,9 +463,9 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("ProductType");
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Products.Backpacks.Backpack", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks.Backpack", b =>
                 {
-                    b.HasBaseType("Dotnet5.GraphQL.Store.Domain.Entities.Products.Product");
+                    b.HasBaseType("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Product");
 
                     b.Property<string>("BackpackType")
                         .IsRequired()
@@ -1176,9 +1176,9 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Products.Boots.Boot", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots.Boot", b =>
                 {
-                    b.HasBaseType("Dotnet5.GraphQL.Store.Domain.Entities.Products.Product");
+                    b.HasBaseType("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Product");
 
                     b.Property<string>("BootType")
                         .IsRequired()
@@ -1942,9 +1942,9 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks.Kayak", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks.Kayak", b =>
                 {
-                    b.HasBaseType("Dotnet5.GraphQL.Store.Domain.Entities.Products.Product");
+                    b.HasBaseType("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Product");
 
                     b.Property<int>("AmountOfPerson")
                         .HasColumnType("int");
@@ -2708,9 +2708,9 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.TypeOne", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.TypeOne", b =>
                 {
-                    b.HasBaseType("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.ProductType");
+                    b.HasBaseType("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.ProductType");
 
                     b.HasDiscriminator().HasValue("TypeOne");
 
@@ -2721,9 +2721,9 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.TypeThree", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.TypeThree", b =>
                 {
-                    b.HasBaseType("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.ProductType");
+                    b.HasBaseType("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.ProductType");
 
                     b.HasDiscriminator().HasValue("TypeThree");
 
@@ -2734,9 +2734,9 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.TypeTwo", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.TypeTwo", b =>
                 {
-                    b.HasBaseType("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.ProductType");
+                    b.HasBaseType("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.ProductType");
 
                     b.HasDiscriminator().HasValue("TypeTwo");
 
@@ -2747,16 +2747,16 @@ namespace Dotnet5.GraphQL.Store.Repositories.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Products.Product", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Product", b =>
                 {
-                    b.HasOne("Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes.ProductType", "ProductType")
+                    b.HasOne("Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes.ProductType", "ProductType")
                         .WithMany()
                         .HasForeignKey("ProductTypeId");
                 });
 
-            modelBuilder.Entity("Dotnet5.GraphQL.Store.Domain.Entities.Reviews.Review", b =>
+            modelBuilder.Entity("Dotnet5.GraphQL3.Store.Domain.Entities.Reviews.Review", b =>
                 {
-                    b.HasOne("Dotnet5.GraphQL.Store.Domain.Entities.Products.Product", "Product")
+                    b.HasOne("Dotnet5.GraphQL3.Store.Domain.Entities.Products.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -5,23 +5,23 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5DB7ECFB-5FD4-4043-BBB1-AFFDD8C50D5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Domain", "src\Dotnet5.GraphQL.Store.Domain\Dotnet5.GraphQL.Store.Domain.csproj", "{ACC0F84A-E462-4AB2-9AD2-771D33307797}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.Domain", "src\Dotnet5.GraphQL3.Store.Domain\Dotnet5.GraphQL3.Store.Domain.csproj", "{ACC0F84A-E462-4AB2-9AD2-771D33307797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.WebAPI", "src\Dotnet5.GraphQL.Store.WebAPI\Dotnet5.GraphQL.Store.WebAPI.csproj", "{ABC794E6-328F-4102-8418-3E3346B72311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.WebAPI", "src\Dotnet5.GraphQL3.Store.WebAPI\Dotnet5.GraphQL3.Store.WebAPI.csproj", "{ABC794E6-328F-4102-8418-3E3346B72311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Repositories", "src\Dotnet5.GraphQL.Store.Repositories\Dotnet5.GraphQL.Store.Repositories.csproj", "{EDDE1CDC-F3C1-479B-8DAB-DD64A6B04E6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.Repositories", "src\Dotnet5.GraphQL3.Store.Repositories\Dotnet5.GraphQL3.Store.Repositories.csproj", "{EDDE1CDC-F3C1-479B-8DAB-DD64A6B04E6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Services", "src\Dotnet5.GraphQL.Store.Services\Dotnet5.GraphQL.Store.Services.csproj", "{5F636855-3808-4A4C-823F-7BD08AA6B6E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.Services", "src\Dotnet5.GraphQL3.Store.Services\Dotnet5.GraphQL3.Store.Services.csproj", "{5F636855-3808-4A4C-823F-7BD08AA6B6E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.WebMVC", "src\Dotnet5.GraphQL.Store.WebMVC\Dotnet5.GraphQL.Store.WebMVC.csproj", "{C9F87428-A1C9-43A1-AAE7-ED5BDBEE6919}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.WebMVC", "src\Dotnet5.GraphQL3.Store.WebMVC\Dotnet5.GraphQL3.Store.WebMVC.csproj", "{C9F87428-A1C9-43A1-AAE7-ED5BDBEE6919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.CrossCutting", "src\Dotnet5.GraphQL.Store.CrossCutting\Dotnet5.GraphQL.Store.CrossCutting.csproj", "{2D3C002E-8B8C-4A67-991B-1FE2B5781050}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.CrossCutting", "src\Dotnet5.GraphQL3.CrossCutting\Dotnet5.GraphQL3.CrossCutting.csproj", "{2D3C002E-8B8C-4A67-991B-1FE2B5781050}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Services.Abstractions", "src\Dotnet5.GraphQL.Store.Services.Abstractions\Dotnet5.GraphQL.Store.Services.Abstractions.csproj", "{70361D35-7BBF-4B27-9B9E-4C88EBCFBED6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Services.Abstractions", "src\Dotnet5.GraphQL3.Services.Abstractions\Dotnet5.GraphQL3.Services.Abstractions.csproj", "{70361D35-7BBF-4B27-9B9E-4C88EBCFBED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Repositories.Abstractions", "src\Dotnet5.GraphQL.Store.Repositories.Abstractions\Dotnet5.GraphQL.Store.Repositories.Abstractions.csproj", "{F0B4EC38-335C-4CB1-9582-E7F12C6CB068}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Repositories.Abstractions", "src\Dotnet5.GraphQL3.Repositories.Abstractions\Dotnet5.GraphQL3.Repositories.Abstractions.csproj", "{F0B4EC38-335C-4CB1-9582-E7F12C6CB068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL.Store.Domain.Abstractions", "src\Dotnet5.GraphQL.Store.Domain.Abstractions\Dotnet5.GraphQL.Store.Domain.Abstractions.csproj", "{B9D43201-90AB-440B-BE30-6DD2D3ABC180}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Domain.Abstractions", "src\Dotnet5.GraphQL3.Domain.Abstractions\Dotnet5.GraphQL3.Domain.Abstractions.csproj", "{B9D43201-90AB-440B-BE30-6DD2D3ABC180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

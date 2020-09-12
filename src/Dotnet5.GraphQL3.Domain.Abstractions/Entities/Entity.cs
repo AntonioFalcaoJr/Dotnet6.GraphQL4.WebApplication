@@ -10,11 +10,11 @@ namespace Dotnet5.GraphQL.Store.Domain.Abstractions.Entities
     {
         public TId Id { get; protected set; }
 
-        [NotMapped] 
-        public bool IsValid 
+        [NotMapped]
+        public bool IsValid
             => ValidationResult?.IsValid ?? Validate();
 
-        [NotMapped] 
+        [NotMapped]
         public ValidationResult ValidationResult { get; private set; }
 
         protected bool OnValidate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator)
