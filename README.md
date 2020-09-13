@@ -17,14 +17,14 @@ ___
 
 ##### Secrets
 
-To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebAPI`](./src/Dotnet5.GraphQL.Store.WebAPI), and then define the `DefaultConnection`: 
+To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL3.Store.WebAPI`](./src/Dotnet5.GraphQL3.Store.WebAPI), and then define the `DefaultConnection`: 
 
 ```bash
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
 ```
 
-After this, to configure the HTTP client, `init` secrets in [`./src/Dotnet5.GraphQL.Store.WebMVC`](./src/Dotnet5.GraphQL.Store.WebMVC) and define **Store** client host:
+After this, to configure the HTTP client, `init` secrets in [`./src/Dotnet5.GraphQL3.Store.WebMVC`](./src/Dotnet5.GraphQL3.Store.WebMVC) and define **Store** client host:
 
 ```bash
 dotnet user-secrets init
@@ -33,7 +33,7 @@ dotnet user-secrets set "HttpClient:Store" "http://localhost:5000/graphql"
 
 ##### AppSettings 
 
-If you prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet5.GraphQL.Store.WebMVC/appsettings.Development.json) files:
+If you prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet5.GraphQL3.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet5.GraphQL3.Store.WebMVC/appsettings.Development.json) files:
 
 WebAPI
 
@@ -58,7 +58,7 @@ ___
 
 ### Production
 
-Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet5.GraphQL.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet5.GraphQL.Store.WebMVC/appsettings.json) files:   
+Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet5.GraphQL3.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet5.GraphQL3.Store.WebMVC/appsettings.json) files:   
 
 ##### AppSettings 
 
@@ -87,7 +87,7 @@ ___
 
 ### Notifications (pattern/context)
 
-To avoid handle exceptions, was implemented a _notification context_ that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
+To avoid handle exceptions, was implemented a _notification context_ that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
 
 ```c#
 var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
@@ -102,7 +102,7 @@ if (notificationContext.HasNotifications)
 
 ### Resolve `Scoped` dependencies with `Singleton` Schema.
 
-Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:
+Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:
 
 ```c#
 var options = base.GetOptions(operationName, query, variables, context, cancellationToken);
@@ -113,7 +113,7 @@ options.RequestServices = _serviceProvider;
 
 With abstract designs, it is possible to reduce coupling in addition to applying **DRY** concepts, providing resources for the main behaviors:
 
-[`...Domain.Abstractions`](./src/Dotnet5.GraphQL.Store.Domain.Abstractions)
+[`...Domain.Abstractions`](./src/Dotnet5.GraphQL3.Domain.Abstractions)
 
 ```c#
 public abstract class Entity<TId>
@@ -127,7 +127,7 @@ public abstract class Builder<TBuilder, TEntity, TId> : IBuilder<TEntity, TId>
     where TId : struct
 ```
     
-[`...Repositories.Abstractions`](./src/Dotnet5.GraphQL.Store.Repositories.Abstractions/Repository.cs)  
+[`...Repositories.Abstractions`](./src/Dotnet5.GraphQL3.Repositories.Abstractions/Repository.cs)  
 
 ```c#
 public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
@@ -142,7 +142,7 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
     }
 ```
 
-[`...Services.Abstractions`](./src/Dotnet5.GraphQL.Store.Services.Abstractions/Service.cs) 
+[`...Services.Abstractions`](./src/Dotnet5.GraphQL3.Services.Abstractions/Service.cs) 
 
 ```c#
 public abstract class Service<TEntity, TModel, TId> : IService<TEntity, TModel, TId>
@@ -195,7 +195,7 @@ docker-compose up -d
 
 ## GraphQL Playground 
 
-By default,**Playground** respond at `http://localhost:5000/ui/playground`, but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet5.GraphQL.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
 
 ```c#
 app.UseGraphQLPlayground(
