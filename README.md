@@ -167,6 +167,22 @@ public abstract class Service<TEntity, TModel, TId> : IService<TEntity, TModel, 
         NotificationContext = notificationContext;
     }
 ```
+
+```c#
+public abstract class MessageService<TMessage, TModel, TId> : IMessageService<TMessage, TModel, TId>
+    where TMessage : class
+    where TModel : Model<TId>
+    where TId : struct
+{
+    private readonly IMapper _mapper;
+    private readonly ISubject<TMessage> _subject;
+
+    protected MessageService(IMapper mapper, ISubject<TMessage> subject)
+    {
+        _mapper = mapper;
+        _subject = subject;
+    }
+```
 ___
 
 ## Running

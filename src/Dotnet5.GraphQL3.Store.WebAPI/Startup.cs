@@ -51,8 +51,9 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 .AddRepositories()
                 .AddUnitOfWork()
                 .AddAutoMapper()
-                .AddMessageServices()
                 .AddServices()
+                .AddMessageServices()
+                .AddSubjects()
                 .AddNotificationContext();
 
             services.AddApplicationDbContext(options

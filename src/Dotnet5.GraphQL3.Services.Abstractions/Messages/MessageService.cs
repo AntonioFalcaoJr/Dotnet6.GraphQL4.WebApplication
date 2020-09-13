@@ -12,11 +12,12 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.Messages
         where TId : struct
     {
         private readonly IMapper _mapper;
-        private readonly ISubject<TMessage> _subject = new ReplaySubject<TMessage>();
+        private readonly ISubject<TMessage> _subject;
 
-        protected MessageService(IMapper mapper)
+        protected MessageService(IMapper mapper, ISubject<TMessage> subject)
         {
             _mapper = mapper;
+            _subject = subject;
         }
 
         public TMessage Add(TModel model)
