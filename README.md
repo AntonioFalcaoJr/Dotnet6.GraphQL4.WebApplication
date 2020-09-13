@@ -87,7 +87,23 @@ ___
 
 ### Notifications (pattern/context)
 
-To avoid handle exceptions, was implemented a _notification context_ that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
+To avoid handle exceptions, was implemented a [`NotificationContext`](./src/Dotnet5.GraphQL3.CrossCutting/Notifications/NotificationContext.cs) that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. 
+
+```c#
+protected bool OnValidate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator)
+{
+    ValidationResult = validator.Validate(entity);
+    return IsValid;
+}
+
+protected void AddError(string errorMessage, ValidationResult validationResult = default)
+{
+    ValidationResult.Errors.Add(new ValidationFailure(default, errorMessage));
+    validationResult?.Errors.ToList().ForEach(failure => ValidationResult.Errors.Add(failure));
+}
+```
+
+To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
 
 ```c#
 var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
@@ -100,7 +116,7 @@ if (notificationContext.HasNotifications)
 }
 ```
 
-### Resolve `Scoped` dependencies with `Singleton` Schema.
+### Resolving `Scoped` dependencies with `Singleton` Schema.
 
 Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:
 
@@ -183,6 +199,40 @@ public abstract class MessageService<TMessage, TModel, TId> : IMessageService<TM
         _subject = subject;
     }
 ```
+
+___
+
+## From EF TPH to GraphQL Interface
+
+ABSTRACT
+
+```c#
+public class ProductConfig : IEntityTypeConfiguration<Product>
+{
+    public void Configure(EntityTypeBuilder<Product> builder)
+    {
+        builder
+            .HasDiscriminator()
+            .HasValue<Boot>(nameof(Boot))
+            .HasValue<Kayak>(nameof(Kayak))
+            .HasValue<Backpack>(nameof(Backpack));
+    }
+}
+```
+
+INHERITOR
+
+```c#
+public class KayakConfig : IEntityTypeConfiguration<Kayak>
+{
+    public void Configure(EntityTypeBuilder<Kayak> builder)
+    {
+        builder
+            .HasBaseType<Product>();
+    }
+}
+```
+
 ___
 
 ## Running
