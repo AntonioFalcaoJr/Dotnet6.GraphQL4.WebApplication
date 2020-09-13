@@ -8,16 +8,16 @@ EXPOSE 7000
 FROM mcr.microsoft.com/dotnet/core/sdk:$SDK_VERSION AS build
 WORKDIR /src
 
-COPY ./src/Dotnet5.GraphQL.Store.WebMVC/*.csproj ./Dotnet5.GraphQL.Store.WebMVC/
+COPY ./src/Dotnet5.GraphQL3.Store.WebMVC/*.csproj ./Dotnet5.GraphQL3.Store.WebMVC/
 
 COPY ./NuGet.Config ./
 COPY ./Directory.Build.props ./
 
-RUN dotnet restore ./Dotnet5.GraphQL.Store.WebMVC
+RUN dotnet restore ./Dotnet5.GraphQL3.Store.WebMVC
 
-COPY ./src/Dotnet5.GraphQL.Store.WebMVC/. ./Dotnet5.GraphQL.Store.WebMVC/
+COPY ./src/Dotnet5.GraphQL3.Store.WebMVC/. ./Dotnet5.GraphQL3.Store.WebMVC/
 
-WORKDIR /src/Dotnet5.GraphQL.Store.WebMVC
+WORKDIR /src/Dotnet5.GraphQL3.Store.WebMVC
 RUN dotnet build -c Release --no-restore -o /app/build 
 
 FROM build AS publish
@@ -26,4 +26,4 @@ RUN dotnet publish -c Release --no-restore -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Dotnet5.GraphQL.Store.WebMVC.dll"]
+ENTRYPOINT ["dotnet", "Dotnet5.GraphQL3.Store.WebMVC.dll"]
