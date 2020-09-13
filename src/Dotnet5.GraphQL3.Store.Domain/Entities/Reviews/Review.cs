@@ -1,8 +1,8 @@
 using System;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Reviews
 {
     public class Review : Entity<Guid>
     {

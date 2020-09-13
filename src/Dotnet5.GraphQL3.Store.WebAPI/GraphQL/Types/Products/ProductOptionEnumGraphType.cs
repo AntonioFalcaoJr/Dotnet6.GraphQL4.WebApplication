@@ -1,7 +1,7 @@
-using Dotnet5.GraphQL.Store.Domain.Enumerations;
+using Dotnet5.GraphQL3.Store.Domain.Enumerations;
 using GraphQL.Types;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products
 {
     public class ProductOptionEnumGraphType : EnumerationGraphType<Option>
     {

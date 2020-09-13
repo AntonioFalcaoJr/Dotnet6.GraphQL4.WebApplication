@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
+using Dotnet5.GraphQL3.CrossCutting.Notifications;
 using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Server;
@@ -12,7 +12,7 @@ using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Executers
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers
 {
     public class StoreExecuter<TSchema> : DefaultGraphQLExecuter<TSchema> where TSchema : ISchema
     {

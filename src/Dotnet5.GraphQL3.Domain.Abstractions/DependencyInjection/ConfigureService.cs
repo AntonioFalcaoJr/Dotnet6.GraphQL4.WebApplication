@@ -1,8 +1,8 @@
-﻿using Dotnet5.GraphQL.Store.Domain.Abstractions.Builders;
+﻿using Dotnet5.GraphQL3.Domain.Abstractions.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
-namespace Dotnet5.GraphQL.Store.Domain.Abstractions.DependencyInjection
+namespace Dotnet5.GraphQL3.Domain.Abstractions.DependencyInjection
 {
     public static class ConfigureService
     {

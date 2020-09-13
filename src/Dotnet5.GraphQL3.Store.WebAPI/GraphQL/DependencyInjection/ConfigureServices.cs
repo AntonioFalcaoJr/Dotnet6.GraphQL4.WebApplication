@@ -1,11 +1,11 @@
 ﻿using System;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Executers;
+using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers;
 using GraphQL.Server;
 using GraphQL.Server.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection
 {
     public static class ConfigureServices
     {

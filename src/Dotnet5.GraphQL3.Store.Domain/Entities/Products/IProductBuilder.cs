@@ -1,10 +1,10 @@
 ﻿using System;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Builders;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
-using Dotnet5.GraphQL.Store.Domain.Enumerations;
-using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
+using Dotnet5.GraphQL3.Domain.Abstractions.Builders;
+using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Store.Domain.Enumerations;
+using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
 {
     public interface IProductBuilder<out TProduct, TId> : IBuilder<TProduct, TId>
         where TProduct : Entity<TId>, IProduct

@@ -1,4 +1,4 @@
-namespace Dotnet5.GraphQL.Store.Domain.Enumerations
+namespace Dotnet5.GraphQL3.Store.Domain.Enumerations
 {
     public enum KayakType
     {

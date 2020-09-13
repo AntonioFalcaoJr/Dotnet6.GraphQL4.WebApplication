@@ -1,9 +1,9 @@
 using System;
-using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL.Store.Repositories.Abstractions;
+using Dotnet5.GraphQL3.Repositories.Abstractions;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dotnet5.GraphQL.Store.Repositories
+namespace Dotnet5.GraphQL3.Store.Repositories
 {
     public class ReviewRepository : Repository<Review, Guid>, IReviewRepository
     {

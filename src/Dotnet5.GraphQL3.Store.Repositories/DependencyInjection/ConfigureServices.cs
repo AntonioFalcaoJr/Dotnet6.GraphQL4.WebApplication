@@ -1,10 +1,10 @@
 using System;
-using Dotnet5.GraphQL.Store.Repositories.Contexts;
+using Dotnet5.GraphQL3.Store.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet5.GraphQL.Store.Repositories.DependencyInjection
+namespace Dotnet5.GraphQL3.Store.Repositories.DependencyInjection
 {
     public static class ConfigureServices
     {

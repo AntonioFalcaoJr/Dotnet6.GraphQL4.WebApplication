@@ -3,7 +3,7 @@ using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection
 {
     public static class Configure
     {

@@ -1,7 +1,7 @@
-using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
+using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 using GraphQL.Types;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products
 {
     public sealed class ProductTypeGraphType : ObjectGraphType<ProductType>
     {

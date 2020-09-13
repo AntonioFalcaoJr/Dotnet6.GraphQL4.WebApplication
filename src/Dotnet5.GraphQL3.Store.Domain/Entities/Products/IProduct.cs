@@ -1,6 +1,6 @@
-﻿using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
+﻿using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
 {
     public interface IProduct
     {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
-using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
+using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Services.Abstractions.Models;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Dotnet5.GraphQL.Store.Services.Abstractions
+namespace Dotnet5.GraphQL3.Services.Abstractions
 {
     public interface IService<TEntity, in TModel, in TId>
         where TEntity : Entity<TId>

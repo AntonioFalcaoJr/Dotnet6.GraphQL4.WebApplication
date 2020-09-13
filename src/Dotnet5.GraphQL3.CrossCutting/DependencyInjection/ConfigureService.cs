@@ -1,7 +1,7 @@
-﻿using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
+﻿using Dotnet5.GraphQL3.CrossCutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet5.GraphQL.Store.CrossCutting.DependencyInjection
+namespace Dotnet5.GraphQL3.CrossCutting.DependencyInjection
 {
     public static class ConfigureService
     {

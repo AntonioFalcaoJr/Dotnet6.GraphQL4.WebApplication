@@ -1,12 +1,12 @@
-using Dotnet5.GraphQL.Store.CrossCutting.DependencyInjection;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.DependencyInjection;
-using Dotnet5.GraphQL.Store.Repositories.Abstractions.DependencyInjection;
-using Dotnet5.GraphQL.Store.Repositories.Contexts;
-using Dotnet5.GraphQL.Store.Repositories.DependencyInjection;
-using Dotnet5.GraphQL.Store.Services.Abstractions.DependencyInjection;
-using Dotnet5.GraphQL.Store.Services.DependencyInjection;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.DependencyInjection;
+using Dotnet5.GraphQL3.CrossCutting.DependencyInjection;
+using Dotnet5.GraphQL3.Domain.Abstractions.DependencyInjection;
+using Dotnet5.GraphQL3.Repositories.Abstractions.DependencyInjection;
+using Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection;
+using Dotnet5.GraphQL3.Store.Repositories.Contexts;
+using Dotnet5.GraphQL3.Store.Repositories.DependencyInjection;
+using Dotnet5.GraphQL3.Store.Services.DependencyInjection;
+using Dotnet5.GraphQL3.Store.WebAPI.GraphQL;
+using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Dotnet5.GraphQL.Store.WebAPI
+namespace Dotnet5.GraphQL3.Store.WebAPI
 {
     public class Startup
     {

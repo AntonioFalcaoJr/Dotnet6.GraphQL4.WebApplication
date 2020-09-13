@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWork
+namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -1,12 +1,12 @@
-using Dotnet5.GraphQL.Store.Services;
-using Dotnet5.GraphQL.Store.Services.Messages;
-using Dotnet5.GraphQL.Store.Services.Models;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
+using Dotnet5.GraphQL3.Store.Services;
+using Dotnet5.GraphQL3.Store.Services.Messages;
+using Dotnet5.GraphQL3.Store.Services.Models;
+using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
 using GraphQL.Types;
 using GraphQL.Utilities;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
 {
     public class StoreMutation : ObjectGraphType
     {

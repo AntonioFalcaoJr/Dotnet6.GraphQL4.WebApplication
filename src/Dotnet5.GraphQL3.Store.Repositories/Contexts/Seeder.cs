@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Bogus;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products;
-using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL.Store.Domain.Enumerations;
-using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
+using Dotnet5.GraphQL3.Store.Domain.Enumerations;
+using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Contexts
+namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
 {
     public static class Seeder
     {

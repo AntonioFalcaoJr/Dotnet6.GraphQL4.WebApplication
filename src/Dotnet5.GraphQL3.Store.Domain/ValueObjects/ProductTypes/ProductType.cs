@@ -1,6 +1,6 @@
 using System;
 
-namespace Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes
+namespace Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes
 {
     public abstract class ProductType
     {

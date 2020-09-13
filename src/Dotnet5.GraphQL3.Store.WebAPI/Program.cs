@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Dotnet5.GraphQL.Store.WebAPI
+namespace Dotnet5.GraphQL3.Store.WebAPI
 {
     public class Program
     {

@@ -5,15 +5,15 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
-using Dotnet5.GraphQL.Store.Repositories.Abstractions;
-using Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWork;
-using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
-using Dotnet5.GraphQL.Store.Services.Abstractions.Resources;
+using Dotnet5.GraphQL3.CrossCutting.Notifications;
+using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Repositories.Abstractions;
+using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
+using Dotnet5.GraphQL3.Services.Abstractions.Models;
+using Dotnet5.GraphQL3.Services.Abstractions.Resources;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Dotnet5.GraphQL.Store.Services.Abstractions
+namespace Dotnet5.GraphQL3.Services.Abstractions
 {
     public abstract class Service<TEntity, TModel, TId> : IService<TEntity, TModel, TId>
         where TEntity : Entity<TId>

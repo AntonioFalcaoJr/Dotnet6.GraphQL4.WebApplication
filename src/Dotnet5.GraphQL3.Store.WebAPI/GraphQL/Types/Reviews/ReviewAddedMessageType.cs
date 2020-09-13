@@ -1,7 +1,7 @@
-﻿using Dotnet5.GraphQL.Store.Services.Models.Messages;
+﻿using Dotnet5.GraphQL3.Store.Services.Models.Messages;
 using GraphQL.Types;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews
 {
     public sealed class ReviewAddedMessageType : ObjectGraphType<ReviewMessage>
     {

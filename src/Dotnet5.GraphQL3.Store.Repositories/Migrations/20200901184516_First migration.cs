@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Migrations
+namespace Dotnet5.GraphQL3.Store.Repositories.Migrations
 {
     public partial class Firstmigration : Migration
     {

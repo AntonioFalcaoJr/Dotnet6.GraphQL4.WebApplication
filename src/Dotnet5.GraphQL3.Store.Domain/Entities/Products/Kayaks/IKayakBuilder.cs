@@ -1,7 +1,7 @@
 ﻿using System;
-using Dotnet5.GraphQL.Store.Domain.Enumerations;
+using Dotnet5.GraphQL3.Store.Domain.Enumerations;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks
 {
     public interface IKayakBuilder : IProductBuilder<Kayak, Guid>
     {

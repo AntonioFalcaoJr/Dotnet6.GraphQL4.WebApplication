@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dotnet5.GraphQL.Store.Services.Abstractions.Resources {
-    using System;
-    
-    
+namespace Dotnet5.GraphQL3.Services.Abstractions.Resources {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

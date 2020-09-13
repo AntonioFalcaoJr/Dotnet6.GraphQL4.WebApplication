@@ -1,4 +1,4 @@
-﻿namespace Dotnet5.GraphQL.Store.WebMVC.Models
+﻿namespace Dotnet5.GraphQL3.Store.WebMVC.Models
 {
     public class AddedReviewSubscriptionResult
     {

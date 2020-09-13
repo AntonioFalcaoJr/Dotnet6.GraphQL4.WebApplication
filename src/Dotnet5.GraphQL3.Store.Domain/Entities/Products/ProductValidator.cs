@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
 {
     public abstract class ProductValidator<TProduct> : AbstractValidator<TProduct>
         where TProduct : Product

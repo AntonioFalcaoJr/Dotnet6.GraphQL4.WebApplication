@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products.Backpacks
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks
 {
     public class BackpackValidator : ProductValidator<Backpack>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentValidation;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Reviews
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Reviews
 {
     public class ReviewValidator : AbstractValidator<Review>
     {

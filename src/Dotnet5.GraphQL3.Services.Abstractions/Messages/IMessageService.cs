@@ -1,7 +1,7 @@
 ﻿using System;
-using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
+using Dotnet5.GraphQL3.Services.Abstractions.Models;
 
-namespace Dotnet5.GraphQL.Store.Services.Abstractions.Messages
+namespace Dotnet5.GraphQL3.Services.Abstractions.Messages
 {
     public interface IMessageService<out TMessage, in TModel, TId>
         where TMessage : class

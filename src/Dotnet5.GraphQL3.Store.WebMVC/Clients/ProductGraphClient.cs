@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.WebMVC.Models;
+using Dotnet5.GraphQL3.Store.WebMVC.Models;
 using GraphQL;
-using GraphQL.Client.Http;
 using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Dotnet5.GraphQL.Store.WebMVC.Clients
+namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
 {
     public class ProductGraphClient : IProductGraphClient
     {

@@ -1,14 +1,14 @@
 using System;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products.Backpacks;
-using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL.Store.Services;
-using Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Reviews;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
+using Dotnet5.GraphQL3.Store.Services;
+using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;
 using GraphQL.Types;
 using GraphQL.Utilities;
 
-namespace Dotnet5.GraphQL.Store.WebAPI.GraphQL.Types.Products.Backpacks
+namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products.Backpacks
 {
     public sealed class BackpackGraphType : ObjectGraphType<Backpack>
     {

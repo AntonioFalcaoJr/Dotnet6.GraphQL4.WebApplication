@@ -1,4 +1,4 @@
-﻿namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
+﻿namespace Dotnet5.GraphQL3.CrossCutting.Notifications
 {
     public class Notification
     {

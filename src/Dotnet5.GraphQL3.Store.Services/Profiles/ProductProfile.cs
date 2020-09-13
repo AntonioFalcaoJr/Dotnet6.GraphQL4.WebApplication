@@ -1,8 +1,8 @@
 using AutoMapper;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products;
-using Dotnet5.GraphQL.Store.Services.Models;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Store.Services.Models;
 
-namespace Dotnet5.GraphQL.Store.Services.Profiles
+namespace Dotnet5.GraphQL3.Store.Services.Profiles
 {
     public class ProductProfile : Profile
     {

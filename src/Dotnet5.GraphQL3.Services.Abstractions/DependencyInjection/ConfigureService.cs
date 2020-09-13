@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
-namespace Dotnet5.GraphQL.Store.Services.Abstractions.DependencyInjection
+namespace Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection
 {
     public static class ConfigureService
     {

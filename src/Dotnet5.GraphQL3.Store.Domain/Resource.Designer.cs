@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dotnet5.GraphQL.Store.Domain {
-    using System;
-    
-    
+namespace Dotnet5.GraphQL3.Store.Domain {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

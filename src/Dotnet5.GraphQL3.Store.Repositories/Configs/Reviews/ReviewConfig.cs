@@ -1,8 +1,8 @@
-using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Configs.Reviews
+namespace Dotnet5.GraphQL3.Store.Repositories.Configs.Reviews
 {
     public class ReviewConfig : IEntityTypeConfiguration<Review>
     {

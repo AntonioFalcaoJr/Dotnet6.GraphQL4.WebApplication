@@ -4,17 +4,17 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Dotnet5.GraphQL.Store.CrossCutting.Notifications;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products;
-using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL.Store.Repositories;
-using Dotnet5.GraphQL.Store.Repositories.Abstractions.UnitsOfWork;
-using Dotnet5.GraphQL.Store.Services.Abstractions;
-using Dotnet5.GraphQL.Store.Services.Abstractions.Resources;
-using Dotnet5.GraphQL.Store.Services.Models;
+using Dotnet5.GraphQL3.CrossCutting.Notifications;
+using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
+using Dotnet5.GraphQL3.Services.Abstractions;
+using Dotnet5.GraphQL3.Services.Abstractions.Resources;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
+using Dotnet5.GraphQL3.Store.Repositories;
+using Dotnet5.GraphQL3.Store.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dotnet5.GraphQL.Store.Services
+namespace Dotnet5.GraphQL3.Store.Services
 {
     public class ProductService : Service<Product, ProductModel, Guid>, IProductService
     {

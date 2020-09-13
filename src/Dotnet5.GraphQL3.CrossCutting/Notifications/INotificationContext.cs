@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FluentValidation.Results;
 using GraphQL;
 
-namespace Dotnet5.GraphQL.Store.CrossCutting.Notifications
+namespace Dotnet5.GraphQL3.CrossCutting.Notifications
 {
     public interface INotificationContext
     {

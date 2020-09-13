@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
-using Dotnet5.GraphQL.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL.Store.Domain.Enumerations;
-using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
+using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
+using Dotnet5.GraphQL3.Store.Domain.Enumerations;
+using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 
-namespace Dotnet5.GraphQL.Store.Domain.Entities.Products
+namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
 {
     public abstract class Product : Entity<Guid>, IProduct
     {

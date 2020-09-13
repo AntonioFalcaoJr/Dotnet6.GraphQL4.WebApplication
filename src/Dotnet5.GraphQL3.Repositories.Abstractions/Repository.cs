@@ -4,11 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL.Store.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Abstractions
+namespace Dotnet5.GraphQL3.Repositories.Abstractions
 {
     public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
         where TEntity : Entity<TId>

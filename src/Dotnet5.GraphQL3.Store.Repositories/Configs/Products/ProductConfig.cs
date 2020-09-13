@@ -1,13 +1,13 @@
-using Dotnet5.GraphQL.Store.Domain.Entities.Products;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products.Backpacks;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products.Boots;
-using Dotnet5.GraphQL.Store.Domain.Entities.Products.Kayaks;
-using Dotnet5.GraphQL.Store.Domain.Enumerations;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks;
+using Dotnet5.GraphQL3.Store.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Dotnet5.GraphQL.Store.Repositories.Configs.Products
+namespace Dotnet5.GraphQL3.Store.Repositories.Configs.Products
 {
     public class ProductConfig : IEntityTypeConfiguration<Product>
     {

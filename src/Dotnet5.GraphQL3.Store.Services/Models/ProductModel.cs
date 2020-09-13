@@ -1,8 +1,8 @@
 using System;
-using Dotnet5.GraphQL.Store.Domain.ValueObjects.ProductTypes;
-using Dotnet5.GraphQL.Store.Services.Abstractions.Models;
+using Dotnet5.GraphQL3.Services.Abstractions.Models;
+using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 
-namespace Dotnet5.GraphQL.Store.Services.Models
+namespace Dotnet5.GraphQL3.Store.Services.Models
 {
     public class ProductModel : Model<Guid>
     {
