@@ -18,7 +18,7 @@ services:
     image: webapi
     build:
       context: .
-      dockerfile: ./src/Dotnet5.GraphQL.Store.WebAPI/Dockerfile
+      dockerfile: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://*:5000
     ports:
@@ -33,7 +33,7 @@ services:
     image: webmvc
     build:
       context: .
-      dockerfile: ./src/Dotnet5.GraphQL.Store.WebMVC/Dockerfile
+      dockerfile: ./src/Dotnet5.GraphQL3.Store.WebMVC/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://*:7000
     ports:
