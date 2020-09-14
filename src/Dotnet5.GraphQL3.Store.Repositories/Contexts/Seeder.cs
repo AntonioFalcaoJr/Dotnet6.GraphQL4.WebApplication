@@ -13,7 +13,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
 {
     public static class Seeder
     {
-        private const int Amount = 50;
+        private const int Amount = 10;
         private static readonly Faker Faker = new Faker();
         private static readonly List<ProductType> ProductTypes = new List<ProductType>();
         private static readonly List<Guid> ProductIds = new List<Guid>();
@@ -50,7 +50,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
                             Description = Faker.Commerce.ProductDescription(),
                             IntroduceAt = Faker.Date.FutureOffset(),
                             Name = Faker.Commerce.ProductName(),
-                            PhotoUrl = Faker.Image.PicsumUrl(),
+                            PhotoUrl = Faker.Image.PicsumUrl(width:500, height:375, blur: true),
                             Price = Convert.ToDecimal(Faker.Commerce.Price()),
                             ProductTypeId = Faker.PickRandom(ProductTypes).Id,
                             Rating = Faker.Random.Int(0, 10),

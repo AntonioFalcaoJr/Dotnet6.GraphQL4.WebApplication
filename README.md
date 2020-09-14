@@ -200,11 +200,9 @@ public abstract class MessageService<TMessage, TModel, TId> : IMessageService<TM
     }
 ```
 
-___
+### From EF TPH to GraphQL Interface
 
-## From EF TPH to GraphQL Interface
-
-ABSTRACT
+ENTITY
 
 ```c#
 public class ProductConfig : IEntityTypeConfiguration<Product>
@@ -229,6 +227,43 @@ public class KayakConfig : IEntityTypeConfiguration<Kayak>
     {
         builder
             .HasBaseType<Product>();
+    }
+}
+```
+
+INTERFACE 
+
+```c#
+public sealed class ProductInterfaceGraphType : InterfaceGraphType<Product>
+{
+    public ProductInterfaceGraphType(BootGraphType bootGraphType, BackpackGraphType backpackGraphType, KayakGraphType kayakGraphType)
+    {
+        Name = "product";
+
+        ResolveType = @object =>
+        {
+            return @object switch
+            {
+                Boot _ => bootGraphType,
+                Backpack _ => backpackGraphType,
+                Kayak _ => kayakGraphType,
+                _ => default
+            };
+        };
+    }
+}
+```
+
+OBJECT
+
+```c#
+public sealed class KayakGraphType : ObjectGraphType<Kayak>
+{
+    public KayakGraphType()
+    {
+        Name = "kayak";
+        Interface<ProductInterfaceGraphType>();
+        IsTypeOf = o => o is Product;
     }
 }
 ```
