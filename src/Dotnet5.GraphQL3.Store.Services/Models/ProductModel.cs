@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL3.Store.Services.Models
         public string Description { get; set; }
         public DateTimeOffset IntroduceAt { get; set; }
         public string Name { get; set; }
-        public string PhotoFileName { get; set; }
+        public string PhotoUrl { get; set; }
         public decimal Price { get; set; }
         public ProductType ProductType { get; set; }
         public int Rating { get; set; }

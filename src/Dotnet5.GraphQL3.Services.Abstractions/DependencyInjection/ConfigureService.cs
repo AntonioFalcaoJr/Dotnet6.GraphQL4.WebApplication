@@ -7,7 +7,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection
 {
     public static class ConfigureService
     {
-        public static IServiceCollection AddServices(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services.Scan(selector
                 => selector
                     .FromApplicationDependencies()

@@ -200,7 +200,7 @@ public abstract class MessageService<TMessage, TModel, TId> : IMessageService<TM
     }
 ```
 
-### From EF TPH to GraphQL Interface
+### From `EF TPH` to `GraphQL Interface`
 
 ENTITY
 

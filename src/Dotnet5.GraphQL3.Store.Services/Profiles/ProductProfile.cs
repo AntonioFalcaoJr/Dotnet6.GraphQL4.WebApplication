@@ -1,6 +1,7 @@
 using AutoMapper;
-using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks;
 using Dotnet5.GraphQL3.Store.Services.Models;
+using Dotnet5.GraphQL3.Store.Services.Profiles.Converters;
 
 namespace Dotnet5.GraphQL3.Store.Services.Profiles
 {
@@ -8,7 +9,8 @@ namespace Dotnet5.GraphQL3.Store.Services.Profiles
     {
         public ProductProfile()
         {
-            CreateMap<ProductModel, Product>().ReverseMap();
+            CreateMap<ProductModel, Kayak>().
+                ConvertUsing<ProductModelToDomainProfile>();
         }
     }
 }
