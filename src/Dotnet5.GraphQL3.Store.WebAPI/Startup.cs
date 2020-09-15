@@ -2,7 +2,6 @@ using Dotnet5.GraphQL3.CrossCutting.DependencyInjection;
 using Dotnet5.GraphQL3.Domain.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL3.Repositories.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection;
-using Dotnet5.GraphQL3.Store.Repositories.Contexts;
 using Dotnet5.GraphQL3.Store.Repositories.DependencyInjection;
 using Dotnet5.GraphQL3.Store.Services.DependencyInjection;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL;
@@ -28,7 +27,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
             _configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app, StoreDbContext dbContext)
+        public void Configure(IApplicationBuilder app, DbContext dbContext)
         {
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();

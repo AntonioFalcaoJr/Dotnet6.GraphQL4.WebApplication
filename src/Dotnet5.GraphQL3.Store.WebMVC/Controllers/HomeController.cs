@@ -24,20 +24,20 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var response = await _productGraphClient.GetAllAsync();
+            var response = await _productGraphClient.GetAllAsync().ConfigureAwait(false);
             return View(response);
         }
 
         public async Task<IActionResult> ProductDetail(Guid id)
         {
             _productGraphClient.SubscribeToUpdates();
-            var product = await _productGraphClient.GetByIdAsync(id);
+            var product = await _productGraphClient.GetByIdAsync(id).ConfigureAwait(false);
             return View(product);
         }
 
         public async Task<IActionResult> ProductReview(Guid id)
         {
-            var reviews = await _productGraphClient.GetReviewByProductIdAsync(id);
+            var reviews = await _productGraphClient.GetReviewByProductIdAsync(id).ConfigureAwait(false);
             return View(reviews);
         }
 
@@ -47,7 +47,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReviewAsync(ReviewModel model)
         {
-            if (ModelState.IsValid) await _productGraphClient.AddReviewAsync(model);
+            if (ModelState.IsValid) await _productGraphClient.AddReviewAsync(model).ConfigureAwait(false);
             return RedirectToAction("ProductDetail", new {id = model.ProductId});
         }
     }
