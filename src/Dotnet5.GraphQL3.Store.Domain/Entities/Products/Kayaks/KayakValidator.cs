@@ -11,7 +11,7 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks
                 .WithMessage(Resource.Kayak_Type_Null);
 
             RuleFor(x => x.AmountOfPerson)
-                .NotNull()
+                .GreaterThan(0)
                 .WithMessage(Resource.Kayak_Type_Null);
         }
     }
