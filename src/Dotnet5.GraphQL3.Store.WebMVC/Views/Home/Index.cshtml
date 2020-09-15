@@ -13,12 +13,12 @@
             @foreach (var product in Model)
             {
                 <div class="col-sm-6 col-md-4 item">
-                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.Id">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-id="@product.Id">
                         <img class="img-fluid" src="@product.PhotoUrl" alt="">
                     </a>
                     <h3 class="name">@product.Name</h3>
                     <p class="description">@product.Description</p>
-                    <a class="action" asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.Id">
+                    <a class="action" asp-controller="Products" asp-action="Detail" asp-route-id="@product.Id">
                         <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

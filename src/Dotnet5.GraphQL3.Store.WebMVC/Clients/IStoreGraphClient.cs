@@ -6,10 +6,10 @@ using Dotnet5.GraphQL3.Store.WebMVC.Models;
 
 namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
 {
-    public interface IProductGraphClient
+    public interface IStoreGraphClient
     {
-        Task<ProductModel> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-        Task<List<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<ProductModel> GetProductByIdAsync(Guid id, CancellationToken cancellationToken = default);
+        Task<List<ProductModel>> GetAllProductsAsync(CancellationToken cancellationToken = default);
         Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<Guid> AddReviewAsync(ReviewModel review, CancellationToken cancellationToken = default);
         void SubscribeToUpdates();

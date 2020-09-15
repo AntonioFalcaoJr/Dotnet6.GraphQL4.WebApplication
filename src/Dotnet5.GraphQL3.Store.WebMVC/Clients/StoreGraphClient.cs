@@ -11,18 +11,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
 {
-    public class ProductGraphClient : IProductGraphClient
+    public class StoreGraphClient : IStoreGraphClient
     {
         private readonly GraphQLHttpClient _client;
-        private readonly ILogger<IProductGraphClient> _logger;
+        private readonly ILogger<IStoreGraphClient> _logger;
 
-        public ProductGraphClient(GraphQLHttpClient client, ILogger<IProductGraphClient> logger)
+        public StoreGraphClient(GraphQLHttpClient client, ILogger<IStoreGraphClient> logger)
         {
             _client = client;
             _logger = logger;
         }
 
-        public async Task<List<ProductModel>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<List<ProductModel>> GetAllProductsAsync(CancellationToken cancellationToken = default)
         {
             var request = new GraphQLRequest
             {
@@ -42,14 +42,15 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendQueryAsync(
-                request: request,
-                defineResponseType: () => new {products = new List<ProductModel>()},
-                cancellationToken: cancellationToken);
+                    request: request,
+                    defineResponseType: () => new {products = new List<ProductModel>()},
+                    cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
 
             return response.Errors?.Any() ?? default ? default : response.Data.products;
         }
 
-        public async Task<ProductModel> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<ProductModel> GetProductByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
             var request = new GraphQLRequest
             {
@@ -76,9 +77,10 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendQueryAsync(
-                request: request,
-                defineResponseType: () => new {product = new ProductModel()},
-                cancellationToken: cancellationToken);
+                    request: request,
+                    defineResponseType: () => new {product = new ProductModel()},
+                    cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
 
             return response.Errors?.Any() ?? default ? default : response.Data.product;
         }
@@ -100,9 +102,10 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendQueryAsync(
-                request: request,
-                defineResponseType: () => new {reviews = new List<ReviewModel>()},
-                cancellationToken: cancellationToken);
+                    request: request,
+                    defineResponseType: () => new {reviews = new List<ReviewModel>()},
+                    cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
 
             return response.Errors?.Any() ?? default ? default : response.Data.reviews;
         }
@@ -120,9 +123,10 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendMutationAsync(
-                request: request,
-                defineResponseType: () => new {createReview = new {id = new Guid()}},
-                cancellationToken: cancellationToken);
+                    request: request,
+                    defineResponseType: () => new {createReview = new {id = new Guid()}},
+                    cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
 
             return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
         }
@@ -146,7 +150,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             var subscription = stream.Subscribe(response
                 => _logger.LogInformation($"A new Review from Product '{response.Data.Review.ProductId}' " +
                                           $"was added with Title: {response.Data.Review.Title}"));
-            
+
             subscription.Dispose();
         }
     }

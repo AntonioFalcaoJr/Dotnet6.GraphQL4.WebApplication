@@ -54,7 +54,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
                         options.IgnoreNullValues = true;
                     })));
 
-            services.AddSingleton<IProductGraphClient, ProductGraphClient>();
+            services.AddSingleton<IStoreGraphClient, StoreGraphClient>();
         }
     }
 }
