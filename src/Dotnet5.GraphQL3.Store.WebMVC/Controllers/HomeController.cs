@@ -28,8 +28,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Controllers
         public async Task<IActionResult> Index()
         {
             var response = await _storeGraphClient
-                .GetAllProductsAsync()
-                .ConfigureAwait(false);
+                .GetAllProductsAsync();
 
             return View(response);
         }

@@ -44,8 +44,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             var response = await _client.SendQueryAsync(
                     request: request,
                     defineResponseType: () => new {products = new List<ProductModel>()},
-                    cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
+                    cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.products;
         }
@@ -79,8 +78,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             var response = await _client.SendQueryAsync(
                     request: request,
                     defineResponseType: () => new {product = new ProductModel()},
-                    cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
+                    cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.product;
         }
@@ -104,8 +102,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             var response = await _client.SendQueryAsync(
                     request: request,
                     defineResponseType: () => new {reviews = new List<ReviewModel>()},
-                    cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
+                    cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.reviews;
         }
@@ -125,8 +122,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             var response = await _client.SendMutationAsync(
                     request: request,
                     defineResponseType: () => new {createReview = new {id = new Guid()}},
-                    cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
+                    cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
         }

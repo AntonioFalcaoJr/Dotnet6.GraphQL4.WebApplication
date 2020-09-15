@@ -21,8 +21,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Controllers
         public async Task<IActionResult> Reviews(Guid id)
         {
             var reviews = await _storeGraphClient
-                .GetReviewByProductIdAsync(id)
-                .ConfigureAwait(true);
+                .GetReviewByProductIdAsync(id);
 
             return View(reviews);
         }
@@ -34,7 +33,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Controllers
         public async Task<IActionResult> Add(ReviewModel model)
         {
             if (ModelState.IsValid)
-                await _storeGraphClient.AddReviewAsync(model).ConfigureAwait(true);
+                await _storeGraphClient.AddReviewAsync(model);
 
             return RedirectToAction(
                 actionName: "Detail",

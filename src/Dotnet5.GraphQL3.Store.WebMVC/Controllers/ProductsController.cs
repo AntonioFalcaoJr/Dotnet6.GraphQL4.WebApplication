@@ -23,8 +23,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Controllers
             _storeGraphClient.SubscribeToUpdates();
 
             var product = await _storeGraphClient
-                .GetProductByIdAsync(id)
-                .ConfigureAwait(true);
+                .GetProductByIdAsync(id);
 
             return View(product);
         }

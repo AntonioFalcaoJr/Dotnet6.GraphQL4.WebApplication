@@ -36,7 +36,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
         {
-            var entity = await GetByIdAsync(id, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var entity = await GetByIdAsync(id, cancellationToken: cancellationToken);
             if (entity is null) return;
             _dbSet.Remove(entity);
         }
