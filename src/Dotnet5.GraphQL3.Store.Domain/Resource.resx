@@ -49,6 +49,18 @@
     <data name="Backpack_Type_Null" xml:space="preserve">
         The Type from Backpack need be informed.
     </data>
+    <data name="Boot_Type_Null" xml:space="preserve">
+        The Type from Boot need be informed.
+    </data>
+    <data name="Boot_Size_Invalid" xml:space="preserve">
+        The Size from Boot need be greater than zero.
+    </data>
+    <data name="Kayak_Type_Null" xml:space="preserve">
+        The Type from Kayak need be informed.
+    </data>
+    <data name="Kayak_AmountOfPerson_Invalid" xml:space="preserve">
+        The amount of person from Kayak need be greater than zero.
+    </data>
 
     <!-- REVIEW -->
     <data name="Review_Title_Empty" xml:space="preserve">

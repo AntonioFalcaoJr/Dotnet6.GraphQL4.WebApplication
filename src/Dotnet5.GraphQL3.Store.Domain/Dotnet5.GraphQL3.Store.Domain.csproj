@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation" Version="$(FluentValidation_Version)"/>
+        <PackageReference Include="FluentValidation" Version="$(FluentValidation_Version)" />
     </ItemGroup>
 
     <ItemGroup>
@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dotnet5.GraphQL3.Domain.Abstractions\Dotnet5.GraphQL3.Domain.Abstractions.csproj"/>
+        <ProjectReference Include="..\Dotnet5.GraphQL3.Domain.Abstractions\Dotnet5.GraphQL3.Domain.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

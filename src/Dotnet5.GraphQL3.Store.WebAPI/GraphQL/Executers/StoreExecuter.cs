@@ -39,7 +39,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers
         public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables,
             IDictionary<string, object> context, CancellationToken cancellationToken = new CancellationToken())
         {
-            var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
+            var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken).ConfigureAwait(false);
             var notification = _serviceProvider.GetRequiredService<INotificationContext>();
 
             if (notification.HasNotifications)

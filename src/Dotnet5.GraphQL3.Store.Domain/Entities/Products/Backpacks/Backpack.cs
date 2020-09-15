@@ -1,7 +1,6 @@
 using System;
 using Dotnet5.GraphQL3.Store.Domain.Enumerations;
 using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
-using FluentValidation;
 
 namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks
 {
@@ -20,6 +19,6 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks
         public BackpackType BackpackType { get; }
 
         protected sealed override bool Validate()
-            => OnValidate(this, new InlineValidator<Backpack>());
+            => OnValidate(this, new BackpackValidator());
     }
 }

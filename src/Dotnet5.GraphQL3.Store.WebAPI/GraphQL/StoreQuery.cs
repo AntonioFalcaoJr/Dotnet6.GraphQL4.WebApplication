@@ -21,7 +21,8 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
                         .GetRequiredService<IProductService>()
                         .GetAllAsync(
                             selector: product => product,
-                            cancellationToken: context.CancellationToken);
+                            cancellationToken: context.CancellationToken)
+                        .ConfigureAwait(false);
                 });
 
             FieldAsync<ProductInterfaceGraphType>(
@@ -36,7 +37,8 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
                         .GetRequiredService<IProductService>()
                         .GetByIdAsync(
                             id: id,
-                            cancellationToken: context.CancellationToken);
+                            cancellationToken: context.CancellationToken)
+                        .ConfigureAwait(false);
                 });
 
             FieldAsync<ListGraphType<ReviewGraphType>>(
@@ -52,7 +54,8 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
                         .GetByIdAsync(
                             id: productId,
                             include: products => products.Include(x => x.Reviews),
-                            cancellationToken: context.CancellationToken);
+                            cancellationToken: context.CancellationToken)
+                        .ConfigureAwait(false);
 
                     return product?.Reviews;
                 });

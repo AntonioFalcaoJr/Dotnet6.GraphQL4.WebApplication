@@ -1,20 +1,21 @@
 ﻿using AutoMapper;
-using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks;
-using Dotnet5.GraphQL3.Store.Services.Models;
+using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks;
+using Dotnet5.GraphQL3.Store.Services.Models.Products;
 
 namespace Dotnet5.GraphQL3.Store.Services.Profiles.Converters
 {
-    public class ProductModelToDomainProfile : ITypeConverter<ProductModel, Kayak>
+    public class BackpackModelToDomainProfile : ITypeConverter<BackpackModel, Backpack>
     {
-        private readonly IKayakBuilder _builder;
+        private readonly IBackpackBuilder _builder;
 
-        public ProductModelToDomainProfile(IKayakBuilder builder)
+        public BackpackModelToDomainProfile(IBackpackBuilder builder)
         {
             _builder = builder;
         }
-        
-        public Kayak Convert(ProductModel source, Kayak destination, ResolutionContext context) 
+
+        public Backpack Convert(BackpackModel source, Backpack destination, ResolutionContext context)
             => _builder
+                .WithType(source.Type)
                 .WithDescription(source.Description)
                 .WithName(source.Name)
                 .WithPrice(source.Price)

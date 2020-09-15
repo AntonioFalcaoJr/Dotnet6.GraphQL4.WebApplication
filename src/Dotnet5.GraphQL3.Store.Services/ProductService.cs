@@ -12,6 +12,7 @@ using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL3.Store.Repositories;
 using Dotnet5.GraphQL3.Store.Services.Models;
+using Dotnet5.GraphQL3.Store.Services.Models.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL3.Store.Services
@@ -30,24 +31,26 @@ namespace Dotnet5.GraphQL3.Store.Services
             }
 
             var product = await Repository.GetByIdAsync(
-                id: reviewModel.ProductId,
-                include: products => products.Include(x => x.Reviews),
-                withTracking: true,
-                cancellationToken: cancellationToken);
+                    id: reviewModel.ProductId,
+                    include: products => products.Include(x => x.Reviews),
+                    withTracking: true,
+                    cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
 
             var review = Mapper.Map<Review>(reviewModel);
             product?.AddReview(review);
-            await OnEditAsync(product, cancellationToken);
+            await OnEditAsync(product, cancellationToken).ConfigureAwait(false);
             return review;
         }
 
         public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken = default)
         {
             var reviews = await Repository.GetAllAsync(
-                selector: product => product.Reviews,
-                product => productIds.Contains(product.Id),
-                include: products => products.Include(x => x.Reviews),
-                cancellationToken: cancellationToken);
+                    selector: product => product.Reviews,
+                    product => productIds.Contains(product.Id),
+                    include: products => products.Include(x => x.Reviews),
+                    cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
 
             return reviews.SelectMany(x => x)
                 .ToLookup(review => review.ProductId);

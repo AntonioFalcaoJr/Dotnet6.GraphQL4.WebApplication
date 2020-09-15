@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace Dotnet5.GraphQL3.Store.Domain {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -63,6 +66,42 @@ namespace Dotnet5.GraphQL3.Store.Domain {
         internal static string Backpack_Type_Null {
             get {
                 return ResourceManager.GetString("Backpack_Type_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Size from Boot need be greater than zero..
+        /// </summary>
+        internal static string Boot_Size_Invalid {
+            get {
+                return ResourceManager.GetString("Boot_Size_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Type from Boot need be informed..
+        /// </summary>
+        internal static string Boot_Type_Null {
+            get {
+                return ResourceManager.GetString("Boot_Type_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The amount of person from Kayak need be greater than zero..
+        /// </summary>
+        internal static string Kayak_AmountOfPerson_Invalid {
+            get {
+                return ResourceManager.GetString("Kayak_AmountOfPerson_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Type from Kayak need be informed..
+        /// </summary>
+        internal static string Kayak_Type_Null {
+            get {
+                return ResourceManager.GetString("Kayak_Type_Null", resourceCulture);
             }
         }
         

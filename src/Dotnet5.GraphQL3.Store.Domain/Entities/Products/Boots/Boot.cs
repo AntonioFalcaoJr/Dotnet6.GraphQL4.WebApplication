@@ -1,7 +1,6 @@
 using System;
 using Dotnet5.GraphQL3.Store.Domain.Enumerations;
 using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
-using FluentValidation;
 
 namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots
 {
@@ -22,6 +21,6 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots
         public int Size { get; }
 
         protected sealed override bool Validate()
-            => OnValidate(this, new InlineValidator<Boot>());
+            => OnValidate(this, new BootValidator());
     }
 }
