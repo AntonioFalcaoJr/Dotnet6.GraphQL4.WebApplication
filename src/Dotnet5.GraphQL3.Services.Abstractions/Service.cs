@@ -164,7 +164,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
 
         private bool IsValid(TModel model)
         {
-            if (model is {}) return true;
+            if (model is not null) return true;
             NotificationContext.AddNotificationWithType(ServicesResource.Object_Null, typeof(TModel));
             return default;
         }
