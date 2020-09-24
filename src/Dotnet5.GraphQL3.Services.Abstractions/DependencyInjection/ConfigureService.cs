@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Subjects;
+using Dotnet5.GraphQL3.CrossCutting.Extensions;
 using Dotnet5.GraphQL3.Services.Abstractions.Messages;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
@@ -10,8 +11,10 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services.Scan(selector
                 => selector
-                    .FromApplicationDependencies()
-                    .AddClasses(filter => filter.AssignableToAny(typeof(IService<,,>)))
+                    .FromApplicationDependencies(assembly
+                        => assembly.FullName?.StartsWith(assembly.GetEntryAssemblySuffix()) ?? default)
+                    .AddClasses(filter
+                        => filter.AssignableToAny(typeof(IService<,,>)))
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
@@ -19,8 +22,10 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection
         public static IServiceCollection AddMessageServices(this IServiceCollection services)
             => services.Scan(selector
                 => selector
-                    .FromApplicationDependencies()
-                    .AddClasses(filter => filter.AssignableToAny(typeof(IMessageService<,,>)))
+                    .FromApplicationDependencies(assembly
+                        => assembly.FullName?.StartsWith(assembly.GetEntryAssemblySuffix()) ?? default)
+                    .AddClasses(filter
+                        => filter.AssignableToAny(typeof(IMessageService<,,>)))
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()
                     .WithSingletonLifetime());

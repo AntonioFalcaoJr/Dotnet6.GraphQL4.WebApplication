@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL3.Store.WebMVC.Clients;
-using Dotnet5.GraphQL3.Store.WebMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
