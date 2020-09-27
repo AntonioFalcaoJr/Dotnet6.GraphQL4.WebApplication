@@ -46,7 +46,7 @@ namespace Dotnet5.GraphQL3.Store.Services
         {
             var reviews = await Repository.GetAllAsync(
                     selector: product => product.Reviews,
-                    product => productIds.Contains(product.Id),
+                    predicate: product => productIds.Contains(product.Id),
                     include: products => products.Include(x => x.Reviews),
                     cancellationToken: cancellationToken);
 
