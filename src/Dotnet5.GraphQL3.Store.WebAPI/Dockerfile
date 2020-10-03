@@ -1,5 +1,5 @@
-ARG ASPNET_VERSION="5.0.0-rc.1-alpine3.12"
-ARG SDK_VERSION="5.0.100-rc.1-alpine3.12"
+ARG ASPNET_VERSION="5.0-alpine"
+ARG SDK_VERSION="5.0-alpine"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:$ASPNET_VERSION AS base
 WORKDIR /app
