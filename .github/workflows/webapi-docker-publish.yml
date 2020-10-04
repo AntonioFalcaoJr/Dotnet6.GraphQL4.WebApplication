@@ -33,5 +33,6 @@ jobs:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
           push: true
-          github-token: ${{ secrets.DOCKERHUB_GITHUB_TOKEN }}
           labels: false
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.DOCKERHUB_GITHUB_TOKEN }}
