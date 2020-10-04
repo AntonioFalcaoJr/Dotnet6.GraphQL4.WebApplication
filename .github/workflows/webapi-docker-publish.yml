@@ -21,10 +21,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
           push: true
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
           labels: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
