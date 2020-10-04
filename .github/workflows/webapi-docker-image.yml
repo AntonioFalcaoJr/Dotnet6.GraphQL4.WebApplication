@@ -1,8 +1,6 @@
 name: Build API Image
 
 on:
-  push:
-    branches: [ master, relase ]
   pull_request:
     branches: [ master, relase ]
 
