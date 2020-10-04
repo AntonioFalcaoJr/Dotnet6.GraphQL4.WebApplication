@@ -1,9 +1,10 @@
-name: ci
+name: Push API Image
 
 on:
   push:
     branches: master
-
+  workflow_dispatch:
+  
 jobs:
   main:
     runs-on: ubuntu-latest
