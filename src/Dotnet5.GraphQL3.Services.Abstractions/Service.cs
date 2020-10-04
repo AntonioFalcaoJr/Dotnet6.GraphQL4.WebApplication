@@ -65,11 +65,11 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return OnEdit(entity);
         }
 
-        public virtual async Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default)
+        public virtual Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return await OnEditAsync(entity, cancellationToken);
+            return OnEditAsync(entity, cancellationToken);
         }
 
         public virtual bool Exists(TId id)
@@ -108,11 +108,11 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return OnSave(entity);
         }
 
-        public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
+        public virtual Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return await OnSaveAsync(entity, cancellationToken);
+            return OnSaveAsync(entity, cancellationToken);
         }
 
         protected TEntity OnSave(TEntity entity)
