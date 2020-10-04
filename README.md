@@ -1,5 +1,7 @@
 # Dotnet5.GraphQL3.WebApplication
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a0af9efb08c483cab9f8228f6c6848b)](https://app.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication?utm_source=github.com&utm_medium=referral&utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&utm_campaign=Badge_Grade)
+
 This project exemplify the implementation and **Dockerization** of a simple Razor Web MVC Core consuming an full **GraphQL 3** Web API, build in a **.NET 5** multi-layer project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
 
 ![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg?branch=master)
