@@ -1,4 +1,4 @@
-name: CI
+name: Build and Test
 
 on:
   push:
@@ -11,18 +11,18 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.100-rc.1.20452.10
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-  
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100-rc.1.20452.10
+      - name: Install dependencies
+        run: dotnet restore -v m
+      - name: Build
+        run: dotnet build --configuration Release --no-restore -v m
+
   test:
-    name: Tests
+    name: Test
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -32,4 +32,4 @@ jobs:
         with:
           dotnet-version: 5.0.100-rc.1.20452.10
       - name: Test
-        run: dotnet test --no-restore --verbosity normal        
+        run: dotnet test --no-restore -v m     
