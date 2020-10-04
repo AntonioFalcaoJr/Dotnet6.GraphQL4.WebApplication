@@ -17,3 +17,4 @@ jobs:
           labels: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          push: true
