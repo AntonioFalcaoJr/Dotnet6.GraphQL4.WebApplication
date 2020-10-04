@@ -6,7 +6,17 @@ on:
   workflow_dispatch:
 
 jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
   build:
+    needs: login
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,5 +26,3 @@ jobs:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
           labels: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push: true
