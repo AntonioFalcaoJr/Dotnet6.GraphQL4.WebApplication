@@ -1,0 +1,20 @@
+name: Push API Image
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1.1.1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: antoniofalcaojr/dotnet5-graphql3-webapi
+        tags: $(date +%s)
+        dockerfile: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
+        add_git_labels: true
