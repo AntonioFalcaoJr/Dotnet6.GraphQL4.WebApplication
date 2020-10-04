@@ -1,13 +1,14 @@
-name: WebAPI Docker Image
+name: Build API Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, relase ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, relase ]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
