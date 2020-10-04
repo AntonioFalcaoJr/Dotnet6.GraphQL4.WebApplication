@@ -35,4 +35,4 @@ jobs:
           push: true
           labels: false
           secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.DOCKERHUB_GITHUB_TOKEN }}
+            GIT_AUTH_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
