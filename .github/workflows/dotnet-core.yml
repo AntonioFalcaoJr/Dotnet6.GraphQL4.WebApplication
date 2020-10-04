@@ -2,12 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [ release ]
+    branches: [ master, release ]
   pull_request:
-    branches: [ release ]
+    branches: [ master, release ]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,6 +22,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
   
   test:
+    name: Tests
     needs: build
     runs-on: ubuntu-latest
     steps:
