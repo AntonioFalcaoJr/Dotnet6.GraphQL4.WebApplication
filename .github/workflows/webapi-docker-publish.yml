@@ -15,6 +15,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
+          login-server: 'docker.io'
           username: antoniofalcaojr
           password: 41dc1d7c-f2cc-4575-bb54-26bfbf015699
           repository: antoniofalcaojf/dotnet5-graphql3-webapi
