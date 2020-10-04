@@ -15,5 +15,5 @@ jobs:
         with:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
           labels: true
-          tags: $(date +%s)
+          tags: dotnet5-graphql3-webapi
           github-token: ${{ secrets.GITHUB_TOKEN }}
