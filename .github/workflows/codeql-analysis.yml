@@ -2,13 +2,13 @@ name: CodeQL Analysis
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, release ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, release ]
 
 jobs:
   analyze:
-    name: Analyze
+    name: Code Security Analyze
     runs-on: ubuntu-latest
 
     strategy:
