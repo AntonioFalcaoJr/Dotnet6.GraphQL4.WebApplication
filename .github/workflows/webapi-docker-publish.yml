@@ -19,3 +19,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: antoniofalcaojf/dotnet5-graphql3-webapi
           dockerfile: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
+          tag_with_ref: true 
