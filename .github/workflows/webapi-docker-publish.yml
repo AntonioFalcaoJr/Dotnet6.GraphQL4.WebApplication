@@ -21,7 +21,7 @@ jobs:
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
         id: docker_build
@@ -30,8 +30,9 @@ jobs:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile 
           push: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} 
+          context: .
+          cache-from: type=registry,ref=user/app
+          cache-to: type=inline   
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
