@@ -30,6 +30,8 @@ jobs:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile 
           push: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} 
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
