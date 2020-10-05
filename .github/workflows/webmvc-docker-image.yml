@@ -1,4 +1,4 @@
-name: Build MVC Image
+name: MVC Image
 
 on:
   pull_request:
