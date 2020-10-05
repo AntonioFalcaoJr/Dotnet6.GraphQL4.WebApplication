@@ -15,9 +15,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
-          registry: 'docker.io'
-          username: antoniofalcaojr
-          password: 41dc1d7c-f2cc-4575-bb54-26bfbf015699
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: antoniofalcaojf/dotnet5-graphql3-webapi
           dockerfile: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
-          tags: foo
