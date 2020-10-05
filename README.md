@@ -2,13 +2,11 @@
 
 This project exemplify the implementation and **Dockerization** of a simple Razor Web MVC Core consuming an full **GraphQL 3** Web API, build in a **.NET 5** multi-layer project, considering development best practices, like **SOLID** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
 
-![Build and Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20and%20Test/badge.svg)
-![Build MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20MVC%20Image/badge.svg)
-![Build API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20API%20Image/badge.svg)  
-![Push API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20API%20Image/badge.svg?branch=master)
-![Push API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC%20Image/badge.svg?branch=master)  
-![CodeQL Analysis](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL%20Analysis/badge.svg)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade)
+|       APP     |       CI      |      CD      |   Sec/QA   |               
+| ------------- | ------------- |--------------|------------| 
+|    Web API    |![Build and Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20and%20Test/badge.svg) ![Build API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20API%20Image/badge.svg)|![Push API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20API%20Image/badge.svg?branch=master)|![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade)|               
+|    Web MVC    |![Build and Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20and%20Test/badge.svg) ![Build MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20MVC%20Image/badge.svg)|![Push MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC%20Image/badge.svg?branch=master)|![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade)|
+
 ___
 
 ![home](./.assets/img/home.PNG)
