@@ -15,10 +15,10 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: antoniofalcaojf/dotnet5-graphql3-webapi
           dockerfile: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
           tag_with_ref: true
-          push: true 
+          push: true
+          add_git_labels: true
