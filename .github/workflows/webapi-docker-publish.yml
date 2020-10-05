@@ -2,19 +2,34 @@ name: Push API Image
 
 on:
   push:
-    branches: [ master ]
+    branches: master
+  workflow_dispatch:
 
 jobs:
-  build:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: antoniofalcaojr/dotnet5-graphql3-webapi
-        tags: $(date +%s)
-        dockerfile: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile
-        add_git_labels: true
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile 
+          push: true
+          tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
+      -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
