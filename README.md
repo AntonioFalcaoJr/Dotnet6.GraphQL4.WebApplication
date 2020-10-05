@@ -7,6 +7,10 @@ CI
 ![Build MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20MVC%20Image/badge.svg)
 ![Build API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build%20API%20Image/badge.svg)
 
+CD  
+![Push API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20API%20Image/badge.svg?branch=master)
+![Push API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC%20Image/badge.svg?branch=master)
+
 Security/Quality   
 ![CodeQL Analysis](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL%20Analysis/badge.svg)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade)
