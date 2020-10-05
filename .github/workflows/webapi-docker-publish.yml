@@ -30,7 +30,6 @@ jobs:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile 
           push: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
-          context: .
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
