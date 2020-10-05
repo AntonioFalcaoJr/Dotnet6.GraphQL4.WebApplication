@@ -3,7 +3,6 @@ name: Push API Image
 on:
   push:
     branches: master
-  workflow_dispatch:
 
 jobs:
   push_to_registry:
@@ -34,6 +33,3 @@ jobs:
           file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile 
           push: true
           tags: antoniofalcaojr/dotnet5-graphql3-webapi:latest
-      -
-        name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
