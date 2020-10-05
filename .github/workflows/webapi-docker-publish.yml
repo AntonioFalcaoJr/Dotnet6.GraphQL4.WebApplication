@@ -31,8 +31,6 @@ jobs:
           push: true
           tags: antoniofalcaojf/dotnet5-graphql3-webapi:latest
           context: .
-          cache-from: type=registry,ref=user/app
-          cache-to: type=inline   
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
