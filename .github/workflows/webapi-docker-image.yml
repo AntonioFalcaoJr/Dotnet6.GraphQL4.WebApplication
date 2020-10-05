@@ -1,4 +1,4 @@
-name: Build API Image
+name: API Image
 
 on:
   pull_request:
