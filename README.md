@@ -279,6 +279,52 @@ The [`./docker-compose.yml`](./docker-compose.yml) provide the `WebAPI`, `WebMVC
 docker-compose up -d
 ``` 
 
+It's possible to run without a clone of the project using the respective compose:
+
+```yaml
+version: "3.7"
+
+services:
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "!MyComplexPassword"
+      ACCEPT_EULA: "Y"
+    networks:
+      - graphqlstore
+
+  webapi:
+    container_name: webapi
+    image: antoniofalcaojr/dotnet5-graphql3-webapi
+    environment:
+      - ASPNETCORE_URLS=http://*:5000    
+    ports:
+      - 5000:5000
+    depends_on:
+      - mssql
+    networks:
+      - graphqlstore
+
+  webmvc:
+    container_name: webmvc
+    image: antoniofalcaojr/dotnet5-graphql3-webmvc
+    environment:
+      - ASPNETCORE_URLS=http://*:7000
+    ports:
+      - 7000:7000
+    depends_on:
+      - webapi            
+    networks:
+      - graphqlstore
+
+networks:
+  graphqlstore:
+    driver: bridge
+```
+
 ## GraphQL Playground 
 
 By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
