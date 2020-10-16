@@ -9,7 +9,7 @@
         <Microsoft_DependencyInjection_Version>5.0.0-rtm.20509.6</Microsoft_DependencyInjection_Version>
         <FluentValidation_Version>9.3.0-preview2</FluentValidation_Version>
         <GraphQL_Server_Version>3.5.0-alpha0073</GraphQL_Server_Version>
-        <GraphQL_Client_Version>3.1.9</GraphQL_Client_Version>
+        <GraphQL_Client_Version>3.2.0</GraphQL_Client_Version>
         <GraphQL_Version>3.0.0-preview-1719</GraphQL_Version>
         <Scrutor_Version>3.2.2</Scrutor_Version>
     </PropertyGroup>
