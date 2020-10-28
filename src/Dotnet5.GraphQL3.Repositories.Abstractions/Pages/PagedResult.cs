@@ -12,7 +12,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
         private readonly IEnumerable<T> _items;
         private readonly int _size;
 
-        private PagedResult(IEnumerable<T> items, int index, int size)
+        public PagedResult(IEnumerable<T> items, int index, int size)
         {
             _items = items;
             _index = index;
