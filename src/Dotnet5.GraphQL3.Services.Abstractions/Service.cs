@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -8,6 +7,7 @@ using AutoMapper;
 using Dotnet5.GraphQL3.CrossCutting.Notifications;
 using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
 using Dotnet5.GraphQL3.Repositories.Abstractions;
+using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;
 using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
 using Dotnet5.GraphQL3.Services.Abstractions.Models;
 using Dotnet5.GraphQL3.Services.Abstractions.Resources;
@@ -78,22 +78,24 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken)
             => IsValid(id) ? await Repository.ExistsAsync(id, cancellationToken) : default;
 
-        public virtual IEnumerable<TResult> GetAll<TResult>(
+        public virtual PagedResult<TResult> GetAll<TResult>(
+            PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false)
-            => Repository.GetAll(selector, predicate, orderBy, include, withTracking);
+            => Repository.GetAll(pageParams, selector, predicate, orderBy, include, withTracking);
 
-        public virtual Task<IEnumerable<TResult>> GetAllAsync<TResult>(
+        public virtual Task<PagedResult<TResult>> GetAllAsync<TResult>(
+            PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false,
             CancellationToken cancellationToken = default)
-            => Repository.GetAllAsync(selector, predicate, orderBy, include, withTracking, cancellationToken);
+            => Repository.GetAllAsync(pageParams, selector, predicate, orderBy, include, withTracking, cancellationToken);
 
         public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool withTracking = false)
             => IsValid(id) ? Repository.GetById(id, include, withTracking) : default;
