@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -94,7 +94,8 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             _dbSet.Update(entity);
         }
 
-        public IEnumerable<TResult> GetAll<TResult>(
+        public PagedResult<TResult> GetAll<TResult>(
+            PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
@@ -105,13 +106,11 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = include is null ? query : include(query);
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
-
-            return selector is null
-                ? (IEnumerable<TResult>) query
-                : query.Select(selector).ToArray();
+            return PagedResult<TResult>.Create(query.Select(selector), pageParams);
         }
 
-        public async Task<IEnumerable<TResult>> GetAllAsync<TResult>(
+        public Task<PagedResult<TResult>> GetAllAsync<TResult>(
+            PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
@@ -123,7 +122,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = include is null ? query : include(query);
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
-            return await query.Select(selector).ToArrayAsync(cancellationToken);
+            return PagedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
         }
     }
 }
