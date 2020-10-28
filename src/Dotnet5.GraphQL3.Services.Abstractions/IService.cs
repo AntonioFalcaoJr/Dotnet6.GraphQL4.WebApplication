@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
+using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;
 using Dotnet5.GraphQL3.Services.Abstractions.Models;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -25,14 +25,16 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         bool Exists(TId id);
         Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
 
-        IEnumerable<TResult> GetAll<TResult>(
+        PagedResult<TResult> GetAll<TResult>(
+            PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false);
 
-        Task<IEnumerable<TResult>> GetAllAsync<TResult>(
+        Task<PagedResult<TResult>> GetAllAsync<TResult>(
+            PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,

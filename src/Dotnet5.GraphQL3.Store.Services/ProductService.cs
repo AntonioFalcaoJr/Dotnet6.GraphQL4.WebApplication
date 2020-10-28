@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dotnet5.GraphQL3.CrossCutting.Notifications;
+using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;
 using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
 using Dotnet5.GraphQL3.Services.Abstractions;
 using Dotnet5.GraphQL3.Services.Abstractions.Resources;
@@ -31,10 +32,10 @@ namespace Dotnet5.GraphQL3.Store.Services
             }
 
             var product = await Repository.GetByIdAsync(
-                    id: reviewModel.ProductId,
-                    include: products => products.Include(x => x.Reviews),
-                    withTracking: true,
-                    cancellationToken: cancellationToken);
+                id: reviewModel.ProductId,
+                include: products => products.Include(x => x.Reviews),
+                withTracking: true,
+                cancellationToken: cancellationToken);
 
             var review = Mapper.Map<Review>(reviewModel);
             product?.AddReview(review);
@@ -42,15 +43,17 @@ namespace Dotnet5.GraphQL3.Store.Services
             return review;
         }
 
-        public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken = default)
+        public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken)
         {
-            var reviews = await Repository.GetAllAsync(
-                    selector: product => product.Reviews,
-                    predicate: product => productIds.Contains(product.Id),
-                    include: products => products.Include(x => x.Reviews),
-                    cancellationToken: cancellationToken);
+            var pagedResult = await Repository.GetAllAsync(
+                pageParams: new PageParams {Size = productIds.Count(), Index = 1},
+                selector: product => product.Reviews,
+                predicate: product => productIds.Contains(product.Id),
+                include: products => products.Include(x => x.Reviews),
+                cancellationToken: cancellationToken);
 
-            return reviews.SelectMany(x => x)
+            return pagedResult.Items
+                .SelectMany(review => review)
                 .ToLookup(review => review.ProductId);
         }
     }
