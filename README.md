@@ -489,6 +489,49 @@ HTTP BODY
 }
 ```
 ___
+### Pagination
+
+QUERY
+
+```markdown
+{
+  products(pageParams: { index: 2, size: 1 }) {
+    items {
+      id
+    }
+    pageInfo {
+      current
+      hasNext
+      hasPrevious
+      size
+    }
+  }
+}
+```
+
+RESULT
+
+```json5
+{
+  "data": {
+    "products": {
+      "items": [
+        {
+          "id": "3b2f6ce4-1b1d-4376-80a6-0b8d51932757"
+        }
+      ],
+      "pageInfo": {
+        "current": 2,
+        "hasNext": true,
+        "hasPrevious": true,
+        "size": 1
+      }
+    }
+  }
+}
+```
+
+___
 
 ## Mutations
 
