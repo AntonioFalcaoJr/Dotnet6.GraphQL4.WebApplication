@@ -28,25 +28,27 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             {
                 Query = @"query getAll {
                                   products {
-                                    id
-                                    name
-                                    price
-                                    rating
-                                    photoUrl
-                                    description
-                                    stock
-                                    introduceAt
+                                    items {
+                                      id
+                                      name
+                                      price
+                                      rating
+                                      photoUrl
+                                      description
+                                      stock
+                                      introduceAt
+                                    }
                                   }
-                                }",
+                                }", 
                 OperationName = "getAll"
             };
 
             var response = await _client.SendQueryAsync(
-                    request: request,
-                    defineResponseType: () => new {products = new List<ProductModel>()},
-                    cancellationToken: cancellationToken);
+                request: request,
+                defineResponseType: () => new {products = new {items = new List<ProductModel>()}},
+                cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() ?? default ? default : response.Data.products;
+            return response.Errors?.Any() ?? default ? default : response.Data.products.items;
         }
 
         public async Task<ProductModel> GetProductByIdAsync(Guid id, CancellationToken cancellationToken = default)
@@ -76,9 +78,9 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendQueryAsync(
-                    request: request,
-                    defineResponseType: () => new {product = new ProductModel()},
-                    cancellationToken: cancellationToken);
+                request: request,
+                defineResponseType: () => new {product = new ProductModel()},
+                cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.product;
         }
@@ -100,9 +102,9 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendQueryAsync(
-                    request: request,
-                    defineResponseType: () => new {reviews = new List<ReviewModel>()},
-                    cancellationToken: cancellationToken);
+                request: request,
+                defineResponseType: () => new {reviews = new List<ReviewModel>()},
+                cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.reviews;
         }
@@ -120,9 +122,9 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
             };
 
             var response = await _client.SendMutationAsync(
-                    request: request,
-                    defineResponseType: () => new {createReview = new {id = new Guid()}},
-                    cancellationToken: cancellationToken);
+                request: request,
+                defineResponseType: () => new {createReview = new {id = new Guid()}},
+                cancellationToken: cancellationToken);
 
             return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
         }
