@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
@@ -29,17 +30,17 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products.Boots
             Field(x => x.Rating);
             Field(x => x.Stock);
             Field<ProductOptionEnumGraphType>("Option");
-            
-            FieldAsync<ListGraphType<ReviewGraphType>>(
-                name: "reviews",
-                resolve: async context => await context
-                    .RequestServices.GetRequiredService<IDataLoaderContextAccessor>()
-                    .Context.GetOrAddCollectionBatchLoader<Guid, Review>(
-                        loaderKey: "getLookupByProductIdsAsync",
-                        fetchFunc: context.RequestServices
-                            .GetRequiredService<IProductService>()
-                            .GetLookupReviewsByProductIdsAsync)
-                    .LoadAsync(context.Source.Id));
+
+            Field<ListGraphType<ReviewGraphType>, IEnumerable<Review>>()
+                .Name("reviews")
+                .ResolveAsync(context
+                    => context.RequestServices.GetRequiredService<IDataLoaderContextAccessor>()
+                        .Context.GetOrAddCollectionBatchLoader<Guid, Review>(
+                            loaderKey: "getLookupByProductIdsAsync",
+                            fetchFunc: context.RequestServices
+                                .GetRequiredService<IProductService>()
+                                .GetLookupReviewsByProductIdsAsync)
+                        .LoadAsync(context.Source.Id));
 
             Interface<ProductInterfaceGraphType>();
             IsTypeOf = o => o is Product;
