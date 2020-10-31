@@ -26,10 +26,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
                             cancellationToken: context.CancellationToken);
 
                     if (review.IsValid)
-                    {
-                        context.RequestServices.GetRequiredService<IReviewMessageService>()
-                            .Add(model: model);
-                    }
+                        context.RequestServices.GetRequiredService<IReviewMessageService>().Add(model);
 
                     return review;
                 });
