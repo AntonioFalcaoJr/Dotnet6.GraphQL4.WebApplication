@@ -3,7 +3,6 @@ using Dotnet5.GraphQL3.Domain.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL3.Repositories.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL3.Services.Abstractions.DependencyInjection;
 using Dotnet5.GraphQL3.Store.Repositories.DependencyInjection;
-using Dotnet5.GraphQL3.Store.Services.DependencyInjection;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
