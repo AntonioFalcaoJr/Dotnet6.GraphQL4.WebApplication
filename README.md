@@ -107,19 +107,25 @@ protected void AddError(string errorMessage, ValidationResult validationResult =
 To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
 
 ```c#
-var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
-var notificationContext = _serviceProvider.GetRequiredService<INotificationContext>();
-
-if (notificationContext.HasNotifications)
+public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables, IDictionary<string, object> context, IServiceProvider requestServices, CancellationToken cancellationToken = new CancellationToken())
 {
-    result.Errors = notificationContext.ExecutionErrors;
+    var result = await base.ExecuteAsync(operationName, query, variables, context, requestServices, cancellationToken);
+    var notification = requestServices.GetRequiredService<INotificationContext>();
+
+    if (notification.HasNotifications is false) return result;
+
+    result.Errors = notification.ExecutionErrors;
     result.Data = default;
+    
+    return result;
 }
 ```
 
 ### Resolving `Scoped` dependencies with `Singleton` Schema.
 
-Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:
+_It's no more necessary after version 4.2.0 from  **GraphQL Server**. By default, the Service Provider is already being propagated._
+
+~~Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:~~
 
 ```c#
 var options = base.GetOptions(operationName, query, variables, context, cancellationToken);
@@ -362,7 +368,7 @@ QUERY
   }
 }
 
-fragment comparisonFields on Product {
+fragment comparisonFields on product {
   id
   name
   rating
@@ -399,8 +405,10 @@ QUERY
 ```markdown
 query all {
   products {
-    id
-    name
+    items {
+      id
+      name
+    }
   }
 }
 
@@ -430,9 +438,11 @@ HTTP BODY
     },
     "query": "query all {
         products {
-          id
-          name
-        }
+          items {          
+            id
+            name
+         }
+       }
     }
     query byid($productId: ID!) {
         product(id: $productId) {
@@ -454,10 +464,12 @@ QUERY
 ```markdown
 query all($showPrice: Boolean = false) {
   products {
-    id
-    name
-    price @include(if: $showPrice)
-    rating @skip(if: $showPrice)
+    items {
+      id
+      name
+      price @include(if: $showPrice)
+      rating @skip(if: $showPrice)
+    }
   }
 }
 ```
@@ -480,11 +492,13 @@ HTTP BODY
     },
     "query": "query all($showPrice: Boolean = false) {
           products {
-            id
-            name
-            price @include(if: $showPrice)
-            rating @skip(if: $showPrice)
-          }
+            items {
+              id
+              name
+              price @include(if: $showPrice)
+              rating @skip(if: $showPrice)
+            }
+        }
     }"
 }
 ```
@@ -600,14 +614,14 @@ ___
 
 ## Built With
 
-### Microsoft Stack - v5.0 (RC 1)
+### Microsoft Stack - v5.0 (RC 2)
 
 * [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
 * [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
 * [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM;
 * [Microsoft SQL Server on Linux for Docker](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - Database.
 
-### GraphQL Stack - v3.0 (preview/alpha)
+### GraphQL Stack - v3.0
 
 * [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries with data;
 * [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
