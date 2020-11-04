@@ -24,12 +24,11 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers
             var result = await base.ExecuteAsync(operationName, query, variables, context, requestServices, cancellationToken);
             var notification = requestServices.GetRequiredService<INotificationContext>();
 
-            if (notification.HasNotifications)
-            {
-                result.Errors = notification.ExecutionErrors;
-                result.Data = default;
-            }
+            if (notification.HasNotifications is false) return result;
 
+            result.Errors = notification.ExecutionErrors;
+            result.Data = default;
+            
             return result;
         }
     }
