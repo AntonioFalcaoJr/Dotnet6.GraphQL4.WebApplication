@@ -21,7 +21,6 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Options.IsDevelopment;
-                    options.ExposeExceptions = Options.IsDevelopment;
                     var logger = provider.GetRequiredService<ILogger<Startup>>();
                     options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
