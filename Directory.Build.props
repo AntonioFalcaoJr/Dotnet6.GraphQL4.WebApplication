@@ -21,7 +21,7 @@
 
         <!--Others-->
         <FluentValidation_Version>9.3.0-preview3</FluentValidation_Version>
-        <Scrutor_Version>3.2.2</Scrutor_Version>
+        <Scrutor_Version>3.3.0</Scrutor_Version>
         
     </PropertyGroup>
 </Project>
