@@ -7,13 +7,13 @@
     <PropertyGroup Label="Packages dependency versions">
 
         <!--Microsoft-->
-        <Microsoft_DependencyInjection_Version>5.0.0-rc.2.20475.5</Microsoft_DependencyInjection_Version>
+        <Microsoft_DependencyInjection_Version>5.0.0</Microsoft_DependencyInjection_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>5.0.0-rc.2.20475.6</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>5.0.0</Microsoft_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
-        <GraphQL_Server_Version>4.2.0</GraphQL_Server_Version>
+        <GraphQL_Server_Version>4.3.0</GraphQL_Server_Version>
         <GraphQL_Client_Version>3.2.0</GraphQL_Client_Version>
         <GraphQL_Version>3.1.3</GraphQL_Version>
 
