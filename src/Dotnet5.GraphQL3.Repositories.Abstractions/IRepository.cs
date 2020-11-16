@@ -24,10 +24,10 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
 
         TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false);
+            bool asTracking = default);
 
         Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false, CancellationToken cancellationToken = default);
+            bool asTracking = default, CancellationToken cancellationToken = default);
 
         void Update(TEntity entity);
         Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
@@ -38,7 +38,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false);
+            bool asTracking = default);
 
         Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
@@ -46,7 +46,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false,
+            bool asTracking = default,
             CancellationToken cancellationToken = default);
     }
 }
