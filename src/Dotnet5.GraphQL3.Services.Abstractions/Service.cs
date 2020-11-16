@@ -69,7 +69,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return await OnEditAsync(entity, cancellationToken);
+            return await OnEditAsync(entity, cancellationToken).ConfigureAwait(default);
         }
 
         public virtual bool Exists(TId id)
@@ -114,7 +114,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return await OnSaveAsync(entity, cancellationToken);
+            return await OnSaveAsync(entity, cancellationToken).ConfigureAwait(default);
         }
 
         protected TEntity OnSave(TEntity entity)
