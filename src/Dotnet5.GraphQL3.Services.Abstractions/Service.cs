@@ -65,11 +65,11 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return OnEdit(entity);
         }
 
-        public virtual Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return OnEditAsync(entity, cancellationToken);
+            return await OnEditAsync(entity, cancellationToken);
         }
 
         public virtual bool Exists(TId id)
@@ -87,7 +87,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             bool withTracking = false)
             => Repository.GetAll(pageParams, selector, predicate, orderBy, include, withTracking);
 
-        public virtual Task<PagedResult<TResult>> GetAllAsync<TResult>(
+        public virtual async Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
@@ -95,7 +95,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool withTracking = false,
             CancellationToken cancellationToken = default)
-            => Repository.GetAllAsync(pageParams, selector, predicate, orderBy, include, withTracking, cancellationToken);
+            => await Repository.GetAllAsync(pageParams, selector, predicate, orderBy, include, withTracking, cancellationToken);
 
         public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool withTracking = false)
             => IsValid(id) ? Repository.GetById(id, include, withTracking) : default;
@@ -110,11 +110,11 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return OnSave(entity);
         }
 
-        public virtual Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return OnSaveAsync(entity, cancellationToken);
+            return await OnSaveAsync(entity, cancellationToken);
         }
 
         protected TEntity OnSave(TEntity entity)

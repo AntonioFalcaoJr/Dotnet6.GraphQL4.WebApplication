@@ -34,7 +34,7 @@ namespace Dotnet5.GraphQL3.Store.Services
             var product = await Repository.GetByIdAsync(
                 id: reviewModel.ProductId,
                 include: products => products.Include(x => x.Reviews),
-                withTracking: true,
+                asTracking: true,
                 cancellationToken: cancellationToken);
 
             var review = Mapper.Map<Review>(reviewModel);

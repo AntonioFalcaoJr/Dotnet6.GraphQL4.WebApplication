@@ -36,7 +36,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
         {
-            var entity = await GetByIdAsync(id, cancellationToken: cancellationToken);
+            var entity = await GetByIdAsync(id, cancellationToken: cancellationToken).ConfigureAwait(default);
             if (entity is null) return;
             _dbSet.Remove(entity);
         }
@@ -44,7 +44,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         public virtual bool Exists(TId id)
             => _dbSet.AsNoTracking().Any(x => Equals(x.Id, id));
 
-        public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default) 
+        public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default)
             => await _dbSet.AsNoTracking().AnyAsync(x => Equals(x.Id, id), cancellationToken);
 
         public virtual TEntity Add(TEntity entity)
@@ -56,7 +56,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            if (await ExistsAsync(entity.Id, cancellationToken)) return entity;
+            if (await ExistsAsync(entity.Id, cancellationToken).ConfigureAwait(default)) return entity;
             await _dbSet.AddAsync(entity, cancellationToken);
             return entity;
         }
@@ -72,10 +72,10 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         }
 
         public async Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false, CancellationToken cancellationToken = default)
+            bool asTracking = false, CancellationToken cancellationToken = default)
         {
             if (Equals(id, default(TId))) return default;
-            if (include is null && withTracking) return await _dbSet.FindAsync(new object[] {id}, cancellationToken);
+            if (include is null && asTracking) return await _dbSet.FindAsync(new object[] {id}, cancellationToken);
 
             return include is null
                 ? await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => Equals(x.Id, id), cancellationToken)
@@ -90,7 +90,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            if (await ExistsAsync(entity.Id, cancellationToken) is false) return;
+            if (await ExistsAsync(entity.Id, cancellationToken).ConfigureAwait(default) is false) return;
             _dbSet.Update(entity);
         }
 
@@ -109,7 +109,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             return PagedResult<TResult>.Create(query.Select(selector), pageParams);
         }
 
-        public Task<PagedResult<TResult>> GetAllAsync<TResult>(
+        public async Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector,
             Expression<Func<TEntity, bool>> predicate = default,
@@ -122,7 +122,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = include is null ? query : include(query);
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
-            return PagedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
+            return await PagedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
         }
     }
 }
