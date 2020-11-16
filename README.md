@@ -616,7 +616,7 @@ ___
 
 ## Built With
 
-### Microsoft Stack - v5.0 (RC 2)
+### Microsoft Stack - v5.0
 
 * [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
 * [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
