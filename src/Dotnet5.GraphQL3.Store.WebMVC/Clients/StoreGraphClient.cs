@@ -39,7 +39,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
                                       introduceAt
                                     }
                                   }
-                                }", 
+                                }",
                 OperationName = "getAll"
             };
 
