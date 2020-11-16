@@ -28,7 +28,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers
 
             result.Errors = notification.ExecutionErrors;
             result.Data = default;
-            
+
             return result;
         }
     }

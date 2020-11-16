@@ -60,7 +60,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
             services.AddApplicationGraphQL(options
                 => options.IsDevelopment = _env.IsDevelopment());
 
-            services.Configure<KestrelServerOptions>(options 
+            services.Configure<KestrelServerOptions>(options
                 => options.AllowSynchronousIO = true);
         }
     }

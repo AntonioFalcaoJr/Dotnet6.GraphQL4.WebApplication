@@ -4,7 +4,7 @@
     {
         private const int DefaultSize = 10;
         private const int DefaultIndex = 1;
-        
+
         private int _index;
         private int _size;
 
