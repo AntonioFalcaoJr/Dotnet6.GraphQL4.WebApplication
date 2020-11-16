@@ -84,8 +84,8 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false)
-            => Repository.GetAll(pageParams, selector, predicate, orderBy, include, withTracking);
+            bool asTracking = default)
+            => Repository.GetAll(pageParams, selector, predicate, orderBy, include, asTracking);
 
         public virtual async Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
@@ -93,15 +93,15 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool withTracking = false,
+            bool asTracking = default,
             CancellationToken cancellationToken = default)
-            => await Repository.GetAllAsync(pageParams, selector, predicate, orderBy, include, withTracking, cancellationToken);
+            => await Repository.GetAllAsync(pageParams, selector, predicate, orderBy, include, asTracking, cancellationToken);
 
-        public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool withTracking = false)
-            => IsValid(id) ? Repository.GetById(id, include, withTracking) : default;
+        public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default)
+            => IsValid(id) ? Repository.GetById(id, include, asTracking) : default;
 
-        public virtual async Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool withTracking = false, CancellationToken cancellationToken = default)
-            => IsValid(id) ? await Repository.GetByIdAsync(id, include, withTracking, cancellationToken) : default;
+        public virtual async Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default, CancellationToken cancellationToken = default)
+            => IsValid(id) ? await Repository.GetByIdAsync(id, include, asTracking, cancellationToken) : default;
 
         public virtual TEntity Save(TModel model)
         {
