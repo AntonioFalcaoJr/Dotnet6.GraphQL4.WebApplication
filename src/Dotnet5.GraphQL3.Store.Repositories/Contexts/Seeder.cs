@@ -14,9 +14,9 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
     public static class Seeder
     {
         private const int Amount = 10;
-        private static readonly Faker Faker = new Faker();
-        private static readonly List<ProductType> ProductTypes = new List<ProductType>();
-        private static readonly List<Guid> ProductIds = new List<Guid>();
+        private static readonly Faker Faker = new();
+        private static readonly List<ProductType> ProductTypes = new();
+        private static readonly List<Guid> ProductIds = new();
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
@@ -62,7 +62,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
                             BootType = Faker.PickRandom<BootType>(),
                             KayakType = Faker.PickRandom<KayakType>()
                         };
-                        if (productId.HasValue) productIds.Remove(productId.Value);
+                        productIds.Remove(productId.Value);
                         return product;
                     });
 

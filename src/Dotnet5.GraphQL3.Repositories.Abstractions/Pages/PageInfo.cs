@@ -2,9 +2,9 @@
 {
     public class PageInfo
     {
-        public int Current { get; set; }
-        public int Size { get; set; }
-        public bool HasPrevious { get; set; }
-        public bool HasNext { get; set; }
+        public int Current { get; init; }
+        public int Size { get; init; }
+        public bool HasPrevious { get; init; }
+        public bool HasNext { get; init; }
     }
 }

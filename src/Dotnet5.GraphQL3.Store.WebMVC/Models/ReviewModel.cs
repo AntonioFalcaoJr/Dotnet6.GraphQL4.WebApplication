@@ -6,12 +6,12 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Models
     public class ReviewModel
     {
         [Required, StringLength(400)]
-        public string Comment { get; set; }
+        public string Comment { get; init; }
         
         [Required, StringLength(100)]
-        public string Title { get; set; }
+        public string Title { get; init; }
         
         [Required]
-        public Guid ProductId { get; set; }
+        public Guid ProductId { get; init; }
     }
 }

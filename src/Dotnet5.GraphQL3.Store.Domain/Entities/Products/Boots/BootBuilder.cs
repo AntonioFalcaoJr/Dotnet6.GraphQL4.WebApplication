@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots
         private BootType _type;
 
         public override Boot Build()
-            => new Boot(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type, _size);
+            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type, _size);
 
         public IBootBuilder WithType(BootType type)
         {
