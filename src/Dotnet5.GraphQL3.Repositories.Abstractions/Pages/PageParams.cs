@@ -5,19 +5,19 @@
         private const int DefaultSize = 10;
         private const int DefaultIndex = 1;
 
-        private int _index;
-        private int _size;
+        private readonly int _index;
+        private readonly int _size;
 
         public int Size
         {
             get => _size <= 0 ? DefaultSize : _size;
-            set => _size = value;
+            init => _size = value;
         }
 
         public int Index
         {
             get => _index <= 0 ? DefaultIndex : _index;
-            set => _index = value;
+            init => _index = value;
         }
     }
 }

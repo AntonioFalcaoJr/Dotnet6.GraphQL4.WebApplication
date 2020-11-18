@@ -10,7 +10,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.DependencyInjection
     {
         private const int MaxRetryCount = 5;
         private static readonly TimeSpan MaxRetryDelay = TimeSpan.FromSeconds(5);
-        private static readonly RepositoriesOptions Options = new RepositoriesOptions();
+        private static readonly RepositoriesOptions Options = new();
 
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
         {

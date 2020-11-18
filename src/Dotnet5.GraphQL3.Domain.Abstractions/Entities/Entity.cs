@@ -8,7 +8,7 @@ namespace Dotnet5.GraphQL3.Domain.Abstractions.Entities
     public abstract class Entity<TId>
         where TId : struct
     {
-        public TId Id { get; protected set; }
+        public TId Id { get; protected init; }
 
         [NotMapped]
         public bool IsValid

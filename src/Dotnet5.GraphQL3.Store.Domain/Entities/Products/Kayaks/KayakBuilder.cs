@@ -21,6 +21,6 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks
         }
 
         public override Kayak Build()
-            => new Kayak(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type, _amountOfPerson);
+            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type, _amountOfPerson);
     }
 }

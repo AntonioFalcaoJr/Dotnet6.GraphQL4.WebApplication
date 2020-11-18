@@ -8,7 +8,7 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks
         private BackpackType _type;
 
         public override Backpack Build()
-            => new Backpack(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type);
+            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type);
 
         public IBackpackBuilder WithType(BackpackType type)
         {
