@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection
 {
     public static class ConfigureServices
     {
-        private static readonly Options Options = new Options();
+        private static readonly Options Options = new();
 
         public static IGraphQLBuilder AddApplicationGraphQL(this IServiceCollection services, Action<Options> actionOptions)
         {

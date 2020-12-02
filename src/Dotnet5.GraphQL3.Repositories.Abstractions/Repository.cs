@@ -95,7 +95,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public PagedResult<TResult> GetAll<TResult>(
             PageParams pageParams,
-            Expression<Func<TEntity, TResult>> selector = default,
+            Expression<Func<TEntity, TResult>> selector,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,

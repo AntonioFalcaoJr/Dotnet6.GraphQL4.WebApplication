@@ -9,7 +9,7 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Reviews
         private Guid _productId;
         private string _title;
 
-        public override Review Build() => new Review(_title, _comment, _productId);
+        public override Review Build() => new(_title, _comment, _productId);
 
         public IReviewBuilder WithTitle(string title)
         {

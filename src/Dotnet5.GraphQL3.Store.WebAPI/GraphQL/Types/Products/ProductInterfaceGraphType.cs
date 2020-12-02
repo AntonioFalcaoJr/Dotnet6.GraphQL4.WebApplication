@@ -48,9 +48,9 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products
             {
                 return @object switch
                 {
-                    Boot _ => bootGraphType,
-                    Backpack _ => backpackGraphType,
-                    Kayak _ => kayakGraphType,
+                    Boot => bootGraphType,
+                    Backpack => backpackGraphType,
+                    Kayak => kayakGraphType,
                     _ => default
                 };
             };

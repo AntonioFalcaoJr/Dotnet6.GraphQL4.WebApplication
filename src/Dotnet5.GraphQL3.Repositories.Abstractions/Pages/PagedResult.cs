@@ -22,11 +22,11 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
         public IEnumerable<T> Items => _items.Take(_size);
 
         public PageInfo PageInfo
-            => new PageInfo
+            => new()
             {
-                Current = _index,
-                Size = Items.Count(),
-                HasNext = _size < _items.Count(),
+                Current = _index, 
+                Size = Items.Count(), 
+                HasNext = _size < _items.Count(), 
                 HasPrevious = _index > 1
             };
 
