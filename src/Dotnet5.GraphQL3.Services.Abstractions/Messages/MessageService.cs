@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Threading.Tasks;
 using AutoMapper;
 using Dotnet5.GraphQL3.Services.Abstractions.Models;
 
@@ -27,7 +28,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.Messages
             return message;
         }
 
-        public IObservable<TMessage> Messages()
-            => _subject.AsObservable();
+        public async Task<IObservable<TMessage>> MessagesAsync()
+            =>  await Task.FromResult(_subject.AsObservable()).ConfigureAwait(false);
     }
 }
