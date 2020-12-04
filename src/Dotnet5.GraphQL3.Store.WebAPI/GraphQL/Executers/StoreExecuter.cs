@@ -16,13 +16,18 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers
 {
     public class StoreExecuter<TSchema> : DefaultGraphQLExecuter<TSchema> where TSchema : ISchema
     {
-        public StoreExecuter(TSchema schema, IDocumentExecuter documentExecuter, IOptions<GraphQLOptions> options, IEnumerable<IDocumentExecutionListener> listeners, IEnumerable<IValidationRule> validationRules)
-            : base(schema, documentExecuter, options, listeners, validationRules) { }
+        private readonly IServiceProvider _serviceProvider;
+
+        public StoreExecuter(IServiceProvider serviceProvider, TSchema schema, IDocumentExecuter documentExecuter, IOptions<GraphQLOptions> options, IEnumerable<IDocumentExecutionListener> listeners, IEnumerable<IValidationRule> validationRules)
+            : base(schema, documentExecuter, options, listeners, validationRules)
+        {
+            _serviceProvider = serviceProvider;
+        }
 
         public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables, IDictionary<string, object> context, IServiceProvider requestServices, CancellationToken cancellationToken = new())
         {
             var result = await base.ExecuteAsync(operationName, query, variables, context, requestServices, cancellationToken);
-            var notification = requestServices.GetRequiredService<INotificationContext>();
+            var notification = _serviceProvider.GetRequiredService<INotificationContext>();
 
             if (notification.HasNotifications is false) return result;
 
