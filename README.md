@@ -8,6 +8,10 @@ This project exemplify the implementation and **Dockerization** of a simple Razo
 |**WebMVC**|
 |![Build/Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build/Test/badge.svg) ![MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/MVC%20Image/badge.svg) ![Push MVC](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC/badge.svg?branch=master) ![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade) ![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webapi?style=flat)|
 
+Docker images: 
+[WebAPI](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webapi)  | 
+[WebMVC](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webmvc)
+
 ---
 
 ![home](./.assets/img/home.PNG)
