@@ -34,9 +34,9 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             _dbSet.Remove(entity);
         }
 
-        public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
+        public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken)
         {
-            var entity = await GetByIdAsync(id, cancellationToken: cancellationToken).ConfigureAwait(default);
+            var entity = await GetByIdAsync(id, cancellationToken).ConfigureAwait(default);
             if (entity is null) return;
             _dbSet.Remove(entity);
         }
@@ -44,7 +44,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         public virtual bool Exists(TId id)
             => _dbSet.AsNoTracking().Any(x => Equals(x.Id, id));
 
-        public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default)
+        public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken)
             => await _dbSet.AsNoTracking().AnyAsync(x => Equals(x.Id, id), cancellationToken);
 
         public virtual TEntity Add(TEntity entity)
@@ -54,7 +54,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             return entity;
         }
 
-        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             if (await ExistsAsync(entity.Id, cancellationToken).ConfigureAwait(default)) return entity;
             await _dbSet.AddAsync(entity, cancellationToken);
@@ -67,18 +67,18 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             if (include is null && asTracking) return _dbSet.Find(id);
 
             return include is null
-                ? _dbSet.AsNoTracking().FirstOrDefault(x => Equals(x.Id, id))
-                : include(_dbSet).AsNoTracking().FirstOrDefault(x => Equals(x.Id, id));
+                ? _dbSet.AsNoTracking().SingleOrDefault(x => Equals(x.Id, id))
+                : include(_dbSet).AsNoTracking().SingleOrDefault(x => Equals(x.Id, id));
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default, CancellationToken cancellationToken = default)
+        public async Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default)
         {
             if (Equals(id, default(TId))) return default;
             if (include is null && asTracking) return await _dbSet.FindAsync(new object[] {id}, cancellationToken);
 
             return include is null
-                ? await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => Equals(x.Id, id), cancellationToken)
-                : await include(_dbSet).AsNoTracking().FirstOrDefaultAsync(x => Equals(x.Id, id), cancellationToken);
+                ? await _dbSet.AsNoTracking().SingleOrDefaultAsync(x => Equals(x.Id, id), cancellationToken)
+                : await include(_dbSet).AsNoTracking().SingleOrDefaultAsync(x => Equals(x.Id, id), cancellationToken);
         }
 
         public virtual void Update(TEntity entity)
@@ -87,7 +87,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             _dbSet.Update(entity);
         }
 
-        public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
         {
             if (await ExistsAsync(entity.Id, cancellationToken).ConfigureAwait(default) is false) return;
             _dbSet.Update(entity);
@@ -96,32 +96,40 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         public PagedResult<TResult> GetAll<TResult>(
             PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector,
-            Expression<Func<TEntity, bool>> predicate = default,
+            Expression<Func<TEntity, bool>> predicate,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default)
         {
-            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTracking();
+            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
+            
             query = include is null ? query : include(query);
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
-            return PagedResult<TResult>.Create(query.Select(selector), pageParams);
+
+            return selector is not null
+                ? PagedResult<TResult>.Create(query.Select(selector), pageParams)
+                : PagedResult<TResult>.Create(query as IQueryable<TResult>, pageParams);
         }
 
         public async Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector,
-            Expression<Func<TEntity, bool>> predicate = default,
+            Expression<Func<TEntity, bool>> predicate,
+            CancellationToken cancellationToken,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool asTracking = default,
-            CancellationToken cancellationToken = default)
+            bool asTracking = default)
         {
-            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTracking();
+            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
+
             query = include is null ? query : include(query);
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
-            return await PagedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
+
+            return selector is null
+                ? await PagedResult<TResult>.CreateAsync(query as IQueryable<TResult>, pageParams, cancellationToken)
+                : await PagedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
         }
     }
 }
