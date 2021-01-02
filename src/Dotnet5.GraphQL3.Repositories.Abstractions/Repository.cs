@@ -102,14 +102,14 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             bool asTracking = default)
         {
             var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
-            
+
             query = include is null ? query : include(query);
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
 
-            return selector is not null
-                ? PagedResult<TResult>.Create(query.Select(selector), pageParams)
-                : PagedResult<TResult>.Create(query as IQueryable<TResult>, pageParams);
+            return selector is null
+                ? PagedResult<TResult>.Create(query as IQueryable<TResult>, pageParams)
+                : PagedResult<TResult>.Create(query.Select(selector), pageParams);
         }
 
         public async Task<PagedResult<TResult>> GetAllAsync<TResult>(
