@@ -26,27 +26,28 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default);
 
-        Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool asTracking = default, CancellationToken cancellationToken = default);
+        Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            bool asTracking = default);
 
         void Update(TEntity entity);
         Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         PagedResult<TResult> GetAll<TResult>(
             PageParams pageParams,
-            Expression<Func<TEntity, TResult>> selector = default,
-            Expression<Func<TEntity, bool>> predicate = default,
+            Expression<Func<TEntity, TResult>> selector,
+            Expression<Func<TEntity, bool>> predicate,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default);
 
         Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
-            Expression<Func<TEntity, TResult>> selector = default,
-            Expression<Func<TEntity, bool>> predicate = default,
+            Expression<Func<TEntity, TResult>> selector,
+            Expression<Func<TEntity, bool>> predicate,
+            CancellationToken cancellationToken,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool asTracking = default,
-            CancellationToken cancellationToken = default);
+            bool asTracking = default);
     }
 }

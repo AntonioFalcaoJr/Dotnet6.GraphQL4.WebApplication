@@ -17,13 +17,13 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
     {
         void Delete(TId id);
         void Delete(TEntity entity);
-        Task DeleteAsync(TId id, CancellationToken cancellationToken = default);
+        Task DeleteAsync(TId id, CancellationToken cancellationToken);
 
         TEntity Edit(TModel model);
-        Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken = default);
+        Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken);
 
         bool Exists(TId id);
-        Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
+        Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken);
 
         PagedResult<TResult> GetAll<TResult>(
             PageParams pageParams,
@@ -35,20 +35,17 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
 
         Task<PagedResult<TResult>> GetAllAsync<TResult>(
             PageParams pageParams,
+            CancellationToken cancellationToken,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool asTracking = default,
-            CancellationToken cancellationToken = default);
-
-        TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default);
 
-        Task<TEntity> GetByIdAsync(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
-            bool asTracking = default, CancellationToken cancellationToken = default);
+        TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default);
+        Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default);
 
         TEntity Save(TModel model);
-        Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default);
+        Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken);
     }
 }
