@@ -8,12 +8,12 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
     public interface IUnitOfWork : IDisposable
     {
         IDbContextTransaction BeginTransaction();
-        Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+        Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
         void Commit();
-        Task CommitAsync(CancellationToken cancellationToken = default);
+        Task CommitAsync(CancellationToken cancellationToken);
         void Rollback();
-        Task RollbackAsync(CancellationToken cancellationToken = default);
+        Task RollbackAsync(CancellationToken cancellationToken);
         void SaveChanges();
-        Task SaveChangesAsync(CancellationToken cancellationToken = default);
+        Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

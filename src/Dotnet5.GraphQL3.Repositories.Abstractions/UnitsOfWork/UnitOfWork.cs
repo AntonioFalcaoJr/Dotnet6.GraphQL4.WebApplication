@@ -20,25 +20,25 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
         public IDbContextTransaction BeginTransaction()
             => _database.BeginTransaction();
 
-        public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+        public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
             => _database.BeginTransactionAsync(cancellationToken);
 
         public void SaveChanges()
             => _dbContext.SaveChanges(true);
 
-        public Task SaveChangesAsync(CancellationToken cancellationToken = default)
+        public Task SaveChangesAsync(CancellationToken cancellationToken)
             => _dbContext.SaveChangesAsync(true, cancellationToken);
 
         public void Commit()
             => _database.CommitTransaction();
 
-        public Task CommitAsync(CancellationToken cancellationToken = default)
+        public Task CommitAsync(CancellationToken cancellationToken)
             => _database.CommitTransactionAsync(cancellationToken);
 
         public void Rollback()
             => _database.RollbackTransaction();
 
-        public Task RollbackAsync(CancellationToken cancellationToken = default)
+        public Task RollbackAsync(CancellationToken cancellationToken)
             => _database.RollbackTransactionAsync(cancellationToken);
 
         public void Dispose()
