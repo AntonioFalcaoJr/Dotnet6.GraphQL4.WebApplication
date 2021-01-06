@@ -24,7 +24,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.DependencyInjection
                     var logger = provider.GetRequiredService<ILogger<Startup>>();
                     options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
-                .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+                .AddSystemTextJson(serializerSettings => serializerSettings.IgnoreNullValues = true)
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(StoreSchema));
