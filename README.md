@@ -305,6 +305,12 @@ services:
     environment:
       SA_PASSWORD: "!MyComplexPassword"
       ACCEPT_EULA: "Y"
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     networks:
       - graphqlstore
 
@@ -312,11 +318,12 @@ services:
     container_name: webapi
     image: antoniofalcaojr/dotnet5-graphql3-webapi
     environment:
-      - ASPNETCORE_URLS=http://*:5000    
+      - ASPNETCORE_URLS=http://*:5000
     ports:
       - 5000:5000
     depends_on:
-      - mssql
+      mssql:
+        condition: service_healthy
     networks:
       - graphqlstore
 
@@ -328,7 +335,7 @@ services:
     ports:
       - 7000:7000
     depends_on:
-      - webapi            
+      - webapi
     networks:
       - graphqlstore
 
