@@ -1,7 +1,6 @@
 version: "3.7"
 
 services:
-
   mssql:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server
@@ -10,6 +9,12 @@ services:
     environment:
       SA_PASSWORD: "!MyComplexPassword"
       ACCEPT_EULA: "Y"
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     networks:
       - graphqlstore
 
@@ -23,10 +28,11 @@ services:
       - ASPNETCORE_URLS=http://*:5000
     ports:
       - 5000:5000
+    depends_on:
+      mssql:
+        condition: service_healthy
     networks:
       - graphqlstore
-    depends_on:
-      - mssql
 
   webmvc:
     container_name: webmvc
@@ -38,10 +44,10 @@ services:
       - ASPNETCORE_URLS=http://*:7000
     ports:
       - 7000:7000
-    networks:
-      - graphqlstore
     depends_on:
       - webapi
+    networks:
+      - graphqlstore
 
 networks:
   graphqlstore:
