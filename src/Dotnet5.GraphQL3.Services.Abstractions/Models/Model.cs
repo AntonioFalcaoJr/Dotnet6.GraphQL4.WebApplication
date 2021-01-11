@@ -1,8 +1,8 @@
 namespace Dotnet5.GraphQL3.Services.Abstractions.Models
 {
-    public abstract class Model<TId>
+    public abstract record Model<TId>
         where TId : struct
     {
-        private TId? Id { get; set; }
+        private TId? Id { get; init; }
     }
 }

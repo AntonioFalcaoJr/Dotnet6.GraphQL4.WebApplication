@@ -2,9 +2,9 @@
 
 namespace Dotnet5.GraphQL3.Store.Services.Models.Products
 {
-    public class BootModel : ProductModel
+    public record BootModel : ProductModel
     {
-        public BootType Type { get; set; }
-        public int Size { get; set; }
+        public BootType Type { get; init; }
+        public int Size { get; init; }
     }
 }
