@@ -1,6 +1,6 @@
 ﻿namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
 {
-    public class PageInfo
+    public record PageInfo
     {
         public int Current { get; init; }
         public int Size { get; init; }
