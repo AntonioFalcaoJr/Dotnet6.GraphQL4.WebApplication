@@ -10,7 +10,7 @@
         <Microsoft_DependencyInjection_Version>5.0.0</Microsoft_DependencyInjection_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>5.0.1</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>5.0.2</Microsoft_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
         <GraphQL_Server_Version>4.4.1</GraphQL_Server_Version>
