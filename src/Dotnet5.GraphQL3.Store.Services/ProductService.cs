@@ -46,13 +46,13 @@ namespace Dotnet5.GraphQL3.Store.Services
         public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken)
         {
             var ids = productIds?.ToList();
-            if (productIds is null || ids.Any() is false) return default;
+            if (ids is {Count: > 0} is false) return default;
 
             var pagedResult = await Repository.GetAllAsync(
                 pageParams: new PageParams {Size = ids.Count},
                 selector: product => product.Reviews,
                 predicate: product => ids.Contains(product.Id),
-                include: products => products.Include(product =>  product.Reviews),
+                include: products => products.Include(product => product.Reviews),
                 cancellationToken: cancellationToken);
 
             return pagedResult.Items
