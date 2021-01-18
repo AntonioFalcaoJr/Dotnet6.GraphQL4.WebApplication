@@ -1,6 +1,6 @@
 ﻿namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
 {
-    public class PageParams
+    public record PageParams
     {
         private const int DefaultSize = 10;
         private const int DefaultIndex = 1;

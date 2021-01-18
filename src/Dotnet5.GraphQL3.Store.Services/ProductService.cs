@@ -23,7 +23,7 @@ namespace Dotnet5.GraphQL3.Store.Services
         public ProductService(IUnitOfWork unitOfWork, IProductRepository repository, IMapper mapper, INotificationContext notificationContext)
             : base(unitOfWork, repository, mapper, notificationContext) { }
 
-        public async Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken = default)
+        public async Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
         {
             if (reviewModel is null)
             {
@@ -45,14 +45,14 @@ namespace Dotnet5.GraphQL3.Store.Services
 
         public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken)
         {
-            var ids = productIds?.ToArray() ?? Array.Empty<Guid>();
-            if (ids.Any() is false) return default;
+            var ids = productIds?.ToList();
+            if (ids is {Count: > 0} is false) return default;
 
             var pagedResult = await Repository.GetAllAsync(
-                pageParams: new PageParams {Size = ids.Length},
+                pageParams: new PageParams {Size = ids.Count},
                 selector: product => product.Reviews,
                 predicate: product => ids.Contains(product.Id),
-                include: products => products.Include(x => x.Reviews),
+                include: products => products.Include(product => product.Reviews),
                 cancellationToken: cancellationToken);
 
             return pagedResult.Items

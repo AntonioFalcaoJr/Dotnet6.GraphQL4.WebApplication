@@ -4,15 +4,15 @@ using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 
 namespace Dotnet5.GraphQL3.Store.Services.Models.Products
 {
-    public abstract class ProductModel : Model<Guid>
+    public abstract record ProductModel : Model<Guid>
     {
-        public string Description { get; set; }
-        public DateTimeOffset IntroduceAt { get; set; }
-        public string Name { get; set; }
-        public string PhotoUrl { get; set; }
-        public decimal Price { get; set; }
-        public ProductType ProductType { get; set; }
-        public int Rating { get; set; }
-        public int Stock { get; set; }
+        public string Description { get; init; }
+        public DateTimeOffset IntroduceAt { get; init; }
+        public string Name { get; init; }
+        public string PhotoUrl { get; init; }
+        public decimal Price { get; init; }
+        public ProductType ProductType { get; init; }
+        public int Rating { get; init; }
+        public int Stock { get; init; }
     }
 }

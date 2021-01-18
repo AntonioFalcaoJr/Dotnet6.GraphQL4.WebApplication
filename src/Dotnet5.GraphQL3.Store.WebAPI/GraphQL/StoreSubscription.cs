@@ -13,17 +13,18 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
         public StoreSubscription(IServiceProvider serviceProvider)
         {
             Name = "Subscription";
-            AddField(new EventStreamFieldType
-            {
-                Name = "reviewAdded",
-                Type = typeof(ReviewAddedMessageType),
-                Resolver = new FuncFieldResolver<ReviewMessage>(fieldContext
-                    => fieldContext.Source as ReviewMessage),
-                AsyncSubscriber = new AsyncEventStreamResolver<ReviewMessage>(streamContext
-                    => serviceProvider
-                        .GetRequiredService<IReviewMessageService>()
-                        .MessagesAsync())
-            });
+            AddField(
+                new EventStreamFieldType
+                {
+                    Name = "reviewAdded",
+                    Type = typeof(ReviewAddedMessageType),
+                    Resolver = new FuncFieldResolver<ReviewMessage>(fieldContext 
+                        => fieldContext.Source as ReviewMessage),
+                    AsyncSubscriber = new AsyncEventStreamResolver<ReviewMessage>(streamContext 
+                        => serviceProvider
+                            .GetRequiredService<IReviewMessageService>()
+                            .MessagesAsync())
+                });
         }
     }
 }
