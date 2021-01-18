@@ -110,7 +110,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return OnSave(entity);
         }
 
-        public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> SaveAsync(TModel model, CancellationToken cancellationToken)
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
@@ -133,7 +133,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return entity;
         }
 
-        protected async Task<TEntity> OnEditAsync(TEntity entity, CancellationToken cancellationToken = default)
+        protected async Task<TEntity> OnEditAsync(TEntity entity, CancellationToken cancellationToken)
         {
             if (IsValid(entity) is false) return default;
             await Repository.UpdateAsync(entity, cancellationToken);
@@ -141,7 +141,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             return entity;
         }
 
-        protected async Task<TEntity> OnSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
+        protected async Task<TEntity> OnSaveAsync(TEntity entity, CancellationToken cancellationToken)
         {
             if (IsValid(entity) is false) return default;
             await Repository.AddAsync(entity, cancellationToken);
