@@ -14,7 +14,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
         {
-            options.Invoke(Options);
+            options(Options);
 
             return services
                 .AddScoped<DbContext, StoreDbContext>()
