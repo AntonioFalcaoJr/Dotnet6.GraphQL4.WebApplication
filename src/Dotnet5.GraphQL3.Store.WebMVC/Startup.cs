@@ -1,27 +1,31 @@
 using System;
 using Dotnet5.GraphQL3.Store.WebMVC.Clients;
+using Dotnet5.GraphQL3.Store.WebMVC.Extensions.EndpointRouteBuilders;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 
 namespace Dotnet5.GraphQL3.Store.WebMVC
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _env = env;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -38,6 +42,9 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
             {
                 endpoints.MapControllerRoute("default",
                     "{controller=Home}/{action=Index}/{id?}");
+                
+                endpoints.MapReadinessHealthChecks();
+                endpoints.MapLivenessHealthChecks();
             });
         }
 
@@ -45,9 +52,9 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton(provider
+            services.AddSingleton(_
                 => new GraphQLHttpClient(
-                    endPoint: new Uri(Configuration["HttpClient:Store"]),
+                    endPoint: new Uri($"{_configuration["HttpClient:Store"]}/graphql"),
                     serializer: new SystemTextJsonSerializer(options =>
                     {
                         options.PropertyNameCaseInsensitive = true;
@@ -55,6 +62,13 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
                     })));
 
             services.AddSingleton<IStoreGraphClient, StoreGraphClient>();
+
+            services.AddHealthChecks()
+                .AddUrlGroup(
+                    uri: new Uri($"{_configuration["HttpClient:Store"]}/health/ready"), 
+                    name: "Store Web API", 
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: new[] {"ready"});
         }
     }
 }
