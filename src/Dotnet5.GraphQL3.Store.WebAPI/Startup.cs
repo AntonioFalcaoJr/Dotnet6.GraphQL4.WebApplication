@@ -3,6 +3,7 @@ using Dotnet5.GraphQL3.Domain.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Repositories.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Services.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection;
+using Dotnet5.GraphQL3.Store.WebAPI.Extensions.EndpointRouteBuilders;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI
@@ -32,8 +34,12 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 app.UseDeveloperExceptionPage();
 
             app.UseRouting()
-                .UseEndpoints(endpoints
-                    => endpoints.MapControllers());
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapLivenessHealthChecks();
+                    endpoints.MapReadinessHealthChecks();
+                });
 
             app.UseApplicationGraphQL<StoreSchema>();
 
@@ -62,6 +68,12 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
 
             services.Configure<KestrelServerOptions>(options
                 => options.AllowSynchronousIO = true);
+
+            services.AddHealthChecks()
+                .AddSqlServer(
+                    connectionString: _configuration.GetConnectionString("DefaultConnection"), 
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: new[] {"ready"});
         }
     }
 }
