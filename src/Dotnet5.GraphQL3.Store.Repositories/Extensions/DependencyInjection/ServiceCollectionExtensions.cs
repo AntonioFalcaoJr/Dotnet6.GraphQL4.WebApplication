@@ -12,9 +12,9 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection
         private static readonly TimeSpan MaxRetryDelay = TimeSpan.FromSeconds(5);
         private static readonly RepositoriesOptions Options = new();
 
-        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> options)
+        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> optionsAction)
         {
-            options(Options);
+            optionsAction(Options);
 
             return services
                 .AddScoped<DbContext, StoreDbContext>()
