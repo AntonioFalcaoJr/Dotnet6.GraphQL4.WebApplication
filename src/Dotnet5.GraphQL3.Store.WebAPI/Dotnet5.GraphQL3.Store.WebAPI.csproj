@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="5.0.2" />
         <PackageReference Include="GraphQL" Version="$(GraphQL_Version)" />
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="$(GraphQL_Server_Version)" />
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore.SystemTextJson" Version="$(GraphQL_Server_Version)" />

@@ -35,7 +35,7 @@ After this, to configure the HTTP client, `init` secrets in [`./src/Dotnet5.Grap
 
 ```bash
 dotnet user-secrets init
-dotnet user-secrets set "HttpClient:Store" "http://localhost:5000/graphql"
+dotnet user-secrets set "HttpClient:Store" "http://localhost:5000"
 ```
 
 ##### AppSettings 
@@ -57,7 +57,7 @@ WebMCV
 ```json5
 {
   "HttpClient": {
-    "Store": "http://localhost:5000/graphql"
+    "Store": "http://localhost:5000"
   }
 }
 ```
@@ -84,7 +84,7 @@ WebMCV
 ```json5
 {
   "HttpClient": {
-    "Store": "http://webapi:5000/graphql"
+    "Store": "http://webapi:5000"
   }
 }
 ```
@@ -343,8 +343,36 @@ networks:
   graphqlstore:
     driver: bridge
 ```
+### Health checks
 
-## GraphQL Playground 
+Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
+
+Web API
+
+`http://localhost:5000/health/ready`
+
+![Readiness](./.assets/img/Readiness.png)
+
+
+`http://localhost:5000/health/live`
+
+![Liveness](./.assets/img/Liveness.png)
+
+---
+
+Web MVC
+
+`http://localhost:7000/health/ready`
+
+![Readiness](./.assets/img/ReadinessMVC.png)
+
+`http://localhost:7000/health/live`
+
+![Liveness](./.assets/img/LivenessMVC.png)
+
+---
+
+### GraphQL Playground 
 
 By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
 
@@ -388,7 +416,6 @@ fragment comparisonFields on product {
   description
 }
 ```
-
 RESULT
 
 ```json5
@@ -410,8 +437,8 @@ RESULT
 }
 ```
 ___
-#### Query named's and Variables
 
+#### Query named's and Variables
 
 QUERY
 
