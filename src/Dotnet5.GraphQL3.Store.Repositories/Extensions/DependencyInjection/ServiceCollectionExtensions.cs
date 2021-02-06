@@ -8,11 +8,9 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        private const int MaxRetryCount = 5;
-        private static readonly TimeSpan MaxRetryDelay = TimeSpan.FromSeconds(5);
-        private static readonly RepositoriesOptions Options = new();
+        private static readonly RepositoryOptions Options = new();
 
-        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoriesOptions> optionsAction)
+        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, Action<RepositoryOptions> optionsAction)
         {
             optionsAction(Options);
 
@@ -31,12 +29,42 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection
 
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-                .EnableRetryOnFailure(MaxRetryCount, MaxRetryDelay, null)
+                .EnableRetryOnFailure(
+                    maxRetryCount: Options.ResilientConnection.MaxRetryCount, 
+                    maxRetryDelay: Options.ResilientConnection.MaxRetryDelay, 
+                    errorNumbersToAdd: Options.ResilientConnection.ErrorNumbersToAdd)
                 .MigrationsAssembly(typeof(StoreDbContext).Assembly.GetName().Name);
     }
 
-    public class RepositoriesOptions
+    public class DatabaseResilientConnection
+    {
+        private const int DefaultMaxRetryCount = 5;
+        private const int DefaultMaxRetryDelay = 5;
+
+        private int _maxRetryCount;
+        private int _maxSecondsRetryDelay;
+
+        public int MaxRetryCount
+        {
+            get => _maxRetryCount;
+            set => _maxRetryCount = value is default(int) ? DefaultMaxRetryCount : value;
+        }
+
+        public int MaxSecondsRetryDelay
+        {
+            get => _maxSecondsRetryDelay;
+            set => _maxSecondsRetryDelay = value is default(int) ? DefaultMaxRetryDelay : value;
+        }
+
+        public int[] ErrorNumbersToAdd { get; set; }
+        
+        internal TimeSpan MaxRetryDelay 
+            => TimeSpan.FromSeconds(MaxSecondsRetryDelay);
+    }
+    
+    public class RepositoryOptions
     {
         public string ConnectionString { get; set; }
+        public DatabaseResilientConnection ResilientConnection { get; set; } = new();
     }
 }

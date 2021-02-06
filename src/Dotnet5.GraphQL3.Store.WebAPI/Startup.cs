@@ -60,8 +60,11 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 .AddSubjects()
                 .AddNotificationContext();
 
-            services.AddApplicationDbContext(options
-                => options.ConnectionString = _configuration.GetConnectionString("DefaultConnection"));
+            services.AddApplicationDbContext(options =>
+                {
+                    options.ConnectionString = _configuration.GetConnectionString("DefaultConnection");
+                    _configuration.Bind("DatabaseResilientConnection", options.ResilientConnection);
+                });
 
             services.AddApplicationGraphQL(options
                 => options.IsDevelopment = _env.IsDevelopment());
