@@ -24,19 +24,19 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
                 .UseSqlServer(
-                    connectionString: Options.ConnectionString,
+                    connectionString: Options.DefaultConnection,
                     sqlServerOptionsAction: SqlServerOptionsAction);
 
         private static void SqlServerOptionsAction(SqlServerDbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .EnableRetryOnFailure(
-                    maxRetryCount: Options.ResilientConnection.MaxRetryCount, 
-                    maxRetryDelay: Options.ResilientConnection.MaxRetryDelay, 
-                    errorNumbersToAdd: Options.ResilientConnection.ErrorNumbersToAdd)
+                    maxRetryCount: Options.ConnectionResiliency.MaxRetryCount, 
+                    maxRetryDelay: Options.ConnectionResiliency.MaxRetryDelay, 
+                    errorNumbersToAdd: Options.ConnectionResiliency.ErrorNumbersToAdd)
                 .MigrationsAssembly(typeof(StoreDbContext).Assembly.GetName().Name);
     }
 
-    public class DatabaseResilientConnection
+    public class ConnectionResiliency
     {
         private const int DefaultMaxRetryCount = 5;
         private const int DefaultMaxRetryDelay = 5;
@@ -64,7 +64,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection
     
     public class RepositoryOptions
     {
-        public string ConnectionString { get; set; }
-        public DatabaseResilientConnection ResilientConnection { get; set; } = new();
+        public string DefaultConnection { get; set; }
+        public ConnectionResiliency ConnectionResiliency { get; set; } = new();
     }
 }
