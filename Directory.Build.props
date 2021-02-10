@@ -18,7 +18,7 @@
         <GraphQL_Version>3.3.2</GraphQL_Version>
 
         <!--AutoMapper-->
-        <AutoMapper_DependencyInjection_Version>8.1.0</AutoMapper_DependencyInjection_Version>
+        <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
         <AutoMapper_Version>10.1.1</AutoMapper_Version>
 
         <!--Others-->
