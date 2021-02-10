@@ -28,7 +28,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
             _configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app, DbContext dbContext)
+        public void Configure(IApplicationBuilder app)
         {
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
@@ -42,8 +42,6 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 });
 
             app.UseApplicationGraphQL<StoreSchema>();
-
-            dbContext.Database.Migrate();
         }
 
         public void ConfigureServices(IServiceCollection services)
