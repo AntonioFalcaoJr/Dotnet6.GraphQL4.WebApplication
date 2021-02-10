@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI
@@ -14,7 +17,13 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                         options.ValidateOnBuild = true;
                     });
 
-        public static void Main(string[] args)
-            => CreateHostBuilder(args).Build().Run();
+        public static async Task Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
+            using var scope = host.Services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            await dbContext.Database.MigrateAsync();
+            await host.RunAsync();
+        }
     }
 }
