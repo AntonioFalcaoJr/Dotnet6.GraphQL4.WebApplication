@@ -10,7 +10,7 @@
         <Microsoft_DependencyInjection_Version>5.0.0</Microsoft_DependencyInjection_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>5.0.2</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>5.0.3</Microsoft_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
         <GraphQL_Server_Version>4.4.1</GraphQL_Server_Version>
@@ -18,7 +18,7 @@
         <GraphQL_Version>3.3.2</GraphQL_Version>
 
         <!--AutoMapper-->
-        <AutoMapper_DependencyInjection_Version>8.1.0</AutoMapper_DependencyInjection_Version>
+        <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
         <AutoMapper_Version>10.1.1</AutoMapper_Version>
 
         <!--Others-->
