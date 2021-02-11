@@ -16,7 +16,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.Extensions.EndpointRouteBuilders
         private static readonly JsonSerializerOptions SerializerOptions = new() {IgnoreNullValues = true, WriteIndented = true};
         private static readonly HealthCheck HealthCheck = new();
         
-        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern,  Func<HealthCheckRegistration, bool> predicate = default)
+        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern, Func<HealthCheckRegistration, bool> predicate = default)
             => endpoints.MapHealthChecks(
                 pattern: pattern,
                 options: new HealthCheckOptions
