@@ -347,28 +347,26 @@ networks:
 
 Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
 
+> `/health`   
+> Just check if the instance is running.
+
+> `/health/live`  
+> Check if the instance is running and all the dependencies too.
+
+> `/health/ready`
+> Check if the instance and all the dependencies are ready to attend to all functionalities.
+
 Web API
 
 `http://localhost:5000/health/ready`
 
 ![Readiness](./.assets/img/Readiness.png)
 
-
-`http://localhost:5000/health/live`
-
-![Liveness](./.assets/img/Liveness.png)
-
----
-
 Web MVC
 
 `http://localhost:7000/health/ready`
 
 ![Readiness](./.assets/img/ReadinessMVC.png)
-
-`http://localhost:7000/health/live`
-
-![Liveness](./.assets/img/LivenessMVC.png)
 
 ---
 

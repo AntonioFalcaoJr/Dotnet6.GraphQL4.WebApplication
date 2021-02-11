@@ -32,14 +32,14 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
 
         public static async Task<PagedResult<T>> CreateAsync(IQueryable<T> source, PageParams pageParams, CancellationToken cancellationToken)
         {
-            pageParams ??= new PageParams();
+            pageParams ??= new();
             var items = await ApplyPagination(source, pageParams).ToListAsync(cancellationToken);
             return new PagedResult<T>(items, pageParams.Index, pageParams.Size);
         }
 
         public static PagedResult<T> Create(IQueryable<T> source, PageParams pageParams)
         {
-            pageParams ??= new PageParams();
+            pageParams ??= new();
             var items = ApplyPagination(source, pageParams);
             return new PagedResult<T>(items, pageParams.Index, pageParams.Size);
         }

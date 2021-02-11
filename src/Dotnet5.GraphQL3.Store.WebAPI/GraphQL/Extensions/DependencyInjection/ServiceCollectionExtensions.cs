@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers;
 using GraphQL.Server;
 using GraphQL.Server.Internal;
@@ -13,7 +14,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Extensions.DependencyInjection
 
         public static IGraphQLBuilder AddApplicationGraphQL(this IServiceCollection services, Action<Options> actionOptions)
         {
-            actionOptions.Invoke(Options);
+            actionOptions(Options);
 
             return services
                 .AddScoped(typeof(IGraphQLExecuter<>), typeof(StoreExecuter<>))
@@ -24,7 +25,12 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Extensions.DependencyInjection
                     var logger = provider.GetRequiredService<ILogger<Startup>>();
                     options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
-                .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+                .AddSystemTextJson(configureSerializerSettings: serializerSettings =>
+                    {
+                        serializerSettings.WriteIndented = true;
+                        serializerSettings.IgnoreNullValues = true;
+                        serializerSettings.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    })
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(StoreSchema));

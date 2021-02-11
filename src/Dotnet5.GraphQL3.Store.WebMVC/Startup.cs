@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Dotnet5.GraphQL3.Store.WebMVC.Clients;
 using Dotnet5.GraphQL3.Store.WebMVC.Extensions.EndpointRouteBuilders;
 using GraphQL.Client.Http;
@@ -16,6 +17,8 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
+        private readonly string[] _readinessTags = {"ready"};
+        private readonly string[] _livenessTags = {"live"};
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -42,9 +45,23 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
             {
                 endpoints.MapControllerRoute("default",
                     "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapApplicationHealthChecks(
+                    pattern: "/health", 
+                    predicate: registration
+                        => registration.Tags.Any() is false);
                 
-                endpoints.MapReadinessHealthChecks();
-                endpoints.MapLivenessHealthChecks();
+                endpoints.MapApplicationHealthChecks(
+                    pattern: "/health/live", 
+                    predicate: registration
+                        => registration.Tags.Any(item 
+                               => _livenessTags.Contains(item)));
+                    
+                endpoints.MapApplicationHealthChecks(
+                    pattern: "/health/ready", 
+                    predicate: registration 
+                        => registration.Tags.Any(item 
+                            => _readinessTags.Contains(item)));
             });
         }
 
@@ -65,10 +82,15 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
 
             services.AddHealthChecks()
                 .AddUrlGroup(
+                    uri: new Uri($"{_configuration["HttpClient:Store"]}/health/live"), 
+                    name: "Store Web API (Live)", 
+                    failureStatus: HealthStatus.Degraded,
+                    tags: _livenessTags)
+                .AddUrlGroup(
                     uri: new Uri($"{_configuration["HttpClient:Store"]}/health/ready"), 
-                    name: "Store Web API", 
+                    name: "Store Web API (Ready)", 
                     failureStatus: HealthStatus.Unhealthy,
-                    tags: new[] {"ready"});
+                    tags: _readinessTags);
         }
     }
 }
