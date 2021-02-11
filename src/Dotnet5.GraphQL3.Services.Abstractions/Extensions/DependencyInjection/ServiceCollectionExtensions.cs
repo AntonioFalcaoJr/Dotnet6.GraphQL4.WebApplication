@@ -36,7 +36,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.Extensions.DependencyInjection
 
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)
             => services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies().Where(x 
-                => x.FullName?.Contains(GetAssemblySuffix()) ?? false));
+                => x.FullName?.Contains(GetAssemblySuffix()) ?? default));
 
         private static string GetAssemblySuffix()
             => Assembly.GetEntryAssembly()?.FullName?.Substring(0, 16);
