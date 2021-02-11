@@ -13,7 +13,7 @@ namespace Dotnet5.GraphQL3.Domain.Abstractions.Extensions.DependencyInjection
                     .FromApplicationDependencies(assembly
                         => assembly.FullName?.StartsWith(assembly.GetEntryAssemblySuffix()) ?? default)
                     .AddClasses(filter
-                        => filter.AssignableToAny(typeof(IBuilder<,>)))
+                        => filter.AssignableTo(typeof(IBuilder<,>)))
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
