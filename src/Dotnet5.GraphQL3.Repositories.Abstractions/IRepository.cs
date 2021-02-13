@@ -33,19 +33,34 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         void Update(TEntity entity);
         Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
 
-        PagedResult<TResult> GetAll<TResult>(
+        PagedResult<TEntity> GetAll(
             PageParams pageParams,
-            Expression<Func<TEntity, TResult>> selector,
-            Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, bool>> predicate = default,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            bool asTracking = default);
+        
+        PagedResult<TResult> GetAllProjections<TResult>(
+            PageParams pageParams,
+            Expression<Func<TEntity, TResult>> selector = default,
+            Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default);
 
-        Task<PagedResult<TResult>> GetAllAsync<TResult>(
+        Task<PagedResult<TEntity>> GetAllAsync(
             PageParams pageParams,
-            Expression<Func<TEntity, TResult>> selector,
-            Expression<Func<TEntity, bool>> predicate,
             CancellationToken cancellationToken,
+            Expression<Func<TEntity, bool>> predicate = default,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            bool asTracking = default);
+        
+        Task<PagedResult<TResult>> GetAllProjectionsAsync<TResult>(
+            PageParams pageParams,
+            CancellationToken cancellationToken,
+            Expression<Func<TEntity, TResult>> selector = default,
+            Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default);

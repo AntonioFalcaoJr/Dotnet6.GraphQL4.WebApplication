@@ -19,15 +19,12 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
             FieldAsync<PagedResultGraphType<ProductInterfaceGraphType, Product>>(
                 name: "products",
                 arguments: new QueryArguments(new QueryArgument<PageParamsGraphType> {Name = "pageParams"}),
-                resolve: async context =>
-                {
-                    return await context.RequestServices
+                resolve: async context 
+                    => await context.RequestServices
                         .GetRequiredService<IProductService>()
                         .GetAllAsync(
-                            pageParams: context.GetArgument<PageParams>("pageParams"),
-                            selector: product => product,
-                            cancellationToken: context.CancellationToken);
-                });
+                            pageParams: context.GetArgument<PageParams>("pageParams"), 
+                            cancellationToken: context.CancellationToken));
 
             FieldAsync<ProductInterfaceGraphType>(
                 name: "product",

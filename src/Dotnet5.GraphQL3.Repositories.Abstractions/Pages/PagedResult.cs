@@ -19,7 +19,8 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
             _size = size;
         }
 
-        public IEnumerable<T> Items => _items.Take(_size);
+        public IEnumerable<T> Items
+            => _items.Take(_size);
 
         public PageInfo PageInfo
             => new()
@@ -40,7 +41,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
         public static PagedResult<T> Create(IQueryable<T> source, PageParams pageParams)
         {
             pageParams ??= new();
-            var items = ApplyPagination(source, pageParams);
+            var items = ApplyPagination(source, pageParams).ToList();
             return new PagedResult<T>(items, pageParams.Index, pageParams.Size);
         }
 
