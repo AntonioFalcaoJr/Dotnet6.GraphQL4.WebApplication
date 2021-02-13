@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Reactive.Subjects;
+﻿using System.Reactive.Subjects;
 using System.Reflection;
-using AutoMapper;
 using Dotnet5.GraphQL3.Services.Abstractions.Messages;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
@@ -33,10 +30,6 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.Extensions.DependencyInjection
 
         public static IServiceCollection AddSubjects(this IServiceCollection services)
             => services.AddSingleton(typeof(ISubject<>), typeof(ReplaySubject<>));
-
-        public static IServiceCollection AddAutoMapper(this IServiceCollection services)
-            => services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies().Where(x 
-                => x.FullName?.Contains(GetAssemblySuffix()) ?? default));
 
         private static string GetAssemblySuffix()
             => Assembly.GetEntryAssembly()?.FullName?.Substring(0, 16);

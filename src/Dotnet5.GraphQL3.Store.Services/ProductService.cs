@@ -48,7 +48,7 @@ namespace Dotnet5.GraphQL3.Store.Services
             var ids = productIds?.ToList();
             if (ids is {Count: > 0} is false) return default;
 
-            var pagedResult = await Repository.GetAllAsync(
+            var pagedResult = await Repository.GetAllProjectionsAsync(
                 pageParams: new PageParams {Size = ids.Count},
                 selector: product => product.Reviews,
                 predicate: product => ids.Contains(product.Id),

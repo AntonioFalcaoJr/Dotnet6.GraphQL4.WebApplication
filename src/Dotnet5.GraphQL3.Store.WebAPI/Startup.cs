@@ -35,6 +35,8 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseApplicationGraphQL<StoreSchema>();
+            
             app.UseRouting()
                 .UseEndpoints(endpoints =>
                 {
@@ -57,8 +59,6 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                             => registration.Tags.Any(item 
                                 => _readinessTags.Contains(item)));
                 });
-
-            app.UseApplicationGraphQL<StoreSchema>();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -69,12 +69,13 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 .AddBuilders()
                 .AddRepositories()
                 .AddUnitOfWork()
-                .AddAutoMapper()
                 .AddApplicationServices()
                 .AddMessageServices()
                 .AddSubjects()
                 .AddNotificationContext();
-
+            
+            services.AddAutoMapper(typeof(Startup));
+            
             services.AddApplicationDbContext(options =>
                 {
                     options.DefaultConnection = _configuration.GetConnectionString(nameof(options.DefaultConnection));
