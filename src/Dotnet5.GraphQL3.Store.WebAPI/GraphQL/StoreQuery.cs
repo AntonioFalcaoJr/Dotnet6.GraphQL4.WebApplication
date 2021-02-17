@@ -1,11 +1,14 @@
 using System;
+using System.Linq;
 using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL3.Store.Services;
+using Dotnet5.GraphQL3.Store.Services.Models.Products;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Pages;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
+using GraphQL.Language.AST;
 using GraphQL.Types;
 using GraphQL.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +19,16 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
     {
         public StoreQuery()
         {
+            FieldAsync<PagedResultGraphType<ProductModelGraphType, ProductModel>>(
+                name: "productsmodel",
+                arguments: new QueryArguments(new QueryArgument<PageParamsGraphType> {Name = "pageParams"}),
+                resolve: async context 
+                    => await context.RequestServices
+                        .GetRequiredService<IProductService>()
+                        .GetAllDynamicallyAsync(
+                            pageParams: context.GetArgument<PageParams>("pageParams"), 
+                            selected: context.SubFields["items"].SelectionSet.Selections.Select(x => ((Field) x).Name)));
+            
             FieldAsync<PagedResultGraphType<ProductInterfaceGraphType, Product>>(
                 name: "products",
                 arguments: new QueryArguments(new QueryArgument<PageParamsGraphType> {Name = "pageParams"}),

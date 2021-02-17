@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -25,11 +26,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         protected readonly IRepository<TEntity, TId> Repository;
         protected readonly IUnitOfWork UnitOfWork;
 
-        protected Service(
-            IUnitOfWork unitOfWork,
-            IRepository<TEntity, TId> repository,
-            IMapper mapper,
-            INotificationContext notificationContext)
+        protected Service(IUnitOfWork unitOfWork, IRepository<TEntity, TId> repository, IMapper mapper, INotificationContext notificationContext)
         {
             UnitOfWork = unitOfWork;
             Repository = repository;
@@ -78,15 +75,24 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         public virtual async Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken)
             => IsValid(id) ? await Repository.ExistsAsync(id, cancellationToken) : default;
 
-        public virtual PagedResult<TEntity> GetAll(
+        public virtual PaginatedResult<TEntity> GetAll(
             PageParams pageParams,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default)
             => Repository.GetAll(pageParams, predicate, orderBy, include, asTracking);
-        
-        public virtual PagedResult<TResult> GetAllProjections<TResult>(
+
+        public virtual PaginatedResult<TModel> GetAllDynamically(
+            PageParams pageParams, 
+            IEnumerable<string> selected, 
+            Expression<Func<TEntity, bool>> predicate = default, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
+            bool asTracking = default)
+            => Repository.GetAllDynamically(pageParams, selected, list => Mapper.Map<List<TModel>>(list), predicate, orderBy, include, asTracking);
+
+        public virtual PaginatedResult<TResult> GetAllProjections<TResult>(
             PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
@@ -95,7 +101,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             bool asTracking = default)
             => Repository.GetAllProjections(pageParams, selector, predicate, orderBy, include, asTracking);
 
-        public virtual async Task<PagedResult<TEntity>> GetAllAsync(
+        public virtual async Task<PaginatedResult<TEntity>> GetAllAsync(
             PageParams pageParams,
             CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = default,
@@ -103,8 +109,17 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default)
             => await Repository.GetAllAsync(pageParams, cancellationToken, predicate, orderBy, include, asTracking);
-        
-        public virtual async Task<PagedResult<TResult>> GetAllProjectionsAsync<TResult>(
+
+        public virtual async Task<PaginatedResult<TModel>> GetAllDynamicallyAsync(
+            PageParams pageParams,
+            IEnumerable<string> selected,
+            Expression<Func<TEntity, bool>> predicate = default,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
+            bool asTracking = default)
+            => await Repository.GetAllDynamicallyAsync(pageParams, selected, list => Mapper.Map<List<TModel>>(list), predicate, orderBy, include, asTracking);
+
+        public virtual async Task<PaginatedResult<TResult>> GetAllProjectionsAsync<TResult>(
             PageParams pageParams,
             CancellationToken cancellationToken,
             Expression<Func<TEntity, TResult>> selector = default,

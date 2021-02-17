@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -16,6 +18,8 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         where TEntity : Entity<TId>
         where TId : struct
     {
+        private const string SelectorTemplate = "new({0})";
+
         private readonly IConfigurationProvider _configuration;
         private readonly DbSet<TEntity> _dbSet;
 
@@ -97,7 +101,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             _dbSet.Update(entity);
         }
 
-        public PagedResult<TEntity> GetAll(
+        public PaginatedResult<TEntity> GetAll(
             PageParams pageParams,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
@@ -110,10 +114,10 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
 
-            return PagedResult<TEntity>.Create(query, pageParams);
+            return PaginatedResult<TEntity>.Create(query, pageParams);
         }
         
-        public PagedResult<TResult> GetAllProjections<TResult>(
+        public PaginatedResult<TResult> GetAllProjections<TResult>(
             PageParams pageParams,
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
@@ -128,11 +132,31 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = orderBy is null ? query : orderBy(query);
 
             return selector is null
-                ? PagedResult<TResult>.Create(_dbSet.ProjectTo<TResult>(_configuration), pageParams)
-                : PagedResult<TResult>.Create(query.Select(selector), pageParams);
+                ? PaginatedResult<TResult>.Create(_dbSet.ProjectTo<TResult>(_configuration), pageParams)
+                : PaginatedResult<TResult>.Create(query.Select(selector), pageParams);
         }
+        
+        public PaginatedResult<TResult> GetAllDynamically<TResult>(
+            PageParams pageParams, 
+            IEnumerable<string> selected, 
+            Func<List<object>, List<TResult>> mapping, 
+            Expression<Func<TEntity, bool>> predicate = default, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
+            bool asTracking = default)
+        {
+            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
 
-        public Task<PagedResult<TEntity>> GetAllAsync(
+            query = include is null ? query : include(query);
+            query = predicate is null ? query : query.Where(predicate);
+            query = orderBy is null ? query : orderBy(query);
+
+            var selector = string.Format(SelectorTemplate, string.Join(',', selected));
+            
+            return PaginatedResult<TResult>.CreateDynamically(query.Select(selector), pageParams, mapping);
+        }
+        
+        public Task<PaginatedResult<TEntity>> GetAllAsync(
             PageParams pageParams,
             CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = default,
@@ -146,10 +170,30 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = predicate is null ? query : query.Where(predicate);
             query = orderBy is null ? query : orderBy(query);
 
-            return PagedResult<TEntity>.CreateAsync(query, pageParams, cancellationToken);
+            return PaginatedResult<TEntity>.CreateAsync(query, pageParams, cancellationToken);
+        }
+
+        public async Task<PaginatedResult<TResult>> GetAllDynamicallyAsync<TResult>(
+            PageParams pageParams, 
+            IEnumerable<string> selected,
+            Func<List<object>, List<TResult>> mapping, 
+            Expression<Func<TEntity, bool>> predicate = default,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
+            bool asTracking = default)
+        {
+            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
+
+            query = include is null ? query : include(query);
+            query = predicate is null ? query : query.Where(predicate);
+            query = orderBy is null ? query : orderBy(query);
+
+            var selector = string.Format(SelectorTemplate, string.Join(',', selected));
+            
+            return await PaginatedResult<TResult>.CreateDynamicallyAsync(query.Select(selector), pageParams, mapping);
         }
         
-        public Task<PagedResult<TResult>> GetAllProjectionsAsync<TResult>(
+        public Task<PaginatedResult<TResult>> GetAllProjectionsAsync<TResult>(
             PageParams pageParams,
             CancellationToken cancellationToken,
             Expression<Func<TEntity, TResult>> selector = default,
@@ -165,8 +209,8 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             query = orderBy is null ? query : orderBy(query);
 
             return selector is null
-                ? PagedResult<TResult>.CreateAsync(_dbSet.ProjectTo<TResult>(_configuration), pageParams, cancellationToken)
-                : PagedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
+                ? PaginatedResult<TResult>.CreateAsync(_dbSet.ProjectTo<TResult>(_configuration), pageParams, cancellationToken)
+                : PaginatedResult<TResult>.CreateAsync(query.Select(selector), pageParams, cancellationToken);
         }
     }
 }

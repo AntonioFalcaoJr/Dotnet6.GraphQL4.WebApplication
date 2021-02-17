@@ -4,7 +4,7 @@ using Dotnet5.GraphQL3.Store.Domain.ValueObjects.ProductTypes;
 
 namespace Dotnet5.GraphQL3.Store.Services.Models.Products
 {
-    public abstract record ProductModel : Model<Guid>
+    public class ProductModel : Model<Guid>
     {
         public string Description { get; init; }
         public DateTimeOffset IntroduceAt { get; init; }
