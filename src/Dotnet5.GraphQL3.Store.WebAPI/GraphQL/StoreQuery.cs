@@ -35,9 +35,9 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
                 resolve: async context 
                     => await context.RequestServices
                         .GetRequiredService<IProductService>()
-                        .GetAllDynamicallyAsync(
-                            pageParams: context.GetArgument<PageParams>("pageParams"),
-                            selected: new []{"name"}));
+                        .GetAllAsync(
+                            pageParams: context.GetArgument<PageParams>("pageParams"), 
+                            cancellationToken: context.CancellationToken));
 
             FieldAsync<ProductInterfaceGraphType>(
                 name: "product",
