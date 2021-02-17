@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Pages
 {
-    public sealed class PagedResultGraphType<TGraphType, T> : ObjectGraphType<PagedResult<T>>
+    public sealed class PagedResultGraphType<TGraphType, T> : ObjectGraphType<PaginatedResult<T>>
         where TGraphType : IGraphType
     {
         public PagedResultGraphType()

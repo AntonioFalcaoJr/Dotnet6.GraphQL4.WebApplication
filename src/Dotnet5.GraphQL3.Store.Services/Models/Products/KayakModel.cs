@@ -2,7 +2,7 @@
 
 namespace Dotnet5.GraphQL3.Store.Services.Models.Products
 {
-    public record KayakModel : ProductModel
+    public class KayakModel : ProductModel
     {
         public int AmountOfPerson { get; init; }
         public KayakType Type { get; init; }

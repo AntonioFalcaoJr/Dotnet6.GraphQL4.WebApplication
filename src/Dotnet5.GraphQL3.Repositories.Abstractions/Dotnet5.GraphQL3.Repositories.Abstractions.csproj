@@ -4,6 +4,7 @@
         <PackageReference Include="AutoMapper" Version="$(AutoMapper_Version)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
         <PackageReference Include="Scrutor" Version="$(Scrutor_Version)" />
+        <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.8" />
     </ItemGroup>
 
     <ItemGroup>

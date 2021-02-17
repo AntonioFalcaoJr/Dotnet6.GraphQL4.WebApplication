@@ -2,7 +2,7 @@
 
 namespace Dotnet5.GraphQL3.Store.Services.Models.Products
 {
-    public record BackpackModel : ProductModel
+    public class BackpackModel : ProductModel
     {
         public BackpackType Type { get; init; }
     }
