@@ -683,14 +683,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Antônio Falcão** - [GitHub](https://github.com/AntonioFalcao)
-
-> See also the list of [contributors](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/graphs/contributors) who participated in this project.
+> See the list of [contributors](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/graphs/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details
-
-## Acknowledgments
-
-* Nothing more, for now.
