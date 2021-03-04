@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -29,19 +30,22 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
         public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken)
             => await _dbContext.SaveChangesAsync(true, cancellationToken) > default(int);
 
-        public void Commit()
+        public void CommitTransaction()
             => _database.CommitTransaction();
 
-        public async Task CommitAsync(CancellationToken cancellationToken)
+        public async Task CommitTransactionAsync(CancellationToken cancellationToken)
             => await _database.CommitTransactionAsync(cancellationToken);
 
-        public void Rollback()
+        public void RollbackTransaction()
             => _database.RollbackTransaction();
 
-        public async Task RollbackAsync(CancellationToken cancellationToken)
+        public async Task RollbackTransactionAsync(CancellationToken cancellationToken)
             => await _database.RollbackTransactionAsync(cancellationToken);
 
         public void Dispose()
-            => _dbContext?.Dispose();
+        {
+            _dbContext?.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }
