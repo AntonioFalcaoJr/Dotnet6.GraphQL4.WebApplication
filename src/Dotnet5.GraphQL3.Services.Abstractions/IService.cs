@@ -15,9 +15,10 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         where TModel : Model<TId>
         where TId : struct
     {
-        void Delete(TId id);
-        void Delete(TEntity entity);
-        Task DeleteAsync(TId id, CancellationToken cancellationToken);
+        bool Delete(TId id);
+        bool Delete(TModel model);
+        Task<bool> DeleteAsync(TId id, CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(TModel model, CancellationToken cancellationToken);
 
         TEntity Edit(TModel model);
         Task<TEntity> EditAsync(TModel model, CancellationToken cancellationToken);
@@ -26,35 +27,35 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken);
 
         PagedResult<TEntity> GetAll(
-            PageParams pageParams,
+            PageParams pageParams, 
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default);
-        
+
         PagedResult<TResult> GetAllProjections<TResult>(
-            PageParams pageParams,
+            PageParams pageParams, 
             Expression<Func<TEntity, TResult>> selector = default,
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default);
 
         Task<PagedResult<TEntity>> GetAllAsync(
-            PageParams pageParams,
-            CancellationToken cancellationToken,
+            PageParams pageParams, 
+            CancellationToken cancellationToken, 
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default);
-        
+
         Task<PagedResult<TResult>> GetAllProjectionsAsync<TResult>(
-            PageParams pageParams,
+            PageParams pageParams, 
             CancellationToken cancellationToken,
-            Expression<Func<TEntity, TResult>> selector = default,
+            Expression<Func<TEntity, TResult>> selector = default, 
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default);
 
         TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default);

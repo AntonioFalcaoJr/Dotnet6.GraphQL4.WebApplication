@@ -20,26 +20,26 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
         public IDbContextTransaction BeginTransaction()
             => _database.BeginTransaction();
 
-        public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
-            => _database.BeginTransactionAsync(cancellationToken);
+        public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
+            => await _database.BeginTransactionAsync(cancellationToken);
 
-        public void SaveChanges()
-            => _dbContext.SaveChanges(true);
+        public bool SaveChanges()
+            => _dbContext.SaveChanges(true) > default(int);
 
-        public Task SaveChangesAsync(CancellationToken cancellationToken)
-            => _dbContext.SaveChangesAsync(true, cancellationToken);
+        public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken)
+            => await _dbContext.SaveChangesAsync(true, cancellationToken) > default(int);
 
         public void Commit()
             => _database.CommitTransaction();
 
-        public Task CommitAsync(CancellationToken cancellationToken)
-            => _database.CommitTransactionAsync(cancellationToken);
+        public async Task CommitAsync(CancellationToken cancellationToken)
+            => await _database.CommitTransactionAsync(cancellationToken);
 
         public void Rollback()
             => _database.RollbackTransaction();
 
-        public Task RollbackAsync(CancellationToken cancellationToken)
-            => _database.RollbackTransactionAsync(cancellationToken);
+        public async Task RollbackAsync(CancellationToken cancellationToken)
+            => await _database.RollbackTransactionAsync(cancellationToken);
 
         public void Dispose()
             => _dbContext?.Dispose();

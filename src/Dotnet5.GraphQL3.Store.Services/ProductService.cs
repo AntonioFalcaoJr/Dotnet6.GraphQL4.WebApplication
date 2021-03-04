@@ -12,16 +12,16 @@ using Dotnet5.GraphQL3.Services.Abstractions.Resources;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL3.Store.Repositories;
-using Dotnet5.GraphQL3.Store.Services.Models;
 using Dotnet5.GraphQL3.Store.Services.Models.Products;
+using Dotnet5.GraphQL3.Store.Services.Models.Reviews;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL3.Store.Services
 {
     public class ProductService : Service<Product, ProductModel, Guid>, IProductService
     {
-        public ProductService(IUnitOfWork unitOfWork, IProductRepository repository, IMapper mapper, INotificationContext notificationContext)
-            : base(unitOfWork, repository, mapper, notificationContext) { }
+        public ProductService(IProductRepository repository, IUnitOfWork unitOfWork, INotificationContext notificationContext, IMapper mapper)
+            : base(repository, unitOfWork, notificationContext, mapper) { }
 
         public async Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
         {

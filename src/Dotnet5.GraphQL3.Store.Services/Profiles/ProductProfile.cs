@@ -12,13 +12,13 @@ namespace Dotnet5.GraphQL3.Store.Services.Profiles
         public ProductProfile()
         {
             CreateMap<KayakModel, Kayak>()
-                .ConvertUsing<KayakModelToDomainProfile>();
+                .ConvertUsing<KayakModelToDomainConverter>();
 
             CreateMap<BootModel, Boot>()
-                .ConvertUsing<BootModelToDomainProfile>();
+                .ConvertUsing<BootModelToDomainConverter>();
 
             CreateMap<BackpackModel, Backpack>()
-                .ConvertUsing<BackpackModelToDomainProfile>();
+                .ConvertUsing<BackpackModelToDomainConverter>();
         }
     }
 }

@@ -1,6 +1,6 @@
 using AutoMapper;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL3.Store.Services.Models;
+using Dotnet5.GraphQL3.Store.Services.Models.Reviews;
 using Dotnet5.GraphQL3.Store.Services.Profiles.Converters;
 
 namespace Dotnet5.GraphQL3.Store.Services.Profiles

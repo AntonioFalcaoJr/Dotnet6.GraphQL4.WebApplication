@@ -13,7 +13,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
         Task CommitAsync(CancellationToken cancellationToken);
         void Rollback();
         Task RollbackAsync(CancellationToken cancellationToken);
-        void SaveChanges();
-        Task SaveChangesAsync(CancellationToken cancellationToken);
+        bool SaveChanges();
+        Task<bool> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
