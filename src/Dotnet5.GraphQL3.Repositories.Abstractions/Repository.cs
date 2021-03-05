@@ -27,7 +27,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public virtual void Delete(TId id)
         {
-            var entity = GetById(id);
+            var entity = GetById(id, asTracking: true);
             if (entity is null) return;
             _dbSet.Remove(entity);
         }
@@ -35,14 +35,21 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
         public virtual void Delete(TEntity entity)
         {
             if (entity is null) return;
+            _dbSet.Attach(entity);
             _dbSet.Remove(entity);
         }
 
         public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken)
         {
-            var entity = await GetByIdAsync(id, cancellationToken);
+            var entity = await GetByIdAsync(id, cancellationToken, asTracking: true);
             if (entity is null) return;
             _dbSet.Remove(entity);
+        }
+
+        public virtual async Task DeleteAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            if (entity is null) return;
+            await Task.Run(() => Delete(entity), cancellationToken);
         }
 
         public virtual bool Exists(TId id)
@@ -53,16 +60,18 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
 
         public virtual TEntity Add(TEntity entity)
         {
+            if (entity is null) return default;
             if (Exists(entity.Id)) return entity;
-            _dbSet.Add(entity);
-            return entity;
+            var entityEntry = _dbSet.Add(entity);
+            return entityEntry.Entity;
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
+            if (entity is null) return default;
             if (await ExistsAsync(entity.Id, cancellationToken)) return entity;
-            await _dbSet.AddAsync(entity, cancellationToken);
-            return entity;
+            var entityEntry = await _dbSet.AddAsync(entity, cancellationToken);
+            return entityEntry.Entity;
         }
 
         public TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default)

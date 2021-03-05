@@ -16,8 +16,8 @@ using Microsoft.EntityFrameworkCore.Query;
 namespace Dotnet5.GraphQL3.Services.Abstractions
 {
     public abstract class Service<TEntity, TModel, TId> : IService<TEntity, TModel, TId>
-        where TEntity : Entity<TId>
-        where TModel : Model<TId>
+        where TEntity : Entity<TId> 
+        where TModel : Model<TId> 
         where TId : struct
     {
         protected readonly IMapper Mapper;
@@ -25,37 +25,40 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         protected readonly IRepository<TEntity, TId> Repository;
         protected readonly IUnitOfWork UnitOfWork;
 
-        protected Service(
-            IUnitOfWork unitOfWork,
-            IRepository<TEntity, TId> repository,
-            IMapper mapper,
-            INotificationContext notificationContext)
+        protected Service(IRepository<TEntity, TId> repository, IUnitOfWork unitOfWork, INotificationContext notificationContext, IMapper mapper)
         {
-            UnitOfWork = unitOfWork;
             Repository = repository;
-            Mapper = mapper;
+            UnitOfWork = unitOfWork;
             NotificationContext = notificationContext;
+            Mapper = mapper;
         }
 
-        public virtual void Delete(TId id)
+        public virtual bool Delete(TId id)
         {
-            if (IsValid(id) is false) return;
+            if (IsValid(id) is false) return default;
             Repository.Delete(id);
-            UnitOfWork.SaveChanges();
+            return UnitOfWork.SaveChanges();
         }
 
-        public virtual void Delete(TEntity entity)
+        public virtual bool Delete(TModel model)
         {
-            if (IsValid(entity) is false) return;
-            Repository.Delete(entity);
-            UnitOfWork.SaveChanges();
+            if (IsValid(model) is false) return default;
+            var entity = Mapper.Map<TEntity>(model);
+            return OnDelete(entity);
         }
 
-        public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken)
+        public virtual async Task<bool> DeleteAsync(TId id, CancellationToken cancellationToken)
         {
-            if (IsValid(id) is false) return;
+            if (IsValid(id) is false) return default;
             await Repository.DeleteAsync(id, cancellationToken);
-            await UnitOfWork.SaveChangesAsync(cancellationToken);
+            return await UnitOfWork.SaveChangesAsync(cancellationToken);
+        }
+        
+        public virtual async Task<bool> DeleteAsync(TModel model, CancellationToken cancellationToken)
+        {
+            if (IsValid(model) is false) return default;
+            var entity = Mapper.Map<TEntity>(model);
+            return await OnDeleteAsync(entity, cancellationToken);
         }
 
         public virtual TEntity Edit(TModel model)
@@ -69,7 +72,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return await OnEditAsync(entity, cancellationToken).ConfigureAwait(default);
+            return await OnEditAsync(entity, cancellationToken);
         }
 
         public virtual bool Exists(TId id)
@@ -79,42 +82,42 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             => IsValid(id) ? await Repository.ExistsAsync(id, cancellationToken) : default;
 
         public virtual PagedResult<TEntity> GetAll(
-            PageParams pageParams,
+            PageParams pageParams, 
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default)
             => Repository.GetAll(pageParams, predicate, orderBy, include, asTracking);
-        
+
         public virtual PagedResult<TResult> GetAllProjections<TResult>(
-            PageParams pageParams,
+            PageParams pageParams, 
             Expression<Func<TEntity, TResult>> selector = default,
-            Expression<Func<TEntity, bool>> predicate = default,
+            Expression<Func<TEntity, bool>> predicate = default, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default)
             => Repository.GetAllProjections(pageParams, selector, predicate, orderBy, include, asTracking);
 
         public virtual async Task<PagedResult<TEntity>> GetAllAsync(
-            PageParams pageParams,
+            PageParams pageParams, 
             CancellationToken cancellationToken,
-            Expression<Func<TEntity, bool>> predicate = default,
+            Expression<Func<TEntity, bool>> predicate = default, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default)
             => await Repository.GetAllAsync(pageParams, cancellationToken, predicate, orderBy, include, asTracking);
-        
+
         public virtual async Task<PagedResult<TResult>> GetAllProjectionsAsync<TResult>(
-            PageParams pageParams,
+            PageParams pageParams, 
             CancellationToken cancellationToken,
-            Expression<Func<TEntity, TResult>> selector = default,
+            Expression<Func<TEntity, TResult>> selector = default, 
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default)
             => await Repository.GetAllProjectionsAsync(pageParams, cancellationToken, selector, predicate, orderBy, include, asTracking);
 
-        public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default) 
+        public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default)
             => IsValid(id) ? Repository.GetById(id, include, asTracking) : default;
 
         public virtual async Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default)
@@ -131,39 +134,49 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
         {
             if (IsValid(model) is false) return default;
             var entity = Mapper.Map<TEntity>(model);
-            return await OnSaveAsync(entity, cancellationToken).ConfigureAwait(default);
+            return await OnSaveAsync(entity, cancellationToken);
         }
 
         protected TEntity OnSave(TEntity entity)
         {
             if (IsValid(entity) is false) return default;
             Repository.Add(entity);
-            UnitOfWork.SaveChanges();
-            return entity;
+            return UnitOfWork.SaveChanges() ? entity : default;
         }
 
         protected TEntity OnEdit(TEntity entity)
         {
             if (IsValid(entity) is false) return default;
             Repository.Update(entity);
-            UnitOfWork.SaveChanges();
-            return entity;
+            return UnitOfWork.SaveChanges() ? entity : default;
+        }
+
+        protected bool OnDelete(TEntity entity)
+        {
+            if (IsValid(entity) is false) return default;
+            Repository.Delete(entity);
+            return UnitOfWork.SaveChanges();
         }
 
         protected async Task<TEntity> OnEditAsync(TEntity entity, CancellationToken cancellationToken)
         {
             if (IsValid(entity) is false) return default;
             await Repository.UpdateAsync(entity, cancellationToken);
-            await UnitOfWork.SaveChangesAsync(cancellationToken);
-            return entity;
+            return await UnitOfWork.SaveChangesAsync(cancellationToken) ? entity : default;
         }
 
         protected async Task<TEntity> OnSaveAsync(TEntity entity, CancellationToken cancellationToken)
         {
             if (IsValid(entity) is false) return default;
             await Repository.AddAsync(entity, cancellationToken);
-            await UnitOfWork.SaveChangesAsync(cancellationToken);
-            return entity;
+            return await UnitOfWork.SaveChangesAsync(cancellationToken) ? entity : default;
+        }
+        
+        protected async Task<bool> OnDeleteAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            if (IsValid(entity) is false) return default;
+            await Repository.DeleteAsync(entity, cancellationToken);
+            return await UnitOfWork.SaveChangesAsync(cancellationToken);
         }
 
         private bool IsValid(TEntity entity)

@@ -2,8 +2,8 @@
 using System.Reactive.Subjects;
 using AutoMapper;
 using Dotnet5.GraphQL3.Services.Abstractions.Messages;
-using Dotnet5.GraphQL3.Store.Services.Models;
-using Dotnet5.GraphQL3.Store.Services.Models.Messages;
+using Dotnet5.GraphQL3.Store.Services.Models.Reviews;
+using Dotnet5.GraphQL3.Store.Services.Models.Reviews.Messages;
 
 namespace Dotnet5.GraphQL3.Store.Services.Messages
 {
