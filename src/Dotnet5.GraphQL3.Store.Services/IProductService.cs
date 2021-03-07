@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Dotnet5.GraphQL3.Services.Abstractions;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Products;
 using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
-using Dotnet5.GraphQL3.Store.Services.Models;
 using Dotnet5.GraphQL3.Store.Services.Models.Products;
+using Dotnet5.GraphQL3.Store.Services.Models.Reviews;
 
 namespace Dotnet5.GraphQL3.Store.Services
 {

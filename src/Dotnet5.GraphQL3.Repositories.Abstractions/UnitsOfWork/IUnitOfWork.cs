@@ -9,11 +9,11 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork
     {
         IDbContextTransaction BeginTransaction();
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
-        void Commit();
-        Task CommitAsync(CancellationToken cancellationToken);
-        void Rollback();
-        Task RollbackAsync(CancellationToken cancellationToken);
-        void SaveChanges();
-        Task SaveChangesAsync(CancellationToken cancellationToken);
+        void CommitTransaction();
+        Task CommitTransactionAsync(CancellationToken cancellationToken);
+        void RollbackTransaction();
+        Task RollbackTransactionAsync(CancellationToken cancellationToken);
+        bool SaveChanges();
+        Task<bool> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Reactive.Subjects;
-using System.Reflection;
-using AutoMapper;
+﻿using System.Reactive.Subjects;
+using Dotnet5.GraphQL3.CrossCutting;
 using Dotnet5.GraphQL3.Services.Abstractions.Messages;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
@@ -12,33 +9,25 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.Extensions.DependencyInjection
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-            => services.Scan(selector 
-                => selector.FromApplicationDependencies(assembly 
-                    => assembly.FullName?.StartsWith(GetAssemblySuffix()) ?? default)
-                .AddClasses(filter 
-                    => filter.AssignableTo(typeof(IService<,,>)))
-                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
+            => services
+                .Scan(selector => selector.FromAssemblies(Application.Assemblies)
+                    .AddClasses(filter => filter.AssignableTo(typeof(IService<,,>)))
+                    .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime());
 
-        public static IServiceCollection AddMessageServices(this IServiceCollection services)
-            => services.Scan(selector 
-                => selector.FromApplicationDependencies(assembly 
-                    => assembly.FullName?.StartsWith(GetAssemblySuffix()) ?? default)
-                .AddClasses(filter 
-                    => filter.AssignableTo(typeof(IMessageService<,,>)))
-                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-                .AsImplementedInterfaces()
-                .WithSingletonLifetime());
+        public static IServiceCollection AddApplicationMessageServices(this IServiceCollection services)
+            => services
+                .Scan(selector => selector.FromAssemblies(Application.Assemblies)
+                    .AddClasses(filter => filter.AssignableTo(typeof(IMessageService<,,>)))
+                    .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime());
 
-        public static IServiceCollection AddSubjects(this IServiceCollection services)
+        public static IServiceCollection AddApplicationAutoMapper(this IServiceCollection services)
+            => services.AddAutoMapper(Application.Assemblies);
+
+        public static IServiceCollection AddApplicationSubjects(this IServiceCollection services)
             => services.AddSingleton(typeof(ISubject<>), typeof(ReplaySubject<>));
-
-        public static IServiceCollection AddAutoMapper(this IServiceCollection services)
-            => services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies().Where(x 
-                => x.FullName?.Contains(GetAssemblySuffix()) ?? default));
-
-        private static string GetAssemblySuffix()
-            => Assembly.GetEntryAssembly()?.FullName?.Substring(0, 16);
     }
 }

@@ -1,34 +1,29 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.Extensions.EndpointRouteBuilders
 {
     public static class EndpointRouteBuilderExtensions
     {
-        public static void MapLivenessHealthChecks(this IEndpointRouteBuilder endpoints)
+        private static readonly JsonSerializerOptions SerializerOptions = new() {IgnoreNullValues = true, WriteIndented = true};
+        private static readonly HealthCheck HealthCheck = new();
+        
+        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern, Func<HealthCheckRegistration, bool> predicate = default)
             => endpoints.MapHealthChecks(
-                pattern: "/health/live",
+                pattern: pattern,
                 options: new HealthCheckOptions
                 {
                     AllowCachingResponses = false,
-                    ResponseWriter = WriteHealthCheckLiveResponseAsync,
-                    Predicate = registration => registration.Tags.Any() is false
-                });
-
-        public static void MapReadinessHealthChecks(this IEndpointRouteBuilder endpoints)
-            => endpoints.MapHealthChecks(
-                pattern: "/health/ready",
-                options: new HealthCheckOptions
-                {
-                    AllowCachingResponses = false,
-                    ResponseWriter = WriteHealthCheckReadyResponseAsync,
-                    Predicate = registration => registration.Tags.Contains("ready"),
+                    ResponseWriter = WriteHealthCheckResponseAsync,
+                    Predicate = predicate,
                     ResultStatusCodes =
                     {
                         [HealthStatus.Healthy] = StatusCodes.Status200OK,
@@ -37,34 +32,39 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.Extensions.EndpointRouteBuilders
                     }
                 });
 
-        private static Task WriteHealthCheckReadyResponseAsync(HttpContext httpContext, HealthReport healthReport)
+        private static Task WriteHealthCheckResponseAsync(HttpContext httpContext, HealthReport healthReport)
         {
             httpContext.Response.ContentType = "application/json";
 
-            return httpContext.Response.WriteAsync(
-                JsonConvert.SerializeObject(new
-                {
-                    OverallStatus = healthReport.Status.ToString(),
-                    TotalCheckDuration = healthReport.TotalDuration.TotalSeconds.ToString("00:00:00.000"),
-                    DependencyHealthChecks = healthReport.Entries.Select(
-                        dependency => new
+            HealthCheck.OverallStatus = healthReport.Status.ToString();
+            HealthCheck.TotalCheckDuration = healthReport.TotalDuration.TotalSeconds.ToString("00:00:00.000");
+            HealthCheck.DependencyHealthChecks = healthReport.Entries.Any()
+                ? healthReport.Entries.Select(dependency 
+                    => new DependencyHealthCheck
                         {
                             Name = dependency.Key,
                             Status = dependency.Value.Status.ToString(),
-                            Duration = dependency.Value.Duration.TotalSeconds.ToString("00:00:00.000")
+                            Duration = dependency.Value.Duration.TotalSeconds.ToString("00:00:00.000"),
+                            Error = dependency.Value.Exception?.Message
                         })
-                }));
+                : default;
+            
+            return httpContext.Response.WriteAsync(JsonSerializer.Serialize(HealthCheck, SerializerOptions));
         }
+    }
 
-        private static Task WriteHealthCheckLiveResponseAsync(HttpContext httpContext, HealthReport healthReport)
-        {
-            httpContext.Response.ContentType = "application/json";
-            return httpContext.Response.WriteAsync(
-                JsonConvert.SerializeObject(new
-                {
-                    OverallStatus = healthReport.Status.ToString(),
-                    TotalCheckDuration = healthReport.TotalDuration.TotalSeconds.ToString("00:00:00.000")
-                }));
-        }
+    internal class HealthCheck
+    {
+        public string OverallStatus { get; set; }
+        public string TotalCheckDuration { get; set; }
+        public IEnumerable<DependencyHealthCheck> DependencyHealthChecks { get; set; }
+    }
+
+    internal record DependencyHealthCheck
+    {
+        public string Name { get; init; }
+        public string Status { get; init; }
+        public string Duration { get; init; }
+        public string Error { get; init; }
     }
 }

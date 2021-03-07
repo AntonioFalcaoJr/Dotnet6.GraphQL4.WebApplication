@@ -1,4 +1,4 @@
-﻿using Dotnet5.GraphQL3.Store.Services.Models.Messages;
+﻿using Dotnet5.GraphQL3.Store.Services.Models.Reviews.Messages;
 using GraphQL.Types;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews

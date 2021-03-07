@@ -347,28 +347,26 @@ networks:
 
 Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
 
+> `/health`   
+> Just check if the instance is running.
+
+> `/health/live`  
+> Check if the instance is running and all the dependencies too.
+
+> `/health/ready`
+> Check if the instance and all the dependencies are ready to attend to all functionalities.
+
 Web API
 
 `http://localhost:5000/health/ready`
 
 ![Readiness](./.assets/img/Readiness.png)
 
-
-`http://localhost:5000/health/live`
-
-![Liveness](./.assets/img/Liveness.png)
-
----
-
 Web MVC
 
 `http://localhost:7000/health/ready`
 
 ![Readiness](./.assets/img/ReadinessMVC.png)
-
-`http://localhost:7000/health/live`
-
-![Liveness](./.assets/img/LivenessMVC.png)
 
 ---
 
@@ -685,14 +683,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Antônio Falcão** - [GitHub](https://github.com/AntonioFalcao)
-
-> See also the list of [contributors](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/graphs/contributors) who participated in this project.
+> See the list of [contributors](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/graphs/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details
-
-## Acknowledgments
-
-* Nothing more, for now.

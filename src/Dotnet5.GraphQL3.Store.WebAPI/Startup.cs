@@ -1,3 +1,4 @@
+using System.Linq;
 using Dotnet5.GraphQL3.CrossCutting.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Domain.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Repositories.Abstractions.Extensions.DependencyInjection;
@@ -9,7 +10,6 @@ using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -21,6 +21,8 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
+        private readonly string[] _readinessTags = {"ready"};
+        private readonly string[] _livenessTags = {"live"};
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -33,15 +35,30 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseApplicationGraphQL<StoreSchema>();
+            
             app.UseRouting()
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
-                    endpoints.MapLivenessHealthChecks();
-                    endpoints.MapReadinessHealthChecks();
+                    
+                    endpoints.MapApplicationHealthChecks(
+                        pattern: "/health", 
+                        predicate: registration
+                            => registration.Tags.Any() is false);
+                
+                    endpoints.MapApplicationHealthChecks(
+                        pattern: "/health/live", 
+                        predicate: registration
+                            => registration.Tags.Any(item 
+                                => _livenessTags.Contains(item)));
+                    
+                    endpoints.MapApplicationHealthChecks(
+                        pattern: "/health/ready", 
+                        predicate: registration 
+                            => registration.Tags.Any(item 
+                                => _readinessTags.Contains(item)));
                 });
-
-            app.UseApplicationGraphQL<StoreSchema>();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -52,12 +69,13 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 .AddBuilders()
                 .AddRepositories()
                 .AddUnitOfWork()
-                .AddAutoMapper()
+                .AddNotificationContext()
                 .AddApplicationServices()
-                .AddMessageServices()
-                .AddSubjects()
-                .AddNotificationContext();
-
+                .AddApplicationMessageServices()
+                .AddApplicationSubjects();
+            
+            services.AddApplicationAutoMapper();
+            
             services.AddApplicationDbContext(options =>
                 {
                     options.DefaultConnection = _configuration.GetConnectionString(nameof(options.DefaultConnection));
@@ -72,9 +90,15 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
 
             services.AddHealthChecks()
                 .AddSqlServer(
+                    name:"Sql Server (Live)",
+                    connectionString: _configuration.GetConnectionString("DefaultConnection"), 
+                    failureStatus: HealthStatus.Degraded,
+                    tags: _livenessTags)
+                .AddSqlServer(
+                    name:"Sql Server (Ready)",
                     connectionString: _configuration.GetConnectionString("DefaultConnection"), 
                     failureStatus: HealthStatus.Unhealthy,
-                    tags: new[] {"ready"});
+                    tags: _readinessTags);
         }
     }
 }
