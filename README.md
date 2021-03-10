@@ -378,7 +378,6 @@ app.UseGraphQLPlayground(
         BetaUpdates = true,
         RequestCredentials = RequestCredentials.Omit,
         HideTracingResponse = false,
-
         EditorCursorShape = EditorCursorShape.Line,
         EditorTheme = EditorTheme.Dark,
         EditorFontSize = 14,
@@ -648,12 +647,12 @@ ___
 
 ## Built With
 
-### Microsoft Stack - v5.0
+### Microsoft Stack - v5.0/6.0
 
-* [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
-* [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
-* [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM;
-* [Microsoft SQL Server on Linux for Docker](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - Database.
+* [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) - Base framework;
+* [ASP.NET 5.0](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/) - Web framework;
+* [Entity Framework Core 6.0 (preview)](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-6-0-preview-1/) - ORM;
+* [Microsoft SQL Server on Linux for Docker](https://hub.docker.com/_/microsoft-mssql-server) - Database.
 
 ### GraphQL Stack - v3.0
 
