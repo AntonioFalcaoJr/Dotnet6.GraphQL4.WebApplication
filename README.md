@@ -353,7 +353,7 @@ Based on cloud-native concepts, **Readiness** and **Liveness** integrity verific
 > `/health/live`  
 > Check if the instance is running and all the dependencies too.
 
-> `/health/ready`
+> `/health/ready`          
 > Check if the instance and all the dependencies are ready to attend to all functionalities.
 
 Web API
