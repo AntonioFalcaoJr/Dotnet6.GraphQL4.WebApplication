@@ -7,6 +7,8 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
 {
     public class StoreDbContext : DbContext
     {
+        private const string SqlLatin1GeneralCp1CsAs = "SQL_Latin1_General_CP1_CS_AS";
+
         public StoreDbContext(DbContextOptions options)
             : base(options) { }
 
@@ -16,7 +18,7 @@ namespace Dotnet5.GraphQL3.Store.Repositories.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("SQL_Latin1_General_CP1_CS_AS");
+            modelBuilder.UseCollation(SqlLatin1GeneralCp1CsAs);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreDbContext).Assembly);
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
