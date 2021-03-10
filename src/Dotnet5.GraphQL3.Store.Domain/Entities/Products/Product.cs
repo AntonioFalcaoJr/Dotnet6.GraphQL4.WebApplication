@@ -9,8 +9,9 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
 {
     public abstract class Product : Entity<Guid>, IProduct
     {
-        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
-            ProductType productType, int rating, int stock, Option option)
+        private readonly HashSet<Review> _reviews = new();
+
+        protected Product(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price, ProductType productType, int rating, int stock, Option option)
         {
             Id = id;
             Description = description;
@@ -22,10 +23,12 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
             Rating = rating;
             Stock = stock;
             Option = option;
-            Reviews = new List<Review>();
         }
 
         protected Product() { }
+
+        public IReadOnlyCollection<Review> Reviews
+             => _reviews;
 
         public string Description { get; }
         public DateTimeOffset IntroduceAt { get; }
@@ -36,7 +39,6 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
         public ProductType ProductType { get; }
         public int Rating { get; }
         public int Stock { get; }
-        public ICollection<Review> Reviews { get; }
 
         public void AddReview(Review review)
         {
@@ -46,8 +48,8 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
                 return;
             }
 
-            if (Reviews.Contains(review)) return;
-            Reviews.Add(review);
+            if (_reviews.Contains(review)) return;
+            _reviews.Add(review);
         }
     }
 }
