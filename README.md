@@ -2,7 +2,7 @@
 
 This project exemplify the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 3** Web API, build in a **.NET 5** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
 
-### Give a Star! :star:
+## Give a Star! :star:
 
 |WebAPI|
 |:----:| 
@@ -10,11 +10,7 @@ This project exemplify the implementation and **dockerization** of a simple Razo
 |**WebMVC**|
 |[![Build/Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/MVC%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webmvc-docker-image.yml) [![Push MVC](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webmvc-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webmvc?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webmvc)|
 
----
-
 ![home](./.assets/img/home.PNG)
-
----
 
 ## Environment configuration
 
