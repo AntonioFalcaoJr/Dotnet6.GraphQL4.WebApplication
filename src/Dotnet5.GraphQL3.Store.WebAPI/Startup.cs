@@ -43,18 +43,18 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                     endpoints.MapControllers();
                     
                     endpoints.MapApplicationHealthChecks(
-                        pattern: "/health", 
+                        pattern: _configuration["HealthCheckPatterns:Health"], 
                         predicate: registration
                             => registration.Tags.Any() is false);
                 
                     endpoints.MapApplicationHealthChecks(
-                        pattern: "/health/live", 
+                        pattern: _configuration["HealthCheckPatterns:Liveness"], 
                         predicate: registration
                             => registration.Tags.Any(item 
                                 => _livenessTags.Contains(item)));
                     
                     endpoints.MapApplicationHealthChecks(
-                        pattern: "/health/ready", 
+                        pattern: _configuration["HealthCheckPatterns:Readiness"], 
                         predicate: registration 
                             => registration.Tags.Any(item 
                                 => _readinessTags.Contains(item)));
