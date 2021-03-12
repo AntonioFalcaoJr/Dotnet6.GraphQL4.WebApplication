@@ -1,18 +1,16 @@
 # Dotnet5.GraphQL3.WebApplication
 
 This project exemplify the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 3** Web API, build in a **.NET 5** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
-         
+
+## Give a Star! :star:
+
 |WebAPI|
 |:----:| 
 |[![Build/Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/API%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![Push API](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20API/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webapi-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webapi?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webapi)|                
 |**WebMVC**|
 |[![Build/Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/MVC%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webmvc-docker-image.yml) [![Push MVC](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webmvc-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webmvc?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webmvc)|
 
----
-
 ![home](./.assets/img/home.PNG)
-
----
 
 ## Environment configuration
 
@@ -378,7 +376,6 @@ app.UseGraphQLPlayground(
         BetaUpdates = true,
         RequestCredentials = RequestCredentials.Omit,
         HideTracingResponse = false,
-
         EditorCursorShape = EditorCursorShape.Line,
         EditorTheme = EditorTheme.Dark,
         EditorFontSize = 14,
@@ -648,12 +645,12 @@ ___
 
 ## Built With
 
-### Microsoft Stack - v5.0
+### Microsoft Stack - v5.0/6.0
 
-* [.NET 5.0](https://dotnet.microsoft.com/) - Base framework;
-* [ASP.NET 5.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) - Web framework;
-* [Entity Framework Core 5.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - ORM;
-* [Microsoft SQL Server on Linux for Docker](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/plan) - Database.
+* [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) - Base framework;
+* [ASP.NET 5.0](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/) - Web framework;
+* [Entity Framework Core 6.0 (preview)](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-6-0-preview-1/) - ORM;
+* [Microsoft SQL Server on Linux for Docker](https://hub.docker.com/_/microsoft-mssql-server) - Database.
 
 ### GraphQL Stack - v3.0
 
