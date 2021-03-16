@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL3.Repositories.Abstractions.Pages
 {
-    public class PagedResult<T>
+    public class PagedResult<T> 
+        where T: class
     {
         private readonly IReadOnlyCollection<T> _items;
         private readonly int _index;
