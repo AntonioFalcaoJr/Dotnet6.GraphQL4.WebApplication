@@ -22,7 +22,7 @@
         <AutoMapper_Version>10.1.1</AutoMapper_Version>
 
         <!--Others-->
-        <FluentValidation_Version>9.5.2</FluentValidation_Version>
+        <FluentValidation_Version>9.5.3</FluentValidation_Version>
         <Scrutor_Version>3.3.0</Scrutor_Version>
         
     </PropertyGroup>
