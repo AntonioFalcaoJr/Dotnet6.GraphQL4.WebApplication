@@ -39,7 +39,8 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
-            bool asTracking = default);
+            bool asTracking = default)
+            where TResult : class;
 
         Task<PagedResult<TEntity>> GetAllAsync(
             PageParams pageParams, 
@@ -56,7 +57,8 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Expression<Func<TEntity, bool>> predicate = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
-            bool asTracking = default);
+            bool asTracking = default)
+            where TResult : class;
 
         TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default);
         Task<TEntity> GetByIdAsync(TId id, CancellationToken cancellationToken, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default);

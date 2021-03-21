@@ -5,6 +5,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Pages
 {
     public sealed class PagedResultGraphType<TGraphType, T> : ObjectGraphType<PagedResult<T>>
         where TGraphType : IGraphType
+        where T : class
     {
         public PagedResultGraphType()
         {
