@@ -3,7 +3,7 @@ using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products.Backpacks;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products.Boots;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products.Kayaks;
 using GraphQL.Types;
-using GraphQL.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
 {
@@ -16,9 +16,9 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
             Mutation = serviceProvider.GetRequiredService<StoreMutation>();
             Subscription = serviceProvider.GetRequiredService<StoreSubscription>();
 
-            RegisterType<BootGraphType>();
-            RegisterType<BackpackGraphType>();
-            RegisterType<KayakGraphType>();
+            RegisterType(typeof(BootGraphType));
+            RegisterType(typeof(BackpackGraphType));
+            RegisterType(typeof(KayakGraphType));
         }
     }
 }

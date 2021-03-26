@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers;
 using GraphQL.Server;
-using GraphQL.Server.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -19,18 +18,21 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Extensions.DependencyInjection
             return services
                 .AddScoped(typeof(IGraphQLExecuter<>), typeof(StoreExecuter<>))
                 .AddSingleton<StoreSchema>()
-                .AddGraphQL((options, provider) =>
-                {
-                    options.EnableMetrics = Options.IsDevelopment;
-                    var logger = provider.GetRequiredService<ILogger<Startup>>();
-                    options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
-                })
-                .AddSystemTextJson(configureSerializerSettings: serializerSettings =>
-                    {
-                        serializerSettings.WriteIndented = true;
-                        serializerSettings.IgnoreNullValues = true;
-                        serializerSettings.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    })
+                .AddGraphQL(
+                    (options, provider) =>
+                        {
+                            options.EnableMetrics = Options.IsDevelopment;
+                            var logger = provider.GetRequiredService<ILogger<Startup>>();
+                            options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
+                            options.ComplexityConfiguration = new() {MaxDepth = 15};
+                        })
+                .AddSystemTextJson(
+                    configureSerializerSettings: serializerSettings =>
+                        {
+                            serializerSettings.WriteIndented = true;
+                            serializerSettings.IgnoreNullValues = true;
+                            serializerSettings.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                        })
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(StoreSchema));

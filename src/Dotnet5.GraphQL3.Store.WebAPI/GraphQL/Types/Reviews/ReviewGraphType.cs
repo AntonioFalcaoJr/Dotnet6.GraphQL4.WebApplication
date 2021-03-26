@@ -7,8 +7,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews
     {
         public ReviewGraphType()
         {
-            Name = "review";
-
+            Name = "Review";
             Field(x => x.Id, type: typeof(GuidGraphType));
             Field(x => x.ProductId, type: typeof(GuidGraphType));
             Field(x => x.Comment);

@@ -8,12 +8,7 @@ namespace Dotnet5.GraphQL3.CrossCutting.Notifications
 {
     public class NotificationContext : INotificationContext
     {
-        private readonly List<Notification> _notifications;
-
-        public NotificationContext()
-        {
-            _notifications = new List<Notification>();
-        }
+        private List<Notification> _notifications { get; } = new();
 
         private IEnumerable<ExecutionError> _executionErrors
             => _notifications.Select(notification => new ExecutionError(notification.Message));
@@ -22,7 +17,7 @@ namespace Dotnet5.GraphQL3.CrossCutting.Notifications
         {
             get
             {
-                var executionErrors = new ExecutionErrors();
+                ExecutionErrors executionErrors = new();
                 executionErrors.AddRange(_executionErrors);
                 return executionErrors;
             }

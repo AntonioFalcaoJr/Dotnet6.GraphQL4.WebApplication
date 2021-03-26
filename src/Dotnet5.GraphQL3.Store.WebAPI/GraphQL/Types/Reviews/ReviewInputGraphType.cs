@@ -8,8 +8,8 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews
         {
             Name = "reviewInput";
             Field<NonNullGraphType<StringGraphType>>("title");
-            Field<StringGraphType>("comment");
-            Field<NonNullGraphType<StringGraphType>>("productId");
+            Field<NonNullGraphType<StringGraphType>>("comment");
+            Field<NonNullGraphType<GuidGraphType>>("productId");
         }
     }
 }

@@ -7,8 +7,8 @@ using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL;
 using GraphQL.Types;
-using GraphQL.Utilities;
 using Microsoft.EntityFrameworkCore;
+using GraphQL.MicrosoftDI;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
 {
@@ -16,48 +16,45 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
     {
         public StoreQuery()
         {
-            FieldAsync<PagedResultGraphType<ProductInterfaceGraphType, Product>>(
-                name: "products",
-                arguments: new QueryArguments(new QueryArgument<PageParamsGraphType> {Name = "pageParams"}),
-                resolve: async context 
-                    => await context.RequestServices
-                        .GetRequiredService<IProductService>()
-                        .GetAllAsync(
-                            pageParams: context.GetArgument<PageParams>("pageParams"), 
+            Field<PagedResultGraphType<ProductInterfaceGraphType, Product>>()
+                .Name("Products")
+                .Argument<PageParamsGraphType>(nameof(PageParams))
+                .Resolve()
+                .WithService<IProductService>()
+                .ResolveAsync(
+                    async (context, service) 
+                        => await service.GetAllAsync(
+                            pageParams: context.GetArgument<PageParams>(nameof(PageParams)), 
                             cancellationToken: context.CancellationToken));
 
-            FieldAsync<ProductInterfaceGraphType>(
-                name: "product",
-                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> {Name = "id"}),
-                resolve: async context =>
-                {
-                    var id = context.GetArgument<Guid>("id");
-                    if (Equals(id, default(Guid))) context.Errors.Add(new ExecutionError($"Invalid Id: {id}"));
+            Field<ProductInterfaceGraphType>()
+                .Name("Product")
+                .Argument<GuidGraphType>("id")
+                .Resolve()
+                .WithService<IProductService>()
+                .ResolveAsync(
+                    async (context, service) 
+                        => await service.GetByIdAsync(
+                            id: context.GetArgument<Guid>("id"), 
+                            cancellationToken: context.CancellationToken));
 
-                    return await context.RequestServices
-                        .GetRequiredService<IProductService>()
-                        .GetByIdAsync(
-                            id: id,
-                            cancellationToken: context.CancellationToken);
-                });
 
-            FieldAsync<ListGraphType<ReviewGraphType>>(
-                name: "reviews",
-                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> {Name = "productId"}),
-                resolve: async context =>
-                {
-                    var productId = context.GetArgument<Guid>("productId");
-                    if (Equals(productId, default(Guid))) context.Errors.Add(new ExecutionError($"Invalid Id: {productId}"));
+            Field<ListGraphType<ReviewGraphType>>()
+                .Name("Reviews")
+                .Argument<GuidGraphType>("productId")
+                .Resolve()
+                .WithScope()
+                .WithService<IProductService>()
+                .ResolveAsync(
+                    async (context, service) =>
+                        {
+                            var product = await service.GetByIdAsync(
+                                id: context.GetArgument<Guid>("productId"),
+                                include: products => products.Include(x => x.Reviews),
+                                cancellationToken: context.CancellationToken);
 
-                    var product = await context.RequestServices
-                        .GetRequiredService<IProductService>()
-                        .GetByIdAsync(
-                            id: productId,
-                            include: products => products.Include(x => x.Reviews),
-                            cancellationToken: context.CancellationToken);
-
-                    return product?.Reviews;
-                });
+                            return product?.Reviews;
+                        });
         }
     }
 }

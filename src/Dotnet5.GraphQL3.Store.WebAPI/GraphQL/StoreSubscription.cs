@@ -4,7 +4,7 @@ using Dotnet5.GraphQL3.Store.Services.Models.Reviews.Messages;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.Resolvers;
 using GraphQL.Types;
-using GraphQL.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL
 {

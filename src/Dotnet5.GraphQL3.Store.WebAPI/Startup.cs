@@ -3,13 +3,16 @@ using Dotnet5.GraphQL3.CrossCutting.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Domain.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Repositories.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Services.Abstractions.Extensions.DependencyInjection;
+using Dotnet5.GraphQL3.Store.Repositories.Contexts;
 using Dotnet5.GraphQL3.Store.Repositories.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Store.WebAPI.Extensions.EndpointRouteBuilders;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Extensions.DependencyInjection;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -43,21 +46,25 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                     endpoints.MapControllers();
                     
                     endpoints.MapApplicationHealthChecks(
-                        pattern: _configuration["HealthCheckPatterns:Health"], 
+                        pattern: _configuration["HealthChecksPatterns:Health"], 
                         predicate: registration
                             => registration.Tags.Any() is false);
                 
                     endpoints.MapApplicationHealthChecks(
-                        pattern: _configuration["HealthCheckPatterns:Liveness"], 
+                        pattern: _configuration["HealthChecksPatterns:Liveness"], 
                         predicate: registration
                             => registration.Tags.Any(item 
                                 => _livenessTags.Contains(item)));
                     
                     endpoints.MapApplicationHealthChecks(
-                        pattern: _configuration["HealthCheckPatterns:Readiness"], 
+                        pattern: _configuration["HealthChecksPatterns:Readiness"], 
                         predicate: registration 
                             => registration.Tags.Any(item 
                                 => _readinessTags.Contains(item)));
+
+                    endpoints.MapHealthChecks(
+                        pattern: _configuration["HealthChecksPatterns:UI"], 
+                        options: new() {ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse});
                 });
         }
 
@@ -88,16 +95,16 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
                 => options.AllowSynchronousIO = true);
 
             services.AddHealthChecks()
-                .AddSqlServer(
-                    name:"Sql Server (Live)",
-                    connectionString: _configuration.GetConnectionString("DefaultConnection"), 
+                .AddDbContextCheck<DbContext>(
+                    name: "Sql Server (Live)",
                     failureStatus: HealthStatus.Degraded,
                     tags: _livenessTags)
-                .AddSqlServer(
-                    name:"Sql Server (Ready)",
-                    connectionString: _configuration.GetConnectionString("DefaultConnection"), 
+                .AddDbContextCheck<StoreDbContext>(
+                    name: "Sql Server (Ready)",
                     failureStatus: HealthStatus.Unhealthy,
-                    tags: _readinessTags);
+                    tags: _readinessTags,
+                    customTestQuery: async (dbContext, cancellationToken) 
+                        => await dbContext.Products.AnyAsync(cancellationToken));
         }
     }
 }

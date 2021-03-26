@@ -1,4 +1,5 @@
 ﻿<Project>
+    
     <PropertyGroup Label="Common properties">
         <TargetFramework>net5.0</TargetFramework>
         <LangVersion>9</LangVersion>
@@ -10,20 +11,25 @@
         <Microsoft_DependencyInjection_Version>5.0.0</Microsoft_DependencyInjection_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>6.0.0-preview.1.21102.2</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>6.0.0-preview.2.21154.2</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.0-preview.2.21154.6</Microsoft_HealthChecks_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
-        <GraphQL_Server_Version>4.4.1</GraphQL_Server_Version>
+        <GraphQL_Server_Version>5.0.0</GraphQL_Server_Version>
         <GraphQL_Client_Version>3.2.2</GraphQL_Client_Version>
-        <GraphQL_Version>3.3.2</GraphQL_Version>
+        <GraphQL_Version>4.0.2</GraphQL_Version>
 
         <!--AutoMapper-->
         <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
         <AutoMapper_Version>10.1.1</AutoMapper_Version>
 
+        <!--HealthChecks-->
+        <HealthChecks_Version>5.0.1</HealthChecks_Version>
+        
         <!--Others-->
         <FluentValidation_Version>9.5.2</FluentValidation_Version>
         <Scrutor_Version>3.3.0</Scrutor_Version>
         
     </PropertyGroup>
+    
 </Project>

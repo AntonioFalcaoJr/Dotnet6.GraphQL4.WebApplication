@@ -20,10 +20,16 @@ namespace Dotnet5.GraphQL3.Store.WebAPI
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            await host.MigrateDatabaseAsync();
+            await host.RunAsync();
+        }
+
+        private static async Task MigrateDatabaseAsync(this IHost host)
+        {
             using var scope = host.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             await dbContext.Database.MigrateAsync();
-            await host.RunAsync();
+            await dbContext.Database.EnsureCreatedAsync();
         }
     }
 }

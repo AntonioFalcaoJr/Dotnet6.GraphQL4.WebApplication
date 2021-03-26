@@ -443,7 +443,7 @@ query all {
   }
 }
 
-query byid($productId: ID!) {
+query byid($productId: Guid!) {
   product(id: $productId) {
     id
     name
@@ -475,7 +475,7 @@ HTTP BODY
          }
        }
     }
-    query byid($productId: ID!) {
+    query byid($productId: Guid!) {
         product(id: $productId) {
           id
           name

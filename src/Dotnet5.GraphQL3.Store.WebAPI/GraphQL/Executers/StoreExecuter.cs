@@ -6,7 +6,6 @@ using Dotnet5.GraphQL3.CrossCutting.Notifications;
 using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Server;
-using GraphQL.Server.Internal;
 using GraphQL.Types;
 using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,11 +13,12 @@ using Microsoft.Extensions.Options;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Executers
 {
-    public class StoreExecuter<TSchema> : DefaultGraphQLExecuter<TSchema> where TSchema : ISchema
+    public class StoreExecuter<TSchema> : DefaultGraphQLExecuter<TSchema>
+        where TSchema : ISchema
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public StoreExecuter(IServiceProvider serviceProvider, TSchema schema, IDocumentExecuter documentExecuter, IOptions<GraphQLOptions> options, IEnumerable<IDocumentExecutionListener> listeners, IEnumerable<IValidationRule> validationRules)
+        public StoreExecuter(TSchema schema, IDocumentExecuter documentExecuter, IOptions<GraphQLOptions> options, IEnumerable<IDocumentExecutionListener> listeners, IEnumerable<IValidationRule> validationRules, IServiceProvider serviceProvider)
             : base(schema, documentExecuter, options, listeners, validationRules)
         {
             _serviceProvider = serviceProvider;

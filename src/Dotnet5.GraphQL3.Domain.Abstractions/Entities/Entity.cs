@@ -25,7 +25,7 @@ namespace Dotnet5.GraphQL3.Domain.Abstractions.Entities
 
         protected void AddError(string errorMessage, ValidationResult validationResult = default)
         {
-            ValidationResult.Errors.Add(new ValidationFailure(default, errorMessage));
+            ValidationResult.Errors.Add(new(default, errorMessage));
             validationResult?.Errors.ToList().ForEach(failure => ValidationResult.Errors.Add(failure));
         }
 

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -19,7 +18,7 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.Extensions.EndpointRouteBuilders
         public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern, Func<HealthCheckRegistration, bool> predicate = default)
             => endpoints.MapHealthChecks(
                 pattern: pattern,
-                options: new HealthCheckOptions
+                options: new()
                 {
                     AllowCachingResponses = false,
                     ResponseWriter = WriteHealthCheckResponseAsync,

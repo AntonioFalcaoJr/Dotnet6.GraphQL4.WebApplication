@@ -12,13 +12,14 @@ using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products.Kayaks;
 using Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Reviews;
 using GraphQL.DataLoader;
 using GraphQL.Types;
-using GraphQL.Utilities;
+using GraphQL.MicrosoftDI;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products
 {
     public sealed class ProductInterfaceGraphType : InterfaceGraphType<Product>
     {
-        public ProductInterfaceGraphType(BootGraphType bootGraphType, BackpackGraphType backpackGraphType, KayakGraphType kayakGraphType)
+        public ProductInterfaceGraphType(IServiceProvider serviceProvider)
         {
             Name = "product";
 
@@ -34,23 +35,27 @@ namespace Dotnet5.GraphQL3.Store.WebAPI.GraphQL.Types.Products
             Field<ProductOptionEnumGraphType>("option");
 
             Field<ListGraphType<ReviewGraphType>, IEnumerable<Review>>()
-                .Name("reviews")
-                .ResolveAsync(context
-                    => context.RequestServices.GetRequiredService<IDataLoaderContextAccessor>()
-                        .Context.GetOrAddCollectionBatchLoader<Guid, Review>(
-                            loaderKey: "getLookupByProductIdsAsync",
-                            fetchFunc: context.RequestServices
-                                .GetRequiredService<IProductService>()
-                                .GetLookupReviewsByProductIdsAsync)
-                        .LoadAsync(context.Source.Id));
+                .Name("Reviews")
+                .Resolve()
+                .WithServices<IDataLoaderContextAccessor, IProductService>()
+                .ResolveAsync((context, dataLoader, service) =>
+                    {
+                        var loaderResult = dataLoader.Context
+                            .GetOrAddCollectionBatchLoader<Guid, Review>(
+                                loaderKey: "getLookupByProductIdsAsync",
+                                fetchFunc: service.GetLookupReviewsByProductIdsAsync)
+                            .LoadAsync(context.Source.Id);
+
+                        return loaderResult.GetResultAsync();
+                    });
 
             ResolveType = @object =>
             {
                 return @object switch
                 {
-                    Boot => bootGraphType,
-                    Backpack => backpackGraphType,
-                    Kayak => kayakGraphType,
+                    Boot => serviceProvider.GetRequiredService<BootGraphType>(),
+                    Backpack => serviceProvider.GetRequiredService<BackpackGraphType>(),
+                    Kayak => serviceProvider.GetRequiredService<KayakGraphType>(),
                     _ => default
                 };
             };
