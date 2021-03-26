@@ -22,6 +22,6 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Reviews
         public string Title { get; }
 
         protected sealed override bool Validate()
-            => OnValidate(this, new ReviewValidator());
+            => OnValidate<ReviewValidator, Review>(this, new());
     }
 }

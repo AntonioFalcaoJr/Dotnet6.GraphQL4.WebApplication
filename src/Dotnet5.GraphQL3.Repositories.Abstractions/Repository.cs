@@ -129,6 +129,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default)
+            where TResult : class
         {
             var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
 
@@ -166,6 +167,7 @@ namespace Dotnet5.GraphQL3.Repositories.Abstractions
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             bool asTracking = default)
+            where TResult : class
         {
             var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTrackingWithIdentityResolution();
 

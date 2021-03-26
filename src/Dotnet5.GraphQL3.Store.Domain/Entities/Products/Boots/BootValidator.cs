@@ -2,7 +2,7 @@
 
 namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Boots
 {
-    public class BootValidator : AbstractValidator<Boot>
+    public class BootValidator : ProductValidator<Boot>
     {
         public BootValidator()
         {

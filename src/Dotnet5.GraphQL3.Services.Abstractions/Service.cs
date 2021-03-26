@@ -96,6 +96,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default)
+            where TResult : class
             => Repository.GetAllProjections(pageParams, selector, predicate, orderBy, include, asTracking);
 
         public virtual async Task<PagedResult<TEntity>> GetAllAsync(
@@ -115,6 +116,7 @@ namespace Dotnet5.GraphQL3.Services.Abstractions
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, 
             bool asTracking = default)
+            where TResult : class
             => await Repository.GetAllProjectionsAsync(pageParams, cancellationToken, selector, predicate, orderBy, include, asTracking);
 
         public virtual TEntity GetById(TId id, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default, bool asTracking = default)
