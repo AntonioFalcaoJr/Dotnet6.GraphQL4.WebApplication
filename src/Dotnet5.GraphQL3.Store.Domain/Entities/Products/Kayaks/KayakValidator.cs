@@ -2,7 +2,7 @@
 
 namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Kayaks
 {
-    public class KayakValidator : AbstractValidator<Kayak>
+    public class KayakValidator : ProductValidator<Kayak>
     {
         public KayakValidator()
         {

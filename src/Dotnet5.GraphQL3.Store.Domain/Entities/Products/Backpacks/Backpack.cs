@@ -6,8 +6,7 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks
 {
     public class Backpack : Product
     {
-        public Backpack(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price,
-            ProductType productType, int rating, int stock, Option option, BackpackType backpackType)
+        public Backpack(Guid id, string description, DateTimeOffset introduceAt, string name, string photoUrl, decimal price, ProductType productType, int rating, int stock, Option option, BackpackType backpackType)
             : base(id, description, introduceAt, name, photoUrl, price, productType, rating, stock, option)
         {
             BackpackType = backpackType;
@@ -19,6 +18,6 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products.Backpacks
         public BackpackType BackpackType { get; }
 
         protected sealed override bool Validate()
-            => OnValidate(this, new BackpackValidator());
+            => OnValidate<BackpackValidator, Backpack>(this, new());
     }
 }
