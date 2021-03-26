@@ -4,6 +4,7 @@ using Dotnet5.GraphQL3.Store.WebMVC.Clients;
 using Dotnet5.GraphQL3.Store.WebMVC.Extensions.EndpointRouteBuilders;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -47,21 +48,25 @@ namespace Dotnet5.GraphQL3.Store.WebMVC
                     "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapApplicationHealthChecks(
-                    pattern: "/health", 
+                    pattern: _configuration["HealthChecksPatterns:Health"], 
                     predicate: registration
                         => registration.Tags.Any() is false);
                 
                 endpoints.MapApplicationHealthChecks(
-                    pattern: "/health/live", 
+                    pattern: _configuration["HealthChecksPatterns:Liveness"], 
                     predicate: registration
                         => registration.Tags.Any(item 
-                               => _livenessTags.Contains(item)));
+                            => _livenessTags.Contains(item)));
                     
                 endpoints.MapApplicationHealthChecks(
-                    pattern: "/health/ready", 
+                    pattern: _configuration["HealthChecksPatterns:Readiness"], 
                     predicate: registration 
                         => registration.Tags.Any(item 
                             => _readinessTags.Contains(item)));
+
+                endpoints.MapHealthChecks(
+                    pattern: _configuration["HealthChecksPatterns:UI"], 
+                    options: new() {ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse});
             });
         }
 

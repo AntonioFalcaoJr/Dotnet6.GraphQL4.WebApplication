@@ -4,7 +4,6 @@ using Dotnet5.GraphQL3.Store.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dotnet5.GraphQL3.Store.Repositories.Migrations
 {

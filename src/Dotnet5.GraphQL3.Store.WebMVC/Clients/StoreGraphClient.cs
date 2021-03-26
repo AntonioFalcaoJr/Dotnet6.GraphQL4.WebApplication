@@ -55,7 +55,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
         {
             var request = new GraphQLRequest
             {
-                Query = @"query ProductQuery($productId: ID!) {
+                Query = @"query ProductQuery($productId: Guid!) {
                               product(id: $productId) {
                                 id
                                 name
@@ -81,7 +81,7 @@ namespace Dotnet5.GraphQL3.Store.WebMVC.Clients
                 request: request,
                 defineResponseType: () => new {product = new ProductModel()},
                 cancellationToken: cancellationToken);
-
+            
             return response.Errors?.Any() ?? default ? default : response.Data.product;
         }
 

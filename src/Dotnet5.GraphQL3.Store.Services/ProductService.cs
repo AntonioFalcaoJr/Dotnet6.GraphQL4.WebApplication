@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dotnet5.GraphQL3.CrossCutting.Notifications;
-using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;
 using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
 using Dotnet5.GraphQL3.Services.Abstractions;
 using Dotnet5.GraphQL3.Services.Abstractions.Resources;
@@ -46,10 +45,10 @@ namespace Dotnet5.GraphQL3.Store.Services
         public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken)
         {
             var ids = productIds?.ToList();
-            if (ids is {Count: > 0} is false) return default;
+            if (ids is not {Count: > 0}) return default;
 
             var pagedResult = await Repository.GetAllProjectionsAsync(
-                pageParams: new PageParams {Size = ids.Count},
+                pageParams: new() {Size = ids.Count},
                 selector: product => product.Reviews,
                 predicate: product => ids.Contains(product.Id),
                 include: products => products.Include(product => product.Reviews),

@@ -22,7 +22,7 @@ namespace Dotnet5.GraphQL3.Store.Domain.Entities.Products
                 .WithMessage(Resource.Product_Option_Null);
 
             RuleFor(x => x.Price)
-                .LessThanOrEqualTo(decimal.Zero)
+                .GreaterThan(decimal.Zero)
                 .WithMessage(Resource.Product_Price_Invalid);
         }
     }

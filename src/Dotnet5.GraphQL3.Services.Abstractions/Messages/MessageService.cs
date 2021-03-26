@@ -29,6 +29,6 @@ namespace Dotnet5.GraphQL3.Services.Abstractions.Messages
         }
 
         public async Task<IObservable<TMessage>> MessagesAsync()
-            =>  await Task.FromResult(_subject.AsObservable()).ConfigureAwait(false);
+            =>  await Task.FromResult(_subject.AsObservable());
     }
 }

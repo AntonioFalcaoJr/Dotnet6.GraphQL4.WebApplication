@@ -8,31 +8,29 @@ namespace Dotnet5.GraphQL3.CrossCutting.Notifications
 {
     public class NotificationContext : INotificationContext
     {
-        private readonly List<Notification> _notifications;
-
-        public NotificationContext()
-        {
-            _notifications = new List<Notification>();
-        }
+        private List<Notification> _notifications { get; } = new();
 
         private IEnumerable<ExecutionError> _executionErrors
-            => _notifications.Select(notification => new ExecutionError(notification.Message));
+            => _notifications.Select<Notification, ExecutionError>(notification 
+                => new(notification.Message));
 
         public ExecutionErrors ExecutionErrors
         {
             get
             {
-                var executionErrors = new ExecutionErrors();
+                ExecutionErrors executionErrors = new();
                 executionErrors.AddRange(_executionErrors);
                 return executionErrors;
             }
         }
 
-        public IReadOnlyList<Notification> Notifications => _notifications;
-        public bool HasNotifications => _notifications.Any();
+        public IReadOnlyList<Notification> Notifications 
+            => _notifications;
+        public bool HasNotifications
+            => _notifications.Any();
 
         public void AddNotification(string message, string key = default)
-            => _notifications.Add(new Notification(key, message));
+            => _notifications.Add(new(key, message));
 
         public void AddNotification(Notification notification)
             => _notifications.Add(notification);
@@ -41,10 +39,8 @@ namespace Dotnet5.GraphQL3.CrossCutting.Notifications
             => _notifications.AddRange(notifications);
 
         public void AddNotifications(ValidationResult validationResult)
-        {
-            foreach (var error in validationResult.Errors)
-                AddNotification(error.ErrorMessage, error.ErrorCode);
-        }
+            => validationResult.Errors.ToList().ForEach(failure 
+                => AddNotification(failure.ErrorMessage, failure.ErrorCode));
 
         public void AddNotificationWithId(string message, object id)
             => AddNotification(string.Format(message, id));

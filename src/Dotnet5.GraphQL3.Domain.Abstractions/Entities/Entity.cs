@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using FluentValidation;
@@ -17,15 +18,25 @@ namespace Dotnet5.GraphQL3.Domain.Abstractions.Entities
         [NotMapped]
         public ValidationResult ValidationResult { get; private set; }
 
-        protected bool OnValidate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator)
+        protected bool OnValidate<TValidator, TEntity>(TEntity entity, TValidator validator)
+            where TValidator : AbstractValidator<TEntity>
+            where TEntity : Entity<TId>
         {
             ValidationResult = validator.Validate(entity);
             return IsValid;
         }
 
+        protected bool OnValidate<TValidator, TEntity>(TEntity entity, TValidator validator, Func<AbstractValidator<TEntity>, TEntity, ValidationResult> validation)
+            where TValidator : AbstractValidator<TEntity>
+            where TEntity : Entity<TId>
+        {
+            ValidationResult = validation(validator, entity);
+            return IsValid;
+        }
+
         protected void AddError(string errorMessage, ValidationResult validationResult = default)
         {
-            ValidationResult.Errors.Add(new ValidationFailure(default, errorMessage));
+            ValidationResult.Errors.Add(new(default, errorMessage));
             validationResult?.Errors.ToList().ForEach(failure => ValidationResult.Errors.Add(failure));
         }
 
