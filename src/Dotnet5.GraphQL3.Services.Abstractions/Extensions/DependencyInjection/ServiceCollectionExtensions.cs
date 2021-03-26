@@ -1,5 +1,5 @@
 ﻿using System.Reactive.Subjects;
-using Dotnet5.GraphQL3.CrossCutting;
+using Dotnet5.GraphQL4.CrossCutting;
 using Dotnet5.GraphQL3.Services.Abstractions.Messages;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;

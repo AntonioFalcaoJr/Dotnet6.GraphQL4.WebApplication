@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Store.WebMVC", "src\Dotnet5.GraphQL3.Store.WebMVC\Dotnet5.GraphQL3.Store.WebMVC.csproj", "{C9F87428-A1C9-43A1-AAE7-ED5BDBEE6919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.CrossCutting", "src\Dotnet5.GraphQL3.CrossCutting\Dotnet5.GraphQL3.CrossCutting.csproj", "{2D3C002E-8B8C-4A67-991B-1FE2B5781050}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL4.CrossCutting", "src\Dotnet5.GraphQL4.CrossCutting\Dotnet5.GraphQL4.CrossCutting.csproj", "{2D3C002E-8B8C-4A67-991B-1FE2B5781050}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet5.GraphQL3.Services.Abstractions", "src\Dotnet5.GraphQL3.Services.Abstractions\Dotnet5.GraphQL3.Services.Abstractions.csproj", "{70361D35-7BBF-4B27-9B9E-4C88EBCFBED6}"
 EndProject

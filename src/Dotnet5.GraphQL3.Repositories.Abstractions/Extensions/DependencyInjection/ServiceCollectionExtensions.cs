@@ -1,5 +1,5 @@
-﻿using Dotnet5.GraphQL3.CrossCutting;
-using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
+﻿using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
+using Dotnet5.GraphQL4.CrossCutting;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 

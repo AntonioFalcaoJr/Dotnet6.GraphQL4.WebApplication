@@ -23,9 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dotnet5.GraphQL3.CrossCutting\Dotnet5.GraphQL3.CrossCutting.csproj" />
         <ProjectReference Include="..\Dotnet5.GraphQL3.Store.Repositories\Dotnet5.GraphQL3.Store.Repositories.csproj" />
         <ProjectReference Include="..\Dotnet5.GraphQL3.Store.Services\Dotnet5.GraphQL3.Store.Services.csproj" />
+        <ProjectReference Include="..\Dotnet5.GraphQL4.CrossCutting\Dotnet5.GraphQL4.CrossCutting.csproj" />
     </ItemGroup>
 
 </Project>

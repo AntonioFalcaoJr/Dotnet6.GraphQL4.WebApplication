@@ -1,5 +1,5 @@
 using System.Linq;
-using Dotnet5.GraphQL3.CrossCutting.Extensions.DependencyInjection;
+using Dotnet5.GraphQL4.CrossCutting.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Domain.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Repositories.Abstractions.Extensions.DependencyInjection;
 using Dotnet5.GraphQL3.Services.Abstractions.Extensions.DependencyInjection;

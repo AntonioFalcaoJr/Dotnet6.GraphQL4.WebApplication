@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="$(FluentValidation_Version)"/>
+        <PackageReference Include="GraphQL" Version="$(GraphQL_Version)"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(Microsoft_Extensions_Version)"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(Microsoft_Extensions_Version)"/>
+    </ItemGroup>
+</Project>

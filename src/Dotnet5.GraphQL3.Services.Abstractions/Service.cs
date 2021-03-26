@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Dotnet5.GraphQL3.CrossCutting.Notifications;
+using Dotnet5.GraphQL4.CrossCutting.Notifications;
 using Dotnet5.GraphQL3.Domain.Abstractions.Entities;
 using Dotnet5.GraphQL3.Repositories.Abstractions;
 using Dotnet5.GraphQL3.Repositories.Abstractions.Pages;

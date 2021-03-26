@@ -1,4 +1,4 @@
-﻿using Dotnet5.GraphQL3.CrossCutting;
+﻿using Dotnet5.GraphQL4.CrossCutting;
 using Dotnet5.GraphQL3.Domain.Abstractions.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;

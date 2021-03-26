@@ -1,7 +1,7 @@
-﻿using Dotnet5.GraphQL3.CrossCutting.Notifications;
+﻿using Dotnet5.GraphQL4.CrossCutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet5.GraphQL3.CrossCutting.Extensions.DependencyInjection
+namespace Dotnet5.GraphQL4.CrossCutting.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {

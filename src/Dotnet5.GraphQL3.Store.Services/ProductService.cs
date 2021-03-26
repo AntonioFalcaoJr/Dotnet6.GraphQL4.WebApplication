@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Dotnet5.GraphQL3.CrossCutting.Notifications;
 using Dotnet5.GraphQL3.Repositories.Abstractions.UnitsOfWork;
 using Dotnet5.GraphQL3.Services.Abstractions;
 using Dotnet5.GraphQL3.Services.Abstractions.Resources;
@@ -13,6 +12,7 @@ using Dotnet5.GraphQL3.Store.Domain.Entities.Reviews;
 using Dotnet5.GraphQL3.Store.Repositories;
 using Dotnet5.GraphQL3.Store.Services.Models.Products;
 using Dotnet5.GraphQL3.Store.Services.Models.Reviews;
+using Dotnet5.GraphQL4.CrossCutting.Notifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet5.GraphQL3.Store.Services

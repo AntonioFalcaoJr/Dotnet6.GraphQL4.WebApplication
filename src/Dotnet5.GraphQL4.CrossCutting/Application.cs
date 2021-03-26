@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyModel;
 
-namespace Dotnet5.GraphQL3.CrossCutting
+namespace Dotnet5.GraphQL4.CrossCutting
 {
     public static class Application
     {

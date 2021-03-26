@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Dotnet5.GraphQL3.CrossCutting.Notifications;
+using Dotnet5.GraphQL4.CrossCutting.Notifications;
 using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Server;
