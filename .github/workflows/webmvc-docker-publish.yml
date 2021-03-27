@@ -31,4 +31,4 @@ jobs:
           context: .
           file: ./src/Dotnet6.GraphQL4.Store.WebMVC/Dockerfile 
           push: true
-          tags: antoniofalcaojr/dotnet5-graphql3-webmvc:latest
+          tags: antoniofalcaojr/dotnet6-graphql4-webmvc:latest
