@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Dotnet6.GraphQL4.Store.WebMVC.Extensions.EndpointRouteBuilders;
 using Dotnet6.GraphQL4.Store.WebMVC.Clients;
 using GraphQL.Client.Http;
@@ -80,7 +81,7 @@ namespace Dotnet6.GraphQL4.Store.WebMVC
                     serializer: new SystemTextJsonSerializer(options =>
                     {
                         options.PropertyNameCaseInsensitive = true;
-                        options.IgnoreNullValues = true;
+                        options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     })));
 
             services.AddSingleton<IStoreGraphClient, StoreGraphClient>();

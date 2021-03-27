@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -13,7 +14,7 @@ namespace Dotnet6.GraphQL4.Store.WebMVC.Extensions.EndpointRouteBuilders
 {
     public static class EndpointRouteBuilderExtensions
     {
-        private static readonly JsonSerializerOptions SerializerOptions = new() {IgnoreNullValues = true, WriteIndented = true};
+        private static readonly JsonSerializerOptions SerializerOptions = new() {DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, WriteIndented = true};
         private static readonly HealthCheck HealthCheck = new();
         
         public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern,  Func<HealthCheckRegistration, bool> predicate = default)
