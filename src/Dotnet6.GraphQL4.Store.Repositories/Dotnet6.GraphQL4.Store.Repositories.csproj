@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    
+    <ItemGroup>
+        <PackageReference Include="Bogus" Version="33.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Dotnet6.GraphQL4.Repositories.Abstractions\Dotnet6.GraphQL4.Repositories.Abstractions.csproj" />
+      <ProjectReference Include="..\Dotnet6.GraphQL4.Store.Domain\Dotnet6.GraphQL4.Store.Domain.csproj" />
+    </ItemGroup>
+    
+</Project>
