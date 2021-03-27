@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file ./src/Dotnet5.GraphQL3.Store.WebMVC/Dockerfile --tag my-image-name:$(date +%s)
+        run: docker build . --file ./src/Dotnet6.GraphQL4.Store.WebMVC/Dockerfile --tag my-image-name:$(date +%s)
