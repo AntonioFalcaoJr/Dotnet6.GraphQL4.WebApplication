@@ -1,6 +1,6 @@
 # Dotnet6.GraphQL4.WebApplication
 
-This project exemplify the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 4** Web API, build in a **.NET 6** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
+This project exemplifies the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 4** Web API, build in a **.NET 6** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
 
 ### Give a Star! :star:
 
@@ -652,14 +652,14 @@ ___
 
 ## Built With
 
-### Microsoft Stack - v5.0/6.0
+### Microsoft Stack - v6 - preview 2
 
-* [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) - Base framework;
-* [ASP.NET 5.0](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/) - Web framework;
-* [Entity Framework Core 6.0 (preview)](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-6-0-preview-1/) - ORM;
+* [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-2/) - Base framework;
+* [ASP.NET 6](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-6-preview-2/) - Web framework;
+* [Entity Framework Core 6](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-6-0-preview-2/) - ORM;
 * [Microsoft SQL Server on Linux for Docker](https://hub.docker.com/_/microsoft-mssql-server) - Database.
 
-### GraphQL Stack - v3.0
+### GraphQL Stack - v4
 
 * [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries with data;
 * [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
