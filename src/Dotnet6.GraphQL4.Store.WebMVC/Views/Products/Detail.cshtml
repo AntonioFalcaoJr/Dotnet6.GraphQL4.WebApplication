@@ -1,0 +1,71 @@
+﻿@using Dotnet6.GraphQL4.Store.WebMVC.Models
+@{
+    ViewData["Title"] = "Product Detail";
+    IEnumerable<ReviewModel> reviews = Model.Reviews;
+}
+
+<body>
+<div class="product-list"></div>
+<div class="product-dual-column">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 text-center">
+                <div class="intro">
+                    <h1 class="text-center">@Model.Name</h1>
+                    <img class="img-fluid" src="@Model.PhotoUrl" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-3 offset-md-1">
+                <div class="details">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Price: @Model.Price </li>
+                        <li class="list-group-item">Rating: @Model.Rating</li>
+                        <li class="list-group-item">Introduce at: @Model.IntroduceAt.ToString("dd/MM/yyyy") </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">
+                <div class="text">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-12 col-md-7">
+            @if (reviews is null || reviews.Any() is false)
+            {
+                <div class="row justify-content-center text-center" style="margin-top: 2%; padding: 1%">
+                    <a asp-controller="Reviews" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-outline-secondary">Add first review</a>
+                </div>
+            }
+            else
+            {
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="list-group ">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@review.Title</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">@review.Comment</p>
+                            <small>Donec id elit non mi porta.</small>
+                        </a>
+                    </div>
+                }
+                <div class="row justify-content-center text-center" style="margin-top: 2%; padding: 1%">
+                    <a asp-controller="Reviews" asp-action="Reviews" asp-route-id="@Model.Id" class="btn btn-outline-secondary review-btn">See all</a>
+                    <a asp-controller="Reviews" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-outline-secondary review-btn">Add a review</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</body>

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="$(AutoMapper_Version)" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="$(AutoMapper_DependencyInjection_Version)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Scrutor" Version="$(Scrutor_Version)" />
+        <PackageReference Include="GraphQL.SystemReactive" Version="$(GraphQL_Version)" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Dotnet6.GraphQL4.CrossCutting\Dotnet6.GraphQL4.CrossCutting.csproj" />
+        <ProjectReference Include="..\Dotnet6.GraphQL4.Domain.Abstractions\Dotnet6.GraphQL4.Domain.Abstractions.csproj" />
+        <ProjectReference Include="..\Dotnet6.GraphQL4.Repositories.Abstractions\Dotnet6.GraphQL4.Repositories.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\ServicesResource.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>ServicesResource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Resources\ServicesResource.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resource.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+</Project>

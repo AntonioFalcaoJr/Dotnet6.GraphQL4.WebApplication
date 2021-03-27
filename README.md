@@ -1,18 +1,23 @@
-# Dotnet5.GraphQL3.WebApplication
+# Dotnet6.GraphQL4.WebApplication
 
-This project exemplify the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 3** Web API, build in a **.NET 5** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
-         
+This project exemplifies the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 4** Web API, build in a **.NET 6** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
+
+### Give a Star! :star:
+
 |WebAPI|
 |:----:| 
-|[![Build/Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![API Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/API%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![Push API](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20API/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webapi-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webapi?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webapi)|                
+|[![Build/Test](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/build-and-test.yml) [![API Image](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/API%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/build-and-test.yml) [![Push API](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/Push%20API/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/webapi-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet6.GraphQL4.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet6-graphql4-webapi?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet6-graphql4-webapi)|                
 |**WebMVC**|
-|[![Build/Test](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/build-and-test.yml) [![MVC Image](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/MVC%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webmvc-docker-image.yml) [![Push MVC](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/Push%20MVC/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/webmvc-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet5.GraphQL3.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet5.GraphQL3.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webmvc?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webmvc)|
+|[![Build/Test](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/Build/Test/badge.svg)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/build-and-test.yml) [![MVC Image](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/MVC%20Image/badge.svg)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/webmvc-docker-image.yml) [![Push MVC](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/Push%20MVC/badge.svg?branch=master)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/webmvc-docker-publish.yml) [![CodeQL](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/workflows/CodeQL/badge.svg)](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/actions/workflows/codeql-analysis.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/35ba87f59d524982baeb803a3a9c42f7)](https://www.codacy.com/gh/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AntonioFalcao/Dotnet6.GraphQL4.WebApplication&amp;utm_campaign=Badge_Grade) [![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet6-graphql4-webmvc?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet6-graphql4-webmvc)|
 
----
+**Oldest version**: Dotnet**5**.GraphQL**3**.WebApplication
+
+|WebAPI|[![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webapi?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webapi)|
+|:----:|--- |
+|**WebMVC**|[![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webmvc?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webmvc)|
+
 
 ![home](./.assets/img/home.PNG)
-
----
 
 ## Environment configuration
 
@@ -20,14 +25,14 @@ This project exemplify the implementation and **dockerization** of a simple Razo
 
 ##### Secrets
 
-To configure database resource, `init` secrets in [`./src/Dotnet5.GraphQL3.Store.WebAPI`](./src/Dotnet5.GraphQL3.Store.WebAPI), and then define the `DefaultConnection`: 
+To configure database resource, `init` secrets in [`./src/Dotnet6.GraphQL4.Store.WebAPI`](./src/Dotnet6.GraphQL4.Store.WebAPI), and then define the `DefaultConnection`: 
 
 ```bash
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=Store;User=sa;Password=!MyComplexPassword"
 ```
 
-After this, to configure the HTTP client, `init` secrets in [`./src/Dotnet5.GraphQL3.Store.WebMVC`](./src/Dotnet5.GraphQL3.Store.WebMVC) and define **Store** client host:
+After this, to configure the HTTP client, `init` secrets in [`./src/Dotnet6.GraphQL4.Store.WebMVC`](./src/Dotnet6.GraphQL4.Store.WebMVC) and define **Store** client host:
 
 ```bash
 dotnet user-secrets init
@@ -36,7 +41,7 @@ dotnet user-secrets set "HttpClient:Store" "http://localhost:5000"
 
 ##### AppSettings 
 
-If you prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet5.GraphQL3.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet5.GraphQL3.Store.WebMVC/appsettings.Development.json) files:
+If you prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet6.GraphQL4.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet6.GraphQL4.Store.WebMVC/appsettings.Development.json) files:
 
 WebAPI
 
@@ -61,7 +66,7 @@ ___
 
 ### Production
 
-Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet5.GraphQL3.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet5.GraphQL3.Store.WebMVC/appsettings.json) files:   
+Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet6.GraphQL4.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet6.GraphQL4.Store.WebMVC/appsettings.json) files:   
 
 ##### AppSettings 
 
@@ -90,7 +95,7 @@ ___
 
 ### Notifications (pattern/context)
 
-To avoid handle exceptions, was implemented a [`NotificationContext`](./src/Dotnet5.GraphQL3.CrossCutting/Notifications/NotificationContext.cs) that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. 
+To avoid handle exceptions, was implemented a [`NotificationContext`](./src/Dotnet6.GraphQL4.CrossCutting/Notifications/NotificationContext.cs) that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. 
 
 ```c#
 protected bool OnValidate<TEntity>(TEntity entity, AbstractValidator<TEntity> validator)
@@ -106,7 +111,7 @@ protected void AddError(string errorMessage, ValidationResult validationResult =
 }
 ```
 
-To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
+To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
 
 ```c#
 public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables, IDictionary<string, object> context, IServiceProvider requestServices, CancellationToken cancellationToken = new CancellationToken())
@@ -127,7 +132,7 @@ public override async Task<ExecutionResult> ExecuteAsync(string operationName, s
 
 _It's no more necessary after version 4.2.0 from  **GraphQL Server**. By default, the Service Provider is already being propagated._
 
-~~Is necessary, in the same personalised [`Executer`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:~~
+~~Is necessary, in the same personalised [`Executer`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:~~
 
 ```c#
 var options = base.GetOptions(operationName, query, variables, context, cancellationToken);
@@ -138,7 +143,7 @@ options.RequestServices = _serviceProvider;
 
 With abstract designs, it is possible to reduce coupling in addition to applying **DRY** concepts, providing resources for the main behaviors:
 
-[`...Domain.Abstractions`](./src/Dotnet5.GraphQL3.Domain.Abstractions)
+[`...Domain.Abstractions`](./src/Dotnet6.GraphQL4.Domain.Abstractions)
 
 ```c#
 public abstract class Entity<TId>
@@ -152,7 +157,7 @@ public abstract class Builder<TBuilder, TEntity, TId> : IBuilder<TEntity, TId>
     where TId : struct
 ```
     
-[`...Repositories.Abstractions`](./src/Dotnet5.GraphQL3.Repositories.Abstractions/Repository.cs)  
+[`...Repositories.Abstractions`](./src/Dotnet6.GraphQL4.Repositories.Abstractions/Repository.cs)  
 
 ```c#
 public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
@@ -167,7 +172,7 @@ public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId>
     }
 ```
 
-[`...Services.Abstractions`](./src/Dotnet5.GraphQL3.Services.Abstractions/Service.cs) 
+[`...Services.Abstractions`](./src/Dotnet6.GraphQL4.Services.Abstractions/Service.cs) 
 
 ```c#
 public abstract class Service<TEntity, TModel, TId> : IService<TEntity, TModel, TId>
@@ -312,7 +317,7 @@ services:
 
   webapi:
     container_name: webapi
-    image: antoniofalcaojr/dotnet5-graphql3-webapi
+    image: antoniofalcaojr/dotnet6-graphql4-webapi
     environment:
       - ASPNETCORE_URLS=http://*:5000
     ports:
@@ -325,7 +330,7 @@ services:
 
   webmvc:
     container_name: webmvc
-    image: antoniofalcaojr/dotnet5-graphql3-webmvc
+    image: antoniofalcaojr/dotnet6-graphql4-webmvc
     environment:
       - ASPNETCORE_URLS=http://*:7000
     ports:
@@ -368,7 +373,7 @@ Web MVC
 
 ### GraphQL Playground 
 
-By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet5.GraphQL3.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
 
 ```c#
 app.UseGraphQLPlayground(
@@ -445,7 +450,7 @@ query all {
   }
 }
 
-query byid($productId: ID!) {
+query byid($productId: Guid!) {
   product(id: $productId) {
     id
     name
@@ -477,7 +482,7 @@ HTTP BODY
          }
        }
     }
-    query byid($productId: ID!) {
+    query byid($productId: Guid!) {
         product(id: $productId) {
           id
           name
@@ -647,14 +652,14 @@ ___
 
 ## Built With
 
-### Microsoft Stack - v5.0/6.0
+### Microsoft Stack - v6 - preview 2
 
-* [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) - Base framework;
-* [ASP.NET 5.0](https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/) - Web framework;
-* [Entity Framework Core 6.0 (preview)](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-6-0-preview-1/) - ORM;
+* [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-2/) - Base framework;
+* [ASP.NET 6](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-6-preview-2/) - Web framework;
+* [Entity Framework Core 6](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-6-0-preview-2/) - ORM;
 * [Microsoft SQL Server on Linux for Docker](https://hub.docker.com/_/microsoft-mssql-server) - Database.
 
-### GraphQL Stack - v3.0
+### GraphQL Stack - v4
 
 * [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries with data;
 * [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet/) - This is an implementation of GraphQL in .NET;
@@ -674,11 +679,11 @@ Available soon!
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AntonioFalcao/Dotnet6.GraphQL.WebApplication/tags).
 
 ## Authors
 
-> See the list of [contributors](https://github.com/AntonioFalcao/Dotnet5.GraphQL.WebApplication/graphs/contributors) who participated in this project.
+> See the list of [contributors](https://github.com/AntonioFalcao/Dotnet6.GraphQL.WebApplication/graphs/contributors) who participated in this project.
 
 ## License
 

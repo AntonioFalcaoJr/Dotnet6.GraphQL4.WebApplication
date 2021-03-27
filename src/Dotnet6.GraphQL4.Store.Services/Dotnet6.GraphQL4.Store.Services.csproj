@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\Dotnet6.GraphQL4.Services.Abstractions\Dotnet6.GraphQL4.Services.Abstractions.csproj" />
+        <ProjectReference Include="..\Dotnet6.GraphQL4.Store.Domain\Dotnet6.GraphQL4.Store.Domain.csproj" />
+        <ProjectReference Include="..\Dotnet6.GraphQL4.Store.Repositories\Dotnet6.GraphQL4.Store.Repositories.csproj" />
+    </ItemGroup>
+</Project>

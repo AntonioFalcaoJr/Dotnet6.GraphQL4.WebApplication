@@ -30,6 +30,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./src/Dotnet5.GraphQL3.Store.WebAPI/Dockerfile 
+          file: ./src/Dotnet6.GraphQL4.Store.WebAPI/Dockerfile 
           push: true
-          tags: antoniofalcaojr/dotnet5-graphql3-webapi:latest
+          tags: antoniofalcaojr/dotnet6-graphql4-webapi:latest

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Store";
+}
+
+<body>
+<div class="product-list">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">Products</h2>
+            <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+        </div>
+        <div class="row products">
+            @foreach (var product in Model)
+            {
+                <div class="col-sm-6 col-md-4 item">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-id="@product.Id">
+                        <img class="img-fluid" src="@product.PhotoUrl" alt="">
+                    </a>
+                    <h3 class="name">@product.Name</h3>
+                    <p class="description">@product.Description</p>
+                    <a class="action" asp-controller="Products" asp-action="Detail" asp-route-id="@product.Id">
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</body>
