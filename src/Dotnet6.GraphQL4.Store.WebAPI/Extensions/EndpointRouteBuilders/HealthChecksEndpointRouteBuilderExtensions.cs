@@ -11,7 +11,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders
 {
-    public static class EndpointRouteBuilderExtensions
+    public static class HealthChecksEndpointRouteBuilderExtensions
     {
         private static readonly JsonSerializerOptions SerializerOptions = new() {DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, WriteIndented = true};
         private static readonly HealthCheck HealthCheck = new();

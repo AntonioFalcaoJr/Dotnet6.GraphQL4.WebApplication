@@ -47,6 +47,11 @@ namespace Dotnet6.GraphQL4.Store.WebMVC
             {
                 endpoints.MapControllerRoute("default",
                     "{controller=Home}/{action=Index}/{id?}");
+                
+                endpoints.MapDumpConfig(
+                    pattern: "/dump-config",
+                    configInfo: (_configuration as IConfigurationRoot).GetDebugView(),
+                    isDevelopment: _env.IsDevelopment());
 
                 endpoints.MapApplicationHealthChecks(
                     pattern: _configuration["HealthChecksPatterns:Health"], 
