@@ -16,16 +16,15 @@ This project exemplifies the implementation and **dockerization** of a simple Ra
 |:----:|--- |
 |**WebMVC**|[![](https://img.shields.io/docker/pulls/antoniofalcaojr/dotnet5-graphql3-webmvc?style=flat)](https://hub.docker.com/repository/docker/antoniofalcaojr/dotnet5-graphql3-webmvc)|
 
-
 ![home](./.assets/img/home.PNG)
 
-## Environment configuration
+---
 
-### Development
+## Running
 
-##### Secrets
-
-To configure database resource, `init` secrets in [`./src/Dotnet6.GraphQL4.Store.WebAPI`](./src/Dotnet6.GraphQL4.Store.WebAPI), and then define the `DefaultConnection`: 
+### Development (secrets)
+ 
+To configure database resource, `init` secrets in [`./src/Dotnet6.GraphQL4.Store.WebAPI`](./src/Dotnet6.GraphQL4.Store.WebAPI), and then define the `DefaultConnection`:
 
 ```bash
 dotnet user-secrets init
@@ -39,7 +38,7 @@ dotnet user-secrets init
 dotnet user-secrets set "HttpClient:Store" "http://localhost:5000"
 ```
 
-##### AppSettings 
+##### AppSettings
 
 If you prefer, is possible to define it on WebAPI [`appsettings.Development.json`](./src/Dotnet6.GraphQL4.Store.WebAPI/appsettings.Development.json) and WebMVC [`appsettings.Development.json`](./src/Dotnet6.GraphQL4.Store.WebMVC/appsettings.Development.json) files:
 
@@ -62,13 +61,12 @@ WebMCV
   }
 }
 ```
-___
 
 ### Production
 
-Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet6.GraphQL4.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet6.GraphQL4.Store.WebMVC/appsettings.json) files:   
+Considering use Docker for CD (Continuous Deployment). On respective [compose](./docker-compose.yml) both web applications and sql server are in the same network, and then we can use named hosts. Already defined on WebAPI [`appsettings.json`](./src/Dotnet6.GraphQL4.Store.WebAPI/appsettings.json) and WebMVC [`appsettings.json`](./src/Dotnet6.GraphQL4.Store.WebMVC/appsettings.json) files:
 
-##### AppSettings 
+#### AppSettings
 
 WebAPI
 
@@ -87,6 +85,152 @@ WebMCV
   "HttpClient": {
     "Store": "http://webapi:5000"
   }
+}
+```
+
+### Docker
+
+The [`./docker-compose.yml`](./docker-compose.yml) provide the `WebAPI`, `WebMVC` and `MS SQL Server` applications:
+
+```bash
+docker-compose up -d
+``` 
+
+It's possible to run without a clone of the project using the respective compose:
+
+```yaml
+version: "3.7"
+
+services:
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "!MyComplexPassword"
+      ACCEPT_EULA: "Y"
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    networks:
+      - graphqlstore
+
+  webapi:
+    container_name: webapi
+    image: antoniofalcaojr/dotnet6-graphql4-webapi
+    environment:
+      - ASPNETCORE_URLS=http://*:5000
+    ports:
+      - 5000:5000
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - graphqlstore
+
+  webmvc:
+    container_name: webmvc
+    image: antoniofalcaojr/dotnet6-graphql4-webmvc
+    environment:
+      - ASPNETCORE_URLS=http://*:7000
+    ports:
+      - 7000:7000
+    depends_on:
+      - webapi
+    networks:
+      - graphqlstore
+
+  healthchecks:
+    container_name: healthchecks-ui
+    image: xabarilcoding/healthchecksui
+    depends_on:
+      mssql:
+        condition: service_healthy
+    environment:
+      - storage_provider=SqlServer
+      - storage_connection=Server=mssql;Database=Store;User=sa;Password=!MyComplexPassword
+      - Logging:LogLevel:Default=Debug
+      - Logging:Loglevel:Microsoft=Warning
+      - Logging:LogLevel:HealthChecks=Debug
+      - HealthChecksUI:HealthChecks:0:Name=webapi
+      - HealthChecksUI:HealthChecks:0:Uri=http://webapi:5000/healthz
+      - HealthChecksUI:HealthChecks:1:Name=webmvc
+      - HealthChecksUI:HealthChecks:1:Uri=http://webmvc:7000/healthz
+    ports:
+      - 8000:80
+    networks:
+      - graphqlstore
+
+networks:
+  graphqlstore:
+    driver: bridge
+```
+### GraphQL Playground
+
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
+
+```c#
+app.UseGraphQLPlayground(
+    new GraphQLPlaygroundOptions
+    {
+        Path = "/ui/playground",
+        BetaUpdates = true,
+        RequestCredentials = RequestCredentials.Omit,
+        HideTracingResponse = false,
+        EditorCursorShape = EditorCursorShape.Line,
+        EditorTheme = EditorTheme.Dark,
+        EditorFontSize = 14,
+        EditorReuseHeaders = true,
+        EditorFontFamily = "JetBrains Mono"
+    });
+```
+
+### Health checks
+
+Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
+
+> `/health`   
+> Just check if the instance is running.
+
+> `/health/live`  
+> Check if the instance is running and all the dependencies too.
+
+> `/health/ready`          
+> Check if the instance and all the dependencies are ready to attend to all functionalities.
+
+> `/healthz`          
+> HealthReport specific for HealthCheck-UI.
+
+Web API
+
+`http://localhost:5000/health/ready`
+
+![Readiness](./.assets/img/Readiness.png)
+
+Web MVC
+
+`http://localhost:7000/health/ready`
+
+![Readiness](./.assets/img/ReadinessMVC.png)
+
+### Dump configuration
+
+It is possible to dump the state of the environment configuration in through the middleware resource `/dump-config` in both applications.
+
+```c#
+public void Configure(IApplicationBuilder app)
+{
+    app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDumpConfig(
+                pattern: "/dump-config",
+                configInfo: (_configuration as IConfigurationRoot).GetDebugView(),
+                isDevelopment: _env.IsDevelopment());
+        });
 }
 ```
 ___
@@ -284,112 +428,6 @@ public sealed class KayakGraphType : ObjectGraphType<Kayak>
 
 ___
 
-## Running
-
-The [`./docker-compose.yml`](./docker-compose.yml) provide the `WebAPI`, `WebMVC` and `MS SQL Server` applications:
-
-```bash
-docker-compose up -d
-``` 
-
-It's possible to run without a clone of the project using the respective compose:
-
-```yaml
-version: "3.7"
-
-services:
-  mssql:
-    container_name: mssql
-    image: mcr.microsoft.com/mssql/server
-    ports:
-      - 1433:1433
-    environment:
-      SA_PASSWORD: "!MyComplexPassword"
-      ACCEPT_EULA: "Y"
-    healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
-      interval: 10s
-      timeout: 3s
-      retries: 10
-      start_period: 10s
-    networks:
-      - graphqlstore
-
-  webapi:
-    container_name: webapi
-    image: antoniofalcaojr/dotnet6-graphql4-webapi
-    environment:
-      - ASPNETCORE_URLS=http://*:5000
-    ports:
-      - 5000:5000
-    depends_on:
-      mssql:
-        condition: service_healthy
-    networks:
-      - graphqlstore
-
-  webmvc:
-    container_name: webmvc
-    image: antoniofalcaojr/dotnet6-graphql4-webmvc
-    environment:
-      - ASPNETCORE_URLS=http://*:7000
-    ports:
-      - 7000:7000
-    depends_on:
-      - webapi
-    networks:
-      - graphqlstore
-
-networks:
-  graphqlstore:
-    driver: bridge
-```
-### Health checks
-
-Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
-
-> `/health`   
-> Just check if the instance is running.
-
-> `/health/live`  
-> Check if the instance is running and all the dependencies too.
-
-> `/health/ready`          
-> Check if the instance and all the dependencies are ready to attend to all functionalities.
-
-Web API
-
-`http://localhost:5000/health/ready`
-
-![Readiness](./.assets/img/Readiness.png)
-
-Web MVC
-
-`http://localhost:7000/health/ready`
-
-![Readiness](./.assets/img/ReadinessMVC.png)
-
----
-
-### GraphQL Playground 
-
-By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
-
-```c#
-app.UseGraphQLPlayground(
-    new GraphQLPlaygroundOptions
-    {
-        Path = "/ui/playground",
-        BetaUpdates = true,
-        RequestCredentials = RequestCredentials.Omit,
-        HideTracingResponse = false,
-        EditorCursorShape = EditorCursorShape.Line,
-        EditorTheme = EditorTheme.Dark,
-        EditorFontSize = 14,
-        EditorReuseHeaders = true,
-        EditorFontFamily = "JetBrains Mono"
-    });
-```
 
 ## Queries
 
