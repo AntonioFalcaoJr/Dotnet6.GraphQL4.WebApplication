@@ -13,12 +13,11 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection
                 .UseGraphQLWebSockets<TSchema>()
                 .UseGraphQL<TSchema>()
                 .UseGraphQLPlayground(
-                    new() 
+                    options: new() 
                     {
                         BetaUpdates = true,
                         RequestCredentials = RequestCredentials.Omit,
                         HideTracingResponse = false,
-                        
                         EditorCursorShape = EditorCursorShape.Line,
                         EditorTheme = EditorTheme.Dark,
                         EditorFontSize = 14,
