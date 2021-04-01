@@ -39,47 +39,44 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             
-            app.UseSerilogRequestLogging();
+            app.UseSerilogRequestLogging()
+                .UseApplicationGraphQL<StoreSchema>()
+                .UseRouting()
+                .UseEndpoints(
+                    endpoints =>
+                        {
+                            endpoints.MapControllers();
 
-            app.UseApplicationGraphQL<StoreSchema>();
-            
-            app.UseRouting()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
+                            endpoints.MapDumpConfig(
+                                pattern: "/dump-config",
+                                configInfo: (_configuration as IConfigurationRoot).GetDebugView(),
+                                isDevelopment: _env.IsDevelopment());
 
-                    endpoints.MapDumpConfig(
-                        pattern: "/dump-config",
-                        configInfo: (_configuration as IConfigurationRoot).GetDebugView(),
-                        isDevelopment: _env.IsDevelopment());
-                    
-                    endpoints.MapApplicationHealthChecks(
-                        pattern: _configuration["HealthChecksPatterns:Health"], 
-                        predicate: registration
-                            => registration.Tags.Any() is false);
-                
-                    endpoints.MapApplicationHealthChecks(
-                        pattern: _configuration["HealthChecksPatterns:Liveness"], 
-                        predicate: registration
-                            => registration.Tags.Any(item 
-                                => _livenessTags.Contains(item)));
-                    
-                    endpoints.MapApplicationHealthChecks(
-                        pattern: _configuration["HealthChecksPatterns:Readiness"], 
-                        predicate: registration 
-                            => registration.Tags.Any(item 
-                                => _readinessTags.Contains(item)));
+                            endpoints.MapApplicationHealthChecks(
+                                pattern: _configuration["HealthChecksPatterns:Health"],
+                                predicate: registration 
+                                    => registration.Tags.Any() is false);
 
-                    endpoints.MapHealthChecks(
-                        pattern: _configuration["HealthChecksPatterns:UI"], 
-                        options: new() {ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse});
-                });
+                            endpoints.MapApplicationHealthChecks(
+                                pattern: _configuration["HealthChecksPatterns:Liveness"],
+                                predicate: registration 
+                                    => registration.Tags.Any(item 
+                                        => _livenessTags.Contains(item)));
+
+                            endpoints.MapApplicationHealthChecks(
+                                pattern: _configuration["HealthChecksPatterns:Readiness"],
+                                predicate: registration 
+                                    => registration.Tags.Any(item 
+                                        => _readinessTags.Contains(item)));
+
+                            endpoints.MapHealthChecks(
+                                pattern: _configuration["HealthChecksPatterns:UI"],
+                                options: new() {ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse});
+                        });
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services
                 .AddBuilders()
                 .AddRepositories()
@@ -88,7 +85,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 .AddApplicationServices()
                 .AddApplicationMessageServices()
                 .AddApplicationSubjects()
-                .AddApplicationAutoMapper();
+                .AddApplicationAutoMapper()
+                .AddControllers();
             
             services.AddApplicationDbContext(options =>
                 {
