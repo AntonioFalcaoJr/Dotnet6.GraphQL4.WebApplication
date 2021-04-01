@@ -171,7 +171,7 @@ networks:
 ```
 ### GraphQL Playground
 
-By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../...WebAPI/GraphQL/DependencyInjection/Configure.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/DependencyInjection/Configure.cs)
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../....WebAPI/Graphs/Extensions/DependencyInjection/ApplicationBuilderExtensions.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/Graphs/Extensions/DependencyInjection/ApplicationBuilderExtensions.cs)
 
 ```c#
 app.UseGraphQLPlayground(
@@ -255,7 +255,7 @@ protected void AddError(string errorMessage, ValidationResult validationResult =
 }
 ```
 
-To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs):  
+To the **GraphQL** the notification context delivery a `ExecutionErrors` that is propagated to `result` from execution by a personalised [`Executer`](./src/Dotnet6.GraphQL4.Store.WebAPI/Graphs/Executers/StoreGraphQLExecuter.cs):  
 
 ```c#
 public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables, IDictionary<string, object> context, IServiceProvider requestServices, CancellationToken cancellationToken = new CancellationToken())
@@ -276,7 +276,7 @@ public override async Task<ExecutionResult> ExecuteAsync(string operationName, s
 
 _It's no more necessary after version 4.2.0 from  **GraphQL Server**. By default, the Service Provider is already being propagated._
 
-~~Is necessary, in the same personalised [`Executer`](./src/Dotnet6.GraphQL4.Store.WebAPI/GraphQL/Executers/StoreExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:~~
+~~Is necessary, in the same personalised [`Executer`](./src/Dotnet6.GraphQL4.Store.WebAPI/Graphs/Executers/StoreGraphQLExecuter.cs) define the _service provider_ that will be used from `resolvers` on `fields`:~~
 
 ```c#
 var options = base.GetOptions(operationName, query, variables, context, cancellationToken);
@@ -710,6 +710,7 @@ ___
 * [FluentValidation](https://fluentvalidation.net/) - A popular .NET library for building strongly-typed validation rules;
 * [Bogus](https://github.com/bchavez/Bogus) - A simple and sane fake data generator for C#, F#, and VB.NET;
 * [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world.
+* [Serilog](https://serilog.net/) - Serilog provides diagnostic logging to files, the console, and elsewhere.
 
 ## Contributing
 
@@ -717,11 +718,11 @@ Available soon!
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AntonioFalcao/Dotnet6.GraphQL.WebApplication/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/tags).
 
 ## Authors
 
-> See the list of [contributors](https://github.com/AntonioFalcao/Dotnet6.GraphQL.WebApplication/graphs/contributors) who participated in this project.
+> See the list of [contributors](https://github.com/AntonioFalcao/Dotnet6.GraphQL4.WebApplication/graphs/contributors) who participated in this project.
 
 ## License
 
