@@ -710,6 +710,7 @@ ___
 * [FluentValidation](https://fluentvalidation.net/) - A popular .NET library for building strongly-typed validation rules;
 * [Bogus](https://github.com/bchavez/Bogus) - A simple and sane fake data generator for C#, F#, and VB.NET;
 * [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world.
+* [Serilog](https://serilog.net/) - Serilog provides diagnostic logging to files, the console, and elsewhere.
 
 ## Contributing
 
