@@ -16,7 +16,7 @@
         <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.0-preview.2.21154.6</Microsoft_HealthChecks_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
-        <GraphQL_Server_Version>5.0.0</GraphQL_Server_Version>
+        <GraphQL_Server_Version>5.0.1</GraphQL_Server_Version>
         <GraphQL_Client_Version>3.2.2</GraphQL_Client_Version>
         <GraphQL_Version>4.1.0</GraphQL_Version>
 
