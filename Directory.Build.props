@@ -24,6 +24,9 @@
         <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
         <AutoMapper_Version>10.1.1</AutoMapper_Version>
 
+        <!--Serilog-->
+        <Serilog_Version>4.1.0</Serilog_Version>
+        
         <!--HealthChecks-->
         <HealthChecks_Version>5.0.1</HealthChecks_Version>
         
