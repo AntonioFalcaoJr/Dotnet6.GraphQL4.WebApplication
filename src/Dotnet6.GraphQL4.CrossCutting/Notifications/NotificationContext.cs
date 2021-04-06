@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentValidation.Results;
 using GraphQL;
 
@@ -26,8 +27,14 @@ namespace Dotnet6.GraphQL4.CrossCutting.Notifications
 
         public IReadOnlyList<Notification> Notifications 
             => _notifications;
-        public bool HasNotifications
+        public bool AllValid 
+            => HasNotifications is false;
+        public Task<bool> AllValidAsync 
+            => Task.FromResult(HasNotifications is false);   
+        public bool HasNotifications 
             => _notifications.Any();
+        public Task<bool> HasNotificationsAsync 
+            => Task.FromResult(HasNotifications);
 
         public void AddNotification(string message, string key = default)
             => _notifications.Add(new(key, message));
