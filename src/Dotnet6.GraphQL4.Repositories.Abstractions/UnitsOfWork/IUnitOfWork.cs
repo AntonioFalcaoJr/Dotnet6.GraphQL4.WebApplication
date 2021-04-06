@@ -1,18 +1,14 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-        IDbContextTransaction BeginTransaction();
-        Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
-        void CommitTransaction();
-        Task CommitTransactionAsync(CancellationToken cancellationToken);
-        void RollbackTransaction();
-        Task RollbackTransactionAsync(CancellationToken cancellationToken);
+        TResult ExecuteInTransaction<TResult>(Func<TResult> operation, Func<bool> condition);
+        Task<TResult> ExecuteInTransactionAsync<TResult>(Func<CancellationToken, Task<TResult>> operationAsync, Func<CancellationToken, Task<bool>> condition, CancellationToken cancellationToken);
+
         bool SaveChanges();
         Task<bool> SaveChangesAsync(CancellationToken cancellationToken);
     }

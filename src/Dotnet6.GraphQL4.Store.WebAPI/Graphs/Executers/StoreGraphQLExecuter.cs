@@ -29,7 +29,7 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Executers
             var result = await base.ExecuteAsync(operationName, query, variables, context, requestServices, cancellationToken);
             var notification = _serviceProvider.GetRequiredService<INotificationContext>();
 
-            if (notification.HasNotifications is false) return result;
+            if (notification.AllValid) return result;
 
             result.Errors = notification.ExecutionErrors;
             result.Data = default;

@@ -49,6 +49,27 @@ services:
     networks:
       - graphqlstore
 
+  healthchecks:
+    container_name: healthchecks-ui
+    image: xabarilcoding/healthchecksui
+    depends_on:
+      mssql:
+        condition: service_healthy
+    environment:
+      - storage_provider=SqlServer
+      - storage_connection=Server=mssql;Database=Store;User=sa;Password=!MyComplexPassword
+      - Logging:LogLevel:Default=Debug
+      - Logging:Loglevel:Microsoft=Warning
+      - Logging:LogLevel:HealthChecks=Debug
+      - HealthChecksUI:HealthChecks:0:Name=webapi
+      - HealthChecksUI:HealthChecks:0:Uri=http://webapi:5000/healthz
+      - HealthChecksUI:HealthChecks:1:Name=webmvc
+      - HealthChecksUI:HealthChecks:1:Uri=http://webmvc:7000/healthz
+    ports:
+      - 8000:80
+    networks:
+      - graphqlstore
+
 networks:
   graphqlstore:
     driver: bridge

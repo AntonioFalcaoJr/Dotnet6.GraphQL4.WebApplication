@@ -5,14 +5,15 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="$(HealthChecks_Version)"/>
-        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(HealthChecks_Version)"/>
+        <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="$(HealthChecks_Version)" />
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(HealthChecks_Version)" />
+        <PackageReference Include="Serilog.AspNetCore" Version="$(Serilog_Version)" />
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="GraphQL.Client" Version="$(GraphQL_Client_Version)"/>
-        <PackageReference Include="GraphQL.Client.Extensions" Version="3.0.1"/>
-        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="$(GraphQL_Client_Version)"/>
+        <PackageReference Include="GraphQL.Client" Version="$(GraphQL_Client_Version)" />
+        <PackageReference Include="GraphQL.Client.Extensions" Version="3.0.1" />
+        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="$(GraphQL_Client_Version)" />
     </ItemGroup>
     
 </Project>

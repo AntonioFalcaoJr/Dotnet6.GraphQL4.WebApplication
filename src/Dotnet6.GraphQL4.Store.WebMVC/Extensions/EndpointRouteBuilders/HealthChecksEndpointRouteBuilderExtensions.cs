@@ -5,21 +5,22 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders
+namespace Dotnet6.GraphQL4.Store.WebMVC.Extensions.EndpointRouteBuilders
 {
-    public static class EndpointRouteBuilderExtensions
+    public static class HealthChecksEndpointRouteBuilderExtensions
     {
         private static readonly JsonSerializerOptions SerializerOptions = new() {DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, WriteIndented = true};
         private static readonly HealthCheck HealthCheck = new();
         
-        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern, Func<HealthCheckRegistration, bool> predicate = default)
+        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern,  Func<HealthCheckRegistration, bool> predicate = default)
             => endpoints.MapHealthChecks(
                 pattern: pattern,
-                options: new()
+                options: new HealthCheckOptions
                 {
                     AllowCachingResponses = false,
                     ResponseWriter = WriteHealthCheckResponseAsync,
