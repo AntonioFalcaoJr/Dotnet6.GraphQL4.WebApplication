@@ -7,18 +7,17 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.Transactions
 {
     public class TransactionScopeExecutor<T>
     {
-        private TransactionScopeOption _scopeOption;
-        private TransactionScopeAsyncFlowOption _asyncFlowOption;
-        
-        private Func<bool> _condition;
-        private Func<CancellationToken, Task<bool>> _conditionAsync;
-
-        private readonly TransactionOptions _transactionOptions;
         private readonly Func<T> _operation;
         private readonly Func<CancellationToken, Task<T>> _operationAsync;
+        private readonly TransactionOptions _transactionOptions = new();
+
+        private TransactionScopeAsyncFlowOption _asyncFlowOption;
+        private Func<bool> _condition;
+        private Func<CancellationToken, Task<bool>> _conditionAsync;
+        private TransactionScopeOption _scopeOption;
 
         public TransactionScopeExecutor() { }
-        
+
         public TransactionScopeExecutor(Func<T> operation)
         {
             _operation = operation;
@@ -52,7 +51,7 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.Transactions
             _condition = condition;
             return this;
         }
-        
+
         public TransactionScopeExecutor<T> WithConditionAsync(Func<CancellationToken, Task<bool>> conditionAsync)
         {
             _conditionAsync = conditionAsync;
@@ -68,42 +67,20 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.Transactions
         }
 
         public T Execute()
-        {
-            using var scope = CreateScope();
-            var result = _operation();
-            
-            if (_condition()) 
-                scope.Complete();
-            
-            return result;
-        }
+            => Execute(_operation);
 
-        public async Task<T> ExecuteAsync(CancellationToken cancellationToken)
-        {
-            using var scope = CreateScope();
-            var result = await _operationAsync(cancellationToken);
-            
-            if (await _conditionAsync(cancellationToken)) 
-                scope.Complete();
-            
-            return result;
-        }
-        
+        public Task<T> ExecuteAsync(CancellationToken cancellationToken)
+            => ExecuteAsync(_operationAsync, cancellationToken);
+
         public async Task<T> ExecuteAsync(Func<CancellationToken, Task<T>> operationAsync, CancellationToken cancellationToken)
         {
             using var scope = CreateScope();
             var result = await operationAsync(cancellationToken);
-            
-            if (await _conditionAsync(cancellationToken)) 
-                scope.Complete();
-            
+            if (await _conditionAsync(cancellationToken)) scope.Complete();
             return result;
         }
 
         private TransactionScope CreateScope()
-            => new(
-                scopeOption: _scopeOption, 
-                transactionOptions: _transactionOptions, 
-                asyncFlowOption: _asyncFlowOption);
+            => new(_scopeOption, _transactionOptions, _asyncFlowOption);
     }
 }
