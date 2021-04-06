@@ -237,6 +237,36 @@ ___
 
 ## Highlights
 
+### UnitOfWork + Execution Strategy + Transaction Scope
+
+The implementation of the `UnitOfWork` gives support to the `ExecutionStrategy` from **EF Core** with `TransactionScope`.
+
+> **operationAsync**: Encapsulates all desired transactions;    
+> **condition**: External control for commitment;    
+> **cancellationToken**: The cancellation token to be used within operation.   
+
+```c#
+public Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
+{
+    return UnitOfWork.ExecuteInTransactionAsync(
+        operationAsync: async ct =>                         // Func<CancellationToken, Task<TResult>>
+        {
+            var product = await Repository.GetByIdAsync(
+                id: reviewModel.ProductId,
+                include: products => products.Include(x => x.Reviews),
+                asTracking: true,
+                cancellationToken: ct);
+
+            var review = Mapper.Map<Review>(reviewModel);
+            product?.AddReview(review);
+            await OnEditAsync(product, ct);
+            return review;
+        },
+        condition: _ => NotificationContext.AllValidAsync,  // Func<CancellationToken, Task<bool>>
+        cancellationToken: cancellationToken);              
+}
+```
+
 ### Notifications (pattern/context)
 
 To avoid handle exceptions, was implemented a [`NotificationContext`](./src/Dotnet6.GraphQL4.CrossCutting/Notifications/NotificationContext.cs) that's allow  all layers add business notifications through the request, with support to receive **Domain** notifications, that by other side, implementing validators from **Fluent Validation** and return a `ValidationResult`. 

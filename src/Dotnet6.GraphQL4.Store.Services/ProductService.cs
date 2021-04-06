@@ -22,7 +22,7 @@ namespace Dotnet6.GraphQL4.Store.Services
         public ProductService(IProductRepository repository, IUnitOfWork unitOfWork, INotificationContext notificationContext, IMapper mapper)
             : base(repository, unitOfWork, notificationContext, mapper) { }
 
-        public async Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
+        public Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
         {
             if (reviewModel is null)
             {
@@ -30,16 +30,22 @@ namespace Dotnet6.GraphQL4.Store.Services
                 return default;
             }
 
-            var product = await Repository.GetByIdAsync(
-                id: reviewModel.ProductId,
-                include: products => products.Include(x => x.Reviews),
-                asTracking: true,
-                cancellationToken: cancellationToken);
+            return UnitOfWork.ExecuteInTransactionAsync(
+                operationAsync: async ct =>
+                {
+                    var product = await Repository.GetByIdAsync(
+                        id: reviewModel.ProductId,
+                        include: products => products.Include(x => x.Reviews),
+                        asTracking: true,
+                        cancellationToken: ct);
 
-            var review = Mapper.Map<Review>(reviewModel);
-            product?.AddReview(review);
-            await OnEditAsync(product, cancellationToken);
-            return review;
+                    var review = Mapper.Map<Review>(reviewModel);
+                    product?.AddReview(review);
+                    await OnEditAsync(product, ct);
+                    return review;
+                },
+                condition: _ => NotificationContext.AllValidAsync,
+                cancellationToken: cancellationToken);
         }
 
         public async Task<ILookup<Guid, Review>> GetLookupReviewsByProductIdsAsync(IEnumerable<Guid> productIds, CancellationToken cancellationToken)

@@ -5,7 +5,7 @@ using Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection;
 using Dotnet6.GraphQL4.CrossCutting.Extensions.DependencyInjection;
 using Dotnet6.GraphQL4.Domain.Abstractions.Extensions.DependencyInjection;
-using Dotnet6.GraphQL4.Repositories.Abstractions.Extensions.DependencyInjection;
+using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Services.Abstractions.Extensions.DependencyInjection;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
 using HealthChecks.UI.Client;
@@ -87,6 +87,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 .AddApplicationSubjects()
                 .AddApplicationAutoMapper()
                 .AddControllers();
+
+            services.ConfigureTransactionOptions(_configuration.GetSection("Transactions"));
             
             services.AddApplicationDbContext(options =>
                 {
