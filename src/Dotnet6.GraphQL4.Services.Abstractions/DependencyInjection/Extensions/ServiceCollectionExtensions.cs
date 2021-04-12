@@ -4,7 +4,7 @@ using Dotnet6.GraphQL4.Services.Abstractions.Messages;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
-namespace Dotnet6.GraphQL4.Services.Abstractions.Extensions.DependencyInjection
+namespace Dotnet6.GraphQL4.Services.Abstractions.DependencyInjection.Extensions
 {
     public static class ServiceCollectionExtensions
     {
