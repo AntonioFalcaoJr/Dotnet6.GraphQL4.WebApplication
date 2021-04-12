@@ -1,12 +1,12 @@
 using System.Linq;
+using Dotnet6.GraphQL4.CrossCutting.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.Repositories.Contexts;
 using Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders;
-using Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection;
-using Dotnet6.GraphQL4.CrossCutting.Extensions.DependencyInjection;
-using Dotnet6.GraphQL4.Domain.Abstractions.Extensions.DependencyInjection;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensions;
-using Dotnet6.GraphQL4.Services.Abstractions.Extensions.DependencyInjection;
+using Dotnet6.GraphQL4.Services.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +41,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 app.UseDeveloperExceptionPage();
 
             loggerFactory.AddSerilog();
+            
+            app.UseApplicationExceptionHandler();
             
             app.UseSerilogRequestLogging()
                 .UseApplicationGraphQL<StoreSchema>()
