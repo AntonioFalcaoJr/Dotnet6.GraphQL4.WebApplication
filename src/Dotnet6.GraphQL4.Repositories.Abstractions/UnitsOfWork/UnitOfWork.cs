@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using Dotnet6.GraphQL4.CrossCutting.Notifications;
-using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection;
+using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Repositories.Abstractions.Transactions.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -16,13 +16,16 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
     {
         private readonly DatabaseFacade _database;
         private readonly DbContext _dbContext;
-        private readonly IOptionsMonitor<ApplicationTransactionOptions> _options;
+        private readonly ApplicationTransactionOptions _options;
         private readonly INotificationContext _notificationContext;
 
-        public UnitOfWork(DbContext dbContext, IOptionsMonitor<ApplicationTransactionOptions> options, INotificationContext notificationContext)
+        public UnitOfWork(
+            DbContext dbContext, 
+            IOptionsMonitor<ApplicationTransactionOptions> optionsMonitor, 
+            INotificationContext notificationContext)
         {
             _dbContext = dbContext;
-            _options = options;
+            _options = optionsMonitor.CurrentValue;
             _database = _dbContext.Database;
             _notificationContext = notificationContext;
         }
@@ -35,18 +38,18 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
 
         private Task<TResult> ExecuteWithScopeAsync<TResult>(Func<CancellationToken, Task<TResult>> operationAsync, Func<CancellationToken, Task<bool>> condition, CancellationToken cancellationToken)
             => operationAsync
-                .TransactionAsync()
+                .BeginTransactionScope()
                 .WithScopeOption(TransactionScopeOption.Required)
-                .WithOptions(options => options.IsolationLevel = _options.CurrentValue.IsolationLevel)
+                .WithOptions(options => options.IsolationLevel = _options.IsolationLevel)
                 .WithScopeAsyncFlowOption(TransactionScopeAsyncFlowOption.Enabled)
                 .WithConditionAsync(condition ?? (_ => _notificationContext.AllValidAsync))
                 .ExecuteAsync(cancellationToken);
 
         private TResult ExecuteWithScope<TResult>(Func<TResult> operation, Func<bool> condition)
             => operation
-                .Transaction()
+                .BeginTransactionScope()
                 .WithScopeOption(TransactionScopeOption.Required)
-                .WithOptions(options => options.IsolationLevel = _options.CurrentValue.IsolationLevel)
+                .WithOptions(options => options.IsolationLevel = _options.IsolationLevel)
                 .WithScopeAsyncFlowOption(TransactionScopeAsyncFlowOption.Enabled)
                 .WithCondition(condition ?? (() => _notificationContext.AllValid))
                 .Execute();
@@ -55,9 +58,9 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
             => _database.CreateExecutionStrategy();
 
         public bool SaveChanges()
-            => _dbContext.SaveChanges(true) > default(int);
+            => _dbContext.SaveChanges(false) > default(int);
 
         public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken)
-            => await _dbContext.SaveChangesAsync(true, cancellationToken) > default(int);
+            => await _dbContext.SaveChangesAsync(false, cancellationToken) > default(int);
     }
 }

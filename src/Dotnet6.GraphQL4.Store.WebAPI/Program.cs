@@ -45,6 +45,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
             
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
                 .CreateLogger();
 
             try

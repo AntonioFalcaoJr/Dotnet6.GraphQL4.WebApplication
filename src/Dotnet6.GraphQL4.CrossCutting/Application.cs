@@ -7,7 +7,7 @@ namespace Dotnet6.GraphQL4.CrossCutting
 {
     public static class Application
     {
-        public static string Prefix { get; } = Assembly.GetEntryAssembly()?.FullName?.Substring(0, 16);
+        public static string Prefix { get; } = Assembly.GetEntryAssembly()?.FullName?[..16];
 
         public static IEnumerable<Assembly> Assemblies { get; } = 
             DependencyContext.Default.RuntimeLibraries

@@ -1,5 +1,6 @@
 ﻿using System.Transactions;
 using Dotnet6.GraphQL4.CrossCutting;
+using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

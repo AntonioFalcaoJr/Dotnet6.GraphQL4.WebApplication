@@ -3,7 +3,7 @@ using Dotnet6.GraphQL4.Domain.Abstractions.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
-namespace Dotnet6.GraphQL4.Domain.Abstractions.Extensions.DependencyInjection
+namespace Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions
 {
     public static class ServiceCollectionExtensions
     {

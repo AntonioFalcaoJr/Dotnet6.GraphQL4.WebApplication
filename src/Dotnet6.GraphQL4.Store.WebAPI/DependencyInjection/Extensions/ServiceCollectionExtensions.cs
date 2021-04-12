@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs.Executers;
 using GraphQL;
 using GraphQL.Server;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection
+namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -22,11 +23,15 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection
                 .AddScoped<IDocumentExecuter, StoreDocumentExecuter>()
                 .AddSingleton<StoreSchema>()
                 .AddGraphQL(
-                    (options, provider) =>
+                    (options, _) =>
                         {
                             options.EnableMetrics = Options.IsDevelopment;
-                            var logger = provider.GetRequiredService<ILogger<Startup>>();
-                            options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
+                            
+                            options.UnhandledExceptionDelegate = exceptionContext 
+                                => Log.Error(
+                                    messageTemplate: "Unhandled error occured: {Error}", 
+                                    propertyValue: exceptionContext.OriginalException.Message);;
+                            
                             options.ComplexityConfiguration = new() {MaxDepth = 15};
                         })
                 .AddSystemTextJson(

@@ -1,12 +1,12 @@
 using System.Linq;
+using Dotnet6.GraphQL4.CrossCutting.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.Repositories.Contexts;
-using Dotnet6.GraphQL4.Store.Repositories.Extensions.DependencyInjection;
 using Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders;
-using Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection;
-using Dotnet6.GraphQL4.CrossCutting.Extensions.DependencyInjection;
-using Dotnet6.GraphQL4.Domain.Abstractions.Extensions.DependencyInjection;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensions;
-using Dotnet6.GraphQL4.Services.Abstractions.Extensions.DependencyInjection;
+using Dotnet6.GraphQL4.Services.Abstractions.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace Dotnet6.GraphQL4.Store.WebAPI
@@ -34,10 +35,14 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
             _configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app , ILoggerFactory loggerFactory)
         {
             if (_env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
+            loggerFactory.AddSerilog();
+            
+            app.UseApplicationExceptionHandler();
             
             app.UseSerilogRequestLogging()
                 .UseApplicationGraphQL<StoreSchema>()
@@ -78,6 +83,7 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddLogging()
                 .AddBuilders()
                 .AddRepositories()
                 .AddUnitOfWork()
@@ -89,13 +95,10 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 .AddControllers();
 
             services.ConfigureTransactionOptions(_configuration.GetSection("Transactions"));
-            
-            services.AddApplicationDbContext(options =>
-                {
-                    options.DefaultConnection = _configuration.GetConnectionString(nameof(options.DefaultConnection));
-                    _configuration.Bind(nameof(options.ConnectionResiliency), options.ConnectionResiliency);
-                });
+            services.ConfigureSqlServerRetryingOptions(_configuration.GetSection("SqlServerRetryingOptions"));
 
+            services.AddApplicationDbContext();
+            
             services.AddApplicationGraphQL(options
                 => options.IsDevelopment = _env.IsDevelopment());
 
@@ -111,8 +114,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                     name: "Sql Server (Ready)",
                     failureStatus: HealthStatus.Unhealthy,
                     tags: _readinessTags,
-                    customTestQuery: async (dbContext, cancellationToken) 
-                        => await dbContext.Products.AnyAsync(cancellationToken));
+                    customTestQuery: (dbContext, cancellationToken) 
+                        => dbContext.Products.AnyAsync(cancellationToken));
         }
     }
 }

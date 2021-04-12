@@ -2,7 +2,7 @@
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Extensions.DependencyInjection
+namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
