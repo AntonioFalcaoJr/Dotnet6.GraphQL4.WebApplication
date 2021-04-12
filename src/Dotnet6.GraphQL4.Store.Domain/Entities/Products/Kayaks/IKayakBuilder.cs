@@ -3,9 +3,9 @@ using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 
 namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products.Kayaks
 {
-    public interface IKayakBuilder : IProductBuilder<Kayak, Guid>
+    public interface IKayakBuilder : IProductBuilder<KayakBuilder, Kayak, Guid>
     {
-        IKayakBuilder WithAmountOfPerson(int amountOfPerson);
-        IKayakBuilder WithType(KayakType type);
+        int AmountOfPerson { set; }
+        KayakType Type { set; }
     }
 }

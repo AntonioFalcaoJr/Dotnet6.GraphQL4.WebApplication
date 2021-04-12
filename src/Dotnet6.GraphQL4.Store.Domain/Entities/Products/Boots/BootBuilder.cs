@@ -3,24 +3,12 @@ using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 
 namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products.Boots
 {
-    public class BootBuilder : ProductBuilder<Boot, Guid>, IBootBuilder
+    public class BootBuilder : ProductBuilder<BootBuilder, Boot, Guid>, IBootBuilder
     {
-        private int _size;
-        private BootType _type;
+        public BootType Type { get; set; }
+        public int Size { get; set; }
 
         public override Boot Build()
-            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type, _size);
-
-        public IBootBuilder WithType(BootType type)
-        {
-            _type = type;
-            return this;
-        }
-
-        public IBootBuilder WithSize(int size)
-        {
-            _size = size;
-            return this;
-        }
+            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, Type, Size);
     }
 }

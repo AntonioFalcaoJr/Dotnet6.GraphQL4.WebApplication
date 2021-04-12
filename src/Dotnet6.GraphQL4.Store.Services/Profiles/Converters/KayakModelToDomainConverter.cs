@@ -15,16 +15,16 @@ namespace Dotnet6.GraphQL4.Store.Services.Profiles.Converters
 
         public Kayak Convert(KayakModel source, Kayak destination, ResolutionContext context)
             => _builder
-                .WithType(source.Type)
-                .WithAmountOfPerson(source.AmountOfPerson)
-                .WithDescription(source.Description)
-                .WithName(source.Name)
-                .WithPrice(source.Price)
-                .WithRating(source.Rating)
-                .WithStock(source.Stock)
-                .WithIntroduceAt(source.IntroduceAt)
-                .WithPhotoUrl(source.PhotoUrl)
-                .WithProductType(source.ProductType)
+                .With(builder => builder.Type = source.Type)
+                .With(builder => builder.AmountOfPerson = source.AmountOfPerson)
+                .With(builder => builder.Description = source.Description)
+                .With(builder => builder.Name = source.Name)
+                .With(builder => builder.Price = source.Price)
+                .With(builder => builder.Rating = source.Rating)
+                .With(builder => builder.Stock = source.Stock)
+                .With(builder => builder.IntroduceAt = source.IntroduceAt)
+                .With(builder => builder.PhotoUrl = source.PhotoUrl)
+                .With(builder => builder.ProductType = source.ProductType)
                 .Build();
     }
 }

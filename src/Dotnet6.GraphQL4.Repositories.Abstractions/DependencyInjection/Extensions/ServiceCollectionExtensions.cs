@@ -26,6 +26,6 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensi
             => services
                 .AddOptions<ApplicationTransactionOptions>()
                 .Bind(section)
-                .Validate(options => options.IsolationLevel is IsolationLevel.Unspecified);
+                .Validate(options => options.IsolationLevel is not IsolationLevel.Unspecified);
     }
 }

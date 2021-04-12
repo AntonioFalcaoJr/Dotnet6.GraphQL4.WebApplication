@@ -3,9 +3,9 @@ using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 
 namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products.Boots
 {
-    public interface IBootBuilder : IProductBuilder<Boot, Guid>
+    public interface IBootBuilder : IProductBuilder<BootBuilder,Boot, Guid>
     {
-        IBootBuilder WithType(BootType type);
-        IBootBuilder WithSize(int size);
+        BootType Type { set; }
+        int Size { set; }
     }
 }
