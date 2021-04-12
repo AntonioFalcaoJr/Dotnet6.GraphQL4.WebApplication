@@ -1,4 +1,5 @@
 ﻿using System;
+using Dotnet6.GraphQL4.Domain.Abstractions.Builders.Extensions;
 using Dotnet6.GraphQL4.Domain.Abstractions.Entities;
 
 namespace Dotnet6.GraphQL4.Domain.Abstractions.Builders

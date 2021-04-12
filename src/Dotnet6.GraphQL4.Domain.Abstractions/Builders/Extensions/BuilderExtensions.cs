@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dotnet6.GraphQL4.Domain.Abstractions.Builders
+namespace Dotnet6.GraphQL4.Domain.Abstractions.Builders.Extensions
 {
     internal static class BuilderExtensions
     {
