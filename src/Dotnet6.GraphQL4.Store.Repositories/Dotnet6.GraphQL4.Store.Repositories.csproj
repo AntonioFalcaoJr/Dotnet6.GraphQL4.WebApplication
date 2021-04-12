@@ -2,7 +2,6 @@
     
     <ItemGroup>
         <PackageReference Include="Bogus" Version="33.0.2" />
-        <PackageReference Include="EntityFramework" Version="$(Microsoft_EntityFrameworkCore_Version)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Version)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(Microsoft_EntityFrameworkCore_Version)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(Microsoft_EntityFrameworkCore_Version)" />
