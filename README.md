@@ -744,7 +744,7 @@ ___
 
 ## Contributing
 
-Available soon!
+All contributions are welcome. Please take a look at [contributing](./CONTRIBUTING.md) guide.
 
 ## Versioning
 
