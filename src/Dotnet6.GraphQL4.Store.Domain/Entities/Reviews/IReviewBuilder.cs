@@ -5,8 +5,8 @@ namespace Dotnet6.GraphQL4.Store.Domain.Entities.Reviews
 {
     public interface IReviewBuilder : IBuilder<ReviewBuilder, Review, Guid>
     {
-        string Title { set; }
-        string Comment { set; }
-        Guid ProductId { set; }
+        string Title { get; set; }
+        string Comment { get; set; }
+        Guid ProductId { get; set; }
     }
 }

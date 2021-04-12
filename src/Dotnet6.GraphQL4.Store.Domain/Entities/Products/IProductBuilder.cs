@@ -11,14 +11,14 @@ namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products
         where TProduct : Entity<TId>, IProduct
         where TId : struct
     {
-        string Description { set; }
-        DateTimeOffset IntroduceAt { set; }
-        string Name { set; }
-        Option Option { set; }
-        string PhotoUrl { set; }
-        decimal Price { set; }
-        ProductType ProductType { set; }
-        int Rating { set; }
-        int Stock { set; }
+        string Description { get; set; }
+        DateTimeOffset IntroduceAt { get; set; }
+        string Name { get; set; }
+        Option Option { get; set; }
+        string PhotoUrl { get; set; }
+        decimal Price { get; set; }
+        ProductType ProductType { get; set; }
+        int Rating { get; set; }
+        int Stock { get; set; }
     }
 }
