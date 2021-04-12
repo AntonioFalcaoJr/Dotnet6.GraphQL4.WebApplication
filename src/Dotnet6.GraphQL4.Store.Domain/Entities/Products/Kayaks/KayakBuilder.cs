@@ -3,24 +3,12 @@ using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 
 namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products.Kayaks
 {
-    public class KayakBuilder : ProductBuilder<Kayak, Guid>, IKayakBuilder
+    public class KayakBuilder : ProductBuilder<KayakBuilder, Kayak, Guid>, IKayakBuilder
     {
-        private int _amountOfPerson;
-        private KayakType _type;
-
-        public IKayakBuilder WithAmountOfPerson(int amountOfPerson)
-        {
-            _amountOfPerson = amountOfPerson;
-            return this;
-        }
-
-        public IKayakBuilder WithType(KayakType type)
-        {
-            _type = type;
-            return this;
-        }
+        public int AmountOfPerson { get; set; }
+        public KayakType Type { get; set; }
 
         public override Kayak Build()
-            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, _type, _amountOfPerson);
+            => new(Id, Description, IntroduceAt, Name, PhotoUrl, Price, ProductType, Rating, Stock, Option, Type, AmountOfPerson);
     }
 }

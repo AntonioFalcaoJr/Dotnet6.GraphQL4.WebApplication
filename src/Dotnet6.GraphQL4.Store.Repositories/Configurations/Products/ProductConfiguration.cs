@@ -60,8 +60,8 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
             builder
                 .HasDiscriminator()
                 .HasValue<Boot>(nameof(Boot))
-                ?.HasValue<Kayak>(nameof(Kayak))
-                ?.HasValue<Backpack>(nameof(Backpack));
+                .HasValue<Kayak>(nameof(Kayak))
+                .HasValue<Backpack>(nameof(Backpack));
 
             builder
                 .Property(DiscriminatorDefaultName)

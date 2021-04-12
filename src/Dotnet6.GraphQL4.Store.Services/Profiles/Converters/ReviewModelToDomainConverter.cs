@@ -15,9 +15,9 @@ namespace Dotnet6.GraphQL4.Store.Services.Profiles.Converters
 
         public Review Convert(ReviewModel source, Review destination, ResolutionContext context)
             => _builder
-                .WithComment(source.Comment)
-                .WithTitle(source.Title)
-                .WithProductReference(source.ProductId)
+                .With(builder => builder.Comment = source.Comment)
+                .With(builder => builder.Title = source.Title)
+                .With(builder => builder.ProductId = source.ProductId)
                 .Build();
     }
 }
