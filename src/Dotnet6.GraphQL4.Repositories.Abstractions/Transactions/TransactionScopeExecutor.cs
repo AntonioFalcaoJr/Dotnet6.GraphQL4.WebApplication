@@ -58,6 +58,12 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.Transactions
             return this;
         }
 
+        public T Execute()
+            => Execute(_operation);
+
+        public Task<T> ExecuteAsync(CancellationToken cancellationToken)
+            => ExecuteAsync(_operationAsync, cancellationToken);
+
         public T Execute(Func<T> operation)
         {
             using var scope = CreateScope();
@@ -65,12 +71,6 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.Transactions
             if (_condition()) scope.Complete();
             return result;
         }
-
-        public T Execute()
-            => Execute(_operation);
-
-        public Task<T> ExecuteAsync(CancellationToken cancellationToken)
-            => ExecuteAsync(_operationAsync, cancellationToken);
 
         public async Task<T> ExecuteAsync(Func<CancellationToken, Task<T>> operationAsync, CancellationToken cancellationToken)
         {

@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Transactions;
 using Dotnet6.GraphQL4.CrossCutting.Notifications;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Repositories.Abstractions.Transactions.Extensions;
@@ -21,36 +20,36 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
 
         public UnitOfWork(
             DbContext dbContext, 
-            IOptionsMonitor<ApplicationTransactionOptions> optionsMonitor, 
+            IOptionsSnapshot<ApplicationTransactionOptions> optionsMonitor, 
             INotificationContext notificationContext)
         {
             _dbContext = dbContext;
-            _options = optionsMonitor.CurrentValue;
+            _options = optionsMonitor.Value;
             _database = _dbContext.Database;
             _notificationContext = notificationContext;
         }
 
-        public TResult ExecuteInTransaction<TResult>(Func<TResult> operation, Func<bool> condition)
-            => CreateExecutionStrategy().Execute(() => ExecuteWithScope(operation, condition));
+        public TResult ExecuteInTransactionScope<TResult>(Func<TResult> operation, Func<bool> condition)
+            => CreateExecutionStrategy().Execute(() => ExecuteInScope(operation, condition));
 
-        public Task<TResult> ExecuteInTransactionAsync<TResult>(Func<CancellationToken, Task<TResult>> operationAsync, Func<CancellationToken, Task<bool>> condition, CancellationToken cancellationToken)
-            => CreateExecutionStrategy().ExecuteAsync(ct => ExecuteWithScopeAsync(operationAsync, condition, ct), cancellationToken);
+        public Task<TResult> ExecuteInTransactionScopeAsync<TResult>(Func<CancellationToken, Task<TResult>> operationAsync, Func<CancellationToken, Task<bool>> condition, CancellationToken cancellationToken)
+            => CreateExecutionStrategy().ExecuteAsync(ct => ExecuteInScopeAsync(operationAsync, condition, ct), cancellationToken);
 
-        private Task<TResult> ExecuteWithScopeAsync<TResult>(Func<CancellationToken, Task<TResult>> operationAsync, Func<CancellationToken, Task<bool>> condition, CancellationToken cancellationToken)
+        private Task<TResult> ExecuteInScopeAsync<TResult>(Func<CancellationToken, Task<TResult>> operationAsync, Func<CancellationToken, Task<bool>> condition, CancellationToken cancellationToken)
             => operationAsync
                 .BeginTransactionScope()
-                .WithScopeOption(TransactionScopeOption.Required)
+                .WithScopeOption()
                 .WithOptions(options => options.IsolationLevel = _options.IsolationLevel)
-                .WithScopeAsyncFlowOption(TransactionScopeAsyncFlowOption.Enabled)
+                .WithScopeAsyncFlowOption()
                 .WithConditionAsync(condition ?? (_ => _notificationContext.AllValidAsync))
                 .ExecuteAsync(cancellationToken);
 
-        private TResult ExecuteWithScope<TResult>(Func<TResult> operation, Func<bool> condition)
+        private TResult ExecuteInScope<TResult>(Func<TResult> operation, Func<bool> condition)
             => operation
                 .BeginTransactionScope()
-                .WithScopeOption(TransactionScopeOption.Required)
+                .WithScopeOption()
                 .WithOptions(options => options.IsolationLevel = _options.IsolationLevel)
-                .WithScopeAsyncFlowOption(TransactionScopeAsyncFlowOption.Enabled)
+                .WithScopeAsyncFlowOption()
                 .WithCondition(condition ?? (() => _notificationContext.AllValid))
                 .Execute();
 
@@ -58,9 +57,9 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
             => _database.CreateExecutionStrategy();
 
         public bool SaveChanges()
-            => _dbContext.SaveChanges(false) > default(int);
+            => _dbContext.SaveChanges(false) > 0;
 
         public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken)
-            => await _dbContext.SaveChangesAsync(false, cancellationToken) > default(int);
+            => await _dbContext.SaveChangesAsync(false, cancellationToken) > 0;
     }
 }

@@ -30,7 +30,7 @@ namespace Dotnet6.GraphQL4.Store.Services
                 return default;
             }
 
-            return UnitOfWork.ExecuteInTransactionAsync(
+            return UnitOfWork.ExecuteInTransactionScopeAsync(
                 operationAsync: async ct =>
                 {
                     var product = await Repository.GetByIdAsync(
