@@ -10,7 +10,7 @@ namespace Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions
         public static IServiceCollection AddBuilders(this IServiceCollection services)
             => services
                 .Scan(selector => selector.FromAssemblies(Application.Assemblies)
-                    .AddClasses(filter => filter.AssignableTo(typeof(IBuilder<,>)))
+                    .AddClasses(filter => filter.AssignableTo(typeof(IBuilder<,,>)))
                     .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());

@@ -15,7 +15,7 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
                     {
                         var exception = httpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
                         
-                        Log.Logger.Error("[Exception Handler] {Error}", exception?.Message);
+                        Log.Error("[Exception Handler] {Error}", exception?.Message);
                         
                         await httpContext.Response.WriteAsJsonAsync(
                             value: new ExecutionResult().AddError(new(exception?.Message)), 

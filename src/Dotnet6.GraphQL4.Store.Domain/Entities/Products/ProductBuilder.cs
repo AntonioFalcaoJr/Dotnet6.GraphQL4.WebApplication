@@ -6,72 +6,19 @@ using Dotnet6.GraphQL4.Store.Domain.ValueObjects.ProductTypes;
 
 namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products
 {
-    public abstract class ProductBuilder<TProduct, TId> : Builder<ProductBuilder<TProduct, TId>, TProduct, TId>, IProductBuilder<TProduct, TId>
+    public abstract class ProductBuilder<TProductBuilder, TProduct, TId> : Builder<TProductBuilder, TProduct, TId>, IProductBuilder<TProductBuilder, TProduct, TId>
+        where TProductBuilder : ProductBuilder<TProductBuilder, TProduct, TId>
         where TProduct : Entity<TId>, IProduct
         where TId : struct
     {
-        protected string Description;
-        protected DateTimeOffset IntroduceAt;
-        protected string Name;
-        protected Option Option;
-        protected string PhotoUrl;
-        protected decimal Price;
-        protected ProductType ProductType;
-        protected int Rating;
-        protected int Stock;
-
-        public IProductBuilder<TProduct, TId> WithDescription(string description)
-        {
-            Description = description;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithIntroduceAt(DateTimeOffset introduceAt)
-        {
-            IntroduceAt = introduceAt;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithName(string name)
-        {
-            Name = name;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithOption(Option option)
-        {
-            Option = option;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithPhotoUrl(string photoUrl)
-        {
-            PhotoUrl = photoUrl;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithPrice(decimal price)
-        {
-            Price = price;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithProductType(ProductType productType)
-        {
-            ProductType = productType;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithRating(int rating)
-        {
-            Rating = rating;
-            return this;
-        }
-
-        public IProductBuilder<TProduct, TId> WithStock(int stock)
-        {
-            Stock = stock;
-            return this;
-        }
+        public string Description { get; set; }
+        public DateTimeOffset IntroduceAt { get; set; }
+        public string Name { get; set; }
+        public Option Option { get; set; }
+        public string PhotoUrl { get; set; }
+        public decimal Price { get; set; }
+        public ProductType ProductType { get; set; }
+        public int Rating { get; set; }
+        public int Stock { get; set; }
     }
 }

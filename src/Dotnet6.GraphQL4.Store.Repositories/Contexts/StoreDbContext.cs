@@ -21,12 +21,12 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Contexts
             DbContextOptions options, 
             ILoggerFactory loggerFactory, 
             IConfiguration configuration,
-            IOptionsMonitor<SqlServerRetryingOptions> optionsMonitor)
+            IOptionsSnapshot<SqlServerRetryingOptions> optionsMonitor)
             : base(options)
         {
             _loggerFactory = loggerFactory;
             _configuration = configuration;
-            _options = optionsMonitor.CurrentValue;
+            _options = optionsMonitor.Value;
         }
 
         public DbSet<Product> Products { get; set; }
@@ -45,7 +45,8 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Contexts
         {
             if (optionsBuilder.IsConfigured) return;
 
-            optionsBuilder.EnableDetailedErrors()
+            optionsBuilder
+                .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
                 .UseSqlServer(
                     connectionString:_configuration.GetConnectionString("DefaultConnection"), 
