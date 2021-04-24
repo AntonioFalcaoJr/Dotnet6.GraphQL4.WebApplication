@@ -1,31 +1,27 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs.Executers;
 using GraphQL;
 using GraphQL.Server;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        private static readonly Options Options = new();
-
-        public static IGraphQLBuilder AddApplicationGraphQL(this IServiceCollection services, Action<Options> actionOptions)
-        {
-            actionOptions(Options);
-
-            return services
+        public static IGraphQLBuilder AddApplicationGraphQL(this IServiceCollection services)
+            => services
                 .AddScoped(typeof(IGraphQLExecuter<>), typeof(StoreGraphQLExecuter<>))
                 .AddScoped<IDocumentExecuter, StoreDocumentExecuter>()
                 .AddSingleton<StoreSchema>()
                 .AddGraphQL(
-                    (options, _) =>
+                    (options, serviceProvider) =>
                         {
-                            options.EnableMetrics = Options.IsDevelopment;
+                            options.EnableMetrics = serviceProvider.GetRequiredService<IWebHostEnvironment>().IsDevelopment();
                             
                             options.UnhandledExceptionDelegate = exceptionContext 
                                 => Log.Error(
@@ -44,11 +40,5 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(StoreSchema));
-        }
-    }
-
-    public class Options
-    {
-        public bool IsDevelopment { get; set; }
     }
 }

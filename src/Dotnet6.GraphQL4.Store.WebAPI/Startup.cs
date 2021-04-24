@@ -82,6 +82,9 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureTransactionOptions(_configuration.GetSection("Transactions"));
+            services.ConfigureSqlServerRetryingOptions(_configuration.GetSection("SqlServerRetryingOptions"));
+
             services
                 .AddLogging()
                 .AddBuilders()
@@ -92,15 +95,10 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 .AddApplicationMessageServices()
                 .AddApplicationSubjects()
                 .AddApplicationAutoMapper()
+                .AddApplicationDbContext()
                 .AddControllers();
 
-            services.ConfigureTransactionOptions(_configuration.GetSection("Transactions"));
-            services.ConfigureSqlServerRetryingOptions(_configuration.GetSection("SqlServerRetryingOptions"));
-
-            services.AddApplicationDbContext();
-            
-            services.AddApplicationGraphQL(options
-                => options.IsDevelopment = _env.IsDevelopment());
+            services.AddApplicationGraphQL();
 
             services.Configure<KestrelServerOptions>(options
                 => options.AllowSynchronousIO = true);
