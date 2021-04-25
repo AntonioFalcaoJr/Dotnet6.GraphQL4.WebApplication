@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (webAPI)",
+            "name": "WebAPI",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -12,17 +12,21 @@
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/ui/playground"
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
+            },
+            "launchBrowser": {
+                "enabled": true
             }
         },
         {
-            "name": ".NET Core Launch (webMVC)",
+            "name": "WebMVC",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -39,13 +43,18 @@
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
+            },
+            "launchBrowser": {
+                "enabled": true
             }
         }
     ],
     "compounds": [
         {
             "name": "WebAPI/WebMVC",
-            "configurations": [".NET Core Launch (webAPI)", ".NET Core Launch (webMVC)"]
+            "configurations": ["WebAPI", "WebMVC"],
+            "preLaunchTask": "${defaultBuildTask}",
+            "stopAll": true
         }
     ]
 }
