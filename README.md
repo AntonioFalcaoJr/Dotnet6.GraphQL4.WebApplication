@@ -248,8 +248,8 @@ The implementation of the `UnitOfWork` gives support to the `ExecutionStrategy` 
 ```c#
 public Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
 {
-    return UnitOfWork.ExecuteInTransactionAsync(
-        operationAsync: async ct =>                         // Func<CancellationToken, Task<TResult>>
+    return UnitOfWork.ExecuteInTransactionScopeAsync(
+        operationAsync: async ct =>
         {
             var product = await Repository.GetByIdAsync(
                 id: reviewModel.ProductId,
@@ -262,8 +262,8 @@ public Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken ca
             await OnEditAsync(product, ct);
             return review;
         },
-        condition: _ => NotificationContext.AllValidAsync,  // Func<CancellationToken, Task<bool>>
-        cancellationToken: cancellationToken);              
+        condition: _ => NotificationContext.AllValidAsync,
+        cancellationToken: cancellationToken);      
 }
 ```
 
