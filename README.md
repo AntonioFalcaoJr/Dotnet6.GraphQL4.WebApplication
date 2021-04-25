@@ -171,22 +171,22 @@ networks:
 ```
 ### GraphQL Playground
 
-By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../....WebAPI/Graphs/Extensions/DependencyInjection/ApplicationBuilderExtensions.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/Graphs/Extensions/DependencyInjection/ApplicationBuilderExtensions.cs)
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../DependencyInjection/Extensions/ApplicationBuilderExtensions.cs`](.src/Dotnet6.GraphQL4.Store.WebAPI/DependencyInjection/Extensions/ApplicationBuilderExtensions.cs)
 
 ```c#
 app.UseGraphQLPlayground(
-    new GraphQLPlaygroundOptions
-    {
-        Path = "/ui/playground",
-        BetaUpdates = true,
-        RequestCredentials = RequestCredentials.Omit,
-        HideTracingResponse = false,
-        EditorCursorShape = EditorCursorShape.Line,
-        EditorTheme = EditorTheme.Dark,
-        EditorFontSize = 14,
-        EditorReuseHeaders = true,
-        EditorFontFamily = "JetBrains Mono"
-    });
+       options: new() 
+       {
+           BetaUpdates = true,
+           RequestCredentials = RequestCredentials.Omit,
+           HideTracingResponse = false,
+           EditorCursorShape = EditorCursorShape.Line,
+           EditorTheme = EditorTheme.Dark,
+           EditorFontSize = 14,
+           EditorReuseHeaders = true,
+           EditorFontFamily = "JetBrains Mono"
+       },
+       path: "/ui/playground");
 ```
 
 ### Health checks
