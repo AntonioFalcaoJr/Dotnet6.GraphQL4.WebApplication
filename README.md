@@ -171,7 +171,7 @@ networks:
 ```
 ### GraphQL Playground
 
-By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../DependencyInjection/Extensions/ApplicationBuilderExtensions.cs`](.src/Dotnet6.GraphQL4.Store.WebAPI/DependencyInjection/Extensions/ApplicationBuilderExtensions.cs)
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../DependencyInjection/Extensions/ApplicationBuilderExtensions.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/DependencyInjection/Extensions/ApplicationBuilderExtensions.cs)
 
 ```c#
 app.UseGraphQLPlayground(
