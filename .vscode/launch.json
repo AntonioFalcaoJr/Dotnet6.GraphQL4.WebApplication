@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI/bin/Debug/net5.0/Dotnet5.GraphQL3.Store.WebAPI.dll",
+            "program": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI/bin/Debug/net6.0/Dotnet6.GraphQL4.Store.WebAPI.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI",
+            "cwd": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
@@ -26,9 +26,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebMVC/bin/Debug/net5.0/Dotnet5.GraphQL3.Store.WebMVC.dll",
+            "program": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC/bin/Debug/net6.0/Dotnet6.GraphQL4.Store.WebMVC.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebMVC",
+            "cwd": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
@@ -40,12 +40,12 @@
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
             }
-        },
+        }
+    ],
+    "compounds": [
         {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+            "name": "WebAPI/WebMVC",
+            "configurations": [".NET Core Launch (webAPI)", ".NET Core Launch (webMVC)"]
         }
     ]
 }

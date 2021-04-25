@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI/Dotnet5.GraphQL3.Store.WebAPI.csproj",
+                "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI/Dotnet6.GraphQL4.Store.WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI/Dotnet5.GraphQL3.Store.WebAPI.csproj",
+                "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI/Dotnet6.GraphQL4.Store.WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,44 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI/Dotnet5.GraphQL3.Store.WebAPI.csproj",
+                "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI/Dotnet6.GraphQL4.Store.WebAPI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC/Dotnet6.GraphQL4.Store.WebMVC.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC/Dotnet6.GraphQL4.Store.WebMVC.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC/Dotnet6.GraphQL4.Store.WebMVC.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

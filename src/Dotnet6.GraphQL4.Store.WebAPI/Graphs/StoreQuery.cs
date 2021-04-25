@@ -43,7 +43,6 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs
                 .Name("Reviews")
                 .Argument<GuidGraphType>("productId")
                 .Resolve()
-                .WithScope()
                 .WithService<IProductService>()
                 .ResolveAsync(
                     async (context, service) =>
