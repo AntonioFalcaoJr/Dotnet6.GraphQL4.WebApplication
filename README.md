@@ -195,7 +195,9 @@ app.UseGraphQLPlayground(
 
 ### Health checks
 
-Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
+Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented. 
+
+If using [xabarilcoding/healthchecksui](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks/blob/master/doc/ui-docker.md) container image it will responde on `http://localhost:8000/healthchecks-ui/`.
 
 > `/health`   
 > Just check if the instance is running.
