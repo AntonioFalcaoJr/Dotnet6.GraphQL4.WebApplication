@@ -20,6 +20,10 @@ This project exemplifies the implementation and **dockerization** of a simple Ra
 
 ---
 
+![diagram](./.assets/img/diagram.png)
+
+---
+
 ## Running
 
 ### Development (secrets)
