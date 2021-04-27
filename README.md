@@ -20,6 +20,10 @@ This project exemplifies the implementation and **dockerization** of a simple Ra
 
 ---
 
+![diagram](./.assets/img/diagram.png)
+
+---
+
 ## Running
 
 ### Development (secrets)
@@ -171,27 +175,29 @@ networks:
 ```
 ### GraphQL Playground
 
-By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../....WebAPI/Graphs/Extensions/DependencyInjection/ApplicationBuilderExtensions.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/Graphs/Extensions/DependencyInjection/ApplicationBuilderExtensions.cs)
+By default **Playground** respond at `http://localhost:5000/ui/playground` but is possible configure the host and many others details in [`../DependencyInjection/Extensions/ApplicationBuilderExtensions.cs`](./src/Dotnet6.GraphQL4.Store.WebAPI/DependencyInjection/Extensions/ApplicationBuilderExtensions.cs)
 
 ```c#
 app.UseGraphQLPlayground(
-    new GraphQLPlaygroundOptions
-    {
-        Path = "/ui/playground",
-        BetaUpdates = true,
-        RequestCredentials = RequestCredentials.Omit,
-        HideTracingResponse = false,
-        EditorCursorShape = EditorCursorShape.Line,
-        EditorTheme = EditorTheme.Dark,
-        EditorFontSize = 14,
-        EditorReuseHeaders = true,
-        EditorFontFamily = "JetBrains Mono"
-    });
+       options: new() 
+       {
+           BetaUpdates = true,
+           RequestCredentials = RequestCredentials.Omit,
+           HideTracingResponse = false,
+           EditorCursorShape = EditorCursorShape.Line,
+           EditorTheme = EditorTheme.Dark,
+           EditorFontSize = 14,
+           EditorReuseHeaders = true,
+           EditorFontFamily = "JetBrains Mono"
+       },
+       path: "/ui/playground");
 ```
 
 ### Health checks
 
-Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented.
+Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented. 
+
+If using [xabarilcoding/healthchecksui](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks/blob/master/doc/ui-docker.md) container image it will responde on `http://localhost:8000/healthchecks-ui/`.
 
 > `/health`   
 > Just check if the instance is running.
@@ -248,8 +254,8 @@ The implementation of the `UnitOfWork` gives support to the `ExecutionStrategy` 
 ```c#
 public Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken cancellationToken)
 {
-    return UnitOfWork.ExecuteInTransactionAsync(
-        operationAsync: async ct =>                         // Func<CancellationToken, Task<TResult>>
+    return UnitOfWork.ExecuteInTransactionScopeAsync(
+        operationAsync: async ct =>
         {
             var product = await Repository.GetByIdAsync(
                 id: reviewModel.ProductId,
@@ -262,8 +268,8 @@ public Task<Review> AddReviewAsync(ReviewModel reviewModel, CancellationToken ca
             await OnEditAsync(product, ct);
             return review;
         },
-        condition: _ => NotificationContext.AllValidAsync,  // Func<CancellationToken, Task<bool>>
-        cancellationToken: cancellationToken);              
+        condition: _ => NotificationContext.AllValidAsync,
+        cancellationToken: cancellationToken);      
 }
 ```
 

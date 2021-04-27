@@ -2,13 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (webAPI)",
+            "name": "WebAPI",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI/bin/Debug/net5.0/Dotnet5.GraphQL3.Store.WebAPI.dll",
+            "program": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI/bin/Debug/net6.0/Dotnet6.GraphQL4.Store.WebAPI.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebAPI",
+            "cwd": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebAPI",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/ui/playground"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            },
+            "launchBrowser": {
+                "enabled": true
+            }
+        },
+        {
+            "name": "WebMVC",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC/bin/Debug/net6.0/Dotnet6.GraphQL4.Store.WebMVC.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Dotnet6.GraphQL4.Store.WebMVC",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
@@ -19,33 +43,18 @@
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
-            "name": ".NET Core Launch (webMVC)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebMVC/bin/Debug/net5.0/Dotnet5.GraphQL3.Store.WebMVC.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/Dotnet5.GraphQL3.Store.WebMVC",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
+            "launchBrowser": {
+                "enabled": true
             }
-        },
+        }
+    ],
+    "compounds": [
         {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+            "name": "WebAPI/WebMVC",
+            "configurations": ["WebAPI", "WebMVC"],
+            "preLaunchTask": "${defaultBuildTask}",
+            "stopAll": true
         }
     ]
 }
