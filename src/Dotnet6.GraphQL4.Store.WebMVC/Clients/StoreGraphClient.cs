@@ -89,7 +89,7 @@ namespace Dotnet6.GraphQL4.Store.WebMVC.Clients
         {
             var request = new GraphQLRequest
             {
-                Query = @"query ReviewsByProductQuery($productId: ID!) {
+                Query = @"query ReviewsByProductQuery($productId: Guid!) {
                           reviews(productId: $productId) {
                             id
                             title
