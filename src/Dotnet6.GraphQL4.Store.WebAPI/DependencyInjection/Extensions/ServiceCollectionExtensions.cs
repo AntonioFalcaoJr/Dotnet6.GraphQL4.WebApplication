@@ -26,7 +26,7 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
                             options.UnhandledExceptionDelegate = exceptionContext 
                                 => Log.Error(
                                     messageTemplate: "Unhandled error occured: {Error}", 
-                                    propertyValue: exceptionContext.OriginalException.Message);;
+                                    propertyValue: exceptionContext.OriginalException.Message);
                             
                             options.ComplexityConfiguration = new() {MaxDepth = 15};
                         })
