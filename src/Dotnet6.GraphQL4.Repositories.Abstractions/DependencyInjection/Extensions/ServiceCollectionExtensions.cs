@@ -1,4 +1,3 @@
-﻿using System.Transactions;
 using Dotnet6.GraphQL4.CrossCutting;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork;
@@ -22,10 +21,12 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensi
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
             => services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        public static OptionsBuilder<ApplicationTransactionOptions> ConfigureTransactionOptions(this IServiceCollection services, IConfigurationSection section)
+        public static OptionsBuilder<TransactionOptions> ConfigureTransactionOptions(this IServiceCollection services, IConfigurationSection section)
             => services
-                .AddOptions<ApplicationTransactionOptions>()
+                .AddOptions<TransactionOptions>()
                 .Bind(section)
-                .Validate(options => options.IsolationLevel is not IsolationLevel.Unspecified);
+                .Validate(
+                    validation: options => options.IsolationLevel is not System.Transactions.IsolationLevel.Unspecified,
+                    failureMessage: "Transaction isolation level must be specified");
     }
 }

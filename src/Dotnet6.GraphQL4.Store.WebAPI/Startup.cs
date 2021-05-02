@@ -4,8 +4,10 @@ using Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.Repositories.Contexts;
 using Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Services.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Extensions;
+using Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
 using HealthChecks.UI.Client;
@@ -82,8 +84,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureTransactionOptions(_configuration.GetSection("Transactions"));
-            services.ConfigureSqlServerRetryingOptions(_configuration.GetSection("SqlServerRetryingOptions"));
+            services.ConfigureTransactionOptions(_configuration.GetSection(nameof(TransactionOptions)));
+            services.ConfigureSqlServerRetryingOptions(_configuration.GetSection(nameof(SqlServerRetryingOptions)));
 
             services
                 .AddLogging()

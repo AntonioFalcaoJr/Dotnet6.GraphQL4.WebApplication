@@ -15,12 +15,12 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
     {
         private readonly DatabaseFacade _database;
         private readonly DbContext _dbContext;
-        private readonly ApplicationTransactionOptions _options;
+        private readonly TransactionOptions _options;
         private readonly INotificationContext _notificationContext;
 
         public UnitOfWork(
             DbContext dbContext, 
-            IOptionsSnapshot<ApplicationTransactionOptions> optionsMonitor, 
+            IOptionsSnapshot<TransactionOptions> optionsMonitor, 
             INotificationContext notificationContext)
         {
             _dbContext = dbContext;

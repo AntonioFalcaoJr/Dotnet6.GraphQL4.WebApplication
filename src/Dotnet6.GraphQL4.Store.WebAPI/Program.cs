@@ -14,13 +14,7 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
     {
         private static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args)
-                .UseSerilog(
-                    (context, services, configuration) 
-                        => configuration
-                            .ReadFrom.Configuration(context.Configuration)
-                            .ReadFrom.Services(services)
-                            .Enrich.FromLogContext()
-                            .WriteTo.Console())
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
                 .UseDefaultServiceProvider(
                     (context, options) =>
