@@ -28,7 +28,8 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
 
                     b.Property<string>("Description")
                         .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -41,7 +42,8 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Option")
                         .IsRequired()
@@ -49,7 +51,8 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
 
                     b.Property<string>("PhotoUrl")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(10, 2)
@@ -80,14 +83,17 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -98,73 +104,73 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("812c2286-449c-49c2-a7ff-1ea54ad2dbec"),
-                            Comment = "Qui perferendis dolores in laboriosam sit sint nulla dolor magnam. Odio qui saepe nam et veniam. Sit repellat et eos dicta nisi sint voluptas eius. Assumenda voluptatem repudiandae sed ad temporibus molestiae animi nisi dolorem. Repellat corrupti expedita rerum necessitatibus voluptatum labore et sint.\n\nQuo quod officia itaque est. Dolorem non qui sit adipisci maxime rem ut. Impedit animi cum corrupti.\n\nConsectetur molestiae enim et veniam odio occaecati amet est voluptate. Non ratione autem. Fuga et quas unde amet sequi accusamus dolor fuga. Dicta ab libero magni qui ut sit.",
-                            ProductId = new Guid("414d6a4c-e1a8-4954-8ebb-ff52a7a80235"),
-                            Title = "Totam temporibus totam eaque ut tempore repudiandae."
+                            Id = new Guid("9d1a2300-b7a6-44e1-8422-a95ad74a8a1d"),
+                            Comment = "Quis fugit quisquam quis et itaque velit. Error maxime consequatur recusandae. Ea aut modi et at. Occaecati unde illo consequatur. Quae facere omnis voluptatem numquam sequi laborum veritatis quo.\n\nDolorem et commodi voluptas temporibus repudiandae facilis temporibus sed. Quis esse consequatur. Non rerum qui. Ea perspiciatis eum quam culpa. Adipisci qui similique esse. Aspernatur nihil sit dignissimos eum aut suscipit in deleniti itaque.\n\nIure quia qui excepturi velit voluptatem. Possimus veniam eos harum. Cumque laudantium dolorem ipsam.",
+                            ProductId = new Guid("8318e7f4-615f-4401-80f5-121522b7a279"),
+                            Title = "Dicta et quo esse quisquam inventore."
                         },
                         new
                         {
-                            Id = new Guid("2729ee8e-4160-46ea-b68f-508bb5570bc9"),
-                            Comment = "Deleniti odio facere dolores quae sunt ipsam. Odio deserunt voluptates corrupti dolorum totam quis et incidunt eius. Voluptas optio accusantium vero eum. Consequatur et nesciunt.\n\nUt praesentium commodi commodi nostrum non beatae sunt delectus nihil. Repudiandae a consequuntur impedit. Quibusdam magnam voluptate asperiores perferendis atque et sequi. Cumque quibusdam dolor aut officiis. Debitis mollitia nostrum ea qui ut ratione. Delectus ea ea nulla minus sed saepe.\n\nVelit vel quo quo voluptatem tempore corrupti et. Beatae et sunt ut doloremque provident necessitatibus qui veniam dignissimos. Dolore voluptatibus numquam. Dolorem et reiciendis dolore et et. Assumenda debitis laborum non ipsum. Est perferendis omnis suscipit rerum.",
-                            ProductId = new Guid("daad337a-6761-4022-ba07-9717de42d19e"),
-                            Title = "Vero sit mollitia occaecati."
+                            Id = new Guid("1ea1edbc-958b-4ea2-b9ae-de606e7c573a"),
+                            Comment = "Exercitationem totam autem vel laboriosam. Fuga at consequatur doloribus fugit. Sit qui voluptatem qui.\n\nVelit assumenda aut. Consequatur ut quos. Non architecto eaque blanditiis molestiae aspernatur adipisci non itaque qui. Aliquam ut doloremque ab excepturi consequatur qui. Eligendi accusantium rerum perferendis ipsa et perspiciatis ipsum. Totam sunt in ad.\n\nMollitia officia itaque non velit ut eum ratione quis. Omnis natus aspernatur molestiae qui. Modi dolores qui et et.",
+                            ProductId = new Guid("02842c95-3473-4c9f-988b-2a6c4defb95c"),
+                            Title = "Dignissimos voluptatem deserunt ad corporis est maiores sint enim magnam."
                         },
                         new
                         {
-                            Id = new Guid("9f4ae24b-3705-4b15-a8f1-f4f4ef3c391b"),
-                            Comment = "Qui ea non dolore a aliquam. Voluptate est optio voluptatem sapiente excepturi itaque consequatur. Ratione saepe quo delectus accusantium. In illo quia impedit iste aut non id accusamus. Amet quia veniam nihil in fugit.\n\nQuos illo error aut nihil amet magni quas ut corrupti. Occaecati aut nihil ut odio placeat deleniti reiciendis. Fugiat animi dolor corporis molestias numquam tempore veritatis. Laboriosam quos illum eum. Voluptates qui exercitationem vel suscipit iusto molestiae magni. Facilis aut voluptatem rerum.\n\nDeserunt et et et. Tempora quia autem soluta voluptates vero. Voluptate dolores maiores dolores. Quo reiciendis omnis reiciendis. Omnis ducimus sed voluptas quis saepe nobis.",
-                            ProductId = new Guid("ad5fd707-1f4b-494c-b77a-8d19012477ca"),
-                            Title = "Sapiente dolores et et."
+                            Id = new Guid("d7221f5b-0422-45e4-aec0-18452ed7801f"),
+                            Comment = "Et sit ut numquam nam impedit non odit fugiat nihil. Eligendi architecto inventore eos aut qui dolor dolorem excepturi maiores. Dolor est qui sequi qui dolores.\n\nExplicabo non dolores voluptatum perferendis autem. Nihil harum repellat. Commodi consequatur ut doloribus nemo a veritatis vitae est aspernatur. Vitae consequatur culpa dolor omnis velit debitis temporibus.\n\nVoluptates unde quae deleniti molestiae. Voluptates in officia autem. Qui sit ut quos dolores aut odit. Explicabo id deleniti debitis a sapiente. Voluptatum sit et ea reprehenderit culpa. Autem ad odio.",
+                            ProductId = new Guid("3c480dc4-b56c-4696-be22-94f2a8df8eca"),
+                            Title = "Rem ducimus libero eum similique ut modi."
                         },
                         new
                         {
-                            Id = new Guid("d1f502af-5860-4121-9945-4f24c5fcadb8"),
-                            Comment = "Vero autem facilis quibusdam enim saepe. Ullam illo praesentium quia et aut. Itaque qui ipsum et temporibus nihil excepturi quas. Sunt occaecati vel. Autem ex porro dolorum suscipit quibusdam dignissimos culpa ullam. Laborum ad dolorem blanditiis.\n\nReiciendis qui tempore reprehenderit optio ab est sit quia. Quisquam quidem ipsum sit sit voluptas aut veritatis dolor. Soluta temporibus dolorum.\n\nItaque modi hic dolore in. Et minus repudiandae soluta tempora quae sit dolores quidem. Voluptate magni temporibus atque est nemo exercitationem illum suscipit beatae.",
-                            ProductId = new Guid("b18aba7c-f135-4ada-8576-38b5a0acf974"),
-                            Title = "Accusantium omnis cumque et placeat quam fugit."
+                            Id = new Guid("9787db1a-594c-451b-9d1c-c28bb8852cf4"),
+                            Comment = "Incidunt quam consequatur blanditiis sequi temporibus occaecati nihil corrupti. Itaque consequuntur laboriosam eaque minima dolorum ipsum reprehenderit voluptates harum. Et sit et error qui sed molestiae. Eaque rem aut tenetur omnis.\n\nEt aut impedit maxime dolor ut qui dolorem adipisci in. Culpa reprehenderit hic sint enim amet. Et cum deleniti soluta quia aut quam. Eos debitis eius sit explicabo. Saepe eum dolor facilis quo eligendi et rerum facilis.\n\nDebitis mollitia laudantium nesciunt non est repellat saepe. Dignissimos quia fuga dolores tempora ut excepturi quo ipsam placeat. Aut nisi fugiat ut placeat in.",
+                            ProductId = new Guid("820ad41e-0466-43ec-9b12-0ec52de0f86c"),
+                            Title = "Eius maxime asperiores."
                         },
                         new
                         {
-                            Id = new Guid("e5287afb-acb9-4873-9c50-caf0ed76cfea"),
-                            Comment = "Est molestiae aut aut ad. Sit facilis molestias nobis delectus nesciunt consectetur modi. Pariatur et et. Numquam porro rerum in qui. Qui amet quis. Consequuntur vitae alias iure mollitia voluptatem exercitationem qui.\n\nConsequatur quasi possimus natus sint deserunt. Commodi consequatur ad eligendi sit libero sunt eum magnam. Dolore tenetur nisi et. Neque ut itaque qui perferendis dolorum fuga hic.\n\nAperiam consequatur temporibus eum vel recusandae maxime vitae aut. Assumenda est illo dolorem. Occaecati inventore ipsam cumque. Mollitia quo omnis nisi repellendus veniam porro repellat. Corporis consequuntur earum quia nostrum ratione. Eveniet rerum rem qui.",
-                            ProductId = new Guid("d3fca6f7-ed4f-4b9b-ad99-142ca5e95dd9"),
-                            Title = "Excepturi ab voluptate."
+                            Id = new Guid("2ba73ef6-601c-44dd-aaeb-0ce084259e8d"),
+                            Comment = "Nihil hic doloribus qui doloremque eveniet omnis ea. Laborum dolorum commodi dolor voluptas. Consectetur repudiandae possimus repellendus quod voluptas.\n\nQuo ducimus est voluptates eos eius ut pariatur quam. Eligendi architecto cum aperiam voluptates qui fuga. Dolores aut aperiam.\n\nAmet a doloremque officiis hic totam fugit rem. Laborum tenetur illo asperiores suscipit ipsam cumque. Aut temporibus fuga id aut illo eius dicta. Voluptatum dolores velit quae. Eos unde et reiciendis omnis quaerat dolores aliquam. Consequatur quia voluptate magni.",
+                            ProductId = new Guid("79283d10-9770-4ae1-b0c8-346e3cb22656"),
+                            Title = "Aspernatur nisi placeat consectetur sunt ratione."
                         },
                         new
                         {
-                            Id = new Guid("5c6c55a9-5c5d-4214-8f97-5e5c41436753"),
-                            Comment = "Hic ullam repellat doloremque est perferendis corrupti sit nesciunt hic. Sit nemo laborum. Velit ab culpa et quaerat delectus. Non laudantium sapiente dolorem ab omnis.\n\nUt suscipit voluptatum omnis occaecati dolorem. Sed molestias quod. Quos dolorum omnis iusto quisquam dicta quasi et quis. Et suscipit temporibus sapiente iste maxime nulla sunt iste cupiditate. Praesentium dignissimos libero maiores nobis et.\n\nNulla officiis veniam. Ut ea perferendis quia quod. Totam molestias error repellat. Ad ut quis quia et voluptate consequatur sit.",
-                            ProductId = new Guid("b9145011-9f69-4fea-9ef4-71fb913fd8fc"),
-                            Title = "Tempora quia repellendus."
+                            Id = new Guid("e7ed569b-6ee5-4e38-922c-ce28bbfe0ea1"),
+                            Comment = "Voluptas odit quam qui magnam fugit corporis iste. Qui rem aut dolore est. Corporis sed sit enim fugiat odit aut ea saepe numquam. Ipsa eligendi est illo. Aut officiis deleniti nam cumque quis qui provident. Et et sed dolorum atque aut.\n\nQuia voluptatem eligendi voluptatem quisquam ratione eius adipisci atque. Reiciendis laudantium corrupti qui quia atque. Delectus vel suscipit. Nulla sit autem laudantium molestiae laborum aut nam molestias error.\n\nRerum aut reprehenderit inventore placeat dolor atque consectetur perspiciatis voluptate. Harum voluptatem et perspiciatis eveniet dolor aut. Est et iste est magni architecto est iste tempore et. Nisi et sit possimus vel velit dolorum eius atque quis.",
+                            ProductId = new Guid("0210e32a-6157-4763-87af-c3ae5cde3940"),
+                            Title = "Corporis veritatis quae odit voluptas fugiat temporibus voluptatem suscipit unde."
                         },
                         new
                         {
-                            Id = new Guid("be47a10d-64c8-4170-941c-6adf31558140"),
-                            Comment = "Adipisci quae nemo excepturi ducimus voluptate aut voluptas voluptatem adipisci. Ut eos natus fugiat ut commodi ex id aut et. Est quae deserunt quaerat inventore aperiam. Et dolores ipsa architecto reprehenderit ipsa amet non. Culpa ut vero laudantium dolores ullam dignissimos. Dolorum ut quam.\n\nAmet neque adipisci. In aut in. Voluptas dolor doloribus aut beatae debitis officiis dolores. Facere assumenda ut rerum debitis consequatur laudantium. Eius quidem quos reiciendis et consequatur placeat in doloribus.\n\nLaborum distinctio at officiis minima labore quis culpa. Quos eveniet sint quisquam aspernatur et non temporibus. Corrupti ea dolor tenetur asperiores sit omnis. Aut voluptate veniam tempore quia possimus et provident ipsum aut.",
-                            ProductId = new Guid("fc4edcd6-7412-49be-8d96-296a4b399a8e"),
-                            Title = "Nostrum sunt molestiae illo."
+                            Id = new Guid("39c148c1-0d4e-4ded-ba34-32b374c8f18e"),
+                            Comment = "Error unde excepturi totam recusandae. Adipisci aut earum amet in aut quo sunt sit. Voluptates reprehenderit laudantium mollitia corrupti.\n\nNon accusamus dicta ipsam ratione commodi consequuntur quo. Sed qui fugit ut. Sequi reprehenderit quibusdam dolorum.\n\nA et tempora. Ea aspernatur reiciendis ut voluptatem quod aperiam tempora aperiam magnam. Consequatur eaque mollitia est ut. Expedita magnam qui excepturi quia velit.",
+                            ProductId = new Guid("00d56434-f8e1-4cc6-a246-3b60c2e4bd7f"),
+                            Title = "Et est ut neque qui vero ullam et voluptas."
                         },
                         new
                         {
-                            Id = new Guid("45419636-f0c1-41ed-8315-1c2e260afda4"),
-                            Comment = "Tempore sint minus similique in velit fugit magni iure numquam. Vitae neque saepe pariatur voluptas. Saepe earum ut vitae autem. Eius consequuntur recusandae omnis expedita. Suscipit dolores et repellat natus adipisci explicabo iste eligendi.\n\nAnimi id molestiae ab quae. Voluptatum quae voluptate aut ipsa a. Dolorum quia dignissimos aut est quibusdam maxime.\n\nPorro provident iste sunt sint ea fugit et tempore. Ut ipsam deserunt neque molestiae aspernatur iusto mollitia nisi. Sunt quae libero minima inventore labore qui. Et repudiandae velit dignissimos. Sed in cupiditate quasi praesentium dignissimos ipsum quisquam veniam vel.",
-                            ProductId = new Guid("e0163b62-59d2-4fb5-92ee-8cefd8687b93"),
-                            Title = "Quo similique commodi soluta expedita optio quis veniam est iusto."
+                            Id = new Guid("dd73a0e7-bd2c-41cc-b582-b981d1891d83"),
+                            Comment = "Quos aliquam totam illo fugiat sed iusto. Minus occaecati saepe iusto aspernatur aut. Alias enim ea magni quis molestias voluptatum velit.\n\nDebitis et sunt similique quam dignissimos. Pariatur impedit esse iusto doloribus ipsa rerum nisi. Cumque debitis voluptatem repudiandae. Nisi velit consectetur sint quaerat sequi dicta minus. Aut quos non cum accusamus ut maiores culpa. Explicabo velit sit at voluptas.\n\nEos consequatur corrupti labore maxime accusantium dolorum nesciunt quaerat ut. Et iusto necessitatibus facere ex animi nemo. Eos sequi sed aperiam aut omnis. Facilis exercitationem aspernatur alias voluptas fuga. Ratione eaque sit sed ab.",
+                            ProductId = new Guid("81e0bf83-a3f5-4a38-b982-5e0c84f79e6b"),
+                            Title = "Ipsum et alias dolorem nihil enim."
                         },
                         new
                         {
-                            Id = new Guid("c5173bff-2f21-425f-9608-b2d1fd388a31"),
-                            Comment = "Eum sapiente et voluptatem corporis similique non veritatis amet vel. Eos exercitationem corrupti illum quidem quia voluptatem. Deleniti ratione optio. Optio qui aliquid repellat sed culpa. Ea blanditiis eveniet dolores aut qui aut. Sit qui voluptas quis fugit ipsa fugit est voluptates.\n\nQuas vero est sit modi animi ut. Facere non ab. Autem quis et quas tempora enim optio aspernatur quis.\n\nSint suscipit illum dolor sequi eos. Vel tempore dolores et ut totam cumque non maiores itaque. Quas laborum minus sint voluptates molestias reprehenderit sit. Nihil laborum et minus placeat aut aut nisi. Cumque minima eveniet qui est blanditiis voluptas unde nihil. Quis quos fuga dolores.",
-                            ProductId = new Guid("18a4ea4e-0c2b-493a-a0cf-6f1ea30a61b6"),
-                            Title = "Adipisci id dignissimos."
+                            Id = new Guid("088ca74b-1dd9-41e0-876c-3265e695b919"),
+                            Comment = "Rerum eveniet laudantium autem sint. Consequatur exercitationem a debitis nam iste eius laboriosam autem deleniti. Aliquam porro atque nihil qui nesciunt porro nihil. Quae dolorem voluptas eos perspiciatis labore quae ut corrupti. Eligendi officia minus cum. Ducimus harum fugit nisi hic cumque.\n\nNon eum et quis voluptate tenetur ex aut quia. Blanditiis natus omnis molestiae iure officia temporibus alias. Aut id reprehenderit aut iure non.\n\nQuae id dolorem eligendi veniam repudiandae non reiciendis aliquam. Non quis magnam. Optio dolorem cumque aut reprehenderit.",
+                            ProductId = new Guid("115747c4-7bac-45c3-b916-b2b0a068fa4b"),
+                            Title = "Aliquam quidem numquam placeat."
                         },
                         new
                         {
-                            Id = new Guid("222ae5ad-574e-493b-aa27-d20c14529f08"),
-                            Comment = "Aut ut eveniet optio odio ipsam iure at earum praesentium. Inventore delectus et iusto porro doloribus aut iusto. Sunt voluptates iste sint quis voluptatem et eos magni. Natus ipsam officiis harum aliquid. Non rerum omnis ullam et perferendis quasi ut. Voluptatem dignissimos ullam fugiat dolor.\n\nNon ut aut consequatur. Est temporibus aut eaque ex laborum rerum voluptas quos. Velit sequi voluptas.\n\nEveniet cupiditate explicabo magni ducimus numquam ratione. Fugiat earum laborum eligendi quis. Ducimus dignissimos occaecati ipsum et et vel dolores veniam nihil. Voluptas voluptas quia amet quia et et. Voluptates sit possimus harum officia ducimus vel.",
-                            ProductId = new Guid("5e73023d-d64f-4fe7-ad5a-5088c43bf624"),
-                            Title = "Quia magnam aliquid atque eaque mollitia ducimus."
+                            Id = new Guid("3543d2fb-a52c-4820-af95-e00416e2d881"),
+                            Comment = "Occaecati libero dolorum esse voluptatem atque reiciendis non blanditiis qui. Repellat nostrum sint aut rerum unde ratione molestiae pariatur iusto. Velit est perspiciatis ducimus culpa earum aspernatur sed. Minus illum sint voluptate id est velit sed velit in.\n\nCupiditate sunt ut officia rem. Et aut dolorem voluptas quisquam possimus rem qui explicabo. Doloremque temporibus tenetur aliquid omnis voluptatem quos.\n\nDebitis rem modi expedita error. Sunt ut et et facere a error. Est consequatur fuga qui qui. Est libero ut et sapiente maxime et reiciendis inventore. Ullam in et cupiditate.",
+                            ProductId = new Guid("53839868-fc56-4157-9aa5-f85d9825efa3"),
+                            Title = "Rerum accusamus ea rerum minus repellendus tempore maxime velit adipisci."
                         });
                 });
 
@@ -198,143 +204,143 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0ed299fd-42df-4496-bcd7-aef4047302f7"),
-                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 10, 21, 13, 21, 42, 737, DateTimeKind.Unspecified).AddTicks(8406), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Practical Steel Ball",
-                            Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=447&blur",
-                            Price = 444.15m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 8,
-                            Stock = 3190,
-                            BackpackType = "Hiking"
-                        },
-                        new
-                        {
-                            Id = new Guid("0230cce1-1742-4b07-9db1-664bc9c66eb2"),
-                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 16, 11, 43, 39, 710, DateTimeKind.Unspecified).AddTicks(7882), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Tasty Frozen Bacon",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=227&blur",
-                            Price = 776.75m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 5,
-                            Stock = 882,
-                            BackpackType = "Snowsports"
-                        },
-                        new
-                        {
-                            Id = new Guid("b7c45bb6-24a1-4a4f-99ab-5e7d44a9822f"),
+                            Id = new Guid("84aea957-9f2e-41f0-b327-c24df0ccc8ec"),
                             Description = "The Football Is Good For Training And Recreational Purposes",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 3, 18, 6, 58, 9, 409, DateTimeKind.Unspecified).AddTicks(7453), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Awesome Plastic Pants",
-                            Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=147&blur",
-                            Price = 421.32m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 10, 14, 0, 5, 54, 442, DateTimeKind.Unspecified).AddTicks(7619), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Licensed Metal Shoes",
+                            Option = "Three",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=81&blur",
+                            Price = 29.97m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
                             Rating = 7,
-                            Stock = 2377,
-                            BackpackType = "Climbing"
-                        },
-                        new
-                        {
-                            Id = new Guid("43e0733b-5672-4c76-a2e7-4d1d3cc68182"),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 24, 11, 44, 30, 701, DateTimeKind.Unspecified).AddTicks(5852), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Handmade Plastic Chicken",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=3&blur",
-                            Price = 881.88m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
-                            Rating = 5,
-                            Stock = 347,
-                            BackpackType = "Climbing"
-                        },
-                        new
-                        {
-                            Id = new Guid("f2e219df-a2e1-4ed1-8c31-bf89588ce3f3"),
-                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 12, 2, 4, 39, 11, 281, DateTimeKind.Unspecified).AddTicks(2687), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Unbranded Plastic Cheese",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=272&blur",
-                            Price = 476.66m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
-                            Rating = 9,
-                            Stock = 1579,
+                            Stock = 4866,
                             BackpackType = "DayPack"
                         },
                         new
                         {
-                            Id = new Guid("ef82c6fc-569d-43a3-9714-f20a962fd669"),
+                            Id = new Guid("df7e87f2-a25e-4e9e-8ee6-80a6a874f1c7"),
                             Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 6, 12, 48, 37, 577, DateTimeKind.Unspecified).AddTicks(1148), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Generic Fresh Ball",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 17, 20, 57, 13, 234, DateTimeKind.Unspecified).AddTicks(2308), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Unbranded Cotton Cheese",
                             Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=730&blur",
-                            Price = 569.02m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
-                            Rating = 1,
-                            Stock = 1430,
-                            BackpackType = "Hiking"
-                        },
-                        new
-                        {
-                            Id = new Guid("ffbdbe41-131c-425a-8eca-9585492f3913"),
-                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 1, 8, 17, 57, 54, 362, DateTimeKind.Unspecified).AddTicks(8545), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Small Granite Fish",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=1055&blur",
-                            Price = 395.43m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 6,
-                            Stock = 219,
+                            PhotoUrl = "https://picsum.photos/500/375/?image=345&blur",
+                            Price = 434.09m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 10,
+                            Stock = 2552,
                             BackpackType = "DayPack"
                         },
                         new
                         {
-                            Id = new Guid("fb463c8d-9d4f-42eb-8c4b-d69944c1bd35"),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 3, 25, 2, 2, 32, 168, DateTimeKind.Unspecified).AddTicks(2933), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Practical Fresh Keyboard",
+                            Id = new Guid("7d24453c-a245-4340-bac9-f34c686dd005"),
+                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 2, 9, 1, 29, 5, 694, DateTimeKind.Unspecified).AddTicks(5566), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Generic Steel Table",
                             Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=447&blur",
-                            Price = 472.24m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 4,
-                            Stock = 1938,
-                            BackpackType = "Snowsports"
+                            PhotoUrl = "https://picsum.photos/500/375/?image=336&blur",
+                            Price = 223.18m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 1,
+                            Stock = 2744,
+                            BackpackType = "DayPack"
                         },
                         new
                         {
-                            Id = new Guid("3f9062b0-1c34-4ddc-a280-23662e67c0db"),
+                            Id = new Guid("696907a3-ab0d-432d-bf66-c57f89c3c120"),
+                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 2, 7, 3, 35, 8, 251, DateTimeKind.Unspecified).AddTicks(829), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Handcrafted Cotton Chips",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=271&blur",
+                            Price = 533.79m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 4,
+                            Stock = 1541,
+                            BackpackType = "DayPack"
+                        },
+                        new
+                        {
+                            Id = new Guid("05ba3c27-de61-4e49-9590-4c67ea583612"),
+                            Description = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 11, 12, 2, 22, 47, 715, DateTimeKind.Unspecified).AddTicks(7718), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Ergonomic Metal Soap",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=435&blur",
+                            Price = 39.37m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 2,
+                            Stock = 4834,
+                            BackpackType = "DayPack"
+                        },
+                        new
+                        {
+                            Id = new Guid("a80e2df9-1516-445a-9885-7f23728fcd36"),
+                            Description = "The Football Is Good For Training And Recreational Purposes",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 5, 8, 0, 2, 37, DateTimeKind.Unspecified).AddTicks(8846), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Refined Cotton Ball",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=895&blur",
+                            Price = 865.06m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 3,
+                            Stock = 4159,
+                            BackpackType = "Climbing"
+                        },
+                        new
+                        {
+                            Id = new Guid("8a3f8101-a72f-42b0-9d8d-c2f805f55ca4"),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 28, 16, 13, 50, 876, DateTimeKind.Unspecified).AddTicks(7074), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Rustic Rubber Computer",
+                            Option = "Three",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=557&blur",
+                            Price = 988.62m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 6,
+                            Stock = 970,
+                            BackpackType = "DayPack"
+                        },
+                        new
+                        {
+                            Id = new Guid("72ec876e-8f81-43b6-99c4-0caf84cc5c52"),
                             Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 12, 10, 46, 31, 973, DateTimeKind.Unspecified).AddTicks(1959), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Awesome Concrete Bacon",
-                            Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=650&blur",
-                            Price = 355.70m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 8,
-                            Stock = 910,
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 17, 3, 54, 43, 339, DateTimeKind.Unspecified).AddTicks(7693), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Small Concrete Pants",
+                            Option = "Three",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=730&blur",
+                            Price = 804.40m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
+                            Rating = 10,
+                            Stock = 690,
+                            BackpackType = "Overnight"
+                        },
+                        new
+                        {
+                            Id = new Guid("686b866e-03da-4946-88ff-951d36d7d052"),
+                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 6, 7, 50, 17, 999, DateTimeKind.Unspecified).AddTicks(3024), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Sleek Rubber Salad",
+                            Option = "Three",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=810&blur",
+                            Price = 989.35m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 7,
+                            Stock = 83,
                             BackpackType = "Hiking"
                         },
                         new
                         {
-                            Id = new Guid("a682d821-1770-4595-98a9-f5f6d4e7a50c"),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 9, 3, 1, 8, 11, 214, DateTimeKind.Unspecified).AddTicks(7356), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Refined Cotton Gloves",
-                            Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=712&blur",
-                            Price = 64.28m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
+                            Id = new Guid("c990c789-cc3c-4c42-b884-ee7d8d1c44d6"),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 9, 24, 7, 45, 39, 230, DateTimeKind.Unspecified).AddTicks(7884), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Rustic Concrete Ball",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=599&blur",
+                            Price = 521.32m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
                             Rating = 3,
-                            Stock = 200,
-                            BackpackType = "Overnight"
+                            Stock = 1059,
+                            BackpackType = "Cycling"
                         });
                 });
 
@@ -354,153 +360,153 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("53e062d2-9143-451e-ace6-c47b4623d1e2"),
+                            Id = new Guid("26b72de2-fcc2-48cc-993c-33dccabf1737"),
                             Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 10, 10, 9, 47, 12, DateTimeKind.Unspecified).AddTicks(9922), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Sleek Cotton Table",
-                            Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=1023&blur",
-                            Price = 731.27m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 6,
-                            Stock = 4310,
-                            BootType = "Engineer",
-                            Size = 24
-                        },
-                        new
-                        {
-                            Id = new Guid("50d64371-7cf7-4d9a-b5c5-ca43711b90e2"),
-                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 24, 3, 40, 35, 581, DateTimeKind.Unspecified).AddTicks(1409), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Refined Fresh Keyboard",
-                            Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=574&blur",
-                            Price = 722.06m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 6,
-                            Stock = 901,
-                            BootType = "Harness",
-                            Size = 27
-                        },
-                        new
-                        {
-                            Id = new Guid("a8333c47-6769-4c75-a8ea-5f2f421228d2"),
-                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 5, 22, 26, 31, 313, DateTimeKind.Unspecified).AddTicks(2757), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Refined Plastic Gloves",
-                            Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=308&blur",
-                            Price = 889.90m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 8,
-                            Stock = 219,
-                            BootType = "Cowboy",
-                            Size = 27
-                        },
-                        new
-                        {
-                            Id = new Guid("77077e9d-7099-43b8-8f96-57e97bc52de2"),
-                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 7, 4, 45, 12, 234, DateTimeKind.Unspecified).AddTicks(1139), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Gorgeous Soft Towels",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=574&blur",
-                            Price = 894.39m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 10,
-                            Stock = 2789,
-                            BootType = "Engineer",
-                            Size = 22
-                        },
-                        new
-                        {
-                            Id = new Guid("046a976d-9a2c-4617-955c-d83480745d34"),
-                            Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 17, 9, 31, 19, 208, DateTimeKind.Unspecified).AddTicks(2974), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Intelligent Cotton Car",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 21, 20, 29, 23, 858, DateTimeKind.Unspecified).AddTicks(213), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Intelligent Granite Cheese",
                             Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=857&blur",
-                            Price = 230.38m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 4,
-                            Stock = 4356,
-                            BootType = "Football",
-                            Size = 27
-                        },
-                        new
-                        {
-                            Id = new Guid("7a72861a-479e-40ae-b8d4-7a9b1e152a2a"),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 6, 11, 0, 29, 810, DateTimeKind.Unspecified).AddTicks(5968), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Rustic Soft Pizza",
-                            Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=626&blur",
-                            Price = 28.78m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 2,
-                            Stock = 4727,
+                            PhotoUrl = "https://picsum.photos/500/375/?image=989&blur",
+                            Price = 693.80m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 5,
+                            Stock = 4780,
                             BootType = "Chelsea",
-                            Size = 24
+                            Size = 30
                         },
                         new
                         {
-                            Id = new Guid("47fb309e-8245-4618-8498-59ec9b8978b1"),
-                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 11, 13, 17, 19, 33, 324, DateTimeKind.Unspecified).AddTicks(7319), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Rustic Frozen Fish",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=717&blur",
-                            Price = 442.96m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 8,
-                            Stock = 2110,
-                            BootType = "Chelsea",
-                            Size = 29
-                        },
-                        new
-                        {
-                            Id = new Guid("dc1ad637-d68b-459c-9fd6-7a86c406f594"),
+                            Id = new Guid("bf2cf5eb-63ad-48af-9a50-cf8cb7e36383"),
                             Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 9, 5, 21, 38, 54, 263, DateTimeKind.Unspecified).AddTicks(9306), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Practical Fresh Towels",
-                            Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=240&blur",
-                            Price = 588.93m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 0,
-                            Stock = 2169,
-                            BootType = "Harness",
-                            Size = 22
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 20, 22, 25, 38, 413, DateTimeKind.Unspecified).AddTicks(205), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Unbranded Steel Mouse",
+                            Option = "Three",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=1014&blur",
+                            Price = 6.68m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 1,
+                            Stock = 2790,
+                            BootType = "Football",
+                            Size = 23
                         },
                         new
                         {
-                            Id = new Guid("6b70c11d-99f1-48d9-832b-c26f70ba16f3"),
-                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 1, 25, 8, 33, 37, 413, DateTimeKind.Unspecified).AddTicks(559), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Tasty Fresh Soap",
+                            Id = new Guid("2eabc83f-d9eb-4ca3-8cb9-7e119b199edd"),
+                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 31, 8, 18, 43, 126, DateTimeKind.Unspecified).AddTicks(2764), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Ergonomic Soft Car",
                             Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=392&blur",
-                            Price = 940.50m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 8,
-                            Stock = 4042,
+                            PhotoUrl = "https://picsum.photos/500/375/?image=935&blur",
+                            Price = 918.05m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
+                            Rating = 9,
+                            Stock = 4003,
+                            BootType = "Harness",
+                            Size = 25
+                        },
+                        new
+                        {
+                            Id = new Guid("33ac1474-f1c6-44ac-8209-73f13e7e0317"),
+                            Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 8, 17, 33, 27, 535, DateTimeKind.Unspecified).AddTicks(1708), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Handmade Steel Ball",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=378&blur",
+                            Price = 52.62m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 0,
+                            Stock = 3289,
                             BootType = "Cowboy",
                             Size = 30
                         },
                         new
                         {
-                            Id = new Guid("009cb5a5-6114-4e34-9513-fe04777a6910"),
-                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 22, 13, 43, 1, 828, DateTimeKind.Unspecified).AddTicks(4381), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Awesome Metal Chair",
-                            Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=90&blur",
-                            Price = 322.81m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 0,
-                            Stock = 12,
+                            Id = new Guid("35163381-b9f8-4498-a40a-0b14b9db4d61"),
+                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 3, 9, 22, 44, 36, 356, DateTimeKind.Unspecified).AddTicks(2481), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Awesome Metal Chicken",
+                            Option = "One",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=50&blur",
+                            Price = 836.59m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
+                            Rating = 1,
+                            Stock = 3556,
                             BootType = "Engineer",
+                            Size = 24
+                        },
+                        new
+                        {
+                            Id = new Guid("f77c6e93-56c9-46b7-a96a-f46db47a6797"),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 11, 17, 1, 40, 39, 213, DateTimeKind.Unspecified).AddTicks(9360), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Gorgeous Concrete Salad",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=777&blur",
+                            Price = 863.72m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
+                            Rating = 2,
+                            Stock = 1662,
+                            BootType = "Harness",
+                            Size = 21
+                        },
+                        new
+                        {
+                            Id = new Guid("6efe8f37-ed6c-420f-a5eb-faa436132b4e"),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 6, 1, 54, 36, 932, DateTimeKind.Unspecified).AddTicks(3846), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Intelligent Rubber Shoes",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=322&blur",
+                            Price = 721.04m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 6,
+                            Stock = 454,
+                            BootType = "Football",
+                            Size = 24
+                        },
+                        new
+                        {
+                            Id = new Guid("7fa97045-2859-4bbc-b05a-a1345cc0a227"),
+                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 3, 6, 9, 43, 0, 572, DateTimeKind.Unspecified).AddTicks(3435), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Handcrafted Soft Pants",
+                            Option = "One",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=789&blur",
+                            Price = 629.00m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 7,
+                            Stock = 2383,
+                            BootType = "Cowboy",
                             Size = 26
+                        },
+                        new
+                        {
+                            Id = new Guid("fa7d2db5-b255-492e-9734-fc0c9df58a65"),
+                            Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 19, 18, 39, 12, 256, DateTimeKind.Unspecified).AddTicks(1089), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Handmade Granite Shirt",
+                            Option = "Three",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=122&blur",
+                            Price = 926.74m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 7,
+                            Stock = 3442,
+                            BootType = "Harness",
+                            Size = 20
+                        },
+                        new
+                        {
+                            Id = new Guid("d3b257c6-93e9-4f55-adaf-9c46335295b5"),
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 1, 18, 37, 26, 741, DateTimeKind.Unspecified).AddTicks(1673), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Gorgeous Soft Computer",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=816&blur",
+                            Price = 605.77m,
+                            ProductTypeId = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45"),
+                            Rating = 2,
+                            Stock = 2090,
+                            BootType = "Cowboy",
+                            Size = 22
                         });
                 });
 
@@ -520,153 +526,153 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("414d6a4c-e1a8-4954-8ebb-ff52a7a80235"),
-                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 1, 28, 12, 46, 50, 237, DateTimeKind.Unspecified).AddTicks(391), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Awesome Granite Cheese",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=476&blur",
-                            Price = 393.53m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 2,
-                            Stock = 4493,
-                            AmountOfPerson = 3,
-                            KayakType = "Family"
-                        },
-                        new
-                        {
-                            Id = new Guid("daad337a-6761-4022-ba07-9717de42d19e"),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 17, 22, 28, 13, 546, DateTimeKind.Unspecified).AddTicks(9277), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Handcrafted Steel Table",
+                            Id = new Guid("8318e7f4-615f-4401-80f5-121522b7a279"),
+                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 4, 25, 19, 14, 6, 784, DateTimeKind.Unspecified).AddTicks(5801), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Incredible Steel Gloves",
                             Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=434&blur",
-                            Price = 663.72m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
-                            Rating = 4,
-                            Stock = 4932,
-                            AmountOfPerson = 1,
+                            PhotoUrl = "https://picsum.photos/500/375/?image=489&blur",
+                            Price = 829.98m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 0,
+                            Stock = 859,
+                            AmountOfPerson = 3,
                             KayakType = "Fishing"
                         },
                         new
                         {
-                            Id = new Guid("ad5fd707-1f4b-494c-b77a-8d19012477ca"),
-                            Description = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 1, 9, 19, 50, 22, 394, DateTimeKind.Unspecified).AddTicks(652), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Awesome Fresh Keyboard",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=130&blur",
-                            Price = 65.31m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 7,
-                            Stock = 1385,
+                            Id = new Guid("02842c95-3473-4c9f-988b-2a6c4defb95c"),
+                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 10, 21, 15, 29, 13, 800, DateTimeKind.Unspecified).AddTicks(7763), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Intelligent Concrete Shirt",
+                            Option = "One",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=125&blur",
+                            Price = 14.84m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 1,
+                            Stock = 3379,
                             AmountOfPerson = 2,
                             KayakType = "Racing"
                         },
                         new
                         {
-                            Id = new Guid("b18aba7c-f135-4ada-8576-38b5a0acf974"),
-                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 22, 11, 15, 49, 817, DateTimeKind.Unspecified).AddTicks(7050), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Tasty Granite Car",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=471&blur",
-                            Price = 914.45m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 10,
-                            Stock = 4222,
+                            Id = new Guid("3c480dc4-b56c-4696-be22-94f2a8df8eca"),
+                            Description = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 9, 5, 14, 35, 35, 480, DateTimeKind.Unspecified).AddTicks(495), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Refined Concrete Mouse",
+                            Option = "One",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=105&blur",
+                            Price = 51.85m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 8,
+                            Stock = 1621,
+                            AmountOfPerson = 2,
+                            KayakType = "Diving"
+                        },
+                        new
+                        {
+                            Id = new Guid("820ad41e-0466-43ec-9b12-0ec52de0f86c"),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 8, 21, 20, 20, 15, 775, DateTimeKind.Unspecified).AddTicks(297), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Tasty Plastic Car",
+                            Option = "One",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=427&blur",
+                            Price = 218.74m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
+                            Rating = 0,
+                            Stock = 758,
+                            AmountOfPerson = 3,
+                            KayakType = "Fishing"
+                        },
+                        new
+                        {
+                            Id = new Guid("79283d10-9770-4ae1-b0c8-346e3cb22656"),
+                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 18, 5, 35, 26, 367, DateTimeKind.Unspecified).AddTicks(7695), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Ergonomic Wooden Towels",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=481&blur",
+                            Price = 57.33m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 4,
+                            Stock = 4859,
                             AmountOfPerson = 1,
                             KayakType = "Diving"
                         },
                         new
                         {
-                            Id = new Guid("d3fca6f7-ed4f-4b9b-ad99-142ca5e95dd9"),
-                            Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 12, 23, 11, 6, 34, 8, DateTimeKind.Unspecified).AddTicks(2424), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Small Frozen Pizza",
+                            Id = new Guid("0210e32a-6157-4763-87af-c3ae5cde3940"),
+                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 10, 26, 21, 22, 1, 869, DateTimeKind.Unspecified).AddTicks(3340), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Generic Steel Cheese",
+                            Option = "Two",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=337&blur",
+                            Price = 245.28m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 1,
+                            Stock = 2161,
+                            AmountOfPerson = 1,
+                            KayakType = "Camping"
+                        },
+                        new
+                        {
+                            Id = new Guid("00d56434-f8e1-4cc6-a246-3b60c2e4bd7f"),
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 8, 3, 20, 30, 211, DateTimeKind.Unspecified).AddTicks(722), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Licensed Fresh Keyboard",
                             Option = "One",
                             PhotoUrl = "https://picsum.photos/500/375/?image=56&blur",
-                            Price = 409.18m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
+                            Price = 695.82m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
                             Rating = 6,
-                            Stock = 3649,
+                            Stock = 292,
+                            AmountOfPerson = 3,
+                            KayakType = "Fishing"
+                        },
+                        new
+                        {
+                            Id = new Guid("81e0bf83-a3f5-4a38-b982-5e0c84f79e6b"),
+                            Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 9, 14, 3, 23, 15, 59, DateTimeKind.Unspecified).AddTicks(9801), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Refined Granite Shirt",
+                            Option = "One",
+                            PhotoUrl = "https://picsum.photos/500/375/?image=868&blur",
+                            Price = 631.30m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 10,
+                            Stock = 1795,
                             AmountOfPerson = 1,
                             KayakType = "Racing"
                         },
                         new
                         {
-                            Id = new Guid("b9145011-9f69-4fea-9ef4-71fb913fd8fc"),
-                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 10, 24, 10, 11, 47, 544, DateTimeKind.Unspecified).AddTicks(3101), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Incredible Frozen Pants",
-                            Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=295&blur",
-                            Price = 117.45m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 10,
-                            Stock = 2234,
-                            AmountOfPerson = 1,
-                            KayakType = "Camping"
-                        },
-                        new
-                        {
-                            Id = new Guid("fc4edcd6-7412-49be-8d96-296a4b399a8e"),
-                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 7, 21, 16, 46, 0, 252, DateTimeKind.Unspecified).AddTicks(3705), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Handmade Rubber Soap",
+                            Id = new Guid("115747c4-7bac-45c3-b916-b2b0a068fa4b"),
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2022, 2, 6, 9, 43, 56, 943, DateTimeKind.Unspecified).AddTicks(3255), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Generic Wooden Shirt",
                             Option = "Two",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=947&blur",
-                            Price = 16.22m,
-                            ProductTypeId = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84"),
-                            Rating = 1,
-                            Stock = 1264,
-                            AmountOfPerson = 1,
-                            KayakType = "Camping"
-                        },
-                        new
-                        {
-                            Id = new Guid("e0163b62-59d2-4fb5-92ee-8cefd8687b93"),
-                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 12, 18, 11, 47, 5, 168, DateTimeKind.Unspecified).AddTicks(3889), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Tasty Fresh Shirt",
-                            Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=520&blur",
-                            Price = 608.07m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 0,
-                            Stock = 3635,
-                            AmountOfPerson = 2,
+                            PhotoUrl = "https://picsum.photos/500/375/?image=230&blur",
+                            Price = 152.87m,
+                            ProductTypeId = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2"),
+                            Rating = 2,
+                            Stock = 2257,
+                            AmountOfPerson = 3,
                             KayakType = "Diving"
                         },
                         new
                         {
-                            Id = new Guid("18a4ea4e-0c2b-493a-a0cf-6f1ea30a61b6"),
-                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 6, 15, 0, 31, 54, 978, DateTimeKind.Unspecified).AddTicks(9743), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Rustic Frozen Pants",
-                            Option = "One",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=1041&blur",
-                            Price = 53.51m,
-                            ProductTypeId = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b"),
-                            Rating = 10,
-                            Stock = 2036,
-                            AmountOfPerson = 3,
-                            KayakType = "Racing"
-                        },
-                        new
-                        {
-                            Id = new Guid("5e73023d-d64f-4fe7-ad5a-5088c43bf624"),
-                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 22, 23, 18, 50, 887, DateTimeKind.Unspecified).AddTicks(5207), new TimeSpan(0, -3, 0, 0, 0)),
-                            Name = "Gorgeous Concrete Keyboard",
+                            Id = new Guid("53839868-fc56-4157-9aa5-f85d9825efa3"),
+                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                            IntroduceAt = new DateTimeOffset(new DateTime(2021, 5, 11, 13, 9, 54, 52, DateTimeKind.Unspecified).AddTicks(3738), new TimeSpan(0, -3, 0, 0, 0)),
+                            Name = "Sleek Frozen Gloves",
                             Option = "Three",
-                            PhotoUrl = "https://picsum.photos/500/375/?image=1057&blur",
-                            Price = 301.05m,
-                            ProductTypeId = new Guid("54859554-ca78-4f20-ac6d-c23e43865384"),
-                            Rating = 6,
-                            Stock = 4433,
-                            AmountOfPerson = 3,
-                            KayakType = "Family"
+                            PhotoUrl = "https://picsum.photos/500/375/?image=772&blur",
+                            Price = 160.95m,
+                            ProductTypeId = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2"),
+                            Rating = 0,
+                            Stock = 2114,
+                            AmountOfPerson = 1,
+                            KayakType = "Camping"
                         });
                 });
 
@@ -679,7 +685,7 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cedff71a-8449-4ff7-99d8-1823a1bfbe84")
+                            Id = new Guid("5fc2dfdd-c0c6-4e88-91ef-5ac29a8cc0f2")
                         });
                 });
 
@@ -692,7 +698,7 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a1f0f73-2cd2-48a4-b343-d7df28b5387b")
+                            Id = new Guid("d6625126-6b35-424b-a8f1-3ecf64a56c45")
                         });
                 });
 
@@ -705,7 +711,7 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("54859554-ca78-4f20-ac6d-c23e43865384")
+                            Id = new Guid("12c1515d-6aef-4191-b69e-89bd48238eb2")
                         });
                 });
 
