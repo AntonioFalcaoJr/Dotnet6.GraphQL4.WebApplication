@@ -16,7 +16,9 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.KayakType)
-                .HasConversion(new EnumToStringConverter<KayakType>());
+                .HasConversion(new EnumToStringConverter<KayakType>())
+                .IsUnicode(false)
+                .HasMaxLength(30);
 
             builder
                 .Property(x => x.AmountOfPerson);

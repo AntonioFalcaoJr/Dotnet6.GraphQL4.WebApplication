@@ -44,7 +44,9 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.Option)
-                .HasConversion(new EnumToStringConverter<Option>());
+                .HasConversion(new EnumToStringConverter<Option>())
+                .IsUnicode(false)
+                .HasMaxLength(30);
 
             builder
                 .Property(x => x.Rating);
@@ -68,6 +70,7 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(DiscriminatorDefaultName)
+                .IsUnicode(false)
                 .HasMaxLength(30);
         }
     }

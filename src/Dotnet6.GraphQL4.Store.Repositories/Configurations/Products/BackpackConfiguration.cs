@@ -16,7 +16,9 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.BackpackType)
-                .HasConversion(new EnumToStringConverter<BackpackType>());
+                .HasConversion(new EnumToStringConverter<BackpackType>())
+                .IsUnicode(false)
+                .HasMaxLength(30);
         }
     }
 }
