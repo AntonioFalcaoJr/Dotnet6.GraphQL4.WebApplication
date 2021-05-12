@@ -12,10 +12,13 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Reviews
                 .HasKey(x => x.Id);
 
             builder
-                .Property(x => x.Comment);
+                .Property(x => x.Comment)
+                .IsUnicode(false)
+                .HasMaxLength(1000);
 
             builder
                 .Property(x => x.Title)
+                .IsUnicode(false)
                 .HasMaxLength(100);
 
             builder

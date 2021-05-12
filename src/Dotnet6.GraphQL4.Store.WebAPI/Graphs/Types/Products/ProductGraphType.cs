@@ -5,13 +5,13 @@ using Dotnet6.GraphQL4.Store.Domain.Entities.Products;
 using Dotnet6.GraphQL4.Store.Domain.Entities.Reviews;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Reviews;
 using GraphQL.DataLoader;
-using GraphQL.MicrosoftDI;
 using GraphQL.Types;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products
 {
     public abstract class ProductGraphType<T> : ObjectGraphType<T>
-    where T: Product
+        where T : Product
     {
         protected ProductGraphType()
         {
@@ -30,19 +30,16 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products
             Field<ProductOptionEnumGraphType>("Option");
 
             Field<ListGraphType<ReviewGraphType>, IEnumerable<Review>>()
-                .Name("Reviews")
-                .Resolve()
-                .WithServices<IDataLoaderContextAccessor, IProductService>()
-                .ResolveAsync((context, dataLoader, service) =>
-                    {
-                        var loaderResult = dataLoader.Context
-                            .GetOrAddCollectionBatchLoader<Guid, Review>(
-                                loaderKey: "getLookupByProductIdsAsync",
-                                fetchFunc: service.GetLookupReviewsByProductIdsAsync)
-                            .LoadAsync(context.Source.Id);
-
-                        return loaderResult.GetResultAsync();
-                    });
+                .Name("reviews")
+                .ResolveAsync(context 
+                    => context.RequestServices
+                        .GetRequiredService<IDataLoaderContextAccessor>().Context
+                        .GetOrAddCollectionBatchLoader<Guid, Review>(
+                            loaderKey: "getLookupReviewsByProductIdsAsync",
+                            fetchFunc: context.RequestServices
+                                .GetRequiredService<IProductService>()
+                                .GetLookupReviewsByProductIdsAsync)
+                        .LoadAsync(context.Source.Id));
         }
     }
 }

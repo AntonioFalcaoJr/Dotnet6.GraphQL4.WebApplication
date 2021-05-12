@@ -19,7 +19,9 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.BootType)
-                .HasConversion(new EnumToStringConverter<BootType>());
+                .HasConversion(new EnumToStringConverter<BootType>())
+                .IsUnicode(false)
+                .HasMaxLength(30);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.Description)
+                .IsUnicode(false)
                 .HasMaxLength(300);
 
             builder
@@ -27,11 +28,13 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.Name)
+                .IsUnicode(false)
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder
                 .Property(x => x.PhotoUrl)
+                .IsUnicode(false)
                 .HasMaxLength(100);
 
             builder
@@ -41,7 +44,9 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(x => x.Option)
-                .HasConversion(new EnumToStringConverter<Option>());
+                .HasConversion(new EnumToStringConverter<Option>())
+                .IsUnicode(false)
+                .HasMaxLength(30);
 
             builder
                 .Property(x => x.Rating);
@@ -65,6 +70,7 @@ namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
 
             builder
                 .Property(DiscriminatorDefaultName)
+                .IsUnicode(false)
                 .HasMaxLength(30);
         }
     }
