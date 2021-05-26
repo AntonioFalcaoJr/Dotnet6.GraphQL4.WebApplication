@@ -56,8 +56,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
 
                             endpoints.MapDumpConfig(
                                 pattern: "/dump-config",
-                                configInfo: (_configuration as IConfigurationRoot).GetDebugView(),
-                                isDevelopment: _env.IsDevelopment());
+                                configurationRoot: _configuration as IConfigurationRoot,
+                                isProduction: _env.IsProduction());
 
                             endpoints.MapApplicationHealthChecks(
                                 pattern: _configuration["HealthChecksPatterns:Health"],
