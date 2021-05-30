@@ -1,6 +1,5 @@
 using Dotnet6.GraphQL4.CrossCutting.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions;
-using Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Services.Abstractions.DependencyInjection.Extensions;
@@ -75,7 +74,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
             services.AddHttpLogging(options 
                 => options.LoggingFields = HttpLoggingFields.RequestProperties);
 
-            services.AddLogging()
+            services
+                .AddLogging()
                 .AddBuilders()
                 .AddRepositories()
                 .AddUnitOfWork()

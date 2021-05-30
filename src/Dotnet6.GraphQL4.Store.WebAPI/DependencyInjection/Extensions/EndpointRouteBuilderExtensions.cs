@@ -4,11 +4,12 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders
+namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
 {
-    public static class HealthChecksEndpointRouteBuilderExtensions
+    public static class EndpointRouteBuilderExtensions
     {
         private static readonly string[] ReadinessTags = {"ready"};
         private static readonly string[] LivenessTags = {"live"};
@@ -48,5 +49,17 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders
                         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
                     }
                 });
+        
+        public static void MapDumpConfig(this IEndpointRouteBuilder endpoints, string pattern, IConfigurationRoot configurationRoot, bool isProduction)
+        {
+            if (isProduction) return;
+
+            endpoints.MapGet(
+                pattern: pattern,
+                requestDelegate: context 
+                    => context.Response.WriteAsync(
+                        text: configurationRoot.GetDebugView(), 
+                        cancellationToken: context.RequestAborted));
+        }
     }
 }
