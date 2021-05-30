@@ -8,17 +8,17 @@
     <PropertyGroup Label="Packages dependency versions">
 
         <!--Microsoft-->
-        <Microsoft_Extensions_Version>6.0.0-preview.3.21201.4</Microsoft_Extensions_Version>
+        <Microsoft_Extensions_Version>6.0.0-preview.4.21253.7</Microsoft_Extensions_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>6.0.0-preview.3.21201.2</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>6.0.0-preview.4.21253.1</Microsoft_EntityFrameworkCore_Version>
         <Microsoft_EntityFrameworkCore_DependencyInjection_Version>6.0.0-preview.2.21154.6</Microsoft_EntityFrameworkCore_DependencyInjection_Version>
-        <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.0-preview.3.21201.13</Microsoft_HealthChecks_EntityFrameworkCore_Version>
+        <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.0-preview.4.21253.5</Microsoft_HealthChecks_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
         <GraphQL_Server_Version>5.0.2</GraphQL_Server_Version>
         <GraphQL_Client_Version>3.2.3</GraphQL_Client_Version>
-        <GraphQL_Version>4.4.0</GraphQL_Version>
+        <GraphQL_Version>4.5.0</GraphQL_Version>
 
         <!--AutoMapper-->
         <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
@@ -31,7 +31,7 @@
         <HealthChecks_Version>5.0.1</HealthChecks_Version>
         
         <!--Others-->
-        <FluentValidation_Version>10.0.4</FluentValidation_Version>
+        <FluentValidation_Version>10.2.0</FluentValidation_Version>
         <Scrutor_Version>3.3.0</Scrutor_Version>
         
     </PropertyGroup>
