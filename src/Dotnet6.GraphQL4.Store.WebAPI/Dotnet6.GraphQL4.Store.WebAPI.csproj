@@ -5,8 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="$(HealthChecks_Version)" />
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(Microsoft_HealthChecks_EntityFrameworkCore_Version)" />
         <PackageReference Include="Serilog.AspNetCore" Version="$(Serilog_Version)" />
     </ItemGroup>
 
