@@ -1,30 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Options
 {
     public class SqlServerRetryingOptions
     {
-        private const int DefaultRetryCount = 5;
-        private const int DefaultRetryDelay = 5;
+        [Required, Range(5, 20)]
+        public int MaxRetryCount { get; init; }
 
-        private int _maxRetryCount;
-        private int _maxSecondsRetryDelay;
+        [Required, Range(5, 20)]
+        public int MaxSecondsRetryDelay { get; init; }
 
-        public int MaxRetryCount
-        {
-            get => _maxRetryCount <= 0 ? DefaultRetryCount : _maxRetryCount;
-            set => _maxRetryCount = value;
-        }
+        public int[] ErrorNumbersToAdd { get; init; }
 
-        public int MaxSecondsRetryDelay
-        {
-            get => _maxSecondsRetryDelay <= 0 ? DefaultRetryDelay : _maxSecondsRetryDelay;
-            set => _maxSecondsRetryDelay = value;
-        }
-
-        public int[] ErrorNumbersToAdd { get; set; }
-        
-        internal TimeSpan MaxRetryDelay 
+        internal TimeSpan MaxRetryDelay
             => TimeSpan.FromSeconds(MaxSecondsRetryDelay);
     }
 }
