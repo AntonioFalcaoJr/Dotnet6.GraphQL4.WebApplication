@@ -197,8 +197,6 @@ app.UseGraphQLPlayground(
 
 Based on cloud-native concepts, **Readiness** and **Liveness** integrity verification strategies were implemented. 
 
-If using [xabarilcoding/healthchecksui](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks/blob/master/doc/ui-docker.md) container image it will responde on `http://localhost:8000/healthchecks-ui/`.
-
 > `/health`   
 > Just check if the instance is running.
 
@@ -208,14 +206,26 @@ If using [xabarilcoding/healthchecksui](https://github.com/Xabaril/AspNetCore.Di
 > `/health/ready`          
 > Check if the instance and all the dependencies are ready to attend to all functionalities.
 
-> `/healthz`          
-> HealthReport specific for HealthCheck-UI.
-
 Web API
 
 `http://localhost:5000/health/ready`
 
-![Readiness](./.assets/img/Readiness.png)
+```json
+{
+  "status": "Healthy",
+  "totalDuration": "00:00:00.2344435",
+  "entries": {
+    "Sql Server (Ready)": {
+      "data": {},
+      "duration": "00:00:00.2251420",
+      "status": "Healthy",
+      "tags": [
+        "ready"
+      ]
+    }
+  }
+}
+```
 
 Web MVC
 
@@ -234,8 +244,8 @@ public void Configure(IApplicationBuilder app)
         {
             endpoints.MapDumpConfig(
                 pattern: "/dump-config",
-                configInfo: (_configuration as IConfigurationRoot).GetDebugView(),
-                isDevelopment: _env.IsDevelopment());
+                configurationRoot: _configuration as IConfigurationRoot,
+                isProduction: _env.IsProduction());
         });
 }
 ```

@@ -1,7 +1,5 @@
-using System.Linq;
 using Dotnet6.GraphQL4.CrossCutting.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Domain.Abstractions.DependencyInjection.Extensions;
-using Dotnet6.GraphQL4.Store.Repositories.Contexts;
 using Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Options;
@@ -10,14 +8,12 @@ using Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.Repositories.DependencyInjection.Options;
 using Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions;
 using Dotnet6.GraphQL4.Store.WebAPI.Graphs;
-using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -28,8 +24,6 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
-        private readonly string[] _readinessTags = {"ready"};
-        private readonly string[] _livenessTags = {"live"};
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -43,10 +37,10 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 app.UseDeveloperExceptionPage();
 
             loggerFactory.AddSerilog();
-            
-            app.UseApplicationExceptionHandler();
-            
-            app.UseSerilogRequestLogging()
+
+            app.UseHttpLogging()
+                .UseApplicationExceptionHandler()
+                .UseSerilogRequestLogging()
                 .UseApplicationGraphQL<StoreSchema>()
                 .UseRouting()
                 .UseEndpoints(
@@ -59,36 +53,29 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                                 configurationRoot: _configuration as IConfigurationRoot,
                                 isProduction: _env.IsProduction());
 
-                            endpoints.MapApplicationHealthChecks(
-                                pattern: _configuration["HealthChecksPatterns:Health"],
-                                predicate: registration 
-                                    => registration.Tags.Any() is false);
+                            endpoints.MapHealthCheck(
+                                pattern: _configuration["HealthChecksPatterns:Health"]);
 
-                            endpoints.MapApplicationHealthChecks(
-                                pattern: _configuration["HealthChecksPatterns:Liveness"],
-                                predicate: registration 
-                                    => registration.Tags.Any(item 
-                                        => _livenessTags.Contains(item)));
+                            endpoints.MapLivenessHealthCheck(
+                                pattern: _configuration["HealthChecksPatterns:Liveness"]);
 
-                            endpoints.MapApplicationHealthChecks(
-                                pattern: _configuration["HealthChecksPatterns:Readiness"],
-                                predicate: registration 
-                                    => registration.Tags.Any(item 
-                                        => _readinessTags.Contains(item)));
-
-                            endpoints.MapHealthChecks(
-                                pattern: _configuration["HealthChecksPatterns:UI"],
-                                options: new() {ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse});
+                            endpoints.MapReadinessHealthCheck(
+                                pattern: _configuration["HealthChecksPatterns:Readiness"]);
                         });
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureTransactionOptions(_configuration.GetSection(nameof(TransactionOptions)));
-            services.ConfigureSqlServerRetryingOptions(_configuration.GetSection(nameof(SqlServerRetryingOptions)));
+            services.ConfigureTransactionOptions(
+                section: _configuration.GetSection(nameof(TransactionOptions)));
+            
+            services.ConfigureSqlServerRetryingOptions(
+                section: _configuration.GetSection(nameof(SqlServerRetryingOptions)));
 
-            services
-                .AddLogging()
+            services.AddHttpLogging(options 
+                => options.LoggingFields = HttpLoggingFields.RequestProperties);
+
+            services.AddLogging()
                 .AddBuilders()
                 .AddRepositories()
                 .AddUnitOfWork()
@@ -100,22 +87,11 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                 .AddApplicationDbContext()
                 .AddControllers();
 
+            services.AddDbContextHealthChecks();
             services.AddApplicationGraphQL();
 
             services.Configure<KestrelServerOptions>(options
                 => options.AllowSynchronousIO = true);
-
-            services.AddHealthChecks()
-                .AddDbContextCheck<DbContext>(
-                    name: "Sql Server (Live)",
-                    failureStatus: HealthStatus.Degraded,
-                    tags: _livenessTags)
-                .AddDbContextCheck<StoreDbContext>(
-                    name: "Sql Server (Ready)",
-                    failureStatus: HealthStatus.Unhealthy,
-                    tags: _readinessTags,
-                    customTestQuery: (dbContext, cancellationToken) 
-                        => dbContext.Products.AnyAsync(cancellationToken));
         }
     }
 }

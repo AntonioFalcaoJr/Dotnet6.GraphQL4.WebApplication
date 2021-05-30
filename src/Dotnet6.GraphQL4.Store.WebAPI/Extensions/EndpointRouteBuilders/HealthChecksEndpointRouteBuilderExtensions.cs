@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -13,16 +10,36 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders
 {
     public static class HealthChecksEndpointRouteBuilderExtensions
     {
-        private static readonly JsonSerializerOptions SerializerOptions = new() {DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, WriteIndented = true};
-        private static readonly HealthCheck HealthCheck = new();
+        private static readonly string[] ReadinessTags = {"ready"};
+        private static readonly string[] LivenessTags = {"live"};
         
-        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern, Func<HealthCheckRegistration, bool> predicate = default)
+        public static void MapLivenessHealthCheck(this IEndpointRouteBuilder endpoints, string pattern)
+            => endpoints.MapHealthChecks(
+                pattern: pattern,
+                predicate: registration 
+                    => registration.Tags.Any(item 
+                        => LivenessTags.Contains(item)));
+
+        public static void MapReadinessHealthCheck(this IEndpointRouteBuilder endpoints, string pattern)
+            => endpoints.MapHealthChecks(
+                pattern: pattern,
+                predicate: registration 
+                    => registration.Tags.Any(item 
+                        => ReadinessTags.Contains(item)));
+
+        public static void MapHealthCheck(this IEndpointRouteBuilder endpoints, string pattern)
+            => endpoints.MapHealthChecks(
+                pattern: pattern,
+                predicate: registration 
+                    => registration.Tags.Any() is false);
+
+        private static void MapHealthChecks(this IEndpointRouteBuilder endpoints, string pattern, Func<HealthCheckRegistration, bool> predicate = default)
             => endpoints.MapHealthChecks(
                 pattern: pattern,
                 options: new()
                 {
                     AllowCachingResponses = false,
-                    ResponseWriter = WriteHealthCheckResponseAsync,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
                     Predicate = predicate,
                     ResultStatusCodes =
                     {
@@ -31,40 +48,5 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.Extensions.EndpointRouteBuilders
                         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
                     }
                 });
-
-        private static Task WriteHealthCheckResponseAsync(HttpContext httpContext, HealthReport healthReport)
-        {
-            httpContext.Response.ContentType = "application/json";
-
-            HealthCheck.OverallStatus = healthReport.Status.ToString();
-            HealthCheck.TotalCheckDuration = healthReport.TotalDuration.TotalSeconds.ToString("00:00:00.000");
-            HealthCheck.DependencyHealthChecks = healthReport.Entries.Any()
-                ? healthReport.Entries.Select(dependency 
-                    => new DependencyHealthCheck
-                        {
-                            Name = dependency.Key,
-                            Status = dependency.Value.Status.ToString(),
-                            Duration = dependency.Value.Duration.TotalSeconds.ToString("00:00:00.000"),
-                            Error = dependency.Value.Exception?.Message
-                        })
-                : default;
-            
-            return httpContext.Response.WriteAsync(JsonSerializer.Serialize(HealthCheck, SerializerOptions));
-        }
-    }
-
-    internal class HealthCheck
-    {
-        public string OverallStatus { get; set; }
-        public string TotalCheckDuration { get; set; }
-        public IEnumerable<DependencyHealthCheck> DependencyHealthChecks { get; set; }
-    }
-
-    internal record DependencyHealthCheck
-    {
-        public string Name { get; init; }
-        public string Status { get; init; }
-        public string Duration { get; init; }
-        public string Error { get; init; }
     }
 }
