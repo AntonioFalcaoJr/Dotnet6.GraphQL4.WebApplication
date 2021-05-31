@@ -50,7 +50,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
                             endpoints.MapDumpConfig(
                                 pattern: "/dump-config",
                                 configurationRoot: _configuration as IConfigurationRoot,
-                                isProduction: _env.IsProduction());
+                                isProduction: _env.IsProduction(),
+                                logger: loggerFactory.CreateLogger<Startup>());
 
                             endpoints.MapHealthCheck(
                                 pattern: _configuration["HealthChecksPatterns:Health"]);
@@ -74,8 +75,10 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
             services.AddHttpLogging(options 
                 => options.LoggingFields = HttpLoggingFields.RequestProperties);
 
+            services.AddLogging(builder 
+                => builder.AddSerilog());
+            
             services
-                .AddLogging()
                 .AddBuilders()
                 .AddRepositories()
                 .AddUnitOfWork()
