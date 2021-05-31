@@ -1,11 +1,13 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
 
 namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
 {
@@ -50,16 +52,26 @@ namespace Dotnet6.GraphQL4.Store.WebAPI.DependencyInjection.Extensions
                     }
                 });
         
-        public static void MapDumpConfig(this IEndpointRouteBuilder endpoints, string pattern, IConfigurationRoot configurationRoot, bool isProduction)
+        public static void MapDumpConfig(this IEndpointRouteBuilder endpoints, string pattern, IConfigurationRoot configurationRoot, bool isProduction, ILogger logger)
         {
-            if (isProduction) return;
-
             endpoints.MapGet(
-                pattern: pattern,
+                pattern: pattern, 
                 requestDelegate: context 
-                    => context.Response.WriteAsync(
-                        text: configurationRoot.GetDebugView(), 
-                        cancellationToken: context.RequestAborted));
+                    => isProduction ? DumpToLog(context) : DumpToResponse(context));
+
+            Task DumpToResponse(HttpContext context)
+                => context.Response.WriteAsync(
+                    text: configurationRoot.GetDebugView(), 
+                    cancellationToken: context.RequestAborted);
+            
+            Task DumpToLog(HttpContext context)
+            {
+                logger.LogInformation("{Settings}", configurationRoot.GetDebugView());
+                
+                return context.Response.WriteAsync(
+                    text: "Configuration dumped successfully", 
+                    cancellationToken: context.RequestAborted);
+            }
         }
     }
 }
