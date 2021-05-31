@@ -25,8 +25,10 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.DependencyInjection.Extensi
             => services
                 .AddOptions<TransactionOptions>()
                 .Bind(section)
+                .ValidateDataAnnotations()
                 .Validate(
                     validation: options => options.IsolationLevel is not System.Transactions.IsolationLevel.Unspecified,
-                    failureMessage: "Transaction isolation level must be specified");
+                    failureMessage: "Transaction isolation level must be specified")
+                .ValidateOnStart();
     }
 }

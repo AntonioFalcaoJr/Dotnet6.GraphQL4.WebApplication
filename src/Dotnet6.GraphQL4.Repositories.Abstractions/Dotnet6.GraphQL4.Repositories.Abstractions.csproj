@@ -1,11 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="$(AutoMapper_Version)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(Microsoft_Extensions_Version)" />
         <PackageReference Include="Scrutor" Version="$(Scrutor_Version)" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(Microsoft_Extensions_Version)" />
+        <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="$(Microsoft_Extensions_Version)" />
     </ItemGroup>
+    
     <ItemGroup>
       <ProjectReference Include="..\Dotnet6.GraphQL4.Domain.Abstractions\Dotnet6.GraphQL4.Domain.Abstractions.csproj" />
     </ItemGroup>
+    
 </Project>

@@ -20,11 +20,11 @@ namespace Dotnet6.GraphQL4.Repositories.Abstractions.UnitsOfWork
 
         public UnitOfWork(
             DbContext dbContext, 
-            IOptionsSnapshot<TransactionOptions> optionsMonitor, 
+            IOptionsSnapshot<TransactionOptions> optionsSnapshot, 
             INotificationContext notificationContext)
         {
             _dbContext = dbContext;
-            _options = optionsMonitor.Value;
+            _options = optionsSnapshot.Value;
             _database = _dbContext.Database;
             _notificationContext = notificationContext;
         }

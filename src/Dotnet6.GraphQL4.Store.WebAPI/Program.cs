@@ -15,7 +15,8 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
         private static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args)
                 .UseSerilog()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+                .ConfigureWebHostDefaults(webBuilder 
+                    => webBuilder.UseStartup<Startup>())
                 .UseDefaultServiceProvider(
                     (context, options) =>
                         {
@@ -39,8 +40,6 @@ namespace Dotnet6.GraphQL4.Store.WebAPI
             
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
                 .CreateLogger();
 
             try
