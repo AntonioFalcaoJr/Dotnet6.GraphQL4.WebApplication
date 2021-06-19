@@ -17,7 +17,7 @@
 
         <!--GraphQL-->
         <GraphQL_Server_Version>5.0.2</GraphQL_Server_Version>
-        <GraphQL_Client_Version>3.2.3</GraphQL_Client_Version>
+        <GraphQL_Client_Version>3.2.4</GraphQL_Client_Version>
         <GraphQL_Version>4.5.0</GraphQL_Version>
 
         <!--AutoMapper-->
@@ -31,7 +31,7 @@
         <HealthChecks_Version>5.0.1</HealthChecks_Version>
         
         <!--Others-->
-        <FluentValidation_Version>10.2.1</FluentValidation_Version>
+        <FluentValidation_Version>10.2.3</FluentValidation_Version>
         <Scrutor_Version>3.3.0</Scrutor_Version>
         
     </PropertyGroup>
