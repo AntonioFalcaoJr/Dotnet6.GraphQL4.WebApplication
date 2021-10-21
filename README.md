@@ -1,6 +1,6 @@
 # Dotnet6.GraphQL4.WebApplication
 
-This project exemplifies the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 4** Web API, build in a **.NET 6** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Hexagonal Architecture**.
+This project exemplifies the implementation and **dockerization** of a simple Razor Web MVC Core consuming a full **GraphQL 4** Web API, build in a **.NET 6** multi-layer project, considering development best practices, like **SOLID**, **KISS** and **DRY**, applying **Domain-Driven** concepts in a **Onion Architecture**.
 
 ### Give a Star! :star:
 
