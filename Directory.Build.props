@@ -18,7 +18,7 @@
         <!--GraphQL-->
         <GraphQL_Server_Version>5.0.2</GraphQL_Server_Version>
         <GraphQL_Client_Version>3.2.4</GraphQL_Client_Version>
-        <GraphQL_Version>4.6.0</GraphQL_Version>
+        <GraphQL_Version>4.6.1</GraphQL_Version>
 
         <!--AutoMapper-->
         <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
