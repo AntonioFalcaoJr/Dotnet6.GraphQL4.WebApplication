@@ -1,12 +1,11 @@
-namespace Dotnet6.GraphQL4.Store.Domain.Enumerations
+namespace Dotnet6.GraphQL4.Store.Domain.Enumerations;
+
+public enum BackpackType
 {
-    public enum BackpackType
-    {
-        DayPack,
-        Overnight,
-        Hiking,
-        Climbing,
-        Cycling,
-        Snowsports
-    }
+    DayPack,
+    Overnight,
+    Hiking,
+    Climbing,
+    Cycling,
+    Snowsports
 }

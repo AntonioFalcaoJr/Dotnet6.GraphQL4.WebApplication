@@ -5,23 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
+namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products;
+
+public class KayakConfiguration : IEntityTypeConfiguration<Kayak>
 {
-    public class KayakConfiguration : IEntityTypeConfiguration<Kayak>
+    public void Configure(EntityTypeBuilder<Kayak> builder)
     {
-        public void Configure(EntityTypeBuilder<Kayak> builder)
-        {
-            builder
-                .HasBaseType<Product>();
+        builder
+            .HasBaseType<Product>();
 
-            builder
-                .Property(x => x.KayakType)
-                .HasConversion(new EnumToStringConverter<KayakType>())
-                .IsUnicode(false)
-                .HasMaxLength(30);
+        builder
+            .Property(x => x.KayakType)
+            .HasConversion(new EnumToStringConverter<KayakType>())
+            .IsUnicode(false)
+            .HasMaxLength(30);
 
-            builder
-                .Property(x => x.AmountOfPerson);
-        }
+        builder
+            .Property(x => x.AmountOfPerson);
     }
 }

@@ -5,23 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
+namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products;
+
+public class BootConfiguration : IEntityTypeConfiguration<Boot>
 {
-    public class BootConfiguration : IEntityTypeConfiguration<Boot>
+    public void Configure(EntityTypeBuilder<Boot> builder)
     {
-        public void Configure(EntityTypeBuilder<Boot> builder)
-        {
-            builder
-                .HasBaseType<Product>();
+        builder
+            .HasBaseType<Product>();
 
-            builder
-                .Property(x => x.Size);
+        builder
+            .Property(x => x.Size);
 
-            builder
-                .Property(x => x.BootType)
-                .HasConversion(new EnumToStringConverter<BootType>())
-                .IsUnicode(false)
-                .HasMaxLength(30);
-        }
+        builder
+            .Property(x => x.BootType)
+            .HasConversion(new EnumToStringConverter<BootType>())
+            .IsUnicode(false)
+            .HasMaxLength(30);
     }
 }

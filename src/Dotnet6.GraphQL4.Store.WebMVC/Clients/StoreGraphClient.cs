@@ -9,24 +9,24 @@ using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Dotnet6.GraphQL4.Store.WebMVC.Clients
+namespace Dotnet6.GraphQL4.Store.WebMVC.Clients;
+
+public class StoreGraphClient : IStoreGraphClient
 {
-    public class StoreGraphClient : IStoreGraphClient
+    private readonly GraphQLHttpClient _client;
+    private readonly ILogger<IStoreGraphClient> _logger;
+
+    public StoreGraphClient(GraphQLHttpClient client, ILogger<IStoreGraphClient> logger)
     {
-        private readonly GraphQLHttpClient _client;
-        private readonly ILogger<IStoreGraphClient> _logger;
+        _client = client;
+        _logger = logger;
+    }
 
-        public StoreGraphClient(GraphQLHttpClient client, ILogger<IStoreGraphClient> logger)
+    public async Task<List<ProductModel>> GetAllProductsAsync(CancellationToken cancellationToken = default)
+    {
+        var request = new GraphQLRequest
         {
-            _client = client;
-            _logger = logger;
-        }
-
-        public async Task<List<ProductModel>> GetAllProductsAsync(CancellationToken cancellationToken = default)
-        {
-            var request = new GraphQLRequest
-            {
-                Query = @"query getAll {
+            Query = @"query getAll {
                                   products {
                                     items {
                                       id
@@ -40,22 +40,22 @@ namespace Dotnet6.GraphQL4.Store.WebMVC.Clients
                                     }
                                   }
                                 }",
-                OperationName = "getAll"
-            };
+            OperationName = "getAll"
+        };
 
-            var response = await _client.SendQueryAsync(
-                request: request,
-                defineResponseType: () => new {products = new {items = new List<ProductModel>()}},
-                cancellationToken: cancellationToken);
+        var response = await _client.SendQueryAsync(
+            request: request,
+            defineResponseType: () => new {products = new {items = new List<ProductModel>()}},
+            cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() ?? default ? default : response.Data.products.items;
-        }
+        return response.Errors?.Any() ?? default ? default : response.Data.products.items;
+    }
 
-        public async Task<ProductModel> GetProductByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<ProductModel> GetProductByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var request = new GraphQLRequest
         {
-            var request = new GraphQLRequest
-            {
-                Query = @"query ProductQuery($productId: Guid!) {
+            Query = @"query ProductQuery($productId: Guid!) {
                               product(id: $productId) {
                                 id
                                 name
@@ -73,23 +73,23 @@ namespace Dotnet6.GraphQL4.Store.WebMVC.Clients
                                     }
                                   }
                                }",
-                OperationName = "ProductQuery",
-                Variables = new {productId = id}
-            };
+            OperationName = "ProductQuery",
+            Variables = new {productId = id}
+        };
 
-            var response = await _client.SendQueryAsync(
-                request: request,
-                defineResponseType: () => new {product = new ProductModel()},
-                cancellationToken: cancellationToken);
+        var response = await _client.SendQueryAsync(
+            request: request,
+            defineResponseType: () => new {product = new ProductModel()},
+            cancellationToken: cancellationToken);
             
-            return response.Errors?.Any() ?? default ? default : response.Data.product;
-        }
+        return response.Errors?.Any() ?? default ? default : response.Data.product;
+    }
 
-        public async Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<ReviewModel>> GetReviewByProductIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var request = new GraphQLRequest
         {
-            var request = new GraphQLRequest
-            {
-                Query = @"query ReviewsByProductQuery($productId: Guid!) {
+            Query = @"query ReviewsByProductQuery($productId: Guid!) {
                           reviews(productId: $productId) {
                             id
                             title
@@ -97,59 +97,58 @@ namespace Dotnet6.GraphQL4.Store.WebMVC.Clients
                             productId
                           }
                         }",
-                OperationName = "ReviewsByProductQuery",
-                Variables = new {productId = id}
-            };
+            OperationName = "ReviewsByProductQuery",
+            Variables = new {productId = id}
+        };
 
-            var response = await _client.SendQueryAsync(
-                request: request,
-                defineResponseType: () => new {reviews = new List<ReviewModel>()},
-                cancellationToken: cancellationToken);
+        var response = await _client.SendQueryAsync(
+            request: request,
+            defineResponseType: () => new {reviews = new List<ReviewModel>()},
+            cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() ?? default ? default : response.Data.reviews;
-        }
+        return response.Errors?.Any() ?? default ? default : response.Data.reviews;
+    }
 
-        public async Task<Guid> AddReviewAsync(ReviewModel review, CancellationToken cancellationToken = default)
+    public async Task<Guid> AddReviewAsync(ReviewModel review, CancellationToken cancellationToken = default)
+    {
+        var request = new GraphQLRequest
         {
-            var request = new GraphQLRequest
-            {
-                Query = @"mutation($review: reviewInput!) {
+            Query = @"mutation($review: reviewInput!) {
                               createReview(review: $review) {
                                 id
                               }
                             }",
-                Variables = new {review}
-            };
+            Variables = new {review}
+        };
 
-            var response = await _client.SendMutationAsync(
-                request: request,
-                defineResponseType: () => new {createReview = new {id = new Guid()}},
-                cancellationToken: cancellationToken);
+        var response = await _client.SendMutationAsync(
+            request: request,
+            defineResponseType: () => new {createReview = new {id = new Guid()}},
+            cancellationToken: cancellationToken);
 
-            return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
-        }
+        return response.Errors?.Any() ?? default ? default : response.Data.createReview.id;
+    }
 
-        public void SubscribeToUpdates()
+    public void SubscribeToUpdates()
+    {
+        var request = new GraphQLRequest
         {
-            var request = new GraphQLRequest
-            {
-                Query = @"subscription {
+            Query = @"subscription {
                               reviewAdded {
                                 productId
                                 title
                               }
                             }"
-            };
+        };
 
-            var stream = _client.CreateSubscriptionStream<AddedReviewSubscriptionResult>(
-                request: request,
-                exceptionHandler: exception => _logger.LogError(exception.Message));
+        var stream = _client.CreateSubscriptionStream<AddedReviewSubscriptionResult>(
+            request: request,
+            exceptionHandler: exception => _logger.LogError(exception.Message));
 
-            var subscription = stream.Subscribe(response
-                => _logger.LogInformation($"A new Review from Product '{response.Data.Review.ProductId}' " +
-                                          $"was added with Title: {response.Data.Review.Title}"));
+        var subscription = stream.Subscribe(response
+            => _logger.LogInformation($"A new Review from Product '{response.Data.Review.ProductId}' " +
+                                      $"was added with Title: {response.Data.Review.Title}"));
 
-            subscription.Dispose();
-        }
+        subscription.Dispose();
     }
 }

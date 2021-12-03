@@ -1,15 +1,14 @@
 using GraphQL.Types;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Reviews
+namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Reviews;
+
+public class ReviewInputGraphType : InputObjectGraphType
 {
-    public class ReviewInputGraphType : InputObjectGraphType
+    public ReviewInputGraphType()
     {
-        public ReviewInputGraphType()
-        {
-            Name = "reviewInput";
-            Field<NonNullGraphType<StringGraphType>>("title");
-            Field<NonNullGraphType<StringGraphType>>("comment");
-            Field<NonNullGraphType<GuidGraphType>>("productId");
-        }
+        Name = "reviewInput";
+        Field<NonNullGraphType<StringGraphType>>("title");
+        Field<NonNullGraphType<StringGraphType>>("comment");
+        Field<NonNullGraphType<GuidGraphType>>("productId");
     }
 }

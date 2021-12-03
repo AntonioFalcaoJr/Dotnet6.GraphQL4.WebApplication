@@ -1,14 +1,13 @@
 using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 using GraphQL.Types;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products.Boots
+namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products.Boots;
+
+public class BootTypeEnumGraphType : EnumerationGraphType<BootType>
 {
-    public class BootTypeEnumGraphType : EnumerationGraphType<BootType>
+    public BootTypeEnumGraphType()
     {
-        public BootTypeEnumGraphType()
-        {
-            Name = "bootType";
-            Description = "Boot Types";
-        }
+        Name = "bootType";
+        Description = "Boot Types";
     }
 }
