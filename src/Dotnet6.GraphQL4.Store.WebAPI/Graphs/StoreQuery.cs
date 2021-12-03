@@ -38,7 +38,6 @@ public sealed class StoreQuery : ObjectGraphType
                         id: context.GetArgument<Guid>("id"), 
                         cancellationToken: context.CancellationToken));
 
-
         Field<ListGraphType<ReviewGraphType>>()
             .Name("Reviews")
             .Argument<GuidGraphType>("productId")
