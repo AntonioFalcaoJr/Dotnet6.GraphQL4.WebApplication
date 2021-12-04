@@ -1,14 +1,13 @@
 using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 using GraphQL.Types;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products.Backpacks
+namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products.Backpacks;
+
+public class BackpakcTypeEnumGraphType : EnumerationGraphType<BackpackType>
 {
-    public class BackpakcTypeEnumGraphType : EnumerationGraphType<BackpackType>
+    public BackpakcTypeEnumGraphType()
     {
-        public BackpakcTypeEnumGraphType()
-        {
-            Name = "backpackType";
-            Description = "Backpack types";
-        }
+        Name = "backpackType";
+        Description = "Backpack types";
     }
 }

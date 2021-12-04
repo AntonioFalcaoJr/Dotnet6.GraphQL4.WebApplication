@@ -5,20 +5,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products
-{
-    public class BackpackConfiguration : IEntityTypeConfiguration<Backpack>
-    {
-        public void Configure(EntityTypeBuilder<Backpack> builder)
-        {
-            builder
-                .HasBaseType<Product>();
+namespace Dotnet6.GraphQL4.Store.Repositories.Configurations.Products;
 
-            builder
-                .Property(x => x.BackpackType)
-                .HasConversion(new EnumToStringConverter<BackpackType>())
-                .IsUnicode(false)
-                .HasMaxLength(30);
-        }
+public class BackpackConfiguration : IEntityTypeConfiguration<Backpack>
+{
+    public void Configure(EntityTypeBuilder<Backpack> builder)
+    {
+        builder
+            .HasBaseType<Product>();
+
+        builder
+            .Property(x => x.BackpackType)
+            .HasConversion(new EnumToStringConverter<BackpackType>())
+            .IsUnicode(false)
+            .HasMaxLength(30);
     }
 }

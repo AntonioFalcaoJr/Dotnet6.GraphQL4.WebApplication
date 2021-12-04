@@ -10,62 +10,61 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Dotnet6.GraphQL4.Store.WebMVC.Extensions.EndpointRouteBuilders
+namespace Dotnet6.GraphQL4.Store.WebMVC.Extensions.EndpointRouteBuilders;
+
+public static class HealthChecksEndpointRouteBuilderExtensions
 {
-    public static class HealthChecksEndpointRouteBuilderExtensions
-    {
-        private static readonly JsonSerializerOptions SerializerOptions = new() {DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, WriteIndented = true};
-        private static readonly HealthCheck HealthCheck = new();
+    private static readonly JsonSerializerOptions SerializerOptions = new() {DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, WriteIndented = true};
+    private static readonly HealthCheck HealthCheck = new();
         
-        public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern,  Func<HealthCheckRegistration, bool> predicate = default)
-            => endpoints.MapHealthChecks(
-                pattern: pattern,
-                options: new HealthCheckOptions
+    public static void MapApplicationHealthChecks(this IEndpointRouteBuilder endpoints, string pattern,  Func<HealthCheckRegistration, bool> predicate = default)
+        => endpoints.MapHealthChecks(
+            pattern: pattern,
+            options: new HealthCheckOptions
+            {
+                AllowCachingResponses = false,
+                ResponseWriter = WriteHealthCheckResponseAsync,
+                Predicate = predicate,
+                ResultStatusCodes =
                 {
-                    AllowCachingResponses = false,
-                    ResponseWriter = WriteHealthCheckResponseAsync,
-                    Predicate = predicate,
-                    ResultStatusCodes =
-                    {
-                        [HealthStatus.Healthy] = StatusCodes.Status200OK,
-                        [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
-                        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
-                    }
-                });
+                    [HealthStatus.Healthy] = StatusCodes.Status200OK,
+                    [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
+                    [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+                }
+            });
 
-        private static Task WriteHealthCheckResponseAsync(HttpContext httpContext, HealthReport healthReport)
-        {
-            httpContext.Response.ContentType = "application/json";
+    private static Task WriteHealthCheckResponseAsync(HttpContext httpContext, HealthReport healthReport)
+    {
+        httpContext.Response.ContentType = "application/json";
 
-            HealthCheck.OverallStatus = healthReport.Status.ToString();
-            HealthCheck.TotalCheckDuration = healthReport.TotalDuration.TotalSeconds.ToString("00:00:00.000");
-            HealthCheck.DependencyHealthChecks = healthReport.Entries.Any()
-                ? healthReport.Entries.Select(dependency 
-                    => new DependencyHealthCheck
-                        {
-                            Name = dependency.Key,
-                            Status = dependency.Value.Status.ToString(),
-                            Duration = dependency.Value.Duration.TotalSeconds.ToString("00:00:00.000"),
-                            Error = dependency.Value.Exception?.Message
-                        })
-                : default;
+        HealthCheck.OverallStatus = healthReport.Status.ToString();
+        HealthCheck.TotalCheckDuration = healthReport.TotalDuration.TotalSeconds.ToString("00:00:00.000");
+        HealthCheck.DependencyHealthChecks = healthReport.Entries.Any()
+            ? healthReport.Entries.Select(dependency 
+                => new DependencyHealthCheck
+                {
+                    Name = dependency.Key,
+                    Status = dependency.Value.Status.ToString(),
+                    Duration = dependency.Value.Duration.TotalSeconds.ToString("00:00:00.000"),
+                    Error = dependency.Value.Exception?.Message
+                })
+            : default;
             
-            return httpContext.Response.WriteAsync(JsonSerializer.Serialize(HealthCheck, SerializerOptions));
-        }
+        return httpContext.Response.WriteAsync(JsonSerializer.Serialize(HealthCheck, SerializerOptions));
     }
+}
 
-    internal class HealthCheck
-    {
-        public string OverallStatus { get; set; }
-        public string TotalCheckDuration { get; set; }
-        public IEnumerable<DependencyHealthCheck> DependencyHealthChecks { get; set; }
-    }
+internal class HealthCheck
+{
+    public string OverallStatus { get; set; }
+    public string TotalCheckDuration { get; set; }
+    public IEnumerable<DependencyHealthCheck> DependencyHealthChecks { get; set; }
+}
 
-    internal record DependencyHealthCheck
-    {
-        public string Name { get; init; }
-        public string Status { get; init; }
-        public string Duration { get; init; }
-        public string Error { get; init; }
-    }
+internal record DependencyHealthCheck
+{
+    public string Name { get; init; }
+    public string Status { get; init; }
+    public string Duration { get; init; }
+    public string Error { get; init; }
 }

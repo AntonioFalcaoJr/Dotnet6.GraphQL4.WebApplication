@@ -1,9 +1,8 @@
 ﻿using Dotnet6.GraphQL4.Store.Domain.Entities.Reviews;
 
-namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products
+namespace Dotnet6.GraphQL4.Store.Domain.Entities.Products;
+
+public interface IProduct
 {
-    public interface IProduct
-    {
-        void AddReview(Review review);
-    }
+    void AddReview(Review review);
 }

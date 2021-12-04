@@ -1,14 +1,13 @@
 using Dotnet6.GraphQL4.Store.Domain.Enumerations;
 using GraphQL.Types;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products
+namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Types.Products;
+
+public class ProductOptionEnumGraphType : EnumerationGraphType<Option>
 {
-    public class ProductOptionEnumGraphType : EnumerationGraphType<Option>
+    public ProductOptionEnumGraphType()
     {
-        public ProductOptionEnumGraphType()
-        {
-            Name = "options";
-            Description = "Options from product";
-        }
+        Name = "options";
+        Description = "Options from product";
     }
 }

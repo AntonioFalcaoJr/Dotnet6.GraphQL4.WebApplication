@@ -11,30 +11,29 @@ using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Executers
+namespace Dotnet6.GraphQL4.Store.WebAPI.Graphs.Executers;
+
+public class StoreGraphQLExecuter<TSchema> : DefaultGraphQLExecuter<TSchema>
+    where TSchema : ISchema
 {
-    public class StoreGraphQLExecuter<TSchema> : DefaultGraphQLExecuter<TSchema>
-        where TSchema : ISchema
+    private readonly IServiceProvider _serviceProvider;
+
+    public StoreGraphQLExecuter(TSchema schema, IDocumentExecuter documentExecuter, IOptions<GraphQLOptions> options, IEnumerable<IDocumentExecutionListener> listeners, IEnumerable<IValidationRule> validationRules, IServiceProvider serviceProvider)
+        : base(schema, documentExecuter, options, listeners, validationRules)
     {
-        private readonly IServiceProvider _serviceProvider;
+        _serviceProvider = serviceProvider;
+    }
 
-        public StoreGraphQLExecuter(TSchema schema, IDocumentExecuter documentExecuter, IOptions<GraphQLOptions> options, IEnumerable<IDocumentExecutionListener> listeners, IEnumerable<IValidationRule> validationRules, IServiceProvider serviceProvider)
-            : base(schema, documentExecuter, options, listeners, validationRules)
-        {
-            _serviceProvider = serviceProvider;
-        }
+    public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables, IDictionary<string, object> context, IServiceProvider requestServices, CancellationToken cancellationToken = new())
+    {
+        var result = await base.ExecuteAsync(operationName, query, variables, context, requestServices, cancellationToken);
+        var notification = _serviceProvider.GetRequiredService<INotificationContext>();
 
-        public override async Task<ExecutionResult> ExecuteAsync(string operationName, string query, Inputs variables, IDictionary<string, object> context, IServiceProvider requestServices, CancellationToken cancellationToken = new())
-        {
-            var result = await base.ExecuteAsync(operationName, query, variables, context, requestServices, cancellationToken);
-            var notification = _serviceProvider.GetRequiredService<INotificationContext>();
+        if (notification.AllValid) return result;
 
-            if (notification.AllValid) return result;
+        result.Errors = notification.ExecutionErrors;
+        result.Data = default;
 
-            result.Errors = notification.ExecutionErrors;
-            result.Data = default;
-
-            return result;
-        }
+        return result;
     }
 }

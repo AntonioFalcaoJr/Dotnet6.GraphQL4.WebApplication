@@ -1,7 +1,6 @@
-﻿namespace Dotnet6.GraphQL4.Store.WebMVC.Models
+﻿namespace Dotnet6.GraphQL4.Store.WebMVC.Models;
+
+public class AddedReviewSubscriptionResult
 {
-    public class AddedReviewSubscriptionResult
-    {
-        public ReviewModel Review { get; set; }
-    }
+    public ReviewModel Review { get; set; }
 }

@@ -1,9 +1,8 @@
-namespace Dotnet6.GraphQL4.Store.Domain.Enumerations
+namespace Dotnet6.GraphQL4.Store.Domain.Enumerations;
+
+public enum Option
 {
-    public enum Option
-    {
-        One,
-        Two,
-        Three
-    }
+    One,
+    Two,
+    Three
 }
