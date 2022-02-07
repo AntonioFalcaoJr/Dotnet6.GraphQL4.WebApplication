@@ -25,7 +25,7 @@
 
         <!--AutoMapper-->
         <AutoMapper_DependencyInjection_Version>11.0.0</AutoMapper_DependencyInjection_Version>
-        <AutoMapper_Version>11.0.0</AutoMapper_Version>
+        <AutoMapper_Version>11.0.1</AutoMapper_Version>
 
         <!--Serilog-->
         <Serilog_Version>4.1.0</Serilog_Version>
