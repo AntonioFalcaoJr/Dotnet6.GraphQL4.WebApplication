@@ -14,7 +14,7 @@
         <Microsoft_Extensions_Version>6.0.0</Microsoft_Extensions_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>6.0.1</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>6.0.2</Microsoft_EntityFrameworkCore_Version>
         <Microsoft_EntityFrameworkCore_DependencyInjection_Version>6.0.0-preview.2.21154.6</Microsoft_EntityFrameworkCore_DependencyInjection_Version>
         <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.1</Microsoft_HealthChecks_EntityFrameworkCore_Version>
 
