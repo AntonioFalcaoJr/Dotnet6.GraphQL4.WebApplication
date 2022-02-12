@@ -14,28 +14,28 @@
         <Microsoft_Extensions_Version>6.0.0</Microsoft_Extensions_Version>
 
         <!--EF Core-->
-        <Microsoft_EntityFrameworkCore_Version>6.0.0</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>6.0.2</Microsoft_EntityFrameworkCore_Version>
         <Microsoft_EntityFrameworkCore_DependencyInjection_Version>6.0.0-preview.2.21154.6</Microsoft_EntityFrameworkCore_DependencyInjection_Version>
-        <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.0</Microsoft_HealthChecks_EntityFrameworkCore_Version>
+        <Microsoft_HealthChecks_EntityFrameworkCore_Version>6.0.2</Microsoft_HealthChecks_EntityFrameworkCore_Version>
 
         <!--GraphQL-->
-        <GraphQL_Server_Version>5.0.2</GraphQL_Server_Version>
-        <GraphQL_Client_Version>4.0.1</GraphQL_Client_Version>
-        <GraphQL_Version>4.6.1</GraphQL_Version>
+        <GraphQL_Server_Version>5.2.0</GraphQL_Server_Version>
+        <GraphQL_Client_Version>4.0.2</GraphQL_Client_Version>
+        <GraphQL_Version>4.7.1</GraphQL_Version>
 
         <!--AutoMapper-->
-        <AutoMapper_DependencyInjection_Version>8.1.1</AutoMapper_DependencyInjection_Version>
-        <AutoMapper_Version>10.1.1</AutoMapper_Version>
+        <AutoMapper_DependencyInjection_Version>11.0.0</AutoMapper_DependencyInjection_Version>
+        <AutoMapper_Version>11.0.1</AutoMapper_Version>
 
         <!--Serilog-->
         <Serilog_Version>4.1.0</Serilog_Version>
         
         <!--HealthChecks-->
-        <HealthChecks_Version>5.0.1</HealthChecks_Version>
+        <HealthChecks_Version>6.0.2</HealthChecks_Version>
         
         <!--Others-->
-        <FluentValidation_Version>10.3.5</FluentValidation_Version>
-        <Scrutor_Version>3.3.0</Scrutor_Version>
+        <FluentValidation_Version>10.3.6</FluentValidation_Version>
+        <Scrutor_Version>4.0.0</Scrutor_Version>
         
     </PropertyGroup>
     
