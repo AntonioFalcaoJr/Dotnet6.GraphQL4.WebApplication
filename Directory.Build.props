@@ -31,7 +31,7 @@
         <Serilog_Version>5.0.0</Serilog_Version>
         
         <!--HealthChecks-->
-        <HealthChecks_Version>6.0.2</HealthChecks_Version>
+        <HealthChecks_Version>6.0.3</HealthChecks_Version>
         
         <!--Others-->
         <FluentValidation_Version>10.3.6</FluentValidation_Version>
