@@ -34,7 +34,7 @@
         <HealthChecks_Version>6.0.3</HealthChecks_Version>
         
         <!--Others-->
-        <FluentValidation_Version>10.4.0</FluentValidation_Version>
+        <FluentValidation_Version>11.0.1</FluentValidation_Version>
         <Scrutor_Version>4.1.0</Scrutor_Version>
         
     </PropertyGroup>
