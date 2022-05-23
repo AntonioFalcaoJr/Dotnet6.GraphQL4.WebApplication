@@ -12,7 +12,7 @@
     
     <ItemGroup>
         <PackageReference Include="GraphQL.Client" Version="$(GraphQL_Client_Version)" />
-        <PackageReference Include="GraphQL.Client.Extensions" Version="3.2.2" />
+        <PackageReference Include="GraphQL.Client.Extensions" Version="4.0.0" />
         <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="$(GraphQL_Client_Version)" />
     </ItemGroup>
     
