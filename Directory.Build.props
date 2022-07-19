@@ -28,7 +28,7 @@
         <AutoMapper_Version>11.0.1</AutoMapper_Version>
 
         <!--Serilog-->
-        <Serilog_Version>5.0.0</Serilog_Version>
+        <Serilog_Version>6.0.1</Serilog_Version>
         
         <!--HealthChecks-->
         <HealthChecks_Version>6.0.3</HealthChecks_Version>
