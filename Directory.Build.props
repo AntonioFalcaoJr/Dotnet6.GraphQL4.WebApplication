@@ -35,7 +35,7 @@
         
         <!--Others-->
         <FluentValidation_Version>11.0.1</FluentValidation_Version>
-        <Scrutor_Version>4.1.0</Scrutor_Version>
+        <Scrutor_Version>4.2.1</Scrutor_Version>
         
     </PropertyGroup>
     
